@@ -54,6 +54,7 @@ export function Card({
       <div className="flex p-4">
         {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null}
         <h3 className="ml-2 text-sm font-medium">{title}</h3>
+        <Icon className="h-5 w-5 text-gray-700" />
       </div>
       <p
         className={`${lusitana.className}

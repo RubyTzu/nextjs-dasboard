@@ -8,6 +8,12 @@ const nextConfig = {
             port: '',
             pathname: '/breeds/**',
           },
+          {
+            protocol: 'https',
+            hostname: 'cdn2.thecatapi.com',
+            port: '',
+            pathname: '/images/**',
+          }
         ],
       }
 };
