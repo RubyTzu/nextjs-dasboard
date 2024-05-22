@@ -27,6 +27,17 @@ const config: Config = {
           500: '#0070F3',
           600: '#2F6FEB',
         },
+        primary: {
+          100: '#f3f2ed',
+          200: '#e9e5d9',
+          300: '#fafc2c',
+        },
+        grey: {
+          100: '#ffffff',
+          200: '#d3d2d8',
+          300: '#5f5d5e',
+          400: '#1c1a1b',
+        }
       },
     },
     keyframes: {

@@ -8,8 +8,7 @@ export default function BackButton() {
 
     return (
         <>
-        <ArrowLeftIcon className="h-8 w-8 text-[#CFCFCF] stroke-[3px] cursor-pointer" onClick={() => router.back()}/>
+        <ArrowLeftIcon className="h-8 w-8 text-[#CFCFCF] stroke-[2px] cursor-pointer" onClick={() => router.back()}/>
         </>
-
     )
 }

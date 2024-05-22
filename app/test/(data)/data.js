@@ -1,18 +1,46 @@
+// {
+    // groupId,
+    // groupType,
+    // name,
+    // membersIds,
+    // url,
+//   }: {
+    // groupId: string;
+    // groupType: 'travel' | 'health' | 'games' | 'other';
+    // name: string;
+    // membersIds: string[];
+    // url: string;
+//   }
+
 //groups
-const groups = [
+export const groups = [
     {
         groupId: "g1",
         groupType: "travel",
-        name: "group 1",
-        members: [],
+        name: "group Travel",
+        membersIds: ["u1", "u2", "u3", "u4"],
         url: "https://shareGroup1",
     },
     {
         groupId: "g2",
-        groupType: "travel",
-        name: "group 2",
-        members: [],
+        groupType: "health",
+        name: "group Health",
+        membersIds: ["u1", "u2", "u3", "u4"],
         url: "https://shareGroup2",
+    },
+    {
+        groupId: "g3",
+        groupType: "other",
+        name: "group Other",
+        membersIds: ["u1", "u2", "u3", "u4"],
+        url: "https://shareGroup3",
+    },
+    {
+        groupId: "g4",
+        groupType: "games",
+        name: "group Games",
+        membersIds: ["u1", "u2", "u3", "u4"],
+        url: "https://shareGroup4",
     }
 ]
 
@@ -20,7 +48,7 @@ const group = {
     groupId: "g1",
     groupType: "travel",
     name: "group 1",
-    members: [],
+    membersIds: ["u1", "u2", "u3", "u4"],
     url: "https://shareGroup1",
 }
 
@@ -35,24 +63,8 @@ const expenses = [
         cost: 1000,
         date: '2024/5/15',
         event: "expense 1",
-        payer: {
-            userId: "u1",
-            displayName: "a"
-        },
-        sharers: [
-            {
-                userId: "u1",
-                displayName: "a"
-            },
-            {
-                userId: "u2",
-                displayName: "b"
-            },
-            {
-                userId: "u3",
-                displayName: "c"
-            },
-        ],
+        payer: "u1",
+        sharers: [ "u1", "u2", "u3" ],
     },
     {
         groupId: "g1",
@@ -61,24 +73,8 @@ const expenses = [
         cost: 2000,
         date: '2024/5/15',
         event: "expense 2",
-        payer: {
-            userId: "u1",
-            displayName: "a"
-        },
-        sharers: [
-            {
-                userId: "u1",
-                displayName: "a"
-            },
-            {
-                userId: "u2",
-                displayName: "b"
-            },
-            {
-                userId: "u3",
-                displayName: "c"
-            },
-        ],
+        payer: "u1",
+        sharers: [ "u1", "u2", "u3" ],
     }
 ]
 
@@ -89,73 +85,30 @@ const expense = {
     cost: 1000,
     date: '2024/5/15',
     event: "expense 1",
-    payer: {
-        userId: "u1",
-        displayName: "a"
-    },
-    sharers: [
-        {
-            userId: "u1",
-            displayName: "a"
-        },
-        {
-            userId: "u2",
-            displayName: "b"
-        },
-        {
-            userId: "u3",
-            displayName: "c"
-        },
-    ],
+    payer: "u1",
+    sharers: [ "u1", "u2", "u3" ],
 }
 
-const exampleExpense = {
-    description,
-    group_id,
-    payment: false,
-    cost: amount,
-    date,
-    users: [
-        {
-            user_id: from,
-            paid_share: amount,
-        },
-        {
-            user_id: to,
-            owed_share: amount,
-        },
-    ],
-}
+// const exampleExpense = {
+//     description,
+//     group_id,
+//     payment: false,
+//     cost: amount,
+//     date,
+//     users: [
+//         {
+//             user_id: from,
+//             paid_share: amount,
+//         },
+//         {
+//             user_id: to,
+//             owed_share: amount,
+//         },
+//     ],
+// }
 
 //member
-const members = [
-    {
-        userId: "u1",
-        displayName: "a",
-        isAdmin: true,
-    },
-    {
-        userId: "u2",
-        displayName: "b",
-        isAdmin: false,
-    },
-    {
-        userId: "u3",
-        displayName: "c",
-        isAdmin: false,
-    },
-    {
-        userId: "u4",
-        displayName: "d",
-        isAdmin: false,
-    }
-]
-
-const member = {
-    userId: "u1",
-    displayName: "a",
-    isAdmin: true,
-}
+const membersIds = ["u1", "u2", "u3", "u4"]
 
 //Person Info
 const personInfo = {
