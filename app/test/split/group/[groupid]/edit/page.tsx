@@ -9,13 +9,12 @@ export default function Page() {
     const gropData = data.filter((group) => group.groupId === params.groupid )[0]
 
     return (
-        <>
-            <div className="flex flex-col">
-                <h1 className="text-center text-3xl pt-6 pb-3 mt-16"> { gropData ? gropData.name : "no such group" } edit</h1>
-
-
-            </div >
-        </>
-
-    )
+      <>
+        <div className="flex flex-col">
+          <h1 className="fixed left-[50%] z-[2] mt-16 w-full translate-x-[-50%] bg-primary-100 py-7 text-center text-3xl">
+            {gropData ? gropData.name : 'no such group'} edit
+          </h1>
+        </div>
+      </>
+    );
 }

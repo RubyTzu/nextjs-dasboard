@@ -4,10 +4,10 @@ import DoubleLineButton from "@/app/test/(ui)/DoubleLineButton";
 
 export default function Navbar() {
     return (
-        <div className="z-[100] fixed top-0 left-0 right-0 flex justify-between items-center px-6 w-full h-16 bg-slate-100">
-           <BackButton />
-           <DoubleLineButton />
-        </div>
-    )
+      <div className="fixed left-0 right-0 top-0 z-[100] flex h-16 w-full items-center justify-between bg-white px-6 drop-shadow-sm">
+        <BackButton />
+        <DoubleLineButton />
+      </div>
+    );
 }
 
