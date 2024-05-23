@@ -16,21 +16,27 @@ export default function ShareButton({
   const base = 'http://localhost:3000/test/split/group/';
   const links = base + groupId;
 
-  const handlesShareLink = () => {
+  const handlesShareLink = (e: any) => {
+    e.preventDefault();
     setIsShow(true);
     router.refresh();
     console.log('share ' + links);
+
+    // setTimeout(() => {
+    //   setIsShow(false);
+    //   router.refresh();
+    // }, 900)
   };
 
   return (
     <>
-      <div className="relative z-10" onClick={handlesShareLink}>
+      <div className="relative z-[1]" onClick={e =>handlesShareLink(e)}>
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-300">
           <ArrowUpTrayIcon className="h-5 w-5 stroke-[2px] text-grey-300" />
         </div>
       </div>
       <SuccessAlert
-        text="Share Link:"
+        text="分享連結視窗"
         name={name}
         isShow={isShow}
         setIsShow={setIsShow as Function}

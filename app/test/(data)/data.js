@@ -41,6 +41,62 @@ export const groups = [
         name: "group Games",
         membersIds: ["u1", "u2", "u3", "u4"],
         url: "https://shareGroup4",
+    },
+    {
+        groupId: "g5",
+        groupType: "travel",
+        name: "group Travel 2",
+        membersIds: ["u1", "u2", "u3", "u4"],
+        url: "https://shareGroup5",
+    },
+    {
+        groupId: "g6",
+        groupType: "health",
+        name: "group Health 2",
+        membersIds: ["u1", "u2", "u3", "u4"],
+        url: "https://shareGroup6",
+    },
+    {
+        groupId: "g7",
+        groupType: "other",
+        name: "group Other 2",
+        membersIds: ["u1", "u2", "u3", "u4"],
+        url: "https://shareGroup7",
+    },
+    {
+        groupId: "g8",
+        groupType: "games",
+        name: "group Games 2",
+        membersIds: ["u1", "u2", "u3", "u4"],
+        url: "https://shareGroup8",
+    },
+    {
+        groupId: "g9",
+        groupType: "travel",
+        name: "group Travel 3",
+        membersIds: ["u1", "u2", "u3", "u4"],
+        url: "https://shareGroup9",
+    },
+    {
+        groupId: "g10",
+        groupType: "health",
+        name: "group Health 3",
+        membersIds: ["u1", "u2", "u3", "u4"],
+        url: "https://shareGroup10",
+    },
+    {
+        groupId: "g11",
+        groupType: "other",
+        name: "group Other 3",
+        membersIds: ["u1", "u2", "u3", "u4"],
+        url: "https://shareGroup11",
+    },
+    {
+        groupId: "g12",
+        groupType: "games",
+        name: "group Games 3",
+        membersIds: ["u1", "u2", "u3", "u4"],
+        url: "https://shareGroup12",
     }
 ]
 

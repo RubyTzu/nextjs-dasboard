@@ -1,5 +1,7 @@
+"use client"
 import CopyLinkButton from "./CopyLinkButton";
 import ShareButton from "./ShareButton";
+import Link from 'next/link';
 
 import {
   GlobeAsiaAustraliaIcon,
@@ -15,16 +17,18 @@ const iconMap = {
   other: RocketLaunchIcon,
 };
 
-export default function GroupButton({ groupId, groupType, name }: {
-  groupId: string;
-  groupType: 'travel' | 'health' | 'games' | 'other';
-  name: string;
-}) {
+export default function GroupButton({ group }: { group: any }) {
+  const { groupId, groupType, name }: {
+    groupId: string;
+    groupType: 'travel' | 'health' | 'games' | 'other';
+    name: string;
+  } = group
+
   const Icon = iconMap[groupType];
 
   return (
-    <div className="m-4 flex justify-between rounded-lg bg-grey-100 p-3">
-      <div className="flex items-center">
+    <Link href={`/test/split/group/${groupId}`} className="m-4 flex justify-between rounded-lg bg-grey-100 p-3">
+      <div className="z-0 flex items-center">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-200">
           {Icon ? <Icon className="h-6 w-6 text-grey-300" /> : null}
         </div>
@@ -34,6 +38,6 @@ export default function GroupButton({ groupId, groupType, name }: {
         <ShareButton groupId={groupId} name={name} />
         <CopyLinkButton groupId={groupId} name={name} />
       </div>
-    </div>
+    </Link>
   );
 }

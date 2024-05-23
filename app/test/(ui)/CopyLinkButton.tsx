@@ -16,22 +16,28 @@ export default function CopyLinkButton({
   const base = 'http://localhost:3000/test/split/group/';
   const links = base + groupId;
 
-  const copylink = () => {
+  const copylink = (e: any) => {
+    e.preventDefault();
     navigator.clipboard.writeText(links);
     setIsShow(true);
     router.refresh();
     console.log('copy ' + links);
+    
+    setTimeout(() => {
+      setIsShow(false);
+      router.refresh();
+    }, 900)
   };
 
   return (
     <>
-      <div className="relative z-10" onClick={copylink}>
+      <div className="relative z-[1]" onClick={e => copylink(e)}>
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-300">
           <LinkIcon className="h-5 w-5 cursor-pointer stroke-[2px] text-grey-300" />
         </div>
       </div>
       <SuccessAlert
-        text="Copy Link:"
+        text="連結已複製"
         name={name}
         isShow={isShow}
         setIsShow={setIsShow as Function}
