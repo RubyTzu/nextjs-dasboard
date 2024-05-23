@@ -11,7 +11,7 @@ export default function Page() {
     return (
       <>
         <div className="flex flex-col">
-          <h1 className="fixed left-[50%] z-[2] mt-16 w-full translate-x-[-50%] bg-primary-100 py-7 text-center text-3xl">
+          <h1 className="fixed left-[50%] z-[2] mt-0 w-full translate-x-[-50%] bg-primary-100 py-7 text-center text-3xl">
             {gropData ? gropData.name : 'no such group'} edit
           </h1>
         </div>

@@ -7,7 +7,8 @@ export default function Layout({
     children: React.ReactNode;
   }) {
   return (
-    <><Navbar />
+    <>
+    {/* <Navbar /> */}
       <main className="bg-primary-100 w-full min-h-screen">{children}</main>
     </>
   )
