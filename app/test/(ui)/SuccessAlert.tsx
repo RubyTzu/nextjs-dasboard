@@ -31,7 +31,7 @@ export default function SuccessAlert({
         })}
       >
         <div className="flex w-64 rounded-lg shadow-lg">
-          <div className="flex items-center rounded-l-lg bg-primary-300 px-6 py-4">
+          <div className="flex items-center rounded-l-lg bg-primary-orange px-6 py-4">
             <button onClick={e => handleClick(e)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

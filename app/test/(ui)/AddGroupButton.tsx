@@ -12,7 +12,7 @@ const [fakeId, setFakeId] = useState(1);
             groupId: `try${fakeGroupId}`,
             groupType: "travel",
             name: `trytrytry ${fakeGroupId}`,
-            membersIds: ["u1", "u2", "u3", "u4"],
+            membersIds: [],
             url: `https://shareGrouptry${fakeGroupId}`,
         }
 
@@ -26,8 +26,8 @@ const [fakeId, setFakeId] = useState(1);
 
 
     return (
-        <div onClick={handleAddGroup} className="z-[2] fixed left-[50%] translate-x-[-50%] bottom-0 flex justify-center items-center bg-primary-100 w-full h-24">
-            <button className="bg-primary-200 active:bg-grey-200 p-[13px] w-[92%] rounded-[10px]">Add Group</button>
+        <div onClick={handleAddGroup} className="z-[2] fixed top-16 flex items-start bg-primary-blue text-grey-100 w-full px-6 pt-2 pb-3 text-base">
+            <button className="active:bg-grey-100 rounded-[10px] px-2">+ 新增群組</button>
         </div>
     )
 }

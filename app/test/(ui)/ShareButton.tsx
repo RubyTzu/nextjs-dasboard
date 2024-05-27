@@ -30,11 +30,9 @@ export default function ShareButton({
 
   return (
     <>
-      <div className="relative z-[1]" onClick={e =>handlesShareLink(e)}>
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-300">
+        <div onClick={e =>handlesShareLink(e)} className="relative z-[1] flex h-8 w-8 items-center justify-center rounded-full bg-primary-orange">
           <ArrowUpTrayIcon className="h-5 w-5 stroke-[2px] text-grey-300" />
         </div>
-      </div>
       <SuccessAlert
         text="分享連結視窗"
         name={name}

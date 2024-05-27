@@ -31,11 +31,9 @@ export default function CopyLinkButton({
 
   return (
     <>
-      <div className="relative z-[1]" onClick={e => copylink(e)}>
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-300">
+        <div onClick={e => copylink(e)} className="relative z-[1] flex h-8 w-8 items-center justify-center rounded-full bg-primary-orange">
           <LinkIcon className="h-5 w-5 cursor-pointer stroke-[2px] text-grey-300" />
         </div>
-      </div>
       <SuccessAlert
         text="連結已複製"
         name={name}

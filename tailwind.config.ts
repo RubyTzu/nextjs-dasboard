@@ -39,6 +39,9 @@ const config: Config = {
           100: '#FBFBF8',
           200: '#F3F4E5',
           300: '#EBFF79',
+          'blue':'#3555F4',
+          'green': '#7EFB15',
+          'orange': '#F9C813',
         },
         grey: {
           100: '#ffffff',
