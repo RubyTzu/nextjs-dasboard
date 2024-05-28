@@ -6,6 +6,9 @@ import stayIcon from "@/app/test/(ui)/icons/stay.svg";
 import shoppingIcon from "@/app/test/(ui)/icons/shopping.svg";
 import entertainmentIcon from "@/app/test/(ui)/icons/entertainment.svg";
 import otherIcon from "@/app/test/(ui)/icons/other.svg";
+import checkIcon from "@/app/test/(ui)/icons/check.svg";
+import closeIcon from "@/app/test/(ui)/icons/close.svg";
+
 import {
     GlobeAsiaAustraliaIcon,
     HeartIcon,
@@ -56,6 +59,16 @@ function OtherIcon() {
     )
 }
 
+function CheckIcon() {
+    return (
+        <Image src={checkIcon} alt="" />
+    )
+}
+
+function CloseIcon() {
+    return <Image src={closeIcon} alt="" />;
+}
+
 const expenseIconMap = {
     food: FoodIcon,
     drink: DrinkIcon,
@@ -73,4 +86,4 @@ const groupIconMap = {
     other: RocketLaunchIcon,
 };
 
-export { expenseIconMap, groupIconMap }
+export { expenseIconMap, groupIconMap, CheckIcon, CloseIcon };

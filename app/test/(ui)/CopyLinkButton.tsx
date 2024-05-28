@@ -16,7 +16,7 @@ export default function CopyLinkButton({
   const base = 'http://localhost:3000/test/split/group/';
   const links = base + groupId;
 
-  const copylink = (e: any) => {
+  const handleCopylink = (e: any) => {
     e.preventDefault();
     navigator.clipboard.writeText(links);
     setIsShow(true);
@@ -31,7 +31,7 @@ export default function CopyLinkButton({
 
   return (
     <>
-        <div onClick={e => copylink(e)} className="relative z-[1] flex h-8 w-8 items-center justify-center rounded-full bg-primary-orange">
+        <div onClick={e => handleCopylink(e)} className="relative z-[1] flex h-8 w-8 items-center justify-center rounded-full bg-primary-orange">
           <LinkIcon className="h-5 w-5 cursor-pointer stroke-[2px] text-grey-300" />
         </div>
       <SuccessAlert
