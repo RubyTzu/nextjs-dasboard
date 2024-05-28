@@ -1,7 +1,7 @@
 "use client"
 import { useParams } from "next/navigation";
 import { groups } from "@/app/test/(data)/data";
-import { TopGroupBar } from "@/app/test/(ui)/TopBar";
+import { TopGroupBar } from "@/app/test/(ui)/TopBars";
 import UsersBar from "@/app/test/(ui)/UsersBar";
 import ExpensesList from "@/app/test/(ui)/ExpensesList";
 

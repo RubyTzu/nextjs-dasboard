@@ -1,7 +1,7 @@
 'use client';
 import { useParams } from 'next/navigation';
 import { expensesWithDebts } from '@/app/test/(data)/totalDebts';
-import { TopExpenseBar } from '@/app/test/(ui)/TopBar';
+import { TopExpenseBar } from '@/app/test/(ui)/TopBars';
 
 export default function Page() {
   const params = useParams<{ expenseid: string }>();
