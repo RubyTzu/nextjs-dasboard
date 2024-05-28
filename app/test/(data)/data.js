@@ -332,72 +332,57 @@ const usersInfo = [
     userId: 'u1',
     displayName: 'a',
     pictureUrl: 'https://cdn2.thecatapi.com/images/a4v.jpg',
-    groups: [],
   },
   {
     userId: 'u2',
     displayName: 'b',
     pictureUrl: 'https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg',
-    groups: [],
   },
   {
     userId: 'u3',
     displayName: 'c',
     pictureUrl: 'https://cdn2.thecatapi.com/images/O7FnoegHR.jpg',
-    groups: [],
   },
   {
     userId: 'u4',
     displayName: 'd',
     pictureUrl:
       'https://images.dog.ceo/breeds/terrier-sealyham/n02095889_1044.jpg',
-    groups: [],
   },
   {
     userId: 'u5',
     displayName: 'e',
     pictureUrl: 'https://cdn2.thecatapi.com/images/cib.jpg',
-    groups: [],
   },
   {
     userId: 'u6',
     displayName: 'f',
     pictureUrl:
       'https://images.dog.ceo/breeds/terrier-patterdale/Patterdale.jpg',
-    groups: [],
   },
   {
     userId: 'u7',
     displayName: 'g',
     pictureUrl: 'https://cdn2.thecatapi.com/images/edb.jpg',
-    groups: [],
   },
   {
     userId: 'u8',
     displayName: 'h',
     pictureUrl:
       'https://images.dog.ceo/breeds/poodle-medium/WhatsApp_Image_2022-08-06_at_4.48.38_PM.jpg',
-    groups: [],
   },
   {
     userId: 'u9',
     displayName: 'i',
     pictureUrl: 'https://cdn2.thecatapi.com/images/bo5.jpg',
-    groups: [],
   },
   {
     userId: 'u10',
     displayName: 'j',
     pictureUrl:
       'https://images.dog.ceo/breeds/hound-english/n02089973_1303.jpg',
-    groups: [],
   },
 ];
-
-const user = (id) =>
-  usersInfo.filter((user) => {
-    return user.userId === id;
-  })[0];
 
 const exampleUser = [
   'first_name',
