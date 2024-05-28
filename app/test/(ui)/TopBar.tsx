@@ -1,4 +1,4 @@
-import { HomeIcon, Cog8ToothIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, Cog8ToothIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 export function TopGroupBar({groupData}: {groupData:any}) {
@@ -14,4 +14,20 @@ export function TopGroupBar({groupData}: {groupData:any}) {
         </div>
       </div>
     )
+}
+
+export function TopExpenseBar() {
+  return (
+    <div className="fixed flex w-full items-center justify-between bg-primary-blue px-5 py-4 text-grey-100">
+      <Link href="/test/split/groups" className="h-6 w-6">
+        <HomeIcon />
+      </Link>
+      <h1 className="text-lg">
+       費用明細
+      </h1>
+      <div className="h-6 w-6">
+        <PencilSquareIcon />
+      </div>
+    </div>
+  );
 }

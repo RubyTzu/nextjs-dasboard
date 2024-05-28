@@ -15,7 +15,7 @@ export default function Page() {
     <div className="flex flex-col">
       <TopGroupBar groupData={groupData} />
       <UsersBar groupData={groupData} />
-      <ExpensesList />
+      <ExpensesList groupId={params.groupid} />
     </div>
   );
 }
