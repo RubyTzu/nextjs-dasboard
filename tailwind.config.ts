@@ -42,6 +42,8 @@ const config: Config = {
           'blue':'#3555F4',
           'green': '#7EFB15',
           'orange': '#F9C813',
+          'lightPink': '#F9EBDB',
+          'pink': '#FE2FB4',
         },
         grey: {
           100: '#ffffff',

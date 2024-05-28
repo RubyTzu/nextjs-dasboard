@@ -3,6 +3,7 @@ import { useParams } from "next/navigation";
 import { groups } from "@/app/test/(data)/data";
 import { TopGroupBar } from "@/app/test/(ui)/TopBar";
 import UsersBar from "@/app/test/(ui)/UsersBar";
+import ExpensesList from "@/app/test/(ui)/ExpensesList";
 
 
 export default function Page() {
@@ -14,6 +15,7 @@ export default function Page() {
     <div className="flex flex-col">
       <TopGroupBar groupData={groupData} />
       <UsersBar groupData={groupData} />
-    </div >
+      <ExpensesList />
+    </div>
   );
 }

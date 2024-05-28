@@ -2,20 +2,8 @@
 import CopyLinkButton from "./CopyLinkButton";
 import ShareButton from "./ShareButton";
 import Link from 'next/link';
+import { groupIconMap } from "@/app/test/(ui)/Icons";
 
-import {
-  GlobeAsiaAustraliaIcon,
-  HeartIcon,
-  PuzzlePieceIcon,
-  RocketLaunchIcon,
-} from '@heroicons/react/24/outline';
-
-const iconMap = {
-  travel: GlobeAsiaAustraliaIcon,
-  health: HeartIcon,
-  games: PuzzlePieceIcon,
-  other: RocketLaunchIcon,
-};
 
 export default function GroupButton({ group }: { group: any }) {
   const { groupId, groupType, name }: {
@@ -24,7 +12,7 @@ export default function GroupButton({ group }: { group: any }) {
     name: string;
   } = group
 
-  const Icon = iconMap[groupType];
+  const Icon = groupIconMap[groupType];
 
   return (
     <Link href={`/test/split/group/${groupId}`} className="mx-6 my-4 flex justify-between rounded-[20px] bg-grey-100 py-3 pl-3 pr-2">
