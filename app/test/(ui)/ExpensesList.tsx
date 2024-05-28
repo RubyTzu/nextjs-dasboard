@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
-import { expensesWithDebts, userId } from '@/app/test/(data)/totalDebts';
-import { user } from '@/app/test/(data)/user';
+import { expensesWithDebts } from '@/app/test/(data)/totalDebts';
+import { loginUserId,user } from '@/app/test/(data)/user';
 import { expenseIconMap } from '@/app/test/(ui)/Icons';
 import Link from 'next/link';
 
@@ -13,8 +13,8 @@ export default function ExpensesList({ groupId }: { groupId: any }) {
       {expenses.map((expense: any) => (
         <Fragment key={expense.expenseId}>
           {expense.groupId === groupId &&
-          (expense.sharersIds.includes(userId) ||
-            expense.payerId.includes(userId)) ? (
+          (expense.sharersIds.includes(loginUserId) ||
+            expense.payerId.includes(loginUserId)) ? (
             <ExpenseButton expense={expense} />
           ) : null}
         </Fragment>

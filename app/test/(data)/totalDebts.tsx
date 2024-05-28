@@ -1,5 +1,5 @@
 import { expenses } from '@/app/test/(data)/data';
-let userId = 'u1';
+import { loginUserId } from '@/app/test/(data)/user';
 
 //every one's debt save in to new object
 const debts = expenses.reduce(calculateDebt, {});
@@ -45,7 +45,7 @@ let totalDebts = Object.entries(debts).reduce((acc: any, debt: any) => {
   return acc;
 }, {});
 
-let userDebts: any = debts[userId];
+let userDebts: any = debts[loginUserId];
 let expensesWithDebts: any = expenses.map((expense) => {
   let newExpense = { ...expense };
   return newExpense;
@@ -58,4 +58,4 @@ for (let expense in expensesWithDebts) {
     userDebts[expensesWithDebts[expense].event]?.toFixed(2);
 }
 
-export { debts, totalDebts, expensesWithDebts, userId };
+export { debts, totalDebts, expensesWithDebts };
