@@ -12,7 +12,7 @@ export default function Page() {
             <h1 className="z-[2] fixed left-[50%] translate-x-[-50%] text-center text-2xl font-bold bg-primary-blue text-grey-100 w-full py-5">群組列表</h1>
             <AddGroupButton data={data} setData={setData}/>
             <div className="mt-24">
-                {data ? data.map((group,idx) => <GroupButton key={idx} group={group} />) : null}
+                {data ? data.map((group,idx) => <GroupButton key={idx} groupData={group} />) : null}
             </div>
             <div className="mb-16"></div>
         </div>

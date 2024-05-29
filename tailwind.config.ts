@@ -29,6 +29,10 @@ const config: Config = {
       gridTemplateColumns: {
         '13': 'repeat(13, minmax(0, 1fr))',
       },
+      fontSize: {
+        'sm': '0.875rem',
+        'base': '1rem',
+      },
       colors: {
         blue: {
           400: '#2589FE',
@@ -46,10 +50,11 @@ const config: Config = {
           'pink': '#FE2FB4',
         },
         grey: {
-          100: '#ffffff',
+          100: '#EDEDED',
           200: '#d3d2d8',
           300: '#5f5d5e',
-          400: '#1c1a1b',
+          400: '#4A4A4A',
+          500: '#1c1a1b',
         },
       },
     },

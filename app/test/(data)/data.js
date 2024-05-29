@@ -16,23 +16,23 @@
 const groups = [
   {
     groupId: 'g1',
-    groupType: 'travel',
-    name: 'group Travel',
-    membersIds: ['u1', 'u2', 'u3', 'u4', 'u5', 'u6', 'u7', 'u8', 'u9', 'u10'],
+    groupType: 'other',
+    name: '5月聚餐',
+    membersIds: ['u1', 'u2', 'u3', 'u4',],
     url: 'https://shareGroup1',
   },
   {
     groupId: 'g2',
-    groupType: 'health',
-    name: 'group Health',
-    membersIds: ['u1', 'u3', 'u4'],
+    groupType: 'travel',
+    name: '2024 Japan',
+    membersIds: ['u1', 'u2', 'u3', 'u4', 'u5', 'u6'],
     url: 'https://shareGroup2',
   },
   {
     groupId: 'g3',
     groupType: 'other',
     name: 'group Other',
-    membersIds: ['u2', 'u3', 'u6', 'u7', '10'],
+    membersIds: ['u1', 'u2', 'u3', 'u4', 'u5', 'u6', 'u7', 'u8', 'u9', '10'],
     url: 'https://shareGroup3',
   },
   {
@@ -272,7 +272,79 @@ const expenses = [
     payerId: 'u1',
     sharersIds: ['u1'],
   },
+  {
+    groupId: 'g2',
+    expenseId: 'e17',
+    expenseType: 'transport',
+    cost: 180000,
+    date: '2024/5/28',
+    event: 'plane ticket',
+    payerId: 'u1',
+    sharersIds: ['u1', 'u2', 'u3', 'u4', 'u5', 'u6'],
+  },
+    {
+    groupId: 'g2',
+    expenseId: 'e18',
+    expenseType: 'stay',
+    cost: 60000,
+    date: '2024/5/28',
+    event: 'hotel',
+    payerId: 'u2',
+    sharersIds: ['u1', 'u2', 'u3', 'u4', 'u5', 'u6'],
+  },
+    {
+    groupId: 'g2',
+    expenseId: 'e19',
+    expenseType: 'other',
+    cost: 15000,
+    date: '2024/5/29',
+    event: 'disney land',
+    payerId: 'u3',
+    sharersIds: ['u1', 'u3', 'u4', 'u6'],
+  },
 ];
+
+// expenseType:
+// | 'food'
+// | 'drink'
+// | 'transport'
+// | 'stay'
+// | 'shopping'
+// | 'entertainment'
+// | 'other';
+
+// const expenses2 = [
+//   {
+//   groupId: 'g2',
+//   expenseId: 'e17',
+//   expenseType: 'transport',
+//   cost: 180000,
+//   date: '2024/5/28',
+//   event: 'plane ticket',
+//   payerId: 'u1',
+//   sharersIds: ['u1', 'u2', 'u3', 'u4', 'u5', 'u6'],
+// },
+//   {
+//   groupId: 'g2',
+//   expenseId: 'e18',
+//   expenseType: 'stay',
+//   cost: 60000,
+//   date: '2024/5/28',
+//   event: 'hotel',
+//   payerId: 'u2',
+//   sharersIds: ['u1', 'u2', 'u3', 'u4', 'u5', 'u6'],
+// },
+//   {
+//   groupId: 'g2',
+//   expenseId: 'e19',
+//   expenseType: 'other',
+//   cost: 15000,
+//   date: '2024/5/29',
+//   event: 'disney land',
+//   payerId: 'u3',
+//   sharersIds: ['u1', 'u3', 'u4', 'u6'],
+// },
+// ]
 
 // {
 //     groupId,

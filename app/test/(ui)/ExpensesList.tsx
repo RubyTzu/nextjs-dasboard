@@ -1,11 +1,12 @@
 import { Fragment } from 'react';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
-import { expensesWithDebts } from '@/app/test/(data)/totalDebts';
-import { loginUserId,user } from '@/app/test/(data)/user';
+import { filterExpense } from '@/app/test/(data)/totalDebts';
+import { loginUserId, user } from '@/app/test/(data)/user';
 import { expenseIconMap } from '@/app/test/(ui)/Icons';
 import Link from 'next/link';
 
 export default function ExpensesList({ groupId }: { groupId: any }) {
+  let { expensesWithDebts } = filterExpense(groupId)
   let expenses = expensesWithDebts;
 
   return (
@@ -13,8 +14,8 @@ export default function ExpensesList({ groupId }: { groupId: any }) {
       {expenses.map((expense: any) => (
         <Fragment key={expense.expenseId}>
           {expense.groupId === groupId &&
-          (expense.sharersIds.includes(loginUserId) ||
-            expense.payerId.includes(loginUserId)) ? (
+            (expense.sharersIds.includes(loginUserId) ||
+              expense.payerId.includes(loginUserId)) ? (
             <ExpenseButton expense={expense} />
           ) : null}
         </Fragment>
@@ -34,13 +35,13 @@ function ExpenseButton({ expense }: { expense: any }) {
   }: {
     expenseId: string;
     expenseType:
-      | 'food'
-      | 'drink'
-      | 'transport'
-      | 'stay'
-      | 'shopping'
-      | 'entertainment'
-      | 'other';
+    | 'food'
+    | 'drink'
+    | 'transport'
+    | 'stay'
+    | 'shopping'
+    | 'entertainment'
+    | 'other';
     cost: string;
     event: string;
     payerId: string;
@@ -51,17 +52,23 @@ function ExpenseButton({ expense }: { expense: any }) {
   return (
     <Link
       href={`/test/split/expense/${expenseId}`}
-      className="m-4 flex justify-between rounded-lg bg-grey-100 p-4"
+      className="m-4 flex justify-between rounded-lg bg-white p-4"
     >
       <div className="flex items-center gap-3">
         <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary-orange">
           {Icon ? <Icon /> : null}
         </div>
-        <div className="leading-4">
-          <p>{event}</p>
-          <p className="text-sm text-grey-300">
-            <span>{user(payerId)?.displayName}</span>
-            &nbsp;paid&nbsp;
+        <div className="leading-[20px]">
+          <p className="font-semibold">{event}</p>
+          <p className="text-sm font-base text-grey-400">
+            <span>
+              {loginUserId === payerId ?
+              '你'
+              :
+              user(payerId)?.displayName
+              }
+            </span>
+            付了
             <span>{cost}$</span>
           </p>
         </div>

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { usersInfo } from "@/app/test/(data)/data";
-import { ChevronRightIcon } from '@heroicons/react/24/outline';
 import { Fragment } from "react";
 
 export default function UsersBar({ groupData }: { groupData: any }) {
@@ -42,9 +41,9 @@ export default function UsersBar({ groupData }: { groupData: any }) {
                                 )
                             })}
                         </ul>
-                        <div className="flex items-center bg-primary-200 py-1 pl-3 pr-2 rounded-full text-sm text-grey-300">
-                            <p>{groupData.membersIds.length}</p>
-                            <ChevronRightIcon className="w-3 h-3" />
+                        <div className="flex bg-grey-100 gap-[2px] py-1 pl-3 pr-2 rounded-full text-sm text-grey-300">
+                            <p className="">{groupData.membersIds.length}</p>
+                            <span className="relative bottom-[1px]">&gt;</span>
                         </div>
                     </div>) :
                     <NoneUsersBar text="$0"/>
