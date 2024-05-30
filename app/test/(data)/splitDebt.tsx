@@ -1,7 +1,8 @@
 import { filterExpense } from "@/app/test/(data)/totalDebts";
+import { expenses } from '@/app/test/(data)/data';
 
 function splitExpense(groupId: any) {
-    let { totalDebts } = filterExpense(groupId)
+    let { totalDebts } = filterExpense(groupId,expenses)
     
     //split debt initial
     let newTotalDebts: any = { ...totalDebts }

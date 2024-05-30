@@ -18,7 +18,7 @@ export default function CopyLinkButton({
   const base = 'http://localhost:3000/test/split/group/';
   const links = base + groupId;
 
-  const handleCopylink = (e: any) => {
+  const handleCopyLink = (e: any) => {
     e.preventDefault();
     navigator.clipboard.writeText(links);
     setIsShow(true);
@@ -34,11 +34,11 @@ export default function CopyLinkButton({
   return (
     <>
       {inGroupPage ?
-        (<div onClick={e => handleCopylink(e)} className="flex justify-center items-center bg-primary-lightPink p-2 rounded-full">
+        (<div onClick={e => handleCopyLink(e)} className="flex justify-center items-center bg-primary-lightPink p-2 rounded-full">
           <LinkIcon className="w-5 h-5 cursor-pointer" />
         </div>)
         :
-        (<div onClick={e => handleCopylink(e)} className="relative z-[1] flex h-8 w-8 items-center justify-center rounded-full bg-primary-orange">
+        (<div onClick={e => handleCopyLink(e)} className="relative z-[1] flex h-8 w-8 items-center justify-center rounded-full bg-primary-orange">
           <LinkIcon className="h-5 w-5 cursor-pointer stroke-[2px] text-grey-400" />
         </div>)
       }

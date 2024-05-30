@@ -1,7 +1,8 @@
 "use client"
 import { Fragment, useState } from "react";
+
+import GroupButton from '../../(ui)/GroupButton';
 import AddGroupButton from "../../(ui)/AddGroupButton";
-import GroupButton from "../../(ui)/GroupButton";
 import { groups } from "@/app/test/(data)/data";
 import { loginUserId } from "../../(data)/user";
 

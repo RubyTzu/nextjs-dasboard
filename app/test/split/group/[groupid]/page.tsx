@@ -1,13 +1,12 @@
 "use client"
 import { useParams } from "next/navigation";
-import { groups } from "@/app/test/(data)/data";
+import { groups, expenses } from '@/app/test/(data)/data';
 import { TopGroupBar } from "@/app/test/(ui)/TopBars";
 import UsersBar from "@/app/test/(ui)/UsersBar";
 import ExpensesList from "@/app/test/(ui)/ExpensesList";
 import BalanceAndShareButtons from "@/app/test/(ui)/BalanceAndShareButtons";
 import AddExpenseButton from "@/app/test/(ui)/AddExpenseButton";
 import { useState } from "react";
-import { expenses } from '@/app/test/(data)/data';
 
 export default function Page() {
   const params = useParams<{ groupid: string }>();
