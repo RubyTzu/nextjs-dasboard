@@ -105,16 +105,13 @@ export function ExpenseDetailTwo({ expenseData }: { expenseData: any }) {
     )
 }
 
-
-
- 
-    //   {expenseData.groupId} <br/>
-    //   {expenseData.expenseId} <br/>
-    //   {expenseData.expenseType} <br/>
-    //   {expenseData.cost} <br/>
-    //   {expenseData.date} <br/>
-    //   {expenseData.event} <br/>
-    //   {expenseData.payerId} <br/>
-    //   {console.log(expenseData)}
-    //   {expenseData.sharersIds} <br/> 
-    //   {expenseData.note} <br/> 
+export function ExpenseDetailThree({ expenseData }:{expenseData: any}) {
+  return (
+    <div className="mx-1 w-full">
+      <div className="text-sm">備註</div>
+      <div className="mt-2 min-h-[101px] rounded-lg bg-white p-3 text-base">
+        {expenseData.note}
+      </div>
+    </div>
+  );
+}

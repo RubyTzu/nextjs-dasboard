@@ -1,11 +1,17 @@
 'use client';
 import { useParams } from 'next/navigation';
-import { filterExpense } from '@/app/test/(data)/totalDebts';
-import { TopExpenseBar } from '@/app/test/(ui)/TopBars';
 
+import { filterExpense } from '@/app/test/(data)/totalDebts';
 import { findExpenseGroupId } from '@/app/test/(data)/expense';
 import { expenses } from '@/app/test/(data)/data';
-import { ExpenseDetailOne, ExpenseDetailTwo } from '@/app/test/(ui)/ExpenseDetails';
+
+import { TopExpenseBar } from '@/app/test/(ui)/TopBars';
+import {
+  ExpenseDetailOne,
+  ExpenseDetailTwo,
+  ExpenseDetailThree,
+} from '@/app/test/(ui)/ExpenseDetails';
+import DeleteExpenseButton from '@/app/test/(ui)/DeleteExpenseButton';
 
 export default function Page() {
   const params = useParams<{ expenseid: string }>();
@@ -21,23 +27,15 @@ export default function Page() {
     <div className="flex flex-col items-center">
       <TopExpenseBar expenseData={expenseData} />
       {expenseData && expenseData.expenseDebt ? (
-        <div className="flex flex-col items-center mt-16 w-full px-4 py-6">
+        <div className="mt-16 flex w-full flex-col items-center px-4 py-6">
           <ExpenseDetailOne expenseData={expenseData} />
           <ExpenseDetailTwo expenseData={expenseData} />
-          
-          <div className="mx-1 w-full">
-            <div className="text-sm">備註</div>
-            <div className="text-base mt-2 bg-white p-3 rounded-lg min-h-[101px]">{expenseData.note}</div>
-          </div>
-         
-          <div className="flex justify-center items-center bg-grey-100 w-44 h-9 mt-8 rounded-full">
-            刪除費用
-            </div>
+          <ExpenseDetailThree expenseData={expenseData} />
+          <DeleteExpenseButton />
         </div>
-      ) :
-        <div className="mt-16 pt-6">
-          no such expense
-        </div>}
+      ) : (
+        <div className="mt-16 pt-6">no such expense</div>
+      )}
     </div>
   );
 }
