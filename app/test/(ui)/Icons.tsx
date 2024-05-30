@@ -8,6 +8,7 @@ import entertainmentIcon from "@/app/test/(ui)/icons/entertainment.svg";
 import otherIcon from "@/app/test/(ui)/icons/other.svg";
 import checkIcon from "@/app/test/(ui)/icons/check.svg";
 import closeIcon from "@/app/test/(ui)/icons/close.svg";
+import addGroupIcon from '@/app/test/(ui)/icons/addGroup.svg';
 
 import {
     GlobeAsiaAustraliaIcon,
@@ -65,6 +66,11 @@ function CheckIcon() {
     )
 }
 
+
+function AddGroupIcon() {
+  return <Image src={addGroupIcon} alt="" />;
+}
+
 function CloseIcon() {
     return <Image src={closeIcon} alt="" />;
 }
@@ -86,4 +92,4 @@ const groupIconMap = {
     other: RocketLaunchIcon,
 };
 
-export { expenseIconMap, groupIconMap, CheckIcon, CloseIcon };
+export { expenseIconMap, groupIconMap, CheckIcon, CloseIcon, AddGroupIcon };

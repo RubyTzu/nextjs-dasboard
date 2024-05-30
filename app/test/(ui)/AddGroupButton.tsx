@@ -1,6 +1,7 @@
 'use client'
 import { useState } from "react";
 import { loginUserId } from "../(data)/user";
+import { AddGroupIcon } from '@/app/test/(ui)/Icons';
 
 
 export default function AddGroupButton({ data, setData }: { data: any; setData: any }) {
@@ -27,8 +28,14 @@ const [fakeId, setFakeId] = useState(1);
 
 
     return (
-        <div onClick={handleAddGroup} className="z-[2] fixed top-16 flex items-start bg-primary-blue text-grey-100 w-full px-6 pt-2 pb-3 text-base">
-            <button className="active:bg-grey-100 rounded-[10px] px-2">+ 新增群組</button>
-        </div>
-    )
+      <div
+        onClick={handleAddGroup}
+        className="fixed top-16 z-[2] flex w-full items-start bg-primary-blue px-6 pb-3 pt-2 text-base text-grey-100"
+      >
+        <button className="flex items-center justify-center rounded-[10px] px-2 active:bg-grey-100">
+          <AddGroupIcon />
+          <span className="pl-2">新增群組</span>
+        </button>
+      </div>
+    );
 }
