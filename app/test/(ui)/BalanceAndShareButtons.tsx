@@ -1,8 +1,4 @@
-import {
-    CurrencyDollarIcon,
-    ArrowUpTrayIcon,
-    LinkIcon
-} from '@heroicons/react/24/outline';
+import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
 import ShareButton from './ShareButton';
 import CopyLinkButton from './CopyLinkButton';
 import { loginUserId } from '@/app/test/(data)/user';
