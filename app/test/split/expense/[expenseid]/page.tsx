@@ -1,55 +1,43 @@
 'use client';
 import { useParams } from 'next/navigation';
-import { expenses } from '@/app/test/(data)/data';
 import { filterExpense } from '@/app/test/(data)/totalDebts';
 import { TopExpenseBar } from '@/app/test/(ui)/TopBars';
 
+import { findExpenseGroupId } from '@/app/test/(data)/expense';
+import { expenses } from '@/app/test/(data)/data';
+import { ExpenseDetailOne, ExpenseDetailTwo } from '@/app/test/(ui)/ExpenseDetails';
+
 export default function Page() {
   const params = useParams<{ expenseid: string }>();
-  let groupId = ""
-  for (let expense of expenses) {
-    if (!expense) return
-    if (expense.expenseId === params.expenseid) {
-      groupId = expense.groupId
-      break
-    }
-  }
-  const { expensesWithDebts } = filterExpense(groupId)
+
+  const { expensesWithDebts } = filterExpense(findExpenseGroupId(params.expenseid), expenses)
 
   const expenseData = expensesWithDebts.filter(
     (expense: any) => expense.expenseId === params.expenseid,
   )[0];
 
+
   return (
     <div className="flex flex-col items-center">
-      <TopExpenseBar />
-
+      <TopExpenseBar expenseData={expenseData} />
       {expenseData && expenseData.expenseDebt ? (
-        <div className="mt-16 flex flex-col gap-3 pt-6 justify-center items-start w-[70%]">
-          <p>
-            Date:<br/> {expenseData.date}
-          </p>
-          <p>
-            Spending Name:<br/> {expenseData.event}
-          </p>
-          <p>
-            Your Debt:<br/> {expenseData.expenseDebt}
-          </p>
-          <p>
-            Total Spending:<br/> {expenseData.cost}
-          </p>
-
+        <div className="flex flex-col items-center mt-16 w-full px-4 py-6">
+          <ExpenseDetailOne expenseData={expenseData} />
+          <ExpenseDetailTwo expenseData={expenseData} />
+          
+          <div className="mx-1 w-full">
+            <div className="text-sm">備註</div>
+            <div className="text-base mt-2 bg-white p-3 rounded-lg min-h-[101px]">{expenseData.note}</div>
+          </div>
+         
+          <div className="flex justify-center items-center bg-grey-100 w-44 h-9 mt-8 rounded-full">
+            刪除費用
+            </div>
         </div>
-      ) : null}
-      {/* {expenseData.groupId} <br/>
-      {expenseData.expenseId} <br/>
-      {expenseData.expenseType} <br/>
-      {expenseData.cost} <br/>
-      {expenseData.date} <br/>
-      {expenseData.event} <br/>
-      {expenseData.payerId} <br/>
-      {console.log(expenseData)}
-      {expenseData.sharersIds} <br/> */}
+      ) :
+        <div className="mt-16 pt-6">
+          no such expense
+        </div>}
     </div>
   );
 }

@@ -18,7 +18,7 @@ export default function GroupButton({ groupData }: { groupData: any }) {
     <Link href={`/test/split/group/${groupId}`} className="mx-6 my-4 flex justify-between rounded-[20px] bg-white py-3 pl-3 pr-2">
       <div className="z-0 flex items-center">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-200">
-          {Icon ? <Icon className="h-6 w-6 text-grey-300" /> : null}
+          {Icon ? <Icon className="h-6 w-6 text-grey-400" /> : null}
         </div>
         <p className="pl-2 font-medium">{name}</p>
       </div>

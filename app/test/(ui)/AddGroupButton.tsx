@@ -1,5 +1,6 @@
 'use client'
 import { useState } from "react";
+import { loginUserId } from "../(data)/user";
 
 
 export default function AddGroupButton({ data, setData }: { data: any; setData: any }) {
@@ -12,7 +13,7 @@ const [fakeId, setFakeId] = useState(1);
             groupId: `try${fakeGroupId}`,
             groupType: "travel",
             name: `trytrytry ${fakeGroupId}`,
-            membersIds: [],
+            membersIds: [`${loginUserId}`],
             url: `https://shareGrouptry${fakeGroupId}`,
         }
 

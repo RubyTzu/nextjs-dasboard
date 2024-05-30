@@ -38,7 +38,7 @@ export default function ShareButton({
         </div>)
         :
         (<div onClick={e => handlesShareLink(e)} className="relative z-[1] flex h-8 w-8 items-center justify-center rounded-full bg-primary-orange">
-          <ArrowUpTrayIcon className="h-5 w-5 stroke-[2px] text-grey-300" />
+          <ArrowUpTrayIcon className="h-5 w-5 stroke-[2px] text-grey-400" />
         </div>)
       }
 

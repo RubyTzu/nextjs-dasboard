@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { usersInfo } from "@/app/test/(data)/data";
 import { Fragment } from "react";
+import { loginUserId } from "@/app/test/(data)/user";
 
 export default function UsersBar({ groupData }: { groupData: any }) {
     const usersFilterData = usersInfo.filter((user) => {
@@ -17,7 +18,7 @@ export default function UsersBar({ groupData }: { groupData: any }) {
     })
 
     return (<>
-        {groupData ?
+        {groupData && groupData.membersIds.includes(loginUserId) ?
             <>
                 {groupData.membersIds.length ?
                     (<div className="mt-16 flex items-center justify-center gap-4 pt-8 pb-5 border-b-[2px]">
@@ -41,7 +42,7 @@ export default function UsersBar({ groupData }: { groupData: any }) {
                                 )
                             })}
                         </ul>
-                        <div className="flex bg-grey-100 gap-[2px] py-1 pl-3 pr-2 rounded-full text-sm text-grey-300">
+                        <div className="flex bg-grey-100 gap-[2px] py-1 pl-3 pr-2 rounded-full text-sm text-grey-400">
                             <p className="">{groupData.membersIds.length}</p>
                             <span className="relative bottom-[1px]">&gt;</span>
                         </div>

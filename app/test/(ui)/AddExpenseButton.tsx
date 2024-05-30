@@ -3,8 +3,10 @@ import { useState } from "react";
 import {
     PlusIcon,
 } from '@heroicons/react/24/outline';
+import { loginUserId } from "../(data)/user";
 
-export default function AddExpenseButton({ groupId, data, setData }: { groupId: any; data: any; setData: any }) {
+
+export default function AddExpenseButton({ groupData, groupId, data, setData }: { groupData: any; groupId: any; data: any; setData: any }) {
     const [fakeId, setFakeId] = useState(1);
 
     const handleAddExpense = async () => {
@@ -12,13 +14,13 @@ export default function AddExpenseButton({ groupId, data, setData }: { groupId: 
         setFakeId(fakeExpenseId + 1)
         const newExpense = {
             groupId: groupId,
-            expenseId: `try ${fakeExpenseId}`,
+            expenseId: `try${fakeExpenseId}`,
             expenseType: 'other',
             cost: 340,
             date: '2024/5/28',
             event: `try Expense ${fakeExpenseId}`,
-            payerId: 'u1',
-            sharersIds: ['u1', 'u3'],
+            payerId: `${loginUserId}`,
+            sharersIds: [`${loginUserId}`],
         }
 
         setData([
@@ -31,8 +33,12 @@ export default function AddExpenseButton({ groupId, data, setData }: { groupId: 
 
 
     return (
-        <div onClick={handleAddExpense} className="fixed left-[50%] bottom-[45px] translate-x-[-50%] flex justify-center items-center bg-primary-green w-14 h-14 rounded-full">
-            <PlusIcon className="w-7 h-7 stroke-[2px]"/>
-        </div>
+        <>
+            {groupData && groupData.membersIds.includes(loginUserId) ?
+                <div onClick={handleAddExpense} className="fixed left-[50%] bottom-[45px] translate-x-[-50%] flex justify-center items-center bg-primary-green w-14 h-14 rounded-full">
+                    <PlusIcon className="w-7 h-7 stroke-[2px]" />
+                </div> : null
+            }
+        </>
     )
 }

@@ -1,12 +1,12 @@
-import { expenses } from '@/app/test/(data)/data';
+// import { expenses } from '@/app/test/(data)/data';
 import { loginUserId } from '@/app/test/(data)/user';
 
 
-function filterExpense(groupId: any) {
+function filterExpense(groupId: any, expenses: any) {
 
   let currentGroupExpenses = expenses
-    .filter(expense => expense.groupId === groupId)
-    .map(expense => ({ ...expense }));
+    .filter((expense: any) => expense.groupId === groupId)
+    .map((expense: any) => ({ ...expense }));
 
 //every one's debt save in to new object
   const debts = currentGroupExpenses.reduce(calculateDebt, {});
@@ -54,7 +54,7 @@ function filterExpense(groupId: any) {
 
   //map expenses with added debts
   let userDebts: any = debts[loginUserId];
-  let expensesWithDebts: any = currentGroupExpenses.map((expense) => {
+  let expensesWithDebts: any = currentGroupExpenses.map((expense: any) => {
     let newExpense = { ...expense };
     return newExpense;
   });
@@ -69,7 +69,4 @@ function filterExpense(groupId: any) {
   return { debts, totalDebts, expensesWithDebts }
 }
 
-
-
-// export { debts, totalDebts, expensesWithDebts };
 export { filterExpense };

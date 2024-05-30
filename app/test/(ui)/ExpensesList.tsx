@@ -5,8 +5,8 @@ import { loginUserId, user } from '@/app/test/(data)/user';
 import { expenseIconMap } from '@/app/test/(ui)/Icons';
 import Link from 'next/link';
 
-export default function ExpensesList({ groupId }: { groupId: any }) {
-  let { expensesWithDebts } = filterExpense(groupId)
+export default function ExpensesList({ groupId, expensesData }: { groupId: any; expensesData: any }) {
+  let { expensesWithDebts } = filterExpense(groupId, expensesData)
   let expenses = expensesWithDebts;
 
   return (
@@ -48,6 +48,7 @@ function ExpenseButton({ expense }: { expense: any }) {
     expenseDebt: any;
   } = expense;
   const Icon = expenseIconMap[expenseType];
+  let nf = new Intl.NumberFormat('en-US');
 
   return (
     <Link
@@ -60,22 +61,30 @@ function ExpenseButton({ expense }: { expense: any }) {
         </div>
         <div className="leading-[20px]">
           <p className="font-semibold">{event}</p>
-          <p className="text-sm font-base text-grey-400">
+          <p className="text-sm font-base text-grey-500">
             <span>
               {loginUserId === payerId ?
-              '你'
-              :
-              user(payerId)?.displayName
+                '你'
+                :
+                user(payerId)?.displayName
               }
             </span>
             付了
-            <span>{cost}$</span>
+            <span>${nf.format(Number(cost))}</span>
           </p>
         </div>
       </div>
 
       <div className="flex items-center gap-2">
-        <p>$ {expenseDebt}</p>
+        {expenseDebt.includes('-') ?
+          <p className='text-primary-pink'>
+            -${nf.format(Math.abs(expenseDebt))}
+          </p>
+          :
+          <p className='text-primary-blue'>
+            +${nf.format(expenseDebt)}
+          </p>
+        }
         <ChevronRightIcon className="h-3 w-3" />
       </div>
     </Link>

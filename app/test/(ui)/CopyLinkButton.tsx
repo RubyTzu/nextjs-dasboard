@@ -39,7 +39,7 @@ export default function CopyLinkButton({
         </div>)
         :
         (<div onClick={e => handleCopylink(e)} className="relative z-[1] flex h-8 w-8 items-center justify-center rounded-full bg-primary-orange">
-          <LinkIcon className="h-5 w-5 cursor-pointer stroke-[2px] text-grey-300" />
+          <LinkIcon className="h-5 w-5 cursor-pointer stroke-[2px] text-grey-400" />
         </div>)
       }
       <SuccessAlert

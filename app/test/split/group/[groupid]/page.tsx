@@ -20,8 +20,8 @@ export default function Page() {
       <TopGroupBar groupData={groupData} />
       <UsersBar groupData={groupData} />
       <BalanceAndShareButtons groupData={groupData} />
-      <ExpensesList groupId={params.groupid} />
-      <AddExpenseButton groupId={params.groupid} data={data} setData={setData} />
+      <ExpensesList groupId={params.groupid} expensesData={data}/>
+      <AddExpenseButton groupData={groupData} groupId={params.groupid} data={data} setData={setData} />
     </div>
   );
 }
