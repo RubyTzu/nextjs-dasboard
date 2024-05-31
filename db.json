@@ -1,0 +1,525 @@
+{
+  "groups": [
+    {
+      "id": "g1",
+      "groupType": "other",
+      "name": "5月聚餐",
+      "membersIds": [
+        "u1",
+        "u2",
+        "u3",
+        "u4"
+      ]
+    },
+    {
+      "id": "g2",
+      "groupType": "travel",
+      "name": "2024 Japan",
+      "membersIds": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ]
+    },
+    {
+      "id": "g3",
+      "groupType": "health",
+      "name": "新年新希望",
+      "membersIds": [
+        "u1",
+        "u2",
+        "u3"
+      ]
+    },
+    {
+      "id": "g4",
+      "groupType": "games",
+      "name": "group Games",
+      "membersIds": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9",
+        "10"
+      ]
+    },
+    {
+      "id": "g5",
+      "groupType": "travel",
+      "name": "group Travel 2",
+      "membersIds": [
+        "u3",
+        "u4",
+        "u5",
+        "u7",
+        "u9",
+        "10"
+      ]
+    },
+    {
+      "id": "g6",
+      "groupType": "health",
+      "name": "group Health 2",
+      "membersIds": [
+        "u4",
+        "u5",
+        "u6"
+      ]
+    },
+    {
+      "id": "g7",
+      "groupType": "other",
+      "name": "group Other 2",
+      "membersIds": [
+        "u1",
+        "u5",
+        "u6"
+      ]
+    },
+    {
+      "id": "g8",
+      "groupType": "games",
+      "name": "group Games 2",
+      "membersIds": [
+        "u3",
+        "u4",
+        "u6",
+        "u8"
+      ]
+    },
+    {
+      "id": "g9",
+      "groupType": "travel",
+      "name": "group Travel 3",
+      "membersIds": [
+        "u1",
+        "u2",
+        "u3",
+        "u7",
+        "u9",
+        "u10"
+      ]
+    },
+    {
+      "id": "g10",
+      "groupType": "health",
+      "name": "group Health 3",
+      "membersIds": [
+        "u2",
+        "u3",
+        "u4"
+      ]
+    },
+    {
+      "id": "g11",
+      "groupType": "other",
+      "name": "group Other 3",
+      "membersIds": [
+        "u1",
+        "u3",
+        "u5",
+        "u7",
+        "u8",
+        "u9",
+        "u10"
+      ]
+    },
+    {
+      "id": "g12",
+      "groupType": "games",
+      "name": "group Games 3",
+      "membersIds": [
+        "u2",
+        "u4",
+        "u6"
+      ]
+    }
+  ],
+  "expenses": [
+    {
+      "groupId": "g1",
+      "id": "e1",
+      "expenseType": "food",
+      "cost": 210,
+      "date": "2024/5/28",
+      "event": "燒鳥肌肉串",
+      "payerId": "u1",
+      "sharersIds": [
+        "u1",
+        "u2"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g1",
+      "id": "e2",
+      "expenseType": "food",
+      "cost": 50,
+      "date": "2024/5/28",
+      "event": "手工醃蘿波",
+      "payerId": "u1",
+      "sharersIds": [
+        "u2",
+        "u3",
+        "u4"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g1",
+      "id": "e3",
+      "expenseType": "food",
+      "cost": 150,
+      "date": "2024/5/28",
+      "event": "豆腐沙拉",
+      "payerId": "u1",
+      "sharersIds": [
+        "u2",
+        "u3",
+        "u4"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g1",
+      "id": "e4",
+      "expenseType": "food",
+      "cost": 180,
+      "date": "2024/5/28",
+      "event": "炭烤玉米筍",
+      "payerId": "u1",
+      "sharersIds": [
+        "u2",
+        "u3",
+        "u4"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g1",
+      "id": "e5",
+      "expenseType": "food",
+      "cost": 120,
+      "date": "2024/5/28",
+      "event": "節瓜",
+      "payerId": "u1",
+      "sharersIds": [
+        "u2",
+        "u3",
+        "u4"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g1",
+      "id": "e6",
+      "expenseType": "food",
+      "cost": 180,
+      "date": "2024/5/28",
+      "event": "山藥",
+      "payerId": "u1",
+      "sharersIds": [
+        "u1",
+        "u2",
+        "u3"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g1",
+      "id": "e7",
+      "expenseType": "food",
+      "cost": 120,
+      "date": "2024/5/28",
+      "event": "杏苞菇",
+      "payerId": "u1",
+      "sharersIds": [
+        "u2",
+        "u3",
+        "u4"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g1",
+      "id": "e8",
+      "expenseType": "food",
+      "cost": 140,
+      "date": "2024/5/28",
+      "event": "娃娃菜",
+      "payerId": "u1",
+      "sharersIds": [
+        "u2",
+        "u3",
+        "u4"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g1",
+      "id": "e9",
+      "expenseType": "food",
+      "cost": 140,
+      "date": "2024/5/28",
+      "event": "茄子",
+      "payerId": "u1",
+      "sharersIds": [
+        "u2",
+        "u3",
+        "u4"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g1",
+      "id": "e10",
+      "expenseType": "food",
+      "cost": 150,
+      "date": "2024/5/28",
+      "event": "炸豆腐",
+      "payerId": "u1",
+      "sharersIds": [
+        "u2",
+        "u3",
+        "u4"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g1",
+      "id": "e11",
+      "expenseType": "food",
+      "cost": 100,
+      "date": "2024/5/28",
+      "event": "青蔥豚煎餃",
+      "payerId": "u1",
+      "sharersIds": [
+        "u1"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g1",
+      "id": "e12",
+      "expenseType": "food",
+      "cost": 100,
+      "date": "2024/5/28",
+      "event": "韭菜豚煎餃",
+      "payerId": "u1",
+      "sharersIds": [
+        "u2"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g1",
+      "id": "e13",
+      "expenseType": "food",
+      "cost": 120,
+      "date": "2024/5/28",
+      "event": "綜合煎餃",
+      "payerId": "u1",
+      "sharersIds": [
+        "u4"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g1",
+      "id": "e14",
+      "expenseType": "drink",
+      "cost": 340,
+      "date": "2024/5/28",
+      "event": "葡萄沙瓦",
+      "payerId": "u1",
+      "sharersIds": [
+        "u2",
+        "u3"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g1",
+      "id": "e15",
+      "expenseType": "drink",
+      "cost": 180,
+      "date": "2024/5/28",
+      "event": "荔枝沙瓦",
+      "payerId": "u1",
+      "sharersIds": [
+        "u4"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g1",
+      "id": "e16",
+      "expenseType": "drink",
+      "cost": 80,
+      "date": "2024/5/28",
+      "event": "可爾必思",
+      "payerId": "u1",
+      "sharersIds": [
+        "u1"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g2",
+      "id": "e17",
+      "expenseType": "transport",
+      "cost": 180000,
+      "date": "2024/5/28",
+      "event": "plane ticket",
+      "payerId": "u1",
+      "sharersIds": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g2",
+      "id": "e18",
+      "expenseType": "stay",
+      "cost": 60000,
+      "date": "2024/5/28",
+      "event": "hotel",
+      "payerId": "u2",
+      "sharersIds": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g2",
+      "id": "e19",
+      "expenseType": "other",
+      "cost": 15000,
+      "date": "2024/5/29",
+      "event": "disney land",
+      "payerId": "u3",
+      "sharersIds": [
+        "u1",
+        "u3",
+        "u4",
+        "u6"
+      ],
+      "note": ""
+    },
+    {
+      "groupId": "g3",
+      "id": "e20",
+      "expenseType": "food",
+      "cost": 3000,
+      "date": "2024/5/30",
+      "event": "晚餐",
+      "payerId": "u2",
+      "sharersIds": [
+        "u1",
+        "u2",
+        "u3"
+      ],
+      "note": "大家都覺得不好吃的那間"
+    },
+    {
+      "groupId": "g3",
+      "id": "e21",
+      "expenseType": "food",
+      "cost": 2400,
+      "date": "2024/5/30",
+      "event": "午餐",
+      "payerId": "u1",
+      "sharersIds": [
+        "u1",
+        "u2",
+        "u3"
+      ],
+      "note": "其實還可以的那間"
+    },
+    {
+      "groupId": "g3",
+      "id": "e22",
+      "expenseType": "transport",
+      "cost": 450,
+      "date": "2024/5/30",
+      "event": "計程車",
+      "payerId": "u2",
+      "sharersIds": [
+        "u1",
+        "u2",
+        "u3"
+      ],
+      "note": "司機大哥很好笑那台"
+    }
+  ],
+  "usersInfo": [
+    {
+      "id": "u1",
+      "displayName": "a",
+      "pictureUrl": "https://cdn2.thecatapi.com/images/a4v.jpg"
+    },
+    {
+      "id": "u2",
+      "displayName": "b",
+      "pictureUrl": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg"
+    },
+    {
+      "id": "u3",
+      "displayName": "c",
+      "pictureUrl": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg"
+    },
+    {
+      "id": "u4",
+      "displayName": "d",
+      "pictureUrl": "https://images.dog.ceo/breeds/terrier-sealyham/n02095889_1044.jpg"
+    },
+    {
+      "id": "u5",
+      "displayName": "e",
+      "pictureUrl": "https://cdn2.thecatapi.com/images/cib.jpg"
+    },
+    {
+      "id": "u6",
+      "displayName": "f",
+      "pictureUrl": "https://images.dog.ceo/breeds/terrier-patterdale/Patterdale.jpg"
+    },
+    {
+      "id": "u7",
+      "displayName": "g",
+      "pictureUrl": "https://cdn2.thecatapi.com/images/edb.jpg"
+    },
+    {
+      "id": "u8",
+      "displayName": "h",
+      "pictureUrl": "https://images.dog.ceo/breeds/poodle-medium/WhatsApp_Image_2022-08-06_at_4.48.38_PM.jpg"
+    },
+    {
+      "id": "u9",
+      "displayName": "i",
+      "pictureUrl": "https://cdn2.thecatapi.com/images/bo5.jpg"
+    },
+    {
+      "id": "u10",
+      "displayName": "j",
+      "pictureUrl": "https://images.dog.ceo/breeds/hound-english/n02089973_1303.jpg"
+    }
+  ]
+}
