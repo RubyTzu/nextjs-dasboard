@@ -4,14 +4,38 @@ import { Fragment } from 'react';
 import SharerExpenseDetail from './SharerExpenseDetail';
 import Image from 'next/image';
 
+// expense = {
+//     id: 'e1',
+//     groupId: 'g1',
+//     name: 'fruits',
+//     amount: 180,
+//     date: '2024/5/28',
+//     category: 'food',
+//     payerId: 'u1',
+//     sharers: [
+//       {
+//         id: 'u1',
+//         amount: 20
+//       },
+//       {
+//         id: 'u2',
+//         amount: '70'
+//       },
+//       {
+//         id: 'u3',
+//         amount: '90'
+//       },
+//     ]
+// }
+
 export function ExpenseDetailOne({ expenseData }: { expenseData: any }) {
   const {
-    expenseType,
-    cost,
-    event,
+    category,
+    amount,
+    name,
     date,
   }: {
-    expenseType:
+    category:
       | 'food'
       | 'drink'
       | 'transport'
@@ -19,11 +43,11 @@ export function ExpenseDetailOne({ expenseData }: { expenseData: any }) {
       | 'shopping'
       | 'entertainment'
       | 'other';
-    cost: any;
-    event: string;
+    amount: any;
+    name: string;
     date: string;
   } = expenseData;
-  const Icon = expenseIconMap[expenseType];
+  const Icon = expenseIconMap[category];
   let nf = new Intl.NumberFormat('en-US');
 
   return (
@@ -35,14 +59,14 @@ export function ExpenseDetailOne({ expenseData }: { expenseData: any }) {
               <div className="scale-125">{Icon ? <Icon /> : null}</div>
             </div>
             <div className="flex flex-col justify-between">
-              <div className="text-xl leading-8">{event}</div>
+              <div className="text-xl leading-8">{name}</div>
               <div className="text-xs text-grey-300">
                 <div className="leading-3">{date} 新增</div>
                 <div className="leading-6">{date} 最後更新</div>
               </div>
             </div>
           </div>
-          <div className="text-xl leading-8">${nf.format(cost)}</div>
+          <div className="text-xl leading-8">${nf.format(amount)}</div>
         </>
       ) : null}
     </div>
@@ -51,13 +75,13 @@ export function ExpenseDetailOne({ expenseData }: { expenseData: any }) {
 
 export function ExpenseDetailTwo({ expenseData }: { expenseData: any }) {
   const {
-    cost,
+    amount,
     payerId,
-    sharersIds,
+    sharers,
   }: {
-    cost: any;
+    amount: any;
     payerId: string;
-    sharersIds: string[];
+    sharers: string[];
   } = expenseData;
   let nf = new Intl.NumberFormat('en-US');
 
@@ -78,18 +102,18 @@ export function ExpenseDetailTwo({ expenseData }: { expenseData: any }) {
                 {loginUserId === payerId ? '你' : user(payerId)?.displayName}
                 先付了
               </div>
-              <div>${nf.format(cost)}</div>
+              <div>${nf.format(amount)}</div>
             </div>
           </div>
 
-          {sharersIds.map((id: any, idx: any) => {
+          {sharers.map((sharer: any, idx: any) => {
             return (
               <Fragment key={idx}>
-                {id !== payerId ? (
+                {sharer.id !== payerId ? (
                   <>
                     <SharerExpenseDetail
                       expenseData={expenseData}
-                      sharerId={id}
+                      sharer={sharer}
                     />
                   </>
                 ) : null}
@@ -97,7 +121,7 @@ export function ExpenseDetailTwo({ expenseData }: { expenseData: any }) {
             );
           })}
 
-          {sharersIds.length === 1 && sharersIds.includes(payerId) ? (
+          {sharers.length === 1 && sharers.some((sharer: any) => sharer.id === payerId) ? (
             <div className="my-5 flex w-full items-center justify-end">
               已結清無欠款
             </div>

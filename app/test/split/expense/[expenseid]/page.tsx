@@ -19,9 +19,8 @@ export default function Page() {
   const { expensesWithDebts } = filterExpense(findExpenseGroupId(params.expenseid), expenses)
 
   const expenseData = expensesWithDebts.filter(
-    (expense: any) => expense.expenseId === params.expenseid,
+    (expense: any) => expense.id === params.expenseid,
   )[0];
-
 
   return (
     <div className="flex flex-col items-center">

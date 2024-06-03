@@ -12,9 +12,9 @@ export default function ExpensesList({ groupId, expensesData }: { groupId: any; 
   return (
     <div>
       {expenses.map((expense: any) => (
-        <Fragment key={expense.expenseId}>
+        <Fragment key={expense.id}>
           {expense.groupId === groupId &&
-            (expense.sharersIds.includes(loginUserId) ||
+            (expense.sharers.some((sharer: any) => sharer.id === loginUserId) ||
               expense.payerId.includes(loginUserId)) ? (
             <ExpenseButton expense={expense} />
           ) : null}
@@ -26,15 +26,15 @@ export default function ExpensesList({ groupId, expensesData }: { groupId: any; 
 
 function ExpenseButton({ expense }: { expense: any }) {
   const {
-    expenseId,
-    expenseType,
-    cost,
-    event,
+    id,
+    category,
+    amount,
+    name,
     payerId,
     expenseDebt,
   }: {
-    expenseId: string;
-    expenseType:
+    id: string;
+    category:
     | 'food'
     | 'drink'
     | 'transport'
@@ -42,17 +42,17 @@ function ExpenseButton({ expense }: { expense: any }) {
     | 'shopping'
     | 'entertainment'
     | 'other';
-    cost: string;
-    event: string;
+    amount: string;
+    name: string;
     payerId: string;
     expenseDebt: any;
   } = expense;
-  const Icon = expenseIconMap[expenseType];
+  const Icon = expenseIconMap[category];
   let nf = new Intl.NumberFormat('en-US');
 
   return (
     <Link
-      href={`/test/split/expense/${expenseId}`}
+      href={`/test/split/expense/${id}`}
       className="m-4 flex justify-between rounded-lg bg-white p-4"
     >
       <div className="flex items-center gap-3">
@@ -60,7 +60,7 @@ function ExpenseButton({ expense }: { expense: any }) {
           {Icon ? <Icon /> : null}
         </div>
         <div className="leading-[20px]">
-          <p className="font-semibold">{event}</p>
+          <p className="font-semibold">{name}</p>
           <p className="text-sm font-base text-grey-500">
             <span>
               {loginUserId === payerId ?
@@ -70,7 +70,7 @@ function ExpenseButton({ expense }: { expense: any }) {
               }
             </span>
             付了
-            <span>${nf.format(Number(cost))}</span>
+            <span>${nf.format(Number(amount))}</span>
           </p>
         </div>
       </div>

@@ -6,8 +6,8 @@ import { loginUserId } from '@/app/test/(data)/user';
 export default function BalanceAndShareButtons({ groupData }: { groupData: any }) {
     if(!groupData) return
 
-    const { groupId, name, membersIds }: {
-        groupId: string;
+    const { id, name, membersIds }: {
+        id: string;
         name: string;
         membersIds: string[];
     } = groupData
@@ -21,8 +21,8 @@ export default function BalanceAndShareButtons({ groupData }: { groupData: any }
                         <p className="font-semibold ml-1">結餘</p>
                     </div>
                     <div className="flex items-center gap-2">
-                        <ShareButton groupId={groupId} name={name} inGroupPage={true} />
-                        <CopyLinkButton groupId={groupId} name={name} inGroupPage={true} />
+                        <ShareButton id={id} name={name} inGroupPage={true} />
+                        <CopyLinkButton id={id} name={name} inGroupPage={true} />
                     </div>
                 </div>
                 : null}

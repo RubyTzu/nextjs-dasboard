@@ -4,7 +4,7 @@ function findExpenseGroupId(currPageExpenseId: any) {
     let groupId = ""
     for (let expense of expenses) {
         if (!expense) return
-        if (expense.expenseId === currPageExpenseId) {
+        if (expense.id === currPageExpenseId) {
             groupId = expense.groupId
             break
         }

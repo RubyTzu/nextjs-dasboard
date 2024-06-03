@@ -6,7 +6,7 @@ export default function Page() {
     const data = groups
     const params = useParams<{ groupid: string }>()
 
-    const gropData = data.filter((group) => group.groupId === params.groupid )[0]
+    const gropData = data.filter((group) => group.id === params.groupid )[0]
 
     return (
       <>

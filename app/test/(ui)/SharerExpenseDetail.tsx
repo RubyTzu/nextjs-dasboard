@@ -3,22 +3,21 @@ import Image from "next/image";
 
 export default function SharerExpenseDetail({
   expenseData,
-  sharerId,
+  sharer,
 }: {
   expenseData: any;
-  sharerId: any;
+  sharer: any;
 }) {
   const {
-    cost,
     payerId,
-    sharersIds,
+    sharers,
   }: {
-    cost: any;
     payerId: string;
-    sharersIds: string[];
+    sharers: string[];
   } = expenseData;
+  const {id, amount} = sharer
   let nf = new Intl.NumberFormat('en-US');
-  let shareCost: any = (cost / sharersIds.length).toFixed(2);
+  let shareAmount: any = (Number(amount)).toFixed(2);
 
   return (
     <div className="mb-5 flex w-full items-center justify-between">
@@ -29,18 +28,18 @@ export default function SharerExpenseDetail({
         <div className="flex items-center">
           <Image
             className="flex h-[32px] w-[32px] items-center justify-center rounded-full bg-grey-200"
-            src={user(sharerId)?.pictureUrl}
+            src={user(id)?.pictureUrl}
             width={32}
             height={32}
             alt="sharer image"
           />
           <div className="ml-3">
-            {sharerId === loginUserId ? '你' : user(sharerId)?.displayName}
+            {id === loginUserId ? '你' : user(id)?.displayName}
             &nbsp;要給&nbsp;
             {payerId === loginUserId ? '你' : user(payerId)?.displayName}
           </div>
         </div>
-        <div>${nf.format(shareCost)}</div>
+        <div>${nf.format(shareAmount)}</div>
       </div>
     </div>
   );

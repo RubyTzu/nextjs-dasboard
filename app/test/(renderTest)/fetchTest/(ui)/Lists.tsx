@@ -33,8 +33,8 @@ async function ExpensesList() {
             {dataExpenses.map((expense: any) => {
                 return (
                     <div key={expense.id} className="flex justify-between m-5">
-                        <div>{expense.event}</div>
-                        <div>$ {expense.cost}</div>
+                        <div>{expense.name}</div>
+                        <div>$ {expense.amount}</div>
                     </div>
                 )
             })}

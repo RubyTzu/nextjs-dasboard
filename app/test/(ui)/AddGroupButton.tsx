@@ -1,29 +1,12 @@
 'use client'
-import { useState } from "react";
-import { loginUserId } from "../(data)/user";
 import { AddGroupIcon } from '@/app/test/(ui)/Icons';
 
 
-export default function AddGroupButton({ data, setData }: { data: any; setData: any }) {
-const [fakeId, setFakeId] = useState(1);
+export default function AddGroupButton() {
 
     const handleAddGroup = async () => {
-        let fakeGroupId = fakeId;
-        setFakeId(fakeGroupId + 1)
-        const newGroup = {
-            groupId: `try${fakeGroupId}`,
-            groupType: "travel",
-            name: `trytrytry ${fakeGroupId}`,
-            membersIds: [`${loginUserId}`],
-            url: `https://shareGrouptry${fakeGroupId}`,
-        }
 
-        setData([
-            ...data,
-            newGroup
-        ])
-        data.push(newGroup)
-        console.log(data)
+        console.log("add group")
     }
 
 

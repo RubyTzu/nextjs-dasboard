@@ -31,14 +31,14 @@ export function TopExpenseBar({ expenseData }: { expenseData: any }) {
         {expenseData && (
           expenseData.payerId === loginUserId
           ||
-          expenseData.sharersIds.includes(loginUserId)) 
+          expenseData.sharers.some((sharer: any) => sharer.id === loginUserId)) 
           ? "費用明細" : "no such expense"}
       </h1>
       <div className="h-6 w-6">
       {expenseData && (
           expenseData.payerId === loginUserId
           ||
-          expenseData.sharersIds.includes(loginUserId)) 
+          expenseData.sharers.some((sharer: any) => sharer.id === loginUserId)) 
           ? <PencilSquareIcon /> : ""}
       </div>
     </div>

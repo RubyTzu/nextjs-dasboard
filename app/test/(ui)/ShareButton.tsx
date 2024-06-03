@@ -5,18 +5,18 @@ import { ArrowUpTrayIcon } from '@heroicons/react/24/outline';
 import SuccessAlert from '@/app/test/(ui)/SuccessAlert';
 
 export default function ShareButton({
-  groupId,
+  id,
   name,
   inGroupPage
 }: {
-  groupId: string;
+  id: string;
   name: string;
   inGroupPage: boolean;
 }) {
   const [isShow, setIsShow] = useState(false);
   const router = useRouter();
   const base = 'http://localhost:3000/test/split/group/';
-  const links = base + groupId;
+  const links = base + id;
 
   const handlesShareLink = (e: any) => {
     e.preventDefault();

@@ -1,34 +1,14 @@
-'use client'
-import { useState } from "react";
+'use client';
 import {
     PlusIcon,
 } from '@heroicons/react/24/outline';
 import { loginUserId } from "../(data)/user";
 
 
-export default function AddExpenseButton({ groupData, groupId, data, setData }: { groupData: any; groupId: any; data: any; setData: any }) {
-    const [fakeId, setFakeId] = useState(1);
-
-    const handleAddExpense = async () => {
-        let fakeExpenseId = fakeId;
-        setFakeId(fakeExpenseId + 1)
-        const newExpense = {
-            groupId: groupId,
-            expenseId: `try${fakeExpenseId}`,
-            expenseType: 'other',
-            cost: 340,
-            date: '2024/5/28',
-            event: `try Expense ${fakeExpenseId}`,
-            payerId: `${loginUserId}`,
-            sharersIds: [`${loginUserId}`],
-        }
-
-        setData([
-            ...data,
-            newExpense
-        ])
-        data.push(newExpense)
-        console.log(data)
+export default function AddExpenseButton({ groupData }: { groupData: any }) {
+  
+    const handleAddExpense = () => {
+        console.log("expense added")
     }
 
 
