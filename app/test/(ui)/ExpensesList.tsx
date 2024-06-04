@@ -35,6 +35,18 @@ export default function ExpensesList({ groupId, expensesData }: { groupId: any; 
 }
 
 function ExpenseButton({ expense }: { expense: any }) {
+  const [payer, setPayer] = useState<any>(null);
+  const fetchData = async () => {
+    try {
+      setPayer(await getUserInfo(payerId));
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+  
   if(!expense) return
   const {
     id,
@@ -61,15 +73,6 @@ function ExpenseButton({ expense }: { expense: any }) {
 
 if(!expenseDebt) return
   
-  const [payer, setPayer] = useState<any>(null);
-  const fetchData = async () => {
-    try {
-      setPayer(await getUserInfo(payerId));
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-  useEffect(() => { fetchData() }, []);
 
   const Icon = expenseIconMap[category];
   let nf = new Intl.NumberFormat('en-US');
