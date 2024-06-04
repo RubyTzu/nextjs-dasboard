@@ -1,9 +1,7 @@
-//import from next & react
+//import from next
 import Image from "next/image";
-import { Fragment, useEffect, useState } from "react";
 //import data
-// import { usersInfo } from "@/app/test/(data)/data";
-import { getUserInfo } from "@/app/test/(data)/API";
+import { useUser } from '@/app/test/(data)/Providers';
 import { loginUserId } from "@/app/test/(data)/user";
 
 export default function UsersBar({ groupData }: { groupData: any }) {
@@ -47,12 +45,7 @@ function NoneUsersBar({ text }: { text: string }) {
 }
 
 function UserBarImage({ id }: { id: any }) {
-    const [user, setUser] = useState<any>(null)
-    const fetchData = async () => {
-        setUser(await getUserInfo(id))
-    }
-
-    useEffect(() => { fetchData() }, [])
+      const user = useUser(id);
 
     return (
         <>

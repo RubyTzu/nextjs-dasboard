@@ -1,20 +1,24 @@
 //import from next & react
 import Link from 'next/link';
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment } from 'react';
 //import data
 import { filterExpense } from '@/app/test/(data)/totalDebts';
 import { loginUserId } from '@/app/test/(data)/user';
-import { getUserInfo } from "@/app/test/(data)/API";
+import { useUser } from '@/app/test/(data)/Providers';
 //import ui
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 import { expenseIconMap } from '@/app/test/(ui)/Icons';
 
+export default function ExpensesList({
+  groupId,
+  expensesData,
+}: {
+  groupId: any;
+  expensesData: any;
+}) {
+  if (!expensesData) return;
 
-
-export default function ExpensesList({ groupId, expensesData }: { groupId: any; expensesData: any }) {
-  if (!expensesData) return
-
-  let { expensesWithDebts } = filterExpense(groupId, expensesData)
+  let { expensesWithDebts } = filterExpense(groupId, expensesData);
   let expenses = expensesWithDebts;
 
   return (
@@ -23,8 +27,8 @@ export default function ExpensesList({ groupId, expensesData }: { groupId: any; 
         {expenses.map((expense: any) => (
           <Fragment key={expense.id}>
             {expense.groupId === groupId &&
-              (expense.sharers.some((sharer: any) => sharer.id === loginUserId) ||
-                expense.payerId.includes(loginUserId)) ? (
+            (expense.sharers.some((sharer: any) => sharer.id === loginUserId) ||
+              expense.payerId.includes(loginUserId)) ? (
               <ExpenseButton expense={expense} />
             ) : null}
           </Fragment>
@@ -35,19 +39,6 @@ export default function ExpensesList({ groupId, expensesData }: { groupId: any; 
 }
 
 function ExpenseButton({ expense }: { expense: any }) {
-  const [payer, setPayer] = useState<any>(null);
-  const fetchData = async () => {
-    try {
-      setPayer(await getUserInfo(payerId));
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
-  
-  if(!expense) return
   const {
     id,
     category,
@@ -58,21 +49,23 @@ function ExpenseButton({ expense }: { expense: any }) {
   }: {
     id: string;
     category:
-    | 'food'
-    | 'drink'
-    | 'transport'
-    | 'stay'
-    | 'shopping'
-    | 'entertainment'
-    | 'other';
+      | 'food'
+      | 'drink'
+      | 'transport'
+      | 'stay'
+      | 'shopping'
+      | 'entertainment'
+      | 'other';
     amount: string;
     name: string;
     payerId: string;
     expenseDebt: any;
   } = expense;
 
-if(!expenseDebt) return
-  
+  const payerData = useUser(payerId);
+
+  if (!expense) return;
+  if (!expenseDebt) return;
 
   const Icon = expenseIconMap[category];
   let nf = new Intl.NumberFormat('en-US');
@@ -88,13 +81,9 @@ if(!expenseDebt) return
         </div>
         <div className="leading-[20px]">
           <p className="font-semibold">{name}</p>
-          <p className="text-sm font-base text-grey-500">
+          <p className="font-base text-sm text-grey-500">
             <span>
-              {loginUserId === payerId ?
-                '你'
-                :
-                payer?.displayName
-              }
+              {loginUserId === payerId ? '你' : payerData?.displayName}
             </span>
             付了
             <span>${nf.format(Number(amount))}</span>
@@ -103,15 +92,13 @@ if(!expenseDebt) return
       </div>
 
       <div className="flex items-center gap-2">
-        {expenseDebt.includes('-') ?
-          <p className='text-primary-pink'>
+        {expenseDebt.includes('-') ? (
+          <p className="text-primary-pink">
             -${nf.format(Math.abs(expenseDebt))}
           </p>
-          :
-          <p className='text-primary-blue'>
-            +${nf.format(expenseDebt)}
-          </p>
-        }
+        ) : (
+          <p className="text-primary-blue">+${nf.format(expenseDebt)}</p>
+        )}
         <ChevronRightIcon className="h-3 w-3" />
       </div>
     </Link>

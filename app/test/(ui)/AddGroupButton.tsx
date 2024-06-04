@@ -6,7 +6,7 @@ export default function AddGroupButton() {
 
     const handleAddGroup = async () => {
 
-        console.log("add group")
+        console.log("group added")
     }
 
 
