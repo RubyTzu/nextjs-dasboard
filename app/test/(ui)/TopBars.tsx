@@ -1,12 +1,14 @@
-import { HomeIcon, Cog8ToothIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
+//import from next
 import Link from 'next/link';
+//import data
 import { loginUserId } from '@/app/test/(data)/user';
-
+//import ui
+import { HomeIcon, Cog8ToothIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 
 export function TopGroupBar({ groupData }: { groupData: any }) {
 
   return (
-    <div className="fixed w-full bg-primary-blue flex justify-between items-center text-grey-100 px-5 py-4">
+    <div className="z-10 fixed w-full bg-primary-blue flex justify-between items-center text-grey-100 px-5 py-4">
       <Link href="/test/split/groups" className="h-6 w-6">
         <HomeIcon />
       </Link>
@@ -31,14 +33,14 @@ export function TopExpenseBar({ expenseData }: { expenseData: any }) {
         {expenseData && (
           expenseData.payerId === loginUserId
           ||
-          expenseData.sharers.some((sharer: any) => sharer.id === loginUserId)) 
+          expenseData.sharers?.some((sharer: any) => sharer.id === loginUserId)) 
           ? "費用明細" : "no such expense"}
       </h1>
       <div className="h-6 w-6">
       {expenseData && (
           expenseData.payerId === loginUserId
           ||
-          expenseData.sharers.some((sharer: any) => sharer.id === loginUserId)) 
+          expenseData.sharers?.some((sharer: any) => sharer.id === loginUserId)) 
           ? <PencilSquareIcon /> : ""}
       </div>
     </div>

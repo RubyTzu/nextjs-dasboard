@@ -1,52 +1,47 @@
-import { loginUserId, user } from '@/app/test/(data)/user';
-import { expenseIconMap } from '@/app/test/(ui)/Icons';
-import { Fragment } from 'react';
-import SharerExpenseDetail from './SharerExpenseDetail';
+//import from next & react
 import Image from 'next/image';
+import { Fragment, useEffect, useState } from 'react';
+//import data
+import { loginUserId } from '@/app/test/(data)/user';
+import { getUserInfo } from "@/app/test/(data)/API";
+//import ui
+import { expenseIconMap } from '@/app/test/(ui)/Icons';
+import SharerExpenseDetail from '@/app/test/(ui)/SharerExpenseDetail';
 
-// expense = {
-//     id: 'e1',
-//     groupId: 'g1',
-//     name: 'fruits',
-//     amount: 180,
-//     date: '2024/5/28',
-//     category: 'food',
-//     payerId: 'u1',
-//     sharers: [
-//       {
-//         id: 'u1',
-//         amount: 20
-//       },
-//       {
-//         id: 'u2',
-//         amount: '70'
-//       },
-//       {
-//         id: 'u3',
-//         amount: '90'
-//       },
-//     ]
-// }
 
 export function ExpenseDetailOne({ expenseData }: { expenseData: any }) {
   const {
     category,
     amount,
     name,
-    date,
+    createBy,
+    createAt,
+    updateBy,
+    updateAt,
   }: {
     category:
-      | 'food'
-      | 'drink'
-      | 'transport'
-      | 'stay'
-      | 'shopping'
-      | 'entertainment'
-      | 'other';
+    | 'food'
+    | 'drink'
+    | 'transport'
+    | 'stay'
+    | 'shopping'
+    | 'entertainment'
+    | 'other';
     amount: any;
     name: string;
-    date: string;
+    createBy: string;
+    createAt: string;
+    updateBy: string;
+    updateAt: string;
   } = expenseData;
+  const [createByUser, setCreateByUser] = useState<any>(null)
+  const [updateByUser, setUpdateByUser] = useState<any>(null)
+  const fetchData = async () => {
+    setCreateByUser(await getUserInfo(createBy))
+    setUpdateByUser(await getUserInfo(updateBy))
+  }
+  useEffect(() => {fetchData()}, [])
+
   const Icon = expenseIconMap[category];
   let nf = new Intl.NumberFormat('en-US');
 
@@ -61,8 +56,8 @@ export function ExpenseDetailOne({ expenseData }: { expenseData: any }) {
             <div className="flex flex-col justify-between">
               <div className="text-xl leading-8">{name}</div>
               <div className="text-xs text-grey-300">
-                <div className="leading-3">{date} 新增</div>
-                <div className="leading-6">{date} 最後更新</div>
+                <div className="leading-3">{createAt} {createByUser?.displayName}新增</div>
+                <div className="leading-6">{updateAt} {updateByUser?.displayName}最後更新</div>
               </div>
             </div>
           </div>
@@ -83,6 +78,12 @@ export function ExpenseDetailTwo({ expenseData }: { expenseData: any }) {
     payerId: string;
     sharers: string[];
   } = expenseData;
+  const [payerData, setPayerData] = useState<any>(null)
+  const fetchData = async () => {
+    setPayerData(await getUserInfo(payerId))
+  }
+  useEffect(() => {fetchData()}, [])
+
   let nf = new Intl.NumberFormat('en-US');
 
   return (
@@ -90,16 +91,17 @@ export function ExpenseDetailTwo({ expenseData }: { expenseData: any }) {
       {expenseData ? (
         <div className="mt-7 w-full px-3">
           <div className="flex gap-4">
-            <Image
-              className="z-10 flex h-[64px] w-[64px] items-center justify-center rounded-full bg-grey-200"
-              src={user(payerId)?.pictureUrl}
-              width={64}
-              height={64}
-              alt="sharer image"
-            />
+            {payerData ?
+              <Image
+                className="z-10 flex h-[64px] w-[64px] items-center justify-center rounded-full bg-grey-200"
+                src={payerData.pictureUrl}
+                width={64}
+                height={64}
+                alt="sharer image"
+              /> : null}
             <div className="flex grow items-center justify-between">
               <div className="text-base">
-                {loginUserId === payerId ? '你' : user(payerId)?.displayName}
+                {loginUserId === payerId ? '你' : payerData?.displayName}
                 先付了
               </div>
               <div>${nf.format(amount)}</div>

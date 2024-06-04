@@ -1,30 +1,41 @@
-import { Fragment } from 'react';
-import { ChevronRightIcon } from '@heroicons/react/24/outline';
-import { filterExpense } from '@/app/test/(data)/totalDebts';
-import { loginUserId, user } from '@/app/test/(data)/user';
-import { expenseIconMap } from '@/app/test/(ui)/Icons';
+//import from next & react
 import Link from 'next/link';
+import { Fragment, useState, useEffect } from 'react';
+//import data
+import { filterExpense } from '@/app/test/(data)/totalDebts';
+import { loginUserId } from '@/app/test/(data)/user';
+import { getUserInfo } from "@/app/test/(data)/API";
+//import ui
+import { ChevronRightIcon } from '@heroicons/react/24/outline';
+import { expenseIconMap } from '@/app/test/(ui)/Icons';
+
+
 
 export default function ExpensesList({ groupId, expensesData }: { groupId: any; expensesData: any }) {
+  if (!expensesData) return
+
   let { expensesWithDebts } = filterExpense(groupId, expensesData)
   let expenses = expensesWithDebts;
 
   return (
-    <div>
-      {expenses.map((expense: any) => (
-        <Fragment key={expense.id}>
-          {expense.groupId === groupId &&
-            (expense.sharers.some((sharer: any) => sharer.id === loginUserId) ||
-              expense.payerId.includes(loginUserId)) ? (
-            <ExpenseButton expense={expense} />
-          ) : null}
-        </Fragment>
-      ))}
-    </div>
+    <>
+      <div>
+        {expenses.map((expense: any) => (
+          <Fragment key={expense.id}>
+            {expense.groupId === groupId &&
+              (expense.sharers.some((sharer: any) => sharer.id === loginUserId) ||
+                expense.payerId.includes(loginUserId)) ? (
+              <ExpenseButton expense={expense} />
+            ) : null}
+          </Fragment>
+        ))}
+      </div>
+    </>
   );
 }
 
 function ExpenseButton({ expense }: { expense: any }) {
+  if(!expense) return
   const {
     id,
     category,
@@ -47,6 +58,19 @@ function ExpenseButton({ expense }: { expense: any }) {
     payerId: string;
     expenseDebt: any;
   } = expense;
+
+if(!expenseDebt) return
+  
+  const [payer, setPayer] = useState<any>(null);
+  const fetchData = async () => {
+    try {
+      setPayer(await getUserInfo(payerId));
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  useEffect(() => { fetchData() }, []);
+
   const Icon = expenseIconMap[category];
   let nf = new Intl.NumberFormat('en-US');
 
@@ -66,7 +90,7 @@ function ExpenseButton({ expense }: { expense: any }) {
               {loginUserId === payerId ?
                 '你'
                 :
-                user(payerId)?.displayName
+                payer?.displayName
               }
             </span>
             付了

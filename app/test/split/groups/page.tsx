@@ -1,8 +1,9 @@
-import GroupButton from '../../(ui)/GroupButton';
-import AddGroupButton from "../../(ui)/AddGroupButton";
-import { loginUserId } from "../../(data)/user";
+//import data
+import { loginUserId } from "@/app/test/(data)/user";
 import { getGroups } from "@/app/test/(data)/API";
-
+//import ui
+import GroupButton from '@/app/test/(ui)/GroupButton';
+import AddGroupButton from "@/app/test/(ui)/AddGroupButton";
 
 export default async function Page() {
     const data = await getGroups();
@@ -12,6 +13,7 @@ export default async function Page() {
             <h1 className="z-[2] fixed left-[50%] translate-x-[-50%] text-center text-2xl font-bold bg-primary-blue text-grey-100 w-full py-5">群組列表</h1>
             <AddGroupButton />
             <div className="mt-24">
+               
                 {data ? data.map((group: any) =>
                     <div key={group.id} >
                         {group.membersIds.includes(loginUserId) ?

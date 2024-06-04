@@ -1,7 +1,9 @@
-import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
-import ShareButton from './ShareButton';
-import CopyLinkButton from './CopyLinkButton';
+//import data
 import { loginUserId } from '@/app/test/(data)/user';
+//import ui
+import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
+import ShareButton from '@/app/test/(ui)/ShareButton';
+import CopyLinkButton from '@/app/test/(ui)/CopyLinkButton';
 
 export default function BalanceAndShareButtons({ groupData }: { groupData: any }) {
     if(!groupData) return

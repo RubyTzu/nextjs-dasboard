@@ -1,6 +1,8 @@
 'use client';
+//import from next & react
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+//import ui
 import { LinkIcon } from '@heroicons/react/24/outline';
 import SuccessAlert from '@/app/test/(ui)/SuccessAlert';
 

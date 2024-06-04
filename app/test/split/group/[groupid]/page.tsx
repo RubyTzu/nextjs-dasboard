@@ -1,50 +1,43 @@
 "use client"
+//import from next & react
 import { useParams } from "next/navigation";
-import { groups, expenses } from '@/app/test/(data)/data';
+import { useState, useEffect, Suspense } from "react";
+//import data
 import { getGroup, getExpenses } from "@/app/test/(data)/API";
+//import ui
 import { TopGroupBar } from "@/app/test/(ui)/TopBars";
 import UsersBar from "@/app/test/(ui)/UsersBar";
-import ExpensesList from "@/app/test/(ui)/ExpensesList";
 import BalanceAndShareButtons from "@/app/test/(ui)/BalanceAndShareButtons";
+import ExpensesList from "@/app/test/(ui)/ExpensesList";
 import AddExpenseButton from "@/app/test/(ui)/AddExpenseButton";
-import { useState, useEffect } from "react";
+//import ui loading fallback
+import { UsersBarSkeleton } from "@/app/test/(ui)/LoadingSkeletons";
 
 
 export default function Page() {
   const params = useParams<{ groupid: string }>();
-//use client can't appear with async function
-  // const groupData = await getGroup("g1");
-  // const ExpensesData = await getExpenses();
-  const [groupData, setGroupData] = useState(null); 
-  // const [Expenses, setExpenses ] = useState(null); 
+  const [group, setGroup] = useState(null);
+  const [expenses, setExpenses] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getGroup(params.groupid);
-        // const ExpensesData = await getExpenses();
-        // Handle data...
-
-        setGroupData(data);
-        // setExpensesData(ExpensesData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-  
-    fetchData();
-  }, []);
-
-
-  const ExpensesData = expenses
+  const fetchData = async () => {
+    try {
+      setGroup(await getGroup(params.groupid));
+      setExpenses(await getExpenses());
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  useEffect(() => { fetchData() }, []);
 
   return (
     <div className="flex flex-col">
-      <TopGroupBar groupData={groupData} />
-      <UsersBar groupData={groupData} />
-      <BalanceAndShareButtons groupData={groupData} />
-      <ExpensesList groupId={params.groupid} expensesData={ExpensesData}/>
-      <AddExpenseButton groupData={groupData} />
+      <Suspense fallback={<UsersBarSkeleton />}>
+        <TopGroupBar groupData={group} />
+        <UsersBar groupData={group} />
+        <BalanceAndShareButtons groupData={group} />
+        <ExpensesList groupId={params.groupid} expensesData={expenses} />
+        <AddExpenseButton groupData={group} />
+      </Suspense>
     </div>
   );
 }

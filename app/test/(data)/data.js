@@ -42,7 +42,7 @@ const groups = [
     id: 'g5',
     groupType: 'travel',
     name: 'group Travel 2',
-    membersIds: ['u1', 'u2', 'u3', 'u4', 'u5', 'u6', 'u7', 'u8', 'u9', '10'],
+    membersIds: ['u1', 'u2', 'u3', 'u4', 'u5', 'u6', 'u7', 'u8', 'u9', 'u10'],
   },
   {
     id: 'g6',

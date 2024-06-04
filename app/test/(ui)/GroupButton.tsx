@@ -1,9 +1,10 @@
 "use client"
-import CopyLinkButton from "./CopyLinkButton";
-import ShareButton  from "./ShareButton";
+//import from next
 import Link from 'next/link';
+//import ui
 import { groupIconMap } from "@/app/test/(ui)/Icons";
-
+import CopyLinkButton from "@/app/test/(ui)/CopyLinkButton";
+import ShareButton  from "@/app/test/(ui)/ShareButton";
 
 export default function GroupButton({ groupData }: { groupData: any }) {
   const { id, groupType, name }: {

@@ -1,5 +1,9 @@
-import { loginUserId, user } from "@/app/test/(data)/user";
+//import from next & react
 import Image from "next/image";
+import { useEffect, useState } from 'react';
+//import data
+import { loginUserId } from "@/app/test/(data)/user";
+import { getUserInfo } from "@/app/test/(data)/API";
 
 export default function SharerExpenseDetail({
   expenseData,
@@ -8,14 +12,19 @@ export default function SharerExpenseDetail({
   expenseData: any;
   sharer: any;
 }) {
-  const {
-    payerId,
-    sharers,
-  }: {
-    payerId: string;
-    sharers: string[];
-  } = expenseData;
-  const {id, amount} = sharer
+  const { payerId }: { payerId: string; } = expenseData;
+  const { id, amount } = sharer
+
+  const [payerData, setPayerData] = useState<any>(null)
+  const [sharerData, setSharerData] = useState<any>(null)
+  const fetchData = async () => {
+    setPayerData(await getUserInfo(payerId))
+    setSharerData(await getUserInfo(id))
+  }
+
+  useEffect(() => { fetchData() }, [])
+
+
   let nf = new Intl.NumberFormat('en-US');
   let shareAmount: any = (Number(amount)).toFixed(2);
 
@@ -26,17 +35,19 @@ export default function SharerExpenseDetail({
       </div>
       <div className="flex grow items-center justify-between">
         <div className="flex items-center">
-          <Image
-            className="flex h-[32px] w-[32px] items-center justify-center rounded-full bg-grey-200"
-            src={user(id)?.pictureUrl}
-            width={32}
-            height={32}
-            alt="sharer image"
-          />
+          {sharerData ?
+            <Image
+              className="flex h-[32px] w-[32px] items-center justify-center rounded-full bg-grey-200"
+              src={sharerData.pictureUrl}
+              width={32}
+              height={32}
+              alt="sharer image"
+            />
+            : null}
           <div className="ml-3">
-            {id === loginUserId ? '你' : user(id)?.displayName}
+            {id === loginUserId ? '你' : sharerData?.displayName}
             &nbsp;要給&nbsp;
-            {payerId === loginUserId ? '你' : user(payerId)?.displayName}
+            {payerId === loginUserId ? '你' : payerData?.displayName}
           </div>
         </div>
         <div>${nf.format(shareAmount)}</div>

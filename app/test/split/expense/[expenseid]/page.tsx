@@ -1,10 +1,11 @@
 'use client';
+//import from next & react
 import { useParams } from 'next/navigation';
-
-import { filterExpense } from '@/app/test/(data)/totalDebts';
-import { findExpenseGroupId } from '@/app/test/(data)/expense';
-import { expenses } from '@/app/test/(data)/data';
-
+import { useState, useEffect } from "react";
+//import data
+import { getExpense } from "@/app/test/(data)/API";
+import { loginUserId } from '@/app/test/(data)/user';
+//import ui
 import { TopExpenseBar } from '@/app/test/(ui)/TopBars';
 import {
   ExpenseDetailOne,
@@ -15,21 +16,32 @@ import DeleteExpenseButton from '@/app/test/(ui)/DeleteExpenseButton';
 
 export default function Page() {
   const params = useParams<{ expenseid: string }>();
+  const [expense, setExpense] = useState<any>({});
 
-  const { expensesWithDebts } = filterExpense(findExpenseGroupId(params.expenseid), expenses)
+  //use client can't appear with async function, need useEffect
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const ExpenseData = await getExpense((params.expenseid));
 
-  const expenseData = expensesWithDebts.filter(
-    (expense: any) => expense.id === params.expenseid,
-  )[0];
+        setExpense(ExpenseData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="flex flex-col items-center">
-      <TopExpenseBar expenseData={expenseData} />
-      {expenseData && expenseData.expenseDebt ? (
+      <TopExpenseBar expenseData={expense} />
+      {expense && (expense.sharers?.some((sharer: any) => sharer.id === loginUserId) ||
+        expense.payerId?.includes(loginUserId)) ? (
         <div className="mt-16 flex w-full flex-col items-center px-4 py-6">
-          <ExpenseDetailOne expenseData={expenseData} />
-          <ExpenseDetailTwo expenseData={expenseData} />
-          <ExpenseDetailThree expenseData={expenseData} />
+          <ExpenseDetailOne expenseData={expense} />
+          <ExpenseDetailTwo expenseData={expense} />
+          <ExpenseDetailThree expenseData={expense} />
           <DeleteExpenseButton />
         </div>
       ) : (

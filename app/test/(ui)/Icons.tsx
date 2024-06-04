@@ -1,4 +1,6 @@
+//import from next
 import Image from "next/image";
+//import ui
 import foodIcon from "@/app/test/(ui)/icons/food.svg";
 import drinkIcon from "@/app/test/(ui)/icons/drink.svg";
 import transportIcon from "@/app/test/(ui)/icons/transport.svg";
@@ -9,14 +11,12 @@ import otherIcon from "@/app/test/(ui)/icons/other.svg";
 import checkIcon from "@/app/test/(ui)/icons/check.svg";
 import closeIcon from "@/app/test/(ui)/icons/close.svg";
 import addGroupIcon from '@/app/test/(ui)/icons/addGroup.svg';
-
 import {
     GlobeAsiaAustraliaIcon,
     HeartIcon,
     PuzzlePieceIcon,
     RocketLaunchIcon,
 } from '@heroicons/react/24/outline';
-
 
 function FoodIcon() {
     return (
