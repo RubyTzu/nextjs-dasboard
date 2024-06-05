@@ -50,7 +50,7 @@ export function ExpenseDetailOne({ expenseData }: { expenseData: any }) {
         sharers?.some((sharer: any) => sharer.id === loginUserId)) ? (
         <div className="flex w-full justify-between pl-2 pr-3">
           <div className="flex gap-5">
-            <div className="flex h-[72px] w-[72px] items-center justify-center rounded-lg border-[5px] border-white bg-primary-orange">
+            <div className="z-0 flex h-[72px] w-[72px] items-center justify-center rounded-lg border-[5px] border-white bg-primary-orange">
               <div className="scale-125">{Icon ? <Icon /> : null}</div>
             </div>
             <div className="flex flex-col justify-between">

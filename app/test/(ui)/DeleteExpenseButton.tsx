@@ -14,12 +14,16 @@ export default function DeleteExpenseButton({
     sharers: string[];
   } = expenseData;
 
+  const handleDelete = () => {
+    console.log("expense deleted")
+  }
+
   return (
     <>
       {expenseData &&
-      (payerId === loginUserId ||
-        sharers?.some((sharer: any) => sharer.id === loginUserId)) ? (
-        <div className="mt-8 flex h-9 w-44 items-center justify-center rounded-full bg-grey-100">
+        (payerId === loginUserId ||
+          sharers?.some((sharer: any) => sharer.id === loginUserId)) ? (
+        <div onClick={handleDelete} className="mt-8 flex h-9 w-44 items-center justify-center rounded-full bg-grey-100 cursor-pointer">
           刪除費用
         </div>
       ) : null}

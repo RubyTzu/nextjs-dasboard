@@ -14,7 +14,7 @@ export default function AddExpenseButton({ groupData }: { groupData: any }) {
     return (
         <>
             {groupData && groupData.membersIds.includes(loginUserId) ?
-                <div onClick={handleAddExpense} className="fixed left-[50%] bottom-[45px] translate-x-[-50%] flex justify-center items-center bg-primary-green w-14 h-14 rounded-full">
+                <div onClick={handleAddExpense} className="fixed left-[50%] bottom-[45px] translate-x-[-50%] flex justify-center items-center bg-primary-green w-14 h-14 rounded-full cursor-pointer">
                     <PlusIcon className="w-7 h-7 stroke-[2px]" />
                 </div> : null
             }

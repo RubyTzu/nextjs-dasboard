@@ -4,19 +4,17 @@ import { Fragment } from 'react';
 //import data
 import { filterExpense } from '@/app/test/(data)/totalDebts';
 import { loginUserId } from '@/app/test/(data)/user';
-import { useUser } from '@/app/test/(data)/Providers';
+import { useUser, useExpenses } from '@/app/test/(data)/Providers';
 //import ui
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 import { expenseIconMap } from '@/app/test/(ui)/Icons';
 
 export default function ExpensesList({
   groupId,
-  expensesData,
 }: {
   groupId: any;
-  expensesData: any;
 }) {
-  if (!expensesData) return;
+  const expensesData = useExpenses();
 
   let { expensesWithDebts } = filterExpense(groupId, expensesData);
   let expenses = expensesWithDebts;

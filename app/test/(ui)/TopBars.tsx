@@ -25,7 +25,7 @@ export function TopGroupBar({ groupData }: { groupData: any }) {
 
 export function TopExpenseBar({ expenseData }: { expenseData: any }) {
   return (
-    <div className="fixed flex w-full items-center justify-between bg-primary-blue px-5 py-4 text-grey-100">
+    <div className="z-10 fixed flex w-full items-center justify-between bg-primary-blue px-5 py-4 text-grey-100">
       <Link href="/test/split/groups" className="h-6 w-6">
         <HomeIcon />
       </Link>
