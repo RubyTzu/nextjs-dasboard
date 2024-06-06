@@ -1,13 +1,12 @@
 import { loginUserId } from '@/app/test/(data)/user';
 
-function filterExpense(groupId: any, expenses: any) {
+function filterExpense(expenses: any) {
 
-  let currentGroupExpenses = expenses
-    .filter((expense: any) => expense.groupId === groupId)
+  let newExpenses = expenses
     .map((expense: any) => ({ ...expense }));
 
 //every one's debt save in to new object
-  const debts = currentGroupExpenses.reduce(calculateDebt, {});
+  const debts = newExpenses.reduce(calculateDebt, {});
   function calculateDebt(acc: any, expense: any) {
     if (!(expense.payerId in acc)) {
         acc[expense.payerId] = {}
@@ -51,7 +50,7 @@ function filterExpense(groupId: any, expenses: any) {
 
   //map expenses with added debts
   let userDebts: any = debts[loginUserId];
-  let expensesWithDebts: any = currentGroupExpenses.map((expense: any) => {
+  let expensesWithDebts: any = newExpenses.map((expense: any) => {
     let newExpense = { ...expense };
     return newExpense;
   });

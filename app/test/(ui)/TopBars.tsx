@@ -5,7 +5,7 @@ import { loginUserId } from '@/app/test/(data)/user';
 //import ui
 import { HomeIcon, Cog8ToothIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 
-export function TopGroupBar({ groupData }: { groupData: any }) {
+export function TopGroupBar({ groupData,groupName }: { groupData: any; groupName: string }) {
 
   return (
     <div className="z-10 fixed w-full bg-primary-blue flex justify-between items-center text-grey-100 px-5 py-4">
@@ -13,11 +13,10 @@ export function TopGroupBar({ groupData }: { groupData: any }) {
         <HomeIcon />
       </Link>
       <h1 className="text-lg">
-        {groupData && groupData.membersIds.includes(loginUserId) ? groupData.name : 'no such Page'}
+        {groupData && groupData.users.some((user: any) => user.id === loginUserId) ? groupName : 'no such Page'}
       </h1>
       <div className="h-6 w-6">
-        {groupData && groupData.membersIds.includes(loginUserId) ? <Cog8ToothIcon /> : ''}
-
+        {groupData && groupData.users.some((user: any) => user.id === loginUserId) ? <Cog8ToothIcon /> : ''}
       </div>
     </div>
   )

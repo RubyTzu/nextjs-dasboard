@@ -7,13 +7,13 @@ import CopyLinkButton from "@/app/test/(ui)/CopyLinkButton";
 import ShareButton  from "@/app/test/(ui)/ShareButton";
 
 export default function GroupButton({ groupData }: { groupData: any }) {
-  const { id, groupType, name }: {
+  const { id, picture, name }: {
     id: string;
-    groupType: 'travel' | 'health' | 'games' | 'other';
+    picture: 'travel' | 'health' | 'games' | 'other';
     name: string;
   } = groupData
 
-  const Icon = groupIconMap[groupType];
+  const Icon = groupIconMap[picture];
 
   return (
     <Link href={`/test/split/group/${id}`} className="mx-6 my-4 flex justify-between rounded-[20px] bg-white py-3 pl-3 pr-2">

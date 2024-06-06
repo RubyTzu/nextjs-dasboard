@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Fragment } from 'react';
 //import data
 import { loginUserId } from '@/app/test/(data)/user';
-import { useUser } from '@/app/test/(data)/Providers';
+import { useUserData } from '@/app/test/(data)/Providers';
 //import ui
 import { expenseIconMap } from '@/app/test/(ui)/Icons';
 import SharerExpenseDetail from '@/app/test/(ui)/SharerExpenseDetail';
@@ -38,8 +38,8 @@ export function ExpenseDetailOne({ expenseData }: { expenseData: any }) {
     sharers: string[];
   } = expenseData;
 
-  const createByUser = useUser(createBy);
-  const updateByUser = useUser(updateBy);
+  const createByUser = useUserData(createBy);
+  const updateByUser = useUserData(updateBy);
   const Icon = expenseIconMap[category];
   let nf = new Intl.NumberFormat('en-US');
 
@@ -85,7 +85,7 @@ export function ExpenseDetailTwo({ expenseData }: { expenseData: any }) {
     sharers: string[];
   } = expenseData;
 
-  const payerData = useUser(payerId);
+  const payerData = useUserData(payerId);
   let nf = new Intl.NumberFormat('en-US');
 
   return (

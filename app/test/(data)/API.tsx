@@ -1,3 +1,30 @@
+//new group API
+async function getGroup(id: any) {
+    const res = await fetch(`http://localhost:3000/group/${id}`, {
+        cache: "no-store",
+    });
+
+    if (!res.ok) throw Error;
+
+    const data = await res.json();
+
+    return data;
+}
+
+//new user API
+async function getUser(id: any) {
+    const res = await fetch(`http://localhost:3000/user/${id}`, {
+        cache: "no-store",
+    });
+
+    if (!res.ok) throw Error;
+
+    const data = await res.json();
+
+    return data;
+}
+
+
 //get groups
 async function getGroups() {
     const res = await fetch("http://localhost:3000/groups/", {
@@ -11,7 +38,7 @@ async function getGroups() {
     return data;
 }
 
-async function getGroup(id: any) {
+async function getGroupData(id: any) {
     const res = await fetch(`http://localhost:3000/groups/${id}`, {
         cache: "no-store",
     });
@@ -132,4 +159,4 @@ async function getUserInfo(id: any) {
 
 // }
 
-export { getGroups, getGroup, getExpenses, getExpense, getUserInfos, getUserInfo }
+export { getGroups, getGroupData, getExpenses, getExpense, getUserInfos, getUserInfo, getGroup, getUser }

@@ -2,7 +2,7 @@
 import Image from 'next/image';
 //import data
 import { loginUserId } from '@/app/test/(data)/user';
-import { useUser } from '@/app/test/(data)/Providers';
+import { useUserData } from '@/app/test/(data)/Providers';
 
 export default function SharerExpenseDetail({
   expenseData,
@@ -14,8 +14,8 @@ export default function SharerExpenseDetail({
   const { payerId }: { payerId: string } = expenseData;
   const { id, amount } = sharer;
 
-  const payerData = useUser(payerId);
-  const sharerData = useUser(id);
+  const payerData = useUserData(payerId);
+  const sharerData = useUserData(id);
 
   let nf = new Intl.NumberFormat('en-US');
   let shareAmount: any = Number(amount).toFixed(2);
