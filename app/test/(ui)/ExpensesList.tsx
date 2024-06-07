@@ -16,6 +16,7 @@ export default function ExpensesList({
 
   let { expensesWithDebts } = filterExpense(groupData.expense);
   let users = groupData.users
+  let groupId = groupData.id
   let expenses = expensesWithDebts;
 
   return (
@@ -25,7 +26,7 @@ export default function ExpensesList({
           <Fragment key={expense.id}>
             {(expense.sharers.some((sharer: any) => sharer.id === loginUserId) ||
               expense.payerId.includes(loginUserId)) ? (
-              <ExpenseButton users={users} expense={expense} />
+              <ExpenseButton users={users} expense={expense} groupId={groupId} />
             ) : null}
           </Fragment>
         ))}
@@ -34,7 +35,7 @@ export default function ExpensesList({
   );
 }
 
-function ExpenseButton({ users, expense }: { users: any; expense: any }) {
+function ExpenseButton({ users, expense, groupId }: { users: any; expense: any; groupId: any }) {
   const {
     id,
     category,
@@ -65,7 +66,7 @@ function ExpenseButton({ users, expense }: { users: any; expense: any }) {
 
   return (
     <Link
-      href={`/test/split/expense/${id}`}
+      href={`/test/split/group/${groupId}/expense/${id}`}
       className="m-4 flex justify-between rounded-lg bg-white p-4"
     >
       <div className="flex items-center gap-3">

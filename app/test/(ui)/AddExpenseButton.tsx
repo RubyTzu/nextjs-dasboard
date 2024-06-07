@@ -1,6 +1,4 @@
 'use client';
-//import data
-import { loginUserId } from "../(data)/user";
 //import ui
 import { PlusIcon } from '@heroicons/react/24/outline';
 

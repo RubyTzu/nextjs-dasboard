@@ -1,6 +1,6 @@
-//get groups
+//new group API
 async function getGroups() {
-    const res = await fetch("http://localhost:3000/groups/", {
+    const res = await fetch(`http://localhost:3000/group/`, {
         cache: "no-store",
     });
 
@@ -11,9 +11,8 @@ async function getGroups() {
     return data;
 }
 
-//get expenses
-async function getExpenses() {
-    const res = await fetch("http://localhost:3000/expenses", {
+async function getGroup(id: any) {
+    const res = await fetch(`http://localhost:3000/group/${id}`, {
         cache: "no-store",
     });
 
@@ -24,9 +23,9 @@ async function getExpenses() {
     return data;
 }
 
-//get userInfos
-async function getUserInfos() {
-    const res = await fetch("http://localhost:3000/usersInfo", {
+//new user API
+async function getUser(id: any) {
+    const res = await fetch(`http://localhost:3000/user/${id}`, {
         cache: "no-store",
     });
 
@@ -36,17 +35,29 @@ async function getUserInfos() {
 
     return data;
 }
+
+//get expense
+// async function getExpense(id: any) {
+//     const res = await fetch(`http://localhost:3000/expense/${id}`, {
+//         cache: "no-store",
+//     });
+
+//     if (!res.ok) throw Error;
+
+//     const data = await res.json();
+
+//     return data;
+// }
 
 //add group
 async function addGroup(payload: any) {
-    const { id, groupType, name, membersIds } = payload
-    let url = `http://localhost:3000/groups/`
+    const { id, users, expense } = payload
+    let url = `http://localhost:3000/group/`
 
     let body = {
         "id": id,
-        "groupType": groupType,
-        "name": name,
-        "membersIds": membersIds
+        "users": users,
+        "expense": expense,
     }
 
     const res = await fetch(url, {
@@ -62,9 +73,9 @@ async function addGroup(payload: any) {
 
 }
 
-//delete group
+// delete group
 async function deleteGroup(id: any) {
-    let url = `http://localhost:3000/groups/${id}`
+    let url = `http://localhost:3000/group/${id}`
 
     const res = await fetch(url, { method: 'DELETE' })
 
@@ -72,16 +83,14 @@ async function deleteGroup(id: any) {
 
 }
 
-//change group
+// change group
 async function changeGroup(payload: any) {
-    const { id, groupType, name, membersIds } = payload
-    let url = `http://localhost:3000/groups/${id}`
+    const { id, users } = payload
+    let url = `http://localhost:3000/group/${id}`
 
     let body = {
-        "id": id,
-        "groupType": groupType,
-        "name": name,
-        "membersIds": membersIds
+        ...payload,
+        "users": users,
     }
 
     const res = await fetch(url, {
@@ -97,4 +106,5 @@ async function changeGroup(payload: any) {
 
 }
 
-export { getGroups, getExpenses, getUserInfos, addGroup, deleteGroup, changeGroup }
+
+export { getGroups, getGroup, getUser, addGroup, deleteGroup, changeGroup }

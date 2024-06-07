@@ -2,6 +2,7 @@
 //import from next
 import { useParams } from 'next/navigation';
 //import data
+import { useGroup } from '@/app/test/(data)/Providers';
 import { loginUserId } from '@/app/test/(data)/user';
 //import ui
 import { TopExpenseBar } from '@/app/test/(ui)/TopBars';
@@ -13,35 +14,11 @@ import {
 import DeleteExpenseButton from '@/app/test/(ui)/DeleteExpenseButton';
 
 export default function Page() {
-  const params = useParams<{ expenseid: string }>();
-
-  let expense = {
-    "id": "teste1",
-    "name": "fake expense",
-    "amount": 1000,
-    "date": "2024/6/7",
-    "category": "other",
-    "payerId": "u1",
-    "sharers": [
-      {
-        "id": "u1",
-        "amount": 1000
-      }
-    ],
-    "note": "",
-    "createBy": "u1",
-    "createAt": "2024/6/7",
-    "updateBy": "u1",
-    "updateAt": "2024/6/7"
-  }
-  
-  let users =  [
-    {
-      "id": "u1",
-      "name": "a",
-      "picture": "https://cdn2.thecatapi.com/images/a4v.jpg"
-    }
-  ]
+  const params = useParams<{ groupid: string; expenseid: string }>();
+  const group = useGroup(params.groupid)
+  if (!group) return
+  let expense: any = group.expense.filter((i: any) => i.id === params.expenseid)[0]
+  let users: any = group.users
 
   return (
     <div className="flex flex-col items-center">
@@ -50,8 +27,8 @@ export default function Page() {
         (expense.sharers?.some((sharer: any) => sharer.id === loginUserId) ||
           expense.payerId?.includes(loginUserId)) ? (
         <div className="mt-16 flex w-full flex-col items-center px-4 py-6">
-          <ExpenseDetailOne expenseData={expense} users={users} />
-          <ExpenseDetailTwo expenseData={expense} users={users} />
+          <ExpenseDetailOne expenseData={expense} users={users}/>
+          <ExpenseDetailTwo expenseData={expense} users={users}/>
           <ExpenseDetailThree expenseData={expense} />
           <DeleteExpenseButton expenseData={expense} />
         </div>

@@ -1,5 +1,5 @@
 import { TestAddButton } from "./(ui)/TestButtons";
-import { GroupsList, UsresList, ExpensesList } from "./(ui)/Lists"
+import { GroupsList } from "./(ui)/Lists"
 
 export default async function Page() {
 
@@ -13,8 +13,6 @@ export default async function Page() {
             <br />
             <div>
                 <GroupsList />
-                <ExpensesList />
-                <UsresList />
             </div>
         </div>
     );

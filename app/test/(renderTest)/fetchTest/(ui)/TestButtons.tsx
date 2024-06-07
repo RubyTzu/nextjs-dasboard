@@ -1,19 +1,27 @@
 "use client"
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/navigation'
-import { addGroup, deleteGroup, changeGroup, } from "@/app/test/(renderTest)/fetchTest/(api)/API";
+import { addGroup, deleteGroup, changeGroup } from "@/app/test/(renderTest)/fetchTest/(api)/API";
 
 export function TestAddButton() {
     const router = useRouter()
-    async function handleAddGroup() {
-        let body = {
-            id: uuidv4(),
-            groupType: "health",
-            name: "hi group try",
-            membersIds: ["u1", "u2"]
-        }
 
-        await addGroup(body as any)
+    async function handleAddGroup() {
+
+        let groupBody = {
+            id: uuidv4(),
+            users: [
+                {
+                    "id": "u11",
+                    "name": "atest",
+                    "picture": "https://cdn2.thecatapi.com/images/a4v.jpg"
+                }
+            ],
+            expense: []
+        }
+ 
+        await addGroup(groupBody as any)
+
         console.log('add success')
         router.refresh()
     }
@@ -33,19 +41,27 @@ export function TestDeleteButton({ groupId }: { groupId: any }) {
     }
 
     return (
-        <button className="bg-primary-lightPink rounded-full py-1 px-3 pointer-cursor" onClick={handleDeleteGroup}>刪除</button>
+        <button className="bg-primary-lightPink rounded-full py-1 px-3 pointer-cursor" onClick={handleDeleteGroup}>刪除群組</button>
     )
 }
 
 export function TestChangeButton({ groupData }: { groupData: any }) {
     const router = useRouter()
+
     async function handleChangeGroup() {
-        let body = {
-           ...groupData,
-            name: "changeName",
+        let groupBody = {
+            ...groupData,
+            users: [
+                {
+                    "id": "u12",
+                    "name": "btest",
+                    "picture": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg"
+                }
+            ]
         }
 
-        await changeGroup(body as any)
+        await changeGroup(groupBody as any)
+
         console.log('change success')
         router.refresh()
     }

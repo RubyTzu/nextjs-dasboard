@@ -1,7 +1,6 @@
 //import from next
 import Image from "next/image";
 //import data
-import { useUserData } from '@/app/test/(data)/Providers';
 import { loginUserId } from "@/app/test/(data)/user";
 
 export default function UsersBar({ groupData }: { groupData: any }) {
