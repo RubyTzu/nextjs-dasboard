@@ -11,7 +11,8 @@ export default async function Page() {
     const dogImageUrl = dogs.message;
     const cats = await getCats();
     const catImageUrl = cats[0].url;
-
+console.log(dogImageUrl)
+console.log(catImageUrl)
     return (
         <main className="relative bg-slate-100 md:pt-32 pb-32 pt-32 h-screen">
             <Navbar />

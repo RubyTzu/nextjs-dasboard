@@ -85,11 +85,18 @@ const expenseIconMap = {
     other: OtherIcon,
 };
 
+// const groupIconMap = {
+//     travel: GlobeAsiaAustraliaIcon,
+//     health: HeartIcon,
+//     games: PuzzlePieceIcon,
+//     other: RocketLaunchIcon,
+// };
+
 const groupIconMap = {
-    travel: GlobeAsiaAustraliaIcon,
-    health: HeartIcon,
-    games: PuzzlePieceIcon,
-    other: RocketLaunchIcon,
+    travel: "https://cdn2.thecatapi.com/images/av8.jpg",
+    health: "https://cdn2.thecatapi.com/images/8mu.jpg",
+    games: "https://images.dog.ceo/breeds/terrier-wheaten/n02098105_2472.jpg",
+    other: "https://cdn2.thecatapi.com/images/ckq.jpg",
 };
 
 export { expenseIconMap, groupIconMap, CheckIcon, CloseIcon, AddGroupIcon };
