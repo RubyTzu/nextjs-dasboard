@@ -66,7 +66,7 @@ function ExpenseButton({ users, expense, groupId }: { users: any; expense: any; 
 
   return (
     <Link
-      href={`/test/split/group/${groupId}/expense/${id}`}
+      href={`/test/split/expense/${id}`}
       className="m-4 flex justify-between rounded-lg bg-white p-4"
     >
       <div className="flex items-center gap-3">

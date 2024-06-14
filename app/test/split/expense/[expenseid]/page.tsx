@@ -11,37 +11,14 @@ import {
   ExpenseDetailThree,
 } from '@/app/test/(ui)/ExpenseDetails';
 import DeleteExpenseButton from '@/app/test/(ui)/DeleteExpenseButton';
+import { useExpenses } from '@/app/test/(data)/Providers';
 
 export default function Page() {
   const params = useParams<{ expenseid: string }>();
-
-  let expense = {
-    "id": "teste1",
-    "name": "fake expense",
-    "amount": 1000,
-    "date": "2024/6/7",
-    "category": "other",
-    "payerId": "u1",
-    "sharers": [
-      {
-        "id": "u1",
-        "amount": 1000
-      }
-    ],
-    "note": "",
-    "createBy": "u1",
-    "createAt": "2024/6/7",
-    "updateBy": "u1",
-    "updateAt": "2024/6/7"
-  }
-  
-  let users =  [
-    {
-      "id": "u1",
-      "name": "a",
-      "picture": "https://cdn2.thecatapi.com/images/a4v.jpg"
-    }
-  ]
+  // {expenses: context.expenses, users: uniqueUsers}
+  let users = useExpenses(loginUserId).users
+  let expenses = useExpenses(loginUserId).expenses
+  let expense = expenses.find((expense: any) => expense.id === params.expenseid)
 
   return (
     <div className="flex flex-col items-center">
