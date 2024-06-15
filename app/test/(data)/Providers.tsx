@@ -11,7 +11,7 @@ interface AllContextType {
   allUsers: any[];
   fetchUser: (userId: string) => void;
   fetchGroup: (groupId: string) => void;
-  fetchUserExpenses: (userId: string) => void;
+  fetchExpenses: (userId: string) => void;
 }
 
 const AllContext = createContext<AllContextType | null>(null);
@@ -38,11 +38,11 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
       setGroups((prevGroups) => ({
         ...prevGroups,
         [groupId]: group,
-      }))
+      }));
     }
-  }
+  };
 
-  const fetchUserExpenses = async (userId: string) => {
+  const fetchExpenses = async (userId: string) => {
     try {
       // Fetch user data from API 1
       const user = await getUser(userId);
@@ -50,23 +50,28 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
       // Extract group IDs from user data
       const groupIds = user.groups.map((group: any) => group.id);
 
-      // Fetch group expenses for each group ID from API 2
-      const groupExpensesPromises = groupIds.map(async (groupId: any) => {
+      // Fetch group expenses and users for each group ID from API 2
+      const groupDataPromises = groupIds.map(async (groupId: any) => {
         const group = await getGroup(groupId);
-
-        return group.expense;
-      });
-      const groupUsersPromises = groupIds.map(async (groupId: any) => {
-        const group = await getGroup(groupId);
-
-        return group.users;
+        return {
+          expenses: group.expense,
+          users: group.users,
+        };
       });
 
       // Wait for all requests to complete
-      const groupExpenses = (await Promise.all(groupExpensesPromises)).flat();
-      const groupUsers = (await Promise.all(groupUsersPromises)).flat();
+      const groupData = await Promise.all(groupDataPromises);
 
       // Process the group expenses data
+      const groupExpenses = groupData.flatMap((data) => data.expenses);
+
+      // Process the group users data
+      let groupUsers: any[] = groupData.flatMap((data) => data.users);
+
+      // Remove duplicate group users
+      groupUsers = [...new Set(groupUsers.map((user: any) => user.id))].map(
+        (id: string) => groupUsers.find((user: any) => user.id === id),
+      );
 
       setExpenses(groupExpenses);
       setAllUsers(groupUsers);
@@ -74,12 +79,20 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
       console.error('Error fetching data:', error);
       // Handle errors
     }
-  }
-
-
+  };
 
   return (
-    <AllContext.Provider value={{ users, groups, expenses, allUsers, fetchUser, fetchGroup, fetchUserExpenses }}>
+    <AllContext.Provider
+      value={{
+        users,
+        groups,
+        expenses,
+        allUsers,
+        fetchUser,
+        fetchGroup,
+        fetchExpenses,
+      }}
+    >
       {children}
     </AllContext.Provider>
   );
@@ -112,8 +125,8 @@ export const useGroup = (groupId: string) => {
     // console.log(`useEffect fetch group ${groupId}`)
   }, [groupId]);
 
-  return context.groups[groupId]
-}
+  return context.groups[groupId];
+};
 
 export const useExpenses = (userId: string) => {
   const context = useContext(AllContext);
@@ -122,16 +135,12 @@ export const useExpenses = (userId: string) => {
   }
 
   useEffect(() => {
-    context.fetchUserExpenses(userId);
+    context.fetchExpenses(userId);
 
     // console.log(`useEffect fetch userId ${userId}`)
   }, [userId]);
 
-  const uniqueUsers: any[] = [...new Set(context.allUsers.map((user: any) => user.id))].map(
-    (id: string) => context.allUsers.find((user: any) => user.id === id)
-  );
+  let alldata = { expenses: context.expenses, users: context.allUsers };
 
-  let alldata = {expenses: context.expenses, users: uniqueUsers}
- 
-  return alldata
-}
+  return alldata;
+};
