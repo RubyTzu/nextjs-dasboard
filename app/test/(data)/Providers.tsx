@@ -8,7 +8,7 @@ interface AllContextType {
   users: { [key: string]: any };
   groups: { [key: string]: any };
   expenses: any[];
-  allUsers: any[];
+  groupUsers: any[];
   fetchUser: (userId: string) => void;
   fetchGroup: (groupId: string) => void;
   fetchExpenses: (userId: string) => void;
@@ -20,7 +20,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
   const [users, setUsers] = useState<{ [key: string]: any }>({});
   const [groups, setGroups] = useState<{ [key: string]: any }>({});
   const [expenses, setExpenses] = useState<any>([]);
-  const [allUsers, setAllUsers] = useState<any>([]);
+  const [groupUsers, setGroupUsers] = useState<any>([]);
 
   const fetchUser = async (userId: string) => {
     if (!users[userId]) {
@@ -74,7 +74,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
       );
 
       setExpenses(groupExpenses);
-      setAllUsers(groupUsers);
+      setGroupUsers(groupUsers);
     } catch (error) {
       console.error('Error fetching data:', error);
       // Handle errors
@@ -87,7 +87,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
         users,
         groups,
         expenses,
-        allUsers,
+        groupUsers,
         fetchUser,
         fetchGroup,
         fetchExpenses,
@@ -140,7 +140,5 @@ export const useExpenses = (userId: string) => {
     // console.log(`useEffect fetch userId ${userId}`)
   }, [userId]);
 
-  let alldata = { expenses: context.expenses, users: context.allUsers };
-
-  return alldata;
+  return { expenses: context.expenses, users: context.groupUsers };
 };
