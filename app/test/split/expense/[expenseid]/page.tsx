@@ -3,6 +3,7 @@
 import { useParams } from 'next/navigation';
 //import data
 import { loginUserId } from '@/app/test/(data)/user';
+import { useExpenses } from '@/app/test/(data)/Providers';
 //import ui
 import { TopExpenseBar } from '@/app/test/(ui)/TopBars';
 import {
@@ -11,7 +12,6 @@ import {
   ExpenseDetailThree,
 } from '@/app/test/(ui)/ExpenseDetails';
 import DeleteExpenseButton from '@/app/test/(ui)/DeleteExpenseButton';
-import { useExpenses } from '@/app/test/(data)/Providers';
 
 export default function Page() {
   const params = useParams<{ expenseid: string }>();
