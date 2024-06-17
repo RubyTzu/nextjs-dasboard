@@ -16,9 +16,9 @@ import DeleteExpenseButton from '@/app/test/(ui)/DeleteExpenseButton';
 export default function Page() {
   const params = useParams<{ expenseid: string }>();
 
-  // all users info this loginUser can fetch
-  // all expenses this loginUser have
-  // the expense for this page
+  // can fetch all usersInfo in the groups this loginUser are in
+  // can fetch all expenses in the groups this loginUser are in
+  // find the expense for this page from all expenses
   let users = useExpenses(loginUserId).users;
   let expenses = useExpenses(loginUserId).expenses;
   let expense = expenses.find(

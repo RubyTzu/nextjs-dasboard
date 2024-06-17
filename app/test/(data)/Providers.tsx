@@ -24,21 +24,33 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
 
   const fetchUser = async (userId: string) => {
     if (!users[userId]) {
-      const user = await getUser(userId);
-      setUsers((prevUsers) => ({
-        ...prevUsers,
-        [userId]: user,
-      }));
+      try {
+        const user = await getUser(userId);
+
+        setUsers((prevUsers) => ({
+          ...prevUsers,
+          [userId]: user,
+        }));
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        // Handle errors
+      }
     }
   };
 
   const fetchGroup = async (groupId: string) => {
     if (!groups[groupId]) {
-      const group = await getGroup(groupId);
-      setGroups((prevGroups) => ({
-        ...prevGroups,
-        [groupId]: group,
-      }));
+      try {
+        const group = await getGroup(groupId);
+        
+        setGroups((prevGroups) => ({
+          ...prevGroups,
+          [groupId]: group,
+        }));
+      } catch (error) {
+        console.error('Error fetching group data:', error);
+        // Handle errors
+      }
     }
   };
 
@@ -50,28 +62,20 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
       // Extract group IDs from user data
       const groupIds = user.groups.map((group: any) => group.id);
 
-      // Fetch group expenses and users for each group ID from API 2
-      const groupDataPromises = groupIds.map(async (groupId: any) => {
-        const group = await getGroup(groupId);
-        return {
-          expenses: group.expense,
-          users: group.users,
-        };
-      });
-
-      // Wait for all requests to complete
-      const groupData = await Promise.all(groupDataPromises);
+      // Fetch every group data of user's groupIds from API 2, wait for all requests to complete
+      const groupData = await Promise.all(groupIds.map((groupId: any) => {
+        // console.log(groupId)
+        return getGroup(groupId)
+      }));
 
       // Process the group expenses data
-      const groupExpenses = groupData.flatMap((data) => data.expenses);
+      const groupExpenses = groupData.flatMap((data) => data.expense);
 
       // Process the group users data
       let groupUsers: any[] = groupData.flatMap((data) => data.users);
 
-      // Remove duplicate group users
-      groupUsers = [...new Set(groupUsers.map((user: any) => user.id))].map(
-        (id: string) => groupUsers.find((user: any) => user.id === id),
-      );
+      // Remove duplicate group users data
+      groupUsers = [...new Map(groupUsers.map(user => [user.id, user])).values()];
 
       setExpenses(groupExpenses);
       setGroupUsers(groupUsers);
