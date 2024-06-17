@@ -10,8 +10,8 @@ export default function Page() {
     const data = useUser(loginUserId)
 
     return (
-        <div className="flex flex-col bg-primary-blue min-h-screen">
-            <h1 className="z-[2] fixed left-[50%] translate-x-[-50%] text-center text-2xl font-bold bg-primary-blue text-grey-100 w-full py-5">群組列表</h1>
+        <div className="flex flex-col bg-highlight-50 min-h-screen">
+            <h1 className="z-[2] fixed left-[50%] translate-x-[-50%] text-center text-2xl font-bold bg-highlight-50 text-grey-100 w-full py-5">群組列表</h1>
             <AddGroupButton />
             <div className="mt-24">
                 {data ? data.groups.map((group: any) =>

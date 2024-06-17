@@ -35,11 +35,11 @@ export default function ShareButton({
   return (
     <>
       {inGroupPage ?
-        (<div onClick={e => handlesShareLink(e)} className="flex justify-center items-center bg-primary-lightPink p-2 mr-1 rounded-full">
+        (<div onClick={e => handlesShareLink(e)} className="flex justify-center items-center bg-neutrals-20 p-2 mr-1 rounded-full">
           <ArrowUpTrayIcon className="w-5 h-5" />
         </div>)
         :
-        (<div onClick={e => handlesShareLink(e)} className="relative z-[1] flex h-8 w-8 items-center justify-center rounded-full bg-primary-orange">
+        (<div onClick={e => handlesShareLink(e)} className="relative z-[1] flex h-8 w-8 items-center justify-center rounded-full bg-highlight-60">
           <ArrowUpTrayIcon className="h-5 w-5 stroke-[2px] text-grey-400" />
         </div>)
       }

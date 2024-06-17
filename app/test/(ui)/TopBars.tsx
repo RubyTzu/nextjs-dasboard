@@ -8,7 +8,7 @@ import { HomeIcon, Cog8ToothIcon, PencilSquareIcon } from '@heroicons/react/24/o
 export function TopGroupBar({ groupData,groupName }: { groupData: any; groupName: string }) {
 
   return (
-    <div className="z-10 fixed w-full bg-primary-blue flex justify-between items-center text-grey-100 px-5 py-4">
+    <div className="z-10 fixed w-full bg-highlight-50 flex justify-between items-center text-grey-100 px-5 py-4">
       <Link href="/test/split/groups" className="h-6 w-6">
         <HomeIcon />
       </Link>

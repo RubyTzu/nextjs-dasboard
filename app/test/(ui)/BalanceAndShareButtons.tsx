@@ -17,7 +17,7 @@ export default function BalanceAndShareButtons({ groupData, groupName }: { group
         <>
             {groupData && users.some((user: any) => user.id ===loginUserId) ?
                 <div className="flex justify-center items-center gap-2 pt-6 pb-2">
-                    <div className="flex justify-between items-center bg-primary-lightPink px-5 py-2 rounded-full text-sm">
+                    <div className="flex justify-between items-center bg-neutrals-20 px-5 py-2 rounded-full text-sm">
                         <CurrencyDollarIcon className="flex justify-center items-center w-5 h-5" />
                         <p className="font-semibold ml-1">結餘</p>
                     </div>

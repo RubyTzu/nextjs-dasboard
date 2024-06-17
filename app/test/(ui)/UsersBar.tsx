@@ -22,7 +22,7 @@ export default function UsersBar({ groupData }: { groupData: any }) {
                         <ul className="flex items-center justify-center gap-2">
                              {frontUsers.map((user: any) => <UserBarImage user={user} key={user.id} />)}
                         </ul>
-                        <div className="flex bg-grey-100 gap-[2px] py-1 pl-3 pr-2 rounded-full text-sm text-grey-400">
+                        <div className="flex bg-neutrals-30 gap-[2px] py-1 px-3 rounded-full text-sm text-grey-500">
                             <p className="">{groupData.users.length}</p>
                             <span className="relative bottom-[1px]">&gt;</span>
                         </div>

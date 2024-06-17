@@ -20,43 +20,43 @@ import {
 
 function FoodIcon() {
     return (
-        <Image src={foodIcon} alt="" />
+        <Image className="w-4" src={foodIcon} alt="" />
     )
 }
 
 function DrinkIcon() {
     return (
-        <Image src={drinkIcon} alt="" />
+        <Image className="w-5" src={drinkIcon} alt="" />
     )
 }
 
 function TransportIcon() {
     return (
-        <Image src={transportIcon} alt="" />
+        <Image className="w-5" src={transportIcon} alt="" />
     )
 }
 
 function StayIcon() {
     return (
-        <Image src={stayIcon} alt="" />
+        <Image className="w-5" src={stayIcon} alt="" />
     )
 }
 
 function ShoppingIcon() {
     return (
-        <Image src={shoppingIcon} alt="" />
+        <Image className="w-5" src={shoppingIcon} alt="" />
     )
 }
 
 function EntertainmentIcon() {
     return (
-        <Image src={entertainmentIcon} alt="" />
+        <Image className="w-5" src={entertainmentIcon} alt="" />
     )
 }
 
 function OtherIcon() {
     return (
-        <Image src={otherIcon} alt="" />
+        <Image className="w-5" src={otherIcon} alt="" />
     )
 }
 
