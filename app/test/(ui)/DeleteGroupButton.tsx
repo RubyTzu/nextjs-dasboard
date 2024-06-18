@@ -1,10 +1,10 @@
 //import data
 import { loginUserId } from '@/app/test/(data)/user';
 
-export default function DeleteExpenseButton({
-  expenseData,
+export default function DeleteGroupButton({
+  groupData,
 }: {
-  expenseData: any;
+  groupData: any;
 }) {
   const {
     payerId,
@@ -12,7 +12,7 @@ export default function DeleteExpenseButton({
   }: {
     payerId: string;
     sharers: string[];
-  } = expenseData;
+  } = groupData;
 
   const handleDelete = () => {
     console.log("expense deleted")
@@ -20,13 +20,9 @@ export default function DeleteExpenseButton({
 
   return (
     <>
-      {expenseData &&
-        (payerId === loginUserId ||
-          sharers?.some((sharer: any) => sharer.id === loginUserId)) ? (
         <div onClick={handleDelete} className="mt-8 flex h-9 w-44 items-center justify-center rounded-full bg-neutrals-30 text-neutrals-60 cursor-pointer">
-          刪除費用
+          刪除群組
         </div>
-      ) : null}
     </>
   );
 }

@@ -11,12 +11,8 @@ import otherIcon from "@/app/test/(ui)/icons/other.svg";
 import checkIcon from "@/app/test/(ui)/icons/check.svg";
 import closeIcon from "@/app/test/(ui)/icons/close.svg";
 import addGroupIcon from '@/app/test/(ui)/icons/addGroup.svg';
-import {
-    GlobeAsiaAustraliaIcon,
-    HeartIcon,
-    PuzzlePieceIcon,
-    RocketLaunchIcon,
-} from '@heroicons/react/24/outline';
+import addUserIcon from '@/app/test/(ui)/icons/addUser.svg';
+import trashcanIcon from '@/app/test/(ui)/icons/trashcan.svg';
 
 function FoodIcon() {
     return (
@@ -71,6 +67,14 @@ function AddGroupIcon() {
   return <Image src={addGroupIcon} alt="" />;
 }
 
+function AddUserIcon() {
+  return <Image src={addUserIcon} alt="" />;
+}
+
+function TrashcanIcon() {
+  return <Image src={trashcanIcon} alt="" />;
+}
+
 function CloseIcon() {
     return <Image src={closeIcon} alt="" />;
 }
@@ -85,13 +89,6 @@ const expenseIconMap = {
     other: OtherIcon,
 };
 
-// const groupIconMap = {
-//     travel: GlobeAsiaAustraliaIcon,
-//     health: HeartIcon,
-//     games: PuzzlePieceIcon,
-//     other: RocketLaunchIcon,
-// };
-
 const groupIconMap = {
     travel: "https://cdn2.thecatapi.com/images/av8.jpg",
     health: "https://cdn2.thecatapi.com/images/8mu.jpg",
@@ -99,4 +96,4 @@ const groupIconMap = {
     other: "https://cdn2.thecatapi.com/images/ckq.jpg",
 };
 
-export { expenseIconMap, groupIconMap, CheckIcon, CloseIcon, AddGroupIcon };
+export { expenseIconMap, groupIconMap, CheckIcon, CloseIcon, AddGroupIcon, AddUserIcon, TrashcanIcon };

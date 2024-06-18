@@ -41,21 +41,21 @@ const config: Config = {
         },
         primary: {
           100: '#fbfbf8',//
-          200: '#f3f4e5',
-          300: '#ebff79',
-          'blue': '#3555f4',
-          'green': '#7efb15',
-          'orange': '#f9c813',
-          'lightPink': '#f9ebdb',
-          'pink': '#fe2fb4',
+          // 200: '#f3f4e5',
+          // 300: '#ebff79',
+          // 'blue': '#3555f4',
+          // 'green': '#7efb15',
+          // 'orange': '#f9c813',
+          // 'lightPink': '#f9ebdb',
+          // 'pink': '#fe2fb4',
         },
         grey: {
-          100: '#ededed',
-          200: '#d3d2d8',
-          300: '#6c6c6c',
-          400: '#5f5d5e',
+          // 100: '#ededed',
+          // 200: '#d3d2d8',
+          // 300: '#6c6c6c',
+          // 400: '#5f5d5e',
           500: '#4a4a4a',//
-          600: '#1c1a1b',
+          // 600: '#1c1a1b',
         },
         highlight: {
           60: '#EBFF79',
