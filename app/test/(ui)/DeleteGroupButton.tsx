@@ -1,28 +1,26 @@
-//import data
-import { loginUserId } from '@/app/test/(data)/user';
+//import ui
+import { TrashcanIcon } from '@/app/test/(ui)/Icons';
 
 export default function DeleteGroupButton({
   groupData,
 }: {
   groupData: any;
 }) {
-  const {
-    payerId,
-    sharers,
-  }: {
-    payerId: string;
-    sharers: string[];
-  } = groupData;
 
-  const handleDelete = () => {
-    console.log("expense deleted")
+  const handleDelete = (id: any) => {
+    console.log(`deleted group ${id}`)
   }
 
   return (
     <>
-        <div onClick={handleDelete} className="mt-8 flex h-9 w-44 items-center justify-center rounded-full bg-neutrals-30 text-neutrals-60 cursor-pointer">
-          刪除群組
+      <div onClick={() => handleDelete(groupData.id)} className="mt-4 mb-4 flex justify-between items-center">
+        <div className="flex items-center gap-4 cursor-pointer">
+          <div className="relative flex justify-center items-center w-11 h-11 rounded-full bg-neutrals-30">
+            <div className="absolute left-[13px]"><TrashcanIcon /></div>
+          </div>
+          <p className="">刪除群組</p>
         </div>
+      </div>
     </>
   );
 }

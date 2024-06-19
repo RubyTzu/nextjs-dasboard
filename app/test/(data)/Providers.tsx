@@ -42,7 +42,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
     if (!groups[groupId]) {
       try {
         const group = await getGroup(groupId);
-        
+
         setGroups((prevGroups) => ({
           ...prevGroups,
           [groupId]: group,
@@ -68,8 +68,22 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
         return getGroup(groupId)
       }));
 
-      // Process the group expenses data
-      const groupExpenses = groupData.flatMap((data) => data.expense);
+      // Process and collect expenses with group information
+      const expenses: any = [];
+
+      groupData.forEach(group => {
+        group.expense.forEach((expense: any) => {
+          // Check if the user is the payer or a sharer in the expense
+          if (expense.payerId === userId || expense.sharers.some((sharer: any) => sharer.id === userId)) {
+            // Add group information to the expense object
+            const expenseWithGroup: any = {
+              ...expense,
+              groupId: group.id,
+            };
+            expenses.push(expenseWithGroup);
+          }
+        });
+      });
 
       // Process the group users data
       let groupUsers: any[] = groupData.flatMap((data) => data.users);
@@ -77,7 +91,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
       // Remove duplicate group users data
       groupUsers = [...new Map(groupUsers.map(user => [user.id, user])).values()];
 
-      setExpenses(groupExpenses);
+      setExpenses(expenses);
       setGroupUsers(groupUsers);
     } catch (error) {
       console.error('Error fetching data:', error);

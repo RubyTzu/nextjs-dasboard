@@ -2,6 +2,7 @@
 import Image from "next/image";
 //import data
 import { loginUserId } from "@/app/test/(data)/user";
+import Link from "next/link";
 
 export default function UsersBar({ groupData }: { groupData: any }) {
 
@@ -22,10 +23,10 @@ export default function UsersBar({ groupData }: { groupData: any }) {
                         <ul className="flex items-center justify-center gap-2">
                              {frontUsers.map((user: any) => <UserBarImage user={user} key={user.id} />)}
                         </ul>
-                        <div className="flex bg-neutrals-30 gap-[2px] py-1 px-3 rounded-full text-sm text-grey-500">
+                        <Link href={`/test/split/group/${groupData.id}/edit`}  className="flex bg-neutrals-30 gap-[2px] py-1 px-3 rounded-full text-sm text-grey-500" scroll={false}>
                             <p className="">{groupData.users.length}</p>
                             <span className="relative bottom-[1px]">&gt;</span>
-                        </div>
+                        </Link>
                     </div>) :
                     <NoneUsersBar text="$0" />
                 }

@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import { useUser, useGroup } from "@/app/test/(data)/Providers";
 import { loginUserId } from "@/app/test/(data)/user";
 import { TopGroupSettingBar } from '@/app/test/(ui)/TopBars';
-import { GroupNameSetting, GroupOtherSetting, GroupUsersSetting } from '@/app/test/(ui)/GroupSettingDetails';
+import { GroupNameSetting, GroupOtherSetting, GroupSave, GroupUsersSetting } from '@/app/test/(ui)/GroupSettingDetails';
 
 export default function Page() {
   const params = useParams<{ groupid: string }>()
@@ -21,15 +21,13 @@ export default function Page() {
   }
 
   return (
-    <div className="flex flex-col">
-      <TopGroupSettingBar groupData={group} />
-      <GroupNameSetting groupData={groupNameAndImage} />
-      <GroupUsersSetting groupData={group} />
-      <GroupOtherSetting groupData={group} />
-     
-
-      
-      {/* <div>儲存</div> */}
-    </div>
+    <form action={`/test/split/group/${params.groupid}`}>
+      <div className="relative flex flex-col"><TopGroupSettingBar groupData={group} />
+        <GroupNameSetting groupData={groupNameAndImage} />
+        <GroupUsersSetting groupData={group} />
+        <GroupOtherSetting groupData={group} />
+        <GroupSave groupData={group} />
+      </div>
+    </form>
   );
 }

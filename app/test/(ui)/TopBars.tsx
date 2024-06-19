@@ -48,9 +48,12 @@ export function TopGroupSettingBar({ groupData }: { groupData: any }) {
 }
 
 export function TopExpenseBar({ expenseData }: { expenseData: any }) {
+  if(!expenseData) return
+  let groupId = expenseData.groupId
+
   return (
     <div className="z-10 fixed flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
-      <Link href="/test/split/groups" className="h-6 w-6">
+      <Link href={`/test/split/group/${groupId}`} className="h-6 w-6">
         <HomeIcon />
       </Link>
       <h1 className="text-lg">
@@ -65,7 +68,9 @@ export function TopExpenseBar({ expenseData }: { expenseData: any }) {
           expenseData.payerId === loginUserId
           ||
           expenseData.sharers?.some((sharer: any) => sharer.id === loginUserId))
-          ? <PencilSquareIcon /> : ""}
+          ? <Link href={`/test/split/expense/${expenseData.id}/edit`} className="h-6 w-6" scroll={false}>
+            <PencilSquareIcon />
+          </Link> : ""}
       </div>
     </div>
   );
