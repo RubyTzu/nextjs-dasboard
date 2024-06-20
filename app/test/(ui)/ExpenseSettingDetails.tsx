@@ -5,96 +5,158 @@ import { Fragment } from 'react';
 import { useUser, useGroup } from '../(data)/Providers';
 import { loginUserId } from '../(data)/user';
 //import ui
-import { groupIconMap, expenseIconMap, DollarIcon, NotePencilIcon } from '@/app/test/(ui)/Icons';
+import {
+  groupIconMap,
+  expenseIconMap,
+  DollarIcon,
+  NotePencilIcon,
+} from '@/app/test/(ui)/Icons';
+import clsx from 'clsx';
 
-export function GroupInfoBar({ expenseData, group }: { expenseData: any; group: any }) {
-    if (!expenseData) return
-    if (!group) return
+export function GroupInfoBar({
+  expenseData,
+  group,
+}: {
+  expenseData: any;
+  group: any;
+}) {
+  if (!expenseData) return;
+  if (!group) return;
 
-    let groupData = group
-console.log(group)
-    const { picture, name }: {
-        picture: 'travel' | 'health' | 'games' | 'other';
-        name: string;
-    } = groupData
+  let groupData = group;
+  //   console.log(group);
+  const {
+    picture,
+    name,
+  }: {
+    picture: 'travel' | 'health' | 'games' | 'other';
+    name: string;
+  } = groupData;
 
-    const Icon = groupIconMap[picture];
+  const Icon = groupIconMap[picture];
 
-    return (
-        <>
-            <div className="mt-16 pl-6 py-4 flex items-center gap-4 border-b-2">
-                <p>你和</p>
-                <div className="pl-3 pr-4 py-1 flex justify-center items-center gap-2 rounded-full bg-neutrals-30">
-                    {Icon ? <Image src={Icon} className="z-0 flex h-7 w-7 items-center justify-center rounded-full bg-highlight-60" width={200} height={200} alt={picture} /> : null}
-                    <div>{name}</div>
-                </div>
-            </div>
-        </>
-    )
+  return (
+    <>
+      <div className="mt-16 flex items-center gap-4 border-b-2 py-4 pl-6">
+        <p>你和</p>
+        <div className="flex items-center justify-center gap-2 rounded-full bg-neutrals-30 py-1 pl-3 pr-4">
+          {Icon ? (
+            <Image
+              src={Icon}
+              className="z-0 flex h-7 w-7 items-center justify-center rounded-full bg-highlight-60"
+              width={200}
+              height={200}
+              alt={picture}
+            />
+          ) : null}
+          <div>{name}</div>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export function ExpenseSettingStepOne({ expenseData }: { expenseData: any }) {
-    if (!expenseData) return
+  if (!expenseData) return;
 
-    const {
-        date,
-        category,
-        amount,
-        name,
-    }: {
-        date: string;
-        category:
-        | 'food'
-        | 'drink'
-        | 'transport'
-        | 'stay'
-        | 'shopping'
-        | 'entertainment'
-        | 'other';
-        amount: any;
-        name: string;
-    } = expenseData;
+  const {
+    date,
+    category,
+    amount,
+    name,
+  }: {
+    date: string;
+    category:
+      | 'food'
+      | 'drink'
+      | 'transport'
+      | 'stay'
+      | 'shopping'
+      | 'entertainment'
+      | 'other';
+    amount: any;
+    name: string;
+  } = expenseData;
 
-    const Icon = expenseIconMap[category];
+  const Icon = expenseIconMap[category];
 
-    return (
-        <div className="my-6 w-fit mx-auto">
-            <div className="mb-4 py-[1px] px-2 rounded-full w-fit bg-neutrals-20 text-sm">{date}</div>
-            <div className="my-3 flex gap-6 justify-between items-end">
-                <div className="w-8 h-8 flex justify-center items-center rounded-md bg-highlight-60">{Icon ? <Icon /> : null}</div>
-                <input className="pl-0 pb-1 bg-transparent border-0 border-b border-grey-500 w-48 focus:border-b focus:ring-0 focus:border-highlight-40" onChange={() => { }} type="text" value={name} />
-            </div>
-            <div className="my-3 flex gap-6 justify-between items-end">
-                <div className="w-8 h-8 flex justify-center items-center rounded-md bg-highlight-60"><DollarIcon /></div>
-                <input className="pl-0 pb-1 bg-transparent border-0 border-b border-grey-500 w-48 focus:border-b focus:ring-0 focus:border-highlight-40" onChange={() => { }} type="text" value={amount} />
-            </div>
-            <div className="pt-3 pb-6 flex gap-1 justify-center items-center text-sm">
-                <div><NotePencilIcon /></div>
-                <div>編輯備註</div>
-            </div>
+  return (
+    <div className="mx-auto my-6 w-fit">
+      <div className="mb-4 w-fit rounded-full bg-neutrals-20 px-2 py-[1px] text-sm">
+        {date}
+      </div>
+      <div className="my-3 flex items-end justify-between gap-6">
+        <div className="flex h-8 w-8 items-center justify-center rounded-md bg-highlight-60">
+          {Icon ? <Icon /> : null}
         </div>
-    )
+        <input
+          className="w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:ring-0"
+          onChange={() => {}}
+          type="text"
+          value={name}
+        />
+      </div>
+      <div className="my-3 flex items-end justify-between gap-6">
+        <div className="flex h-8 w-8 items-center justify-center rounded-md bg-highlight-60">
+          <DollarIcon />
+        </div>
+        <input
+          className="w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:ring-0"
+          onChange={() => {}}
+          type="text"
+          value={amount}
+        />
+      </div>
+      <div className="flex items-center justify-center gap-1 pb-6 pt-3 text-sm">
+        <div>
+          <NotePencilIcon />
+        </div>
+        <div>編輯備註</div>
+      </div>
+    </div>
+  );
 }
-export function ExpenseSettingStepTwo({ expenseData }: { expenseData: any }) {
-    if (!expenseData) return null;
+export function ExpenseSettingStepTwo({
+  expenseData,
+  group,
+}: {
+  expenseData: any;
+  group: any;
+}) {
+  if (!expenseData) return null;
 
-    // const {
-    //     payerId,
-    //     groupId
-    // }: {
-    //     payerId: string;
-    //     groupId: string;
-    // } = expenseData;
+  const users = group.users;
 
-    // let groupUsers = useGroup(groupId)
-    // if (!groupUsers) return
-    // groupUsers = groupUsers.users
-    // console.log(groupUsers)
-
-    // return (
-    //     <div className="my-6 w-fit mx-auto">
-
-    //         <div>1</div>
-    //     </div>
-    // )
+  return (
+    <div className="mx-auto my-6 flex w-[80%] flex-col items-center">
+      <p className="mb-5 text-xl">選擇付款人</p>
+      {users.map((user: any) => {
+        return (
+          <div
+            className="my-3 flex w-full items-center justify-between"
+            key={user.id}
+          >
+            <div className="flex items-center gap-4">
+              <Image
+                className="h-12 w-12 rounded-full"
+                src={user.picture}
+                width={50}
+                height={50}
+                alt="user's picture"
+              />
+              <div>{user.name}</div>
+            </div>
+            <input
+              className="h-5 w-5 rounded-full border-[1.5px] border-black checked:border-black checked:bg-highlight-60 active:bg-highlight-60"
+              type="radio"
+              id={user.name}
+              name="payer"
+              value={user.name}
+              checked={user.id === expenseData.payerId}
+            />
+          </div>
+        );
+      })}
+    </div>
+  );
 }

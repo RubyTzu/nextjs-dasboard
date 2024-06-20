@@ -1,31 +1,47 @@
-"use client"
+'use client';
 //import from next & react
 import { useParams } from 'next/navigation';
 //import data
-import { useExpenses, useGroup } from '@/app/test/(data)/Providers';
-import { loginUserId } from "@/app/test/(data)/user";
+import { useExpenses, useUser, useGroup } from '@/app/test/(data)/Providers';
+import { loginUserId } from '@/app/test/(data)/user';
 import { TopExpenseSettingBar } from '@/app/test/(ui)/TopBars';
-import { ExpenseSettingStepOne, ExpenseSettingStepTwo, GroupInfoBar } from '@/app/test/(ui)/ExpenseSettingDetails';
+import {
+  ExpenseSettingStepOne,
+  ExpenseSettingStepTwo,
+  GroupInfoBar,
+} from '@/app/test/(ui)/ExpenseSettingDetails';
 
 export default function Page() {
-    const params = useParams<{ expenseid: string }>();
+  const params = useParams<{ expenseid: string }>();
+  const user = useUser(loginUserId);
 
-    // can fetch all usersInfo in the groups this loginUser are in
-    // can fetch all expenses in the groups this loginUser are in (include groupid in each expense)
-    // find the expense for this page from all expenses
-    let users:any = useExpenses(params.expenseid).users;
-    let groupWithExpense:any = useExpenses(params.expenseid).expense;
-    let expense = groupWithExpense.expense
-    let group = groupWithExpense.group
+  //group users and this expense's info
+  let users: any = useExpenses(params.expenseid).users;
+  let groupWithExpense: any = useExpenses(params.expenseid).expense;
 
-    return (
-        <form action={`/test/split/expense/${params.expenseid}`}>
-            <div className="relative flex flex-col">
-                <TopExpenseSettingBar expenseData={expense} />
-                <GroupInfoBar expenseData={expense} group={group}/>
-                <ExpenseSettingStepOne expenseData={expense} />
-                <ExpenseSettingStepTwo expenseData={expense} />
-            </div>
-        </form>
-    );
+  let expense = groupWithExpense.expense;
+  let group = groupWithExpense.group;
+
+  if (!user) return;
+  if (!group) return;
+
+  //match groupId to find group name and picture
+  let groupNameAndImage = null;
+
+  for (let groupInfo of user.groups) {
+    if (groupInfo.id === group.id) {
+      groupNameAndImage = groupInfo;
+    }
+  }
+
+  return (
+    <form action={`/test/split/expense/${params.expenseid}`}>
+      <div className="relative flex flex-col">
+        <TopExpenseSettingBar expenseData={expense} />
+        <GroupInfoBar expenseData={expense} group={groupNameAndImage} />
+        {/* <ExpenseSettingStepOne expenseData={expense} /> */}
+        <ExpenseSettingStepTwo expenseData={expense} group={group} />
+      </div>
+    </form>
+  );
 }

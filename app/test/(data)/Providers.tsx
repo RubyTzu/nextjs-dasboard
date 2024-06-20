@@ -71,24 +71,6 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
         return getGroup(groupId)
       }));
 
-      // // Process and collect expenses with group information
-      // const expenses: any = [];
-
-      // groupData.forEach(group => {
-      //   group.expense.forEach((expense: any) => {
-      //     // Check if the user is the payer or a sharer in the expense
-      //     if (expense.payerId === userId || expense.sharers.some((sharer: any) => sharer.id === userId)) {
-      //       // Add group information to the expense object
-      //       const expenseWithGroup: any = {
-      //         ...expense,
-      //         groupId: group.id,
-      //       };
-      //       expenses.push(expenseWithGroup);
-      //     }
-      //   });
-      // });
-
-      //
       // Find the group that contains the expense with the given expenseId
       groupData.forEach(group => {
         const expense = group.expense.find((exp: any) => exp.id === expenseId);
@@ -103,17 +85,9 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
       if (!groupWithExpense) {
         throw new Error(`Expense with ID ${expenseId} not found in any group.`);
       }
-      // Extract users from the group that contains the expense
-      const groupUsers = groupWithExpense.group.users;
-
-      // // Process the group users data
-      // let groupUsers: any[] = groupData.flatMap((data) => data.users);
-
-      // // Remove duplicate group users data
-      // groupUsers = [...new Map(groupUsers.map(user => [user.id, user])).values()];
 
       setExpense(groupWithExpense);
-      setGroupUsers(groupUsers);
+      setGroupUsers(groupWithExpense.group.users);
     } catch (error) {
       console.error('Error fetching data:', error);
       // Handle errors

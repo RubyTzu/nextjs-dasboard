@@ -16,18 +16,15 @@ import DeleteExpenseButton from '@/app/test/(ui)/DeleteExpenseButton';
 export default function Page() {
   const params = useParams<{ expenseid: string }>();
 
-  // can fetch all usersInfo in the groups this loginUser are in
-  // can fetch all expenses in the groups this loginUser are in (include groupid in each expense)
-  // find the expense for this page from all expenses
-  let users:any = useExpenses(params.expenseid).users;
-  let groupWithExpense:any = useExpenses(params.expenseid).expense;
-  let expense = groupWithExpense.expense
-  let group = groupWithExpense.group
-
+  //group users and this expense's info
+  let users: any = useExpenses(params.expenseid).users;
+  let groupWithExpense: any = useExpenses(params.expenseid).expense;
+  let expense = groupWithExpense.expense;
+  let group = groupWithExpense.group;
 
   return (
     <div className="flex flex-col items-center">
-      <TopExpenseBar expenseData={expense} group={group}/>
+      <TopExpenseBar expenseData={expense} group={group} />
       {expense &&
       (expense.sharers?.some((sharer: any) => sharer.id === loginUserId) ||
         expense.payerId?.includes(loginUserId)) ? (
