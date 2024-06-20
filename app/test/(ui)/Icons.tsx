@@ -13,6 +13,8 @@ import closeIcon from "@/app/test/(ui)/icons/close.svg";
 import addGroupIcon from '@/app/test/(ui)/icons/addGroup.svg';
 import addUserIcon from '@/app/test/(ui)/icons/addUser.svg';
 import trashcanIcon from '@/app/test/(ui)/icons/trashcan.svg';
+import dollarIcon from '@/app/test/(ui)/icons/dollar.svg';
+import notePencilIcon from '@/app/test/(ui)/icons/notePencil.svg';
 
 function FoodIcon() {
     return (
@@ -75,6 +77,14 @@ function TrashcanIcon() {
   return <Image src={trashcanIcon} alt="" />;
 }
 
+function DollarIcon() {
+  return <Image src={dollarIcon} alt="" />;
+}
+
+function NotePencilIcon() {
+  return <Image src={notePencilIcon} alt="" />;
+}
+
 function CloseIcon() {
     return <Image src={closeIcon} alt="" />;
 }
@@ -96,4 +106,4 @@ const groupIconMap = {
     other: "https://cdn2.thecatapi.com/images/ckq.jpg",
 };
 
-export { expenseIconMap, groupIconMap, CheckIcon, CloseIcon, AddGroupIcon, AddUserIcon, TrashcanIcon };
+export { expenseIconMap, groupIconMap, CheckIcon, CloseIcon, AddGroupIcon, AddUserIcon, TrashcanIcon, DollarIcon, NotePencilIcon };

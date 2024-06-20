@@ -47,9 +47,9 @@ export function TopGroupSettingBar({ groupData }: { groupData: any }) {
   )
 }
 
-export function TopExpenseBar({ expenseData }: { expenseData: any }) {
-  if(!expenseData) return
-  let groupId = expenseData.groupId
+export function TopExpenseBar({ expenseData, group }: { expenseData: any, group: any }) {
+  if (!group) return
+  let groupId = group.id
 
   return (
     <div className="z-10 fixed flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
@@ -74,4 +74,32 @@ export function TopExpenseBar({ expenseData }: { expenseData: any }) {
       </div>
     </div>
   );
+}
+
+export function TopExpenseSettingBar({ expenseData }: { expenseData: any }) {
+
+  return (
+    <div className="z-20 fixed w-full bg-highlight-50 flex justify-between items-center text-white px-5 py-4">
+      <div className="h-6 w-8" />
+      <h1 className="text-lg">
+        {expenseData && (
+          expenseData.payerId === loginUserId
+          ||
+          expenseData.sharers?.some((sharer: any) => sharer.id === loginUserId))
+          ? '編輯費用' : 'no such Page'}
+      </h1>
+      <div className="h-6 w-8">
+        {expenseData && (
+          expenseData.payerId === loginUserId
+          ||
+          expenseData.sharers?.some((sharer: any) => sharer.id === loginUserId))
+          ?
+          (
+            <Link href={`/test/split/expense/${expenseData.id}`} scroll={false}>
+              <p className="">取消</p>
+            </Link>
+          ) : ''}
+      </div>
+    </div>
+  )
 }

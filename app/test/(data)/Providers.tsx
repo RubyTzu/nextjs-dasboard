@@ -3,11 +3,12 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 //import data
 import { getGroup, getUser } from '@/app/test/(data)/API';
+import { loginUserId } from './user';
 
 interface AllContextType {
   users: { [key: string]: any };
   groups: { [key: string]: any };
-  expenses: any[];
+  expense: any[];
   groupUsers: any[];
   fetchUser: (userId: string) => void;
   fetchGroup: (groupId: string) => void;
@@ -19,7 +20,7 @@ const AllContext = createContext<AllContextType | null>(null);
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   const [users, setUsers] = useState<{ [key: string]: any }>({});
   const [groups, setGroups] = useState<{ [key: string]: any }>({});
-  const [expenses, setExpenses] = useState<any>([]);
+  const [expense, setExpense] = useState<any>([]);
   const [groupUsers, setGroupUsers] = useState<any>([]);
 
   const fetchUser = async (userId: string) => {
@@ -54,10 +55,12 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const fetchExpenses = async (userId: string) => {
+  const fetchExpenses = async (expenseId: string) => {
     try {
+      let groupWithExpense: any = null;
+
       // Fetch user data from API 1
-      const user = await getUser(userId);
+      const user = await getUser(loginUserId);
 
       // Extract group IDs from user data
       const groupIds = user.groups.map((group: any) => group.id);
@@ -68,30 +71,48 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
         return getGroup(groupId)
       }));
 
-      // Process and collect expenses with group information
-      const expenses: any = [];
+      // // Process and collect expenses with group information
+      // const expenses: any = [];
 
+      // groupData.forEach(group => {
+      //   group.expense.forEach((expense: any) => {
+      //     // Check if the user is the payer or a sharer in the expense
+      //     if (expense.payerId === userId || expense.sharers.some((sharer: any) => sharer.id === userId)) {
+      //       // Add group information to the expense object
+      //       const expenseWithGroup: any = {
+      //         ...expense,
+      //         groupId: group.id,
+      //       };
+      //       expenses.push(expenseWithGroup);
+      //     }
+      //   });
+      // });
+
+      //
+      // Find the group that contains the expense with the given expenseId
       groupData.forEach(group => {
-        group.expense.forEach((expense: any) => {
-          // Check if the user is the payer or a sharer in the expense
-          if (expense.payerId === userId || expense.sharers.some((sharer: any) => sharer.id === userId)) {
-            // Add group information to the expense object
-            const expenseWithGroup: any = {
-              ...expense,
-              groupId: group.id,
-            };
-            expenses.push(expenseWithGroup);
-          }
-        });
+        const expense = group.expense.find((exp: any) => exp.id === expenseId);
+        if (expense) {
+          groupWithExpense = {
+            group: group,
+            expense: expense
+          };
+        }
       });
+      //
+      if (!groupWithExpense) {
+        throw new Error(`Expense with ID ${expenseId} not found in any group.`);
+      }
+      // Extract users from the group that contains the expense
+      const groupUsers = groupWithExpense.group.users;
 
-      // Process the group users data
-      let groupUsers: any[] = groupData.flatMap((data) => data.users);
+      // // Process the group users data
+      // let groupUsers: any[] = groupData.flatMap((data) => data.users);
 
-      // Remove duplicate group users data
-      groupUsers = [...new Map(groupUsers.map(user => [user.id, user])).values()];
+      // // Remove duplicate group users data
+      // groupUsers = [...new Map(groupUsers.map(user => [user.id, user])).values()];
 
-      setExpenses(expenses);
+      setExpense(groupWithExpense);
       setGroupUsers(groupUsers);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -104,7 +125,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
       value={{
         users,
         groups,
-        expenses,
+        expense,
         groupUsers,
         fetchUser,
         fetchGroup,
@@ -146,17 +167,17 @@ export const useGroup = (groupId: string) => {
   return context.groups[groupId];
 };
 
-export const useExpenses = (userId: string) => {
+export const useExpenses = (expenseId: string) => {
   const context = useContext(AllContext);
   if (!context) {
     throw new Error('useGroup must be used within a Provider');
   }
 
   useEffect(() => {
-    context.fetchExpenses(userId);
+    context.fetchExpenses(expenseId);
 
-    // console.log(`useEffect fetch userId ${userId}`)
-  }, [userId]);
+    // console.log(`useEffect fetch expenseId ${expenseId}`)
+  }, [expenseId]);
 
-  return { expenses: context.expenses, users: context.groupUsers };
+  return { expense: context.expense, users: context.groupUsers };
 };
