@@ -89,7 +89,7 @@ export function ExpenseSettingStepOne({
   return (
     <div
       className={clsx('mx-auto my-6 w-fit', {
-        hidden: phase !== '1'
+        hidden: phase !== '1',
       })}
     >
       <div className="mb-4 w-fit rounded-full bg-neutrals-20 px-2 py-[1px] text-sm">
@@ -100,7 +100,7 @@ export function ExpenseSettingStepOne({
           {Icon ? <Icon /> : null}
         </div>
         <input
-          className="w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:ring-0"
+          className="w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0 "
           onChange={() => {}}
           type="text"
           value={name}
@@ -111,7 +111,7 @@ export function ExpenseSettingStepOne({
           <DollarIcon />
         </div>
         <input
-          className="w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:ring-0"
+          className="w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0 "
           onChange={() => {}}
           type="text"
           value={amount}
@@ -129,7 +129,7 @@ export function ExpenseSettingStepOne({
 export function ExpenseSettingStepTwo({
   expenseData,
   group,
-  phase
+  phase,
 }: {
   expenseData: any;
   group: any;
@@ -163,7 +163,7 @@ export function ExpenseSettingStepTwo({
               <div>{user.name}</div>
             </div>
             <input
-              className="relative h-5 w-5 rounded-full border-[1.5px] border-black checked:border-black checked:bg-highlight-60 checked:text-highlight-60 checked:before:absolute checked:before:left-[50%] checked:before:top-[50%] checked:before:block checked:before:h-3 checked:before:w-3 checked:before:translate-x-[-50%] checked:before:translate-y-[-50%] checked:before:rounded-full checked:before:bg-highlight-60 hover:checked:border-black focus:ring-highlight-60 checked:focus:border-black active:bg-highlight-60"
+              className="relative h-5 w-5 rounded-full border-[1.5px] border-black checked:border-black checked:bg-highlight-60 checked:text-highlight-60 checked:before:absolute checked:before:left-[50%] checked:before:top-[50%] checked:before:block checked:before:h-4 checked:before:w-4 checked:before:translate-x-[-50%] checked:before:translate-y-[-50%] checked:before:rounded-full checked:before:bg-highlight-60 hover:checked:border-black focus:ring-highlight-60 checked:focus:border-black active:bg-highlight-60"
               type="radio"
               id={user.name}
               name="payer"
@@ -180,7 +180,7 @@ export function ExpenseSettingStepTwo({
 export function ExpenseSettingStepThree({
   expenseData,
   group,
-  phase
+  phase,
 }: {
   expenseData: any;
   group: any;
@@ -225,14 +225,14 @@ export function ExpenseSettingStepThree({
               />
               <div>{user.name}</div>
               <input
-                className="w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:ring-0"
+                className="w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0"
                 type="text"
                 onChange={() => {}}
                 value={amountValue}
               />
             </div>
             <input
-              className="relative h-5 w-5 rounded-full border-[1.5px] border-black checked:border-black checked:bg-highlight-60 checked:text-highlight-60 checked:before:absolute checked:before:left-[50%] checked:before:top-[50%] checked:before:block checked:before:h-3 checked:before:w-3 checked:before:translate-x-[-50%] checked:before:translate-y-[-50%] checked:before:rounded-full checked:before:bg-highlight-60 hover:checked:border-black focus:ring-highlight-60 checked:focus:border-black active:bg-highlight-60"
+              className="relative h-5 w-5 rounded-full border-[1.5px] border-black ring-transparent checked:border-black checked:bg-highlight-60 checked:text-highlight-60 checked:before:absolute checked:before:left-[50%] checked:before:top-[50%] checked:before:block checked:before:h-4 checked:before:w-4 checked:before:translate-x-[-50%] checked:before:translate-y-[-50%] checked:before:rounded-full checked:before:bg-highlight-60 hover:checked:border-black focus:ring-highlight-60 checked:focus:border-black active:bg-highlight-60"
               type="radio"
               id={user.name}
               name={user.name}
