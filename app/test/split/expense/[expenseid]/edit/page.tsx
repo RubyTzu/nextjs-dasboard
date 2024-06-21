@@ -8,6 +8,7 @@ import { TopExpenseSettingBar } from '@/app/test/(ui)/TopBars';
 import {
   ExpenseSettingStepOne,
   ExpenseSettingStepTwo,
+  ExpenseSettingStepThree,
   GroupInfoBar,
 } from '@/app/test/(ui)/ExpenseSettingDetails';
 
@@ -39,8 +40,9 @@ export default function Page() {
       <div className="relative flex flex-col">
         <TopExpenseSettingBar expenseData={expense} />
         <GroupInfoBar expenseData={expense} group={groupNameAndImage} />
-        {/* <ExpenseSettingStepOne expenseData={expense} /> */}
-        <ExpenseSettingStepTwo expenseData={expense} group={group} />
+        {/* <ExpenseSettingStepOne expenseData={expense} />
+        <ExpenseSettingStepTwo expenseData={expense} group={group} /> */}
+        <ExpenseSettingStepThree expenseData={expense} group={group} />
       </div>
     </form>
   );
