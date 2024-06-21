@@ -11,8 +11,10 @@ import {
   ExpenseSettingStepThree,
   GroupInfoBar,
 } from '@/app/test/(ui)/ExpenseSettingDetails';
+import { useState } from 'react';
 
 export default function Page() {
+  const [phase, setPhase] = useState("1");
   const params = useParams<{ expenseid: string }>();
   const user = useUser(loginUserId);
 
@@ -40,9 +42,19 @@ export default function Page() {
       <div className="relative flex flex-col">
         <TopExpenseSettingBar expenseData={expense} />
         <GroupInfoBar expenseData={expense} group={groupNameAndImage} />
-        {/* <ExpenseSettingStepOne expenseData={expense} />
-        <ExpenseSettingStepTwo expenseData={expense} group={group} /> */}
-        <ExpenseSettingStepThree expenseData={expense} group={group} />
+        <section>
+          <ExpenseSettingStepOne expenseData={expense} phase={phase} />
+          <ExpenseSettingStepTwo
+            expenseData={expense}
+            group={group}
+            phase={phase}
+          />
+          <ExpenseSettingStepThree
+            expenseData={expense}
+            group={group}
+            phase={phase}
+          />
+        </section>
       </div>
     </form>
   );

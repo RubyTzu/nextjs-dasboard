@@ -11,7 +11,7 @@ export default function SuccessAlert({
   name,
   isShow,
   setIsShow,
-  inGroupPage
+  inGroupPage,
 }: {
   text: string;
   name: string;
@@ -39,16 +39,18 @@ export default function SuccessAlert({
           },
         )}
       >
-        <div className='flex w-64 rounded-lg shadow-lg'>
-          <div className={clsx('flex items-center rounded-l-lg px-6 py-4', {
-            'bg-neutrals-20': inGroupPage,
-            'bg-highlight-60': !inGroupPage,
-          })}>
+        <div className="flex w-64 rounded-lg shadow-lg">
+          <div
+            className={clsx('flex items-center rounded-l-lg px-6 py-4', {
+              'bg-neutrals-20': inGroupPage,
+              'bg-highlight-60': !inGroupPage,
+            })}
+          >
             <button onClick={(e) => handleClick(e)}>
               <CheckIcon />
             </button>
           </div>
-          <div className='flex w-full items-center justify-between rounded-r-lg border border-gray-200 border-l-transparent bg-white py-6 pl-8'>
+          <div className="flex w-full items-center justify-between rounded-r-lg border border-gray-200 border-l-transparent bg-white py-6 pl-8">
             <div>
               {text}
               <br />
