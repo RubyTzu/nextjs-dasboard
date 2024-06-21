@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation';
 //import data
 import { useUser, useGroup } from "@/app/test/(data)/Providers";
 import { loginUserId } from "@/app/test/(data)/user";
+//import ui
 import { TopGroupSettingBar } from '@/app/test/(ui)/TopBars';
 import { GroupNameSetting, GroupOtherSetting, GroupSave, GroupUsersSetting } from '@/app/test/(ui)/GroupSettingDetails';
 

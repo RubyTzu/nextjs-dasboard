@@ -1,9 +1,11 @@
 'use client';
 //import from next & react
 import { useParams } from 'next/navigation';
+import { useState } from 'react';
 //import data
 import { useExpenses, useUser, useGroup } from '@/app/test/(data)/Providers';
 import { loginUserId } from '@/app/test/(data)/user';
+//import ui
 import { TopExpenseSettingBar } from '@/app/test/(ui)/TopBars';
 import {
   ExpenseSettingStepOne,
@@ -11,7 +13,6 @@ import {
   ExpenseSettingStepThree,
   GroupInfoBar,
 } from '@/app/test/(ui)/ExpenseSettingDetails';
-import { useState } from 'react';
 
 export default function Page() {
   const [phase, setPhase] = useState("1");
