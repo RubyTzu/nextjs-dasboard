@@ -16,3 +16,12 @@ export function UsersBarSkeleton() {
         </>
     );
 }
+export function ExpenseSkeleton() {
+    return (
+        <>
+         <div className={`${shimmer} z-10 fixed flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white`}>
+         <h1 className="text-lg">loading...</h1>
+         </div>
+        </>
+    );
+}

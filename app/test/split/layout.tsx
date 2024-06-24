@@ -9,7 +9,7 @@ export default function Layout({
   return (
     <>
       <Providers>
-      <main className="bg-primary-100 w-full min-h-screen">{children}</main>
+      <main className="h-dvh bg-primary-100 w-full min-h-screen">{children}</main>
       </Providers>
     </>
   )

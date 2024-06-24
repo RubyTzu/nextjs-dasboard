@@ -22,7 +22,7 @@ export default function Page() {
   }
 
   return (
-    <form action={`/test/split/group/${params.groupid}`}>
+    <form method="post" action={`/test/split/group/${params.groupid}`}>
       <div className="relative flex flex-col"><TopGroupSettingBar groupData={group} />
         <GroupNameSetting groupData={groupNameAndImage} />
         <GroupUsersSetting groupData={group} />

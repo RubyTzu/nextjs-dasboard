@@ -12,10 +12,12 @@ import {
   ExpenseSettingStepTwo,
   ExpenseSettingStepThree,
   GroupInfoBar,
+  NextStepButton
 } from '@/app/test/(ui)/ExpenseSettingDetails';
+import Example from '@/app/test/(ui)/Example';
 
 export default function Page() {
-  const [phase, setPhase] = useState("1");
+  const [phase, setPhase] = useState(1);
   const params = useParams<{ expenseid: string }>();
   const user = useUser(loginUserId);
 
@@ -25,6 +27,8 @@ export default function Page() {
 
   let expense = groupWithExpense.expense;
   let group = groupWithExpense.group;
+  
+  const [currentExpense, setCurrentExpense] = useState(expense)
 
   if (!user) return;
   if (!group) return;
@@ -38,25 +42,35 @@ export default function Page() {
     }
   }
 
+
+
   return (
-    <form action={`/test/split/expense/${params.expenseid}`}>
+    <form method="post" action={`/test/split/expense/${params.expenseid}`}>
       <div className="relative flex flex-col">
-        <TopExpenseSettingBar expenseData={expense} />
-        <GroupInfoBar expenseData={expense} group={groupNameAndImage} />
+        <TopExpenseSettingBar expenseData={currentExpense} phase={phase} setPhase={setPhase} />
+        <GroupInfoBar expenseData={currentExpense} group={groupNameAndImage} />
         <section>
-          <ExpenseSettingStepOne expenseData={expense} phase={phase} />
+          <ExpenseSettingStepOne expenseData={currentExpense} phase={phase} />
           <ExpenseSettingStepTwo
-            expenseData={expense}
+            expenseData={currentExpense}
+            setCurrentExpense={setCurrentExpense}
             group={group}
             phase={phase}
           />
           <ExpenseSettingStepThree
-            expenseData={expense}
+            expenseData={currentExpense}
+            setCurrentExpense={setCurrentExpense}
             group={group}
             phase={phase}
           />
         </section>
+        <section>
+          <NextStepButton expenseData={currentExpense} phase={phase} setPhase={setPhase} />
+        </section>
+        {/* testing popup alert on top of keyboard */}
+        {/* <Example /> */}
       </div>
     </form>
   );
 }
+

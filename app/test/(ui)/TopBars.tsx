@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { loginUserId } from '@/app/test/(data)/user';
 //import ui
 import { HomeIcon, Cog8ToothIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
+import clsx from 'clsx';
 
 export function TopGroupBar({ groupData, groupName }: { groupData: any; groupName: string }) {
 
@@ -76,11 +77,20 @@ export function TopExpenseBar({ expenseData, group }: { expenseData: any, group:
   );
 }
 
-export function TopExpenseSettingBar({ expenseData }: { expenseData: any }) {
+export function TopExpenseSettingBar({ expenseData, phase, setPhase }: { expenseData: any, phase: number, setPhase: any }) {
+  function handleClick() {
+    if (phase === 1) return
+    setPhase(phase - 1)
+    console.log(phase)
+  }
 
   return (
     <div className="z-20 fixed w-full bg-highlight-50 flex justify-between items-center text-white px-5 py-4">
-      <div className="h-6 w-8" />
+      <div className="h-6 w-12 flex justify-start items-center">
+        <div onClick={handleClick} className={clsx("text-sm", {
+          "hidden": phase === 1
+        })}>上一步</div>
+      </div>
       <h1 className="text-lg">
         {expenseData && (
           expenseData.payerId === loginUserId
@@ -88,7 +98,7 @@ export function TopExpenseSettingBar({ expenseData }: { expenseData: any }) {
           expenseData.sharers?.some((sharer: any) => sharer.id === loginUserId))
           ? '編輯費用' : 'no such Page'}
       </h1>
-      <div className="h-6 w-8">
+      <div className="h-6 w-12 flex justify-end items-center">
         {expenseData && (
           expenseData.payerId === loginUserId
           ||
@@ -96,7 +106,7 @@ export function TopExpenseSettingBar({ expenseData }: { expenseData: any }) {
           ?
           (
             <Link href={`/test/split/expense/${expenseData.id}`} scroll={false}>
-              <p className="">取消</p>
+              <p className="text-sm">取消</p>
             </Link>
           ) : ''}
       </div>
