@@ -87,7 +87,7 @@ export function TopExpenseSettingBar({ expenseData, phase, setPhase }: { expense
   return (
     <div className="z-20 fixed w-full bg-highlight-50 flex justify-between items-center text-white px-5 py-4">
       <div className="h-6 w-12 flex justify-start items-center">
-        <div onClick={handleClick} className={clsx("text-sm", {
+        <div onClick={handleClick} className={clsx("text-sm cursor-pointer", {
           "hidden": phase === 1
         })}>上一步</div>
       </div>

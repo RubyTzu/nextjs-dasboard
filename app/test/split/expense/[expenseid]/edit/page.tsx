@@ -3,23 +3,21 @@
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 //import data
-import { useExpenses, useUser, useGroup } from '@/app/test/(data)/Providers';
+import { useExpenses, useUser } from '@/app/test/(data)/Providers';
 import { loginUserId } from '@/app/test/(data)/user';
 //import ui
 import { TopExpenseSettingBar } from '@/app/test/(ui)/TopBars';
-import {
-  ExpenseSettingStepOne,
-  ExpenseSettingStepTwo,
-  ExpenseSettingStepThree,
-  GroupInfoBar,
-  NextStepButton
-} from '@/app/test/(ui)/ExpenseSettingDetails';
+import { GroupInfoBar, NextStepButton } from '@/app/test/(ui)/ExpenseSettingDetails';
+import { ExpenseSettingStepOne } from '@/app/test/(ui)/ExpenseSettingStepOne';
+import { ExpenseSettingStepTwo } from '@/app/test/(ui)/ExpenseSettingStepTwo';
+import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
 import Example from '@/app/test/(ui)/Example';
 
 export default function Page() {
   const [phase, setPhase] = useState(1);
   const params = useParams<{ expenseid: string }>();
   const user = useUser(loginUserId);
+  const [isNotEqual, setIsNotEqual] = useState(false)
 
   //group users and this expense's info
   let users: any = useExpenses(params.expenseid).users;
@@ -27,7 +25,7 @@ export default function Page() {
 
   let expense = groupWithExpense.expense;
   let group = groupWithExpense.group;
-  
+
   const [currentExpense, setCurrentExpense] = useState(expense)
 
   if (!user) return;
@@ -47,7 +45,7 @@ export default function Page() {
   return (
     <form method="post" action={`/test/split/expense/${params.expenseid}`}>
       <div className="relative flex flex-col">
-        <TopExpenseSettingBar expenseData={currentExpense} phase={phase} setPhase={setPhase} />
+        <TopExpenseSettingBar expenseData={expense} phase={phase} setPhase={setPhase} />
         <GroupInfoBar expenseData={currentExpense} group={groupNameAndImage} />
         <section>
           <ExpenseSettingStepOne expenseData={currentExpense} phase={phase} />
@@ -62,10 +60,11 @@ export default function Page() {
             setCurrentExpense={setCurrentExpense}
             group={group}
             phase={phase}
+            setIsNotEqual={setIsNotEqual}
           />
         </section>
         <section>
-          <NextStepButton expenseData={currentExpense} phase={phase} setPhase={setPhase} />
+          <NextStepButton expenseData={currentExpense} phase={phase} setPhase={setPhase} isNotEqual={isNotEqual} />
         </section>
         {/* testing popup alert on top of keyboard */}
         {/* <Example /> */}
