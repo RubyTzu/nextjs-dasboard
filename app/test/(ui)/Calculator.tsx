@@ -10,16 +10,15 @@ export const CalculatorAndInput = ({ amount }: { amount: string }) => {
     setShowKeyboard(true);
   };
 
-  // const handleBlur = () => {
-  //   setShowKeyboard(false);
-  //   console.log("click")
-  // };
+  const handleBlur = () => {
+    setShowKeyboard(false);
+  };
 
   return (
 
     <div className="relative">
       <Display amount={amount} handleFocus={handleFocus} />
-      {showKeyboard && <Calculator handleBlur={setShowKeyboard} />}
+      {showKeyboard && <Calculator handleBlur={handleBlur} />}
     </div>
   );
 };
