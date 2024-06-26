@@ -9,7 +9,7 @@ import SuccessAlert from '@/app/test/(ui)/SuccessAlert';
 export default function CopyLinkButton({
   id,
   name,
-  inGroupPage
+  inGroupPage,
 }: {
   id: string;
   name: string;
@@ -30,20 +30,26 @@ export default function CopyLinkButton({
     setTimeout(() => {
       setIsShow(false);
       router.refresh();
-    }, 900)
+    }, 900);
   };
 
   return (
     <>
-      {inGroupPage ?
-        (<div onClick={e => handleCopyLink(e)} className="flex justify-center items-center bg-neutrals-20 p-2 rounded-full">
-          <LinkIcon className="w-5 h-5 cursor-pointer" />
-        </div>)
-        :
-        (<div onClick={e => handleCopyLink(e)} className="relative z-[1] flex h-8 w-8 items-center justify-center rounded-full bg-highlight-60">
-          <LinkIcon className="h-5 w-5 cursor-pointer stroke-[2px] text-grey-400" />
-        </div>)
-      }
+      {inGroupPage ? (
+        <div
+          onClick={(e) => handleCopyLink(e)}
+          className="flex items-center justify-center rounded-full bg-neutrals-20 p-2"
+        >
+          <LinkIcon className="h-5 w-5 cursor-pointer" />
+        </div>
+      ) : (
+        <div
+          onClick={(e) => handleCopyLink(e)}
+          className="relative z-[1] flex h-8 w-8 items-center justify-center rounded-full bg-highlight-60"
+        >
+          <LinkIcon className="text-grey-400 h-5 w-5 cursor-pointer stroke-[2px]" />
+        </div>
+      )}
       <SuccessAlert
         text="連結已複製"
         name={name}
@@ -54,4 +60,3 @@ export default function CopyLinkButton({
     </>
   );
 }
-

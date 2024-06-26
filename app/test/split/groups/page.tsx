@@ -1,24 +1,28 @@
-'use client'
+'use client';
 //import data
-import { loginUserId } from "@/app/test/(data)/user";
-import { useUser } from "@/app/test/(data)/Providers";
+import { loginUserId } from '@/app/test/(data)/user';
+import { useUser } from '@/app/test/(data)/Providers';
 //import ui
 import GroupButton from '@/app/test/(ui)/GroupButton';
-import AddGroupButton from "@/app/test/(ui)/AddGroupButton";
+import AddGroupButton from '@/app/test/(ui)/AddGroupButton';
 
 export default function Page() {
-    const data = useUser(loginUserId)
+  const data = useUser(loginUserId);
 
-    return (
-        <div className="flex flex-col bg-highlight-50 min-h-screen">
-            <h1 className="z-[2] fixed left-[50%] translate-x-[-50%] text-center text-2xl font-bold bg-highlight-50 text-white w-full py-5">群組列表</h1>
-            <AddGroupButton />
-            <div className="mt-24">
-                {data ? data.groups.map((group: any) =>
-                    <GroupButton key={group.id} groupData={group} />)
-                    : null}
-            </div>
-            <div className="mb-16"></div>
-        </div>
-    )
+  return (
+    <div className="flex min-h-screen flex-col bg-highlight-50">
+      <h1 className="fixed left-[50%] z-[2] w-full translate-x-[-50%] bg-highlight-50 py-5 text-center text-2xl font-bold text-white">
+        群組列表
+      </h1>
+      <AddGroupButton />
+      <div className="mt-24">
+        {data
+          ? data.groups.map((group: any) => (
+              <GroupButton key={group.id} groupData={group} />
+            ))
+          : null}
+      </div>
+      <div className="mb-16"></div>
+    </div>
+  );
 }

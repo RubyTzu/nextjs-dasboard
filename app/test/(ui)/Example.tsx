@@ -1,33 +1,48 @@
 import { useEffect, useState } from 'react';
+import clsx from 'clsx';
 
 const Example = () => {
   const [barTop, setBarTop] = useState('100%');
+  const [onFocus, setOnFocus] = useState(false);
 
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     if (window.visualViewport) {
-  //       const newTop = `min(100%, ${window.visualViewport.height}px)`;
-  //       setBarTop(newTop);
-  //     }
-  //   };
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.visualViewport) {
+        const newTop = `${window.visualViewport.height}px`;
+        console.log(newTop);
+        setBarTop(newTop);
+      }
+    };
 
-  //   if (typeof window !== 'undefined') {
-  //     if (window.visualViewport) {
-  //       handleResize(); // Initial setup
-  //       window.visualViewport.addEventListener('resize', handleResize);
-  //       return () => {
-  //         window.visualViewport.removeEventListener('resize', handleResize);
-  //       };
-  //     }
-  //   }
-  // }, []); // empty dependency array ensures this effect runs only once
+    if (typeof window !== 'undefined') {
+      if (window.visualViewport) {
+        handleResize(); // Initial setup
+        window.visualViewport.addEventListener('resize', handleResize);
+        return () => {
+          window.visualViewport?.removeEventListener('resize', handleResize);
+        };
+      }
+    }
+  }, []); // empty dependency array ensures this effect runs only once
 
   return (
     <div className="relative">
-      <input type="number" pattern="[0-9]*" inputMode="numeric" />
+      <input
+        className="border-2"
+        type="number"
+        pattern="[0-9]*"
+        inputMode="numeric"
+        onFocus={() => setOnFocus(true)}
+        onBlur={() => setOnFocus(false)}
+      />
       <div
         id="bar"
-        className="absolute top-full w-full p-4 bg-black text-white text-center transform -translate-y-full hidden focus:block"
+        className={clsx(
+          'absolute top-full w-full -translate-y-full transform bg-black p-4 text-center text-white',
+          { 'hidden': !onFocus,
+            'block': onFocus
+           },
+        )}
         style={{ top: barTop }}
       >
         $3,000 残っています

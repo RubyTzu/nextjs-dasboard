@@ -6,7 +6,7 @@ import { loginUserId } from '@/app/test/(data)/user';
 export default function SharerExpenseDetail({
   expenseData,
   sharer,
-  users
+  users,
 }: {
   expenseData: any;
   sharer: any;
@@ -15,8 +15,8 @@ export default function SharerExpenseDetail({
   const { payerId }: { payerId: string } = expenseData;
   const { id, amount } = sharer;
 
-  let payerData = users.filter((user:any)=>user.id===payerId)[0]
-  let sharerData = users.filter((user:any)=>user.id===id)[0]
+  let payerData = users.filter((user: any) => user.id === payerId)[0];
+  let sharerData = users.filter((user: any) => user.id === id)[0];
 
   let nf = new Intl.NumberFormat('en-US');
   let shareAmount: any = Number(amount).toFixed(2);
@@ -30,7 +30,7 @@ export default function SharerExpenseDetail({
         <div className="flex items-center">
           {sharerData ? (
             <Image
-              className="flex h-[32px] w-[32px] items-center justify-center rounded-full bg-grey-200"
+              className="bg-grey-200 flex h-[32px] w-[32px] items-center justify-center rounded-full"
               src={sharerData.picture}
               width={32}
               height={32}

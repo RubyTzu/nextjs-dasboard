@@ -8,14 +8,9 @@ import { loginUserId } from '@/app/test/(data)/user';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 import { expenseIconMap } from '@/app/test/(ui)/Icons';
 
-export default function ExpensesList({
-  groupData
-}: {
-  groupData: any;
-}) {
-
+export default function ExpensesList({ groupData }: { groupData: any }) {
   let { expensesWithDebts } = filterExpense(groupData.expense);
-  let users = groupData.users
+  let users = groupData.users;
   let expenses = expensesWithDebts;
 
   // Step 1: Group expenses by date
@@ -32,13 +27,15 @@ export default function ExpensesList({
   const renderExpensesByDate = () => {
     return Object.keys(groupedExpenses).map((date, index) => (
       <div key={index}>
-        {groupedExpenses[date].find((expense: any) => expense.expenseDebt !== undefined) ?
-          <p className="mx-8 mb-3 text-sm text-grey-500">{date}</p> : null
-        }
+        {groupedExpenses[date].find(
+          (expense: any) => expense.expenseDebt !== undefined,
+        ) ? (
+          <p className="mx-8 mb-3 text-sm text-grey-500">{date}</p>
+        ) : null}
         {groupedExpenses[date].map((expense: any) => (
           <Fragment key={expense.id}>
-            {(expense.sharers.some((sharer: any) => sharer.id === loginUserId) ||
-              expense.payerId.includes(loginUserId)) ? (
+            {expense.sharers.some((sharer: any) => sharer.id === loginUserId) ||
+            expense.payerId.includes(loginUserId) ? (
               <ExpenseButton users={users} expense={expense} />
             ) : null}
           </Fragment>
@@ -47,11 +44,7 @@ export default function ExpensesList({
     ));
   };
 
-  return (
-    <>
-      {renderExpensesByDate()}
-    </>
-  );
+  return <>{renderExpensesByDate()}</>;
 }
 
 function ExpenseButton({ users, expense }: { users: any; expense: any }) {
@@ -65,20 +58,20 @@ function ExpenseButton({ users, expense }: { users: any; expense: any }) {
   }: {
     id: string;
     category:
-    | 'food'
-    | 'drink'
-    | 'transport'
-    | 'stay'
-    | 'shopping'
-    | 'entertainment'
-    | 'other';
+      | 'food'
+      | 'drink'
+      | 'transport'
+      | 'stay'
+      | 'shopping'
+      | 'entertainment'
+      | 'other';
     amount: string;
     name: string;
     payerId: string;
     expenseDebt: any;
   } = expense;
 
-  const payerData = users.filter((user: any) => user.id === payerId)[0]
+  const payerData = users.filter((user: any) => user.id === payerId)[0];
 
   const Icon = expenseIconMap[category];
   let nf = new Intl.NumberFormat('en-US');
@@ -95,9 +88,7 @@ function ExpenseButton({ users, expense }: { users: any; expense: any }) {
         <div className="leading-[20px]">
           <p className="font-semibold">{name}</p>
           <p className="font-base text-sm text-grey-500">
-            <span>
-              {loginUserId === payerId ? '你' : payerData?.name}
-            </span>
+            <span>{loginUserId === payerId ? '你' : payerData?.name}</span>
             付了
             <span>${nf.format(Number(amount))}</span>
           </p>
