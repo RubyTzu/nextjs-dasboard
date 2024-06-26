@@ -47,7 +47,7 @@ export function GroupInfoBar({
   );
 }
 
-export function NextStepButton({ phase, setPhase, expenseData, isNotEqual }: { phase: number, setPhase: any, expenseData: any, isNotEqual: any; }) {
+export function NextStepButton({ phase, setPhase, expenseData, isNotEqual, showKeyboard }: { phase: number, setPhase: any, expenseData: any, isNotEqual: any; showKeyboard: any }) {
 
   function handleClick(expenseId: any) {
     setPhase(phase + 1)
@@ -61,13 +61,13 @@ export function NextStepButton({ phase, setPhase, expenseData, isNotEqual }: { p
   return (
     <div className="mb-8 flex flex-col items-center">
       {phase !== 3 ?
-        <div onClick={() => handleClick(expenseData.id)} className="py-2 px-4 flex justify-between items-center w-[180px] rounded-full bg-highlight-20 cursor-pointer">
+        <button type="button" disabled={showKeyboard} onClick={() => handleClick(expenseData.id)} className="py-2 px-4 flex justify-between items-center w-[180px] rounded-full bg-highlight-20 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary">
           <div className="text-[10px]">{phase}/3</div>
           <div className="text-sm">下一步</div>
           <div><NextstepIcon /></div>
-        </div> :
-        <button disabled={isNotEqual} type="submit" onClick={() => handleSubmit(expenseData)} className="relative py-2 px-4 flex justify-between items-center w-[180px] rounded-full bg-highlight-20 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary cursor-pointer">
-          <div className={clsx("absolute left-[50%] bottom-12 translate-x-[-50%] w-screen text-xs text-text-onDark-secondary",{"hidden": !isNotEqual,"block": isNotEqual })}>目前分帳總額 不等於 {expenseData.amount} 元</div>
+        </button> :
+        <button disabled={isNotEqual} type="submit" onClick={() => handleSubmit(expenseData)} className="relative py-2 px-4 flex justify-between items-center w-[180px] rounded-full bg-highlight-20 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary">
+          <div className={clsx("absolute left-[50%] bottom-12 translate-x-[-50%] w-screen text-xs text-text-onDark-secondary", { "hidden": !isNotEqual, "block": isNotEqual })}>目前分帳總額 不等於 {expenseData.amount} 元</div>
           <div className="text-[10px]">3/3</div>
           <div className="text-sm">確認</div>
           <div></div>

@@ -27,6 +27,7 @@ export default function Page() {
   let group = groupWithExpense.group;
 
   const [currentExpense, setCurrentExpense] = useState(expense)
+  const [showKeyboard, setShowKeyboard] = useState(false);
 
   if (!user) return;
   if (!group) return;
@@ -48,7 +49,11 @@ export default function Page() {
         <TopExpenseSettingBar expenseData={expense} phase={phase} setPhase={setPhase} />
         <GroupInfoBar expenseData={currentExpense} group={groupNameAndImage} />
         <section>
-          <ExpenseSettingStepOne expenseData={currentExpense} phase={phase} />
+          <ExpenseSettingStepOne
+            expenseData={currentExpense}
+            phase={phase}
+            showKeyboard={showKeyboard}
+            setShowKeyboard={setShowKeyboard} />
           <ExpenseSettingStepTwo
             expenseData={currentExpense}
             setCurrentExpense={setCurrentExpense}
@@ -64,7 +69,7 @@ export default function Page() {
           />
         </section>
         <section>
-          <NextStepButton expenseData={currentExpense} phase={phase} setPhase={setPhase} isNotEqual={isNotEqual} />
+          <NextStepButton expenseData={currentExpense} phase={phase} setPhase={setPhase} isNotEqual={isNotEqual} showKeyboard={showKeyboard}/>
         </section>
         <div className="h-[420px]"></div>
         {/* testing popup alert on top of keyboard */}

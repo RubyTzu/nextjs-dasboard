@@ -66,13 +66,13 @@ export const CalcProvider = ({ children }: { children: React.ReactNode }) => {
         } catch (error) {
             setDisplay('語法錯誤，請再試一次')
             setTimeout(() => {
-                setDisplay('0')
+                setDisplay('')
             }, 1500)
         }
     }
 
     const clearClick = () => {
-        setDisplay('0')
+        setDisplay('')
     }
 
     //

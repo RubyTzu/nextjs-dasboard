@@ -1,10 +1,11 @@
 "use client"
 import { useContext, useState, useEffect } from 'react'
-import { CalcContext } from '@/app/test/(data)/CalcProvider'
+import { CalcContext,CalcProvider  } from '@/app/test/(data)/CalcProvider'
+
 import clsx from 'clsx';
 
-export const CalculatorAndInput = ({ amount }: { amount: string }) => {
-  const [showKeyboard, setShowKeyboard] = useState(false);
+export const CalculatorAndInput = ({ amount, showKeyboard , setShowKeyboard }: { amount: string,showKeyboard:any, setShowKeyboard:any }) => {
+
 
   const handleFocus = () => {
     setShowKeyboard(true);
@@ -15,11 +16,12 @@ export const CalculatorAndInput = ({ amount }: { amount: string }) => {
   };
 
   return (
-
-    <div className="relative">
-      <Display amount={amount} handleFocus={handleFocus} />
-      {showKeyboard && <Calculator handleBlur={handleBlur} />}
-    </div>
+    <CalcProvider>
+      <div className="relative">
+        <Display amount={amount} handleFocus={handleFocus} />
+        {showKeyboard && <Calculator handleBlur={handleBlur} />}
+      </div>
+    </CalcProvider>
   );
 };
 
@@ -58,7 +60,7 @@ function Display({ amount, handleFocus }: { amount: string, handleFocus: any }) 
 }
 
 const Calculator = ({ handleBlur }: { handleBlur: any }) => {
-  const { buttonClick, equalClick, clearClick } = useContext<any>(CalcContext)
+  const { display, buttonClick, equalClick, clearClick } = useContext<any>(CalcContext)
 
   return (
     <div className="fixed left-[50%] translate-x-[-50%] bottom-0 flex flex-col justify-center w-screen h-[340px] bg-black">
@@ -87,7 +89,7 @@ const Calculator = ({ handleBlur }: { handleBlur: any }) => {
         <CalculatorButton value={'.'} onClick={() => buttonClick('.')} />
         <CalculatorButton value={'0'} onClick={() => buttonClick('0')} />
         <CalculatorButton value={'<-'} onClick={() => buttonClick('Backspace')} />
-        <div onClick={()=>{handleBlur()}} className="m-[5px] flex justify-center items-center h-14 w-[122px] bg-highlight-60 rounded-lg cursor-pointer">確認</div>
+        <button disabled={isNaN(Number(display)) || display < 1} type="button" onClick={() => { handleBlur() }} className="m-[5px] flex justify-center items-center h-14 w-[122px] bg-highlight-60 rounded-lg cursor-pointer">確認</button>
       </div>
     </div>
   );
