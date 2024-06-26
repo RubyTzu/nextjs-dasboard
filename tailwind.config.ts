@@ -30,8 +30,8 @@ const config: Config = {
         '13': 'repeat(13, minmax(0, 1fr))',
       },
       fontSize: {
-        'sm': '0.875rem',
-        'base': '1rem',
+        sm: '0.875rem',
+        base: '1rem',
       },
       colors: {
         blue: {
@@ -40,7 +40,7 @@ const config: Config = {
           600: '#2f6feb',
         },
         primary: {
-          100: '#fbfbf8',//
+          100: '#fbfbf8', //
           // 200: '#f3f4e5',
           // 300: '#ebff79',
           // 'blue': '#3555f4',
@@ -54,8 +54,9 @@ const config: Config = {
           // 200: '#d3d2d8',
           // 300: '#6c6c6c',
           // 400: '#5f5d5e',
-          500: '#4a4a4a',//
+          500: '#4a4a4a', //
           // 600: '#1c1a1b',
+          'keyBoard': '#d1d3d9',
         },
         highlight: {
           60: '#EBFF79',
@@ -76,7 +77,7 @@ const config: Config = {
         text: {
           'onDark-primary': '#FFFFFF',
           'onDark-secondary': '#9E9E9E',
-        }
+        },
       },
     },
     keyframes: {

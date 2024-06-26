@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
-const Example = () => {
+export default function SharerAmountInput() {
   const [barTop, setBarTop] = useState('100%');
   const [onFocus, setOnFocus] = useState(false);
 
@@ -28,7 +28,7 @@ const Example = () => {
   return (
     <div className="relative">
       <input
-        className="border-2"
+        className="ml-[0px] mt-[200px] border-0 border-b focus:border-0 focus:border-b-highlight-60 focus:ring-b-highlight-60"
         type="number"
         pattern="[0-9]*"
         inputMode="numeric"
@@ -38,17 +38,14 @@ const Example = () => {
       <div
         id="bar"
         className={clsx(
-          'absolute top-full w-full -translate-y-full transform bg-black p-4 text-center text-white',
-          { 'hidden': !onFocus,
-            'block': onFocus
-           },
+          'bg-grey-keyBoard absolute top-full w-full -translate-y-full transform p-6 text-center',
+          { hidden: !onFocus, block: onFocus },
         )}
         style={{ top: barTop }}
       >
-        $3,000 残っています
+        <div className="text-black">小陳負擔$3,000中的$</div>
+        <div className="text-sm text-neutrals-60">還剩下$3,000還沒被分帳</div>
       </div>
     </div>
   );
 };
-
-export default Example;

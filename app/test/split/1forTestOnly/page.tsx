@@ -3,7 +3,7 @@
 import { useState } from 'react';
 //import ui
 import { CalculatorAndInput } from '../../(ui)/Calculator';
-import Example from '../../(ui)/Example';
+import SharerAmountInput from '../../(ui)/SharerAmountInput';
 
 export default function Page() {
   const [isNotEqual, setIsNotEqual] = useState(false);
@@ -61,16 +61,20 @@ export default function Page() {
     expense: [],
   };
   return (
-    <>
-      <Example />
-      <CalculatorAndInput
-        group={group}
-        expenseData={currentExpense}
-        setCurrentExpense={setCurrentExpense}
-        showKeyboard={showKeyboard}
-        setShowKeyboard={setShowKeyboard}
-        setIsNotEqual={setIsNotEqual}
-      />
-    </>
+    <div className="relative">
+      <div className="fixed top-0 z-0 w-full">
+        <SharerAmountInput />
+      </div>
+      <div className="z-20">
+        <CalculatorAndInput
+          group={group}
+          expenseData={currentExpense}
+          setCurrentExpense={setCurrentExpense}
+          showKeyboard={showKeyboard}
+          setShowKeyboard={setShowKeyboard}
+          setIsNotEqual={setIsNotEqual}
+        />
+      </div>
+    </div>
   );
 }

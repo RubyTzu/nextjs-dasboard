@@ -14,7 +14,8 @@ import {
 import { ExpenseSettingStepOne } from '@/app/test/(ui)/ExpenseSettingStepOne';
 import { ExpenseSettingStepTwo } from '@/app/test/(ui)/ExpenseSettingStepTwo';
 import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
-import Example from '@/app/test/(ui)/Example';
+import SharerAmountInput from '@/app/test/(ui)/SharerAmountInput';
+
 
 export default function Page() {
   const [phase, setPhase] = useState(1);
@@ -83,7 +84,6 @@ export default function Page() {
             phase={phase}
             setPhase={setPhase}
             isNotEqual={isNotEqual}
-            // setIsNotEqual={setIsNotEqual}
             showKeyboard={showKeyboard}
           />
         </section>
