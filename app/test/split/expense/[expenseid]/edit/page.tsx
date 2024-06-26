@@ -66,6 +66,7 @@ export default function Page() {
         <section>
           <NextStepButton expenseData={currentExpense} phase={phase} setPhase={setPhase} isNotEqual={isNotEqual} />
         </section>
+        <div className="h-[420px]"></div>
         {/* testing popup alert on top of keyboard */}
         {/* <Example /> */}
       </div>

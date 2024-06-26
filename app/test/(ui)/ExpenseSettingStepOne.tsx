@@ -6,6 +6,7 @@ import {
 } from '@/app/test/(ui)/Icons';
 //other
 import clsx from 'clsx';
+import { CalculatorAndInput } from './Calculator';
 
 export function ExpenseSettingStepOne({
     expenseData,
@@ -61,12 +62,7 @@ export function ExpenseSettingStepOne({
           <div className="flex h-8 w-8 items-center justify-center rounded-md bg-highlight-60">
             <DollarIcon />
           </div>
-          <input
-            className="w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0 "
-            onChange={() => { }}
-            type="text"
-            defaultValue={amount}
-          />
+          <CalculatorAndInput amount={amount} />
         </div>
         <div className="flex items-center justify-center gap-1 pb-0 pt-3 text-sm">
           <div>
