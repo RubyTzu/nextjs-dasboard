@@ -10,20 +10,21 @@ export const CalculatorAndInput = ({ amount }: { amount: string }) => {
     setShowKeyboard(true);
   };
 
-  const handleBlur = () => {
-    setShowKeyboard(false);
-  };
+  // const handleBlur = () => {
+  //   setShowKeyboard(false);
+  //   console.log("click")
+  // };
 
   return (
 
     <div className="relative">
-      <Display amount={amount} handleFocus={handleFocus} handleBlur={handleBlur} />
-      {showKeyboard && <Calculator />}
+      <Display amount={amount} handleFocus={handleFocus} />
+      {showKeyboard && <Calculator handleBlur={setShowKeyboard} />}
     </div>
   );
 };
 
-function Display({ amount, handleFocus, handleBlur }: { amount: string, handleFocus: any, handleBlur: any }) {
+function Display({ amount, handleFocus }: { amount: string, handleFocus: any }) {
 
   const { display, setDisplay, updateDisplay, onFocusDisplay, onBlurDisplay } = useContext<any>(CalcContext)
 
@@ -42,12 +43,11 @@ function Display({ amount, handleFocus, handleBlur }: { amount: string, handleFo
     <input
       className="w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0 "
       onChange={handleChange}
-      onFocus={() =>{
+      onFocus={() => {
         handleFocus()
         onFocusDisplay()
       }}
-      onBlur={() =>{
-        handleBlur()
+      onBlur={() => {
         onBlurDisplay()
       }}
       type="text"
@@ -58,7 +58,7 @@ function Display({ amount, handleFocus, handleBlur }: { amount: string, handleFo
   )
 }
 
-const Calculator = () => {
+const Calculator = ({ handleBlur }: { handleBlur: any }) => {
   const { buttonClick, equalClick, clearClick } = useContext<any>(CalcContext)
 
   return (
@@ -88,7 +88,7 @@ const Calculator = () => {
         <CalculatorButton value={'.'} onClick={() => buttonClick('.')} />
         <CalculatorButton value={'0'} onClick={() => buttonClick('0')} />
         <CalculatorButton value={'<-'} onClick={() => buttonClick('Backspace')} />
-        <div className="m-[5px] flex justify-center items-center h-14 w-[122px] bg-highlight-60 rounded-lg" onClick={() => { }} >確認</div>
+        <div onClick={()=>{handleBlur()}} className="m-[5px] flex justify-center items-center h-14 w-[122px] bg-highlight-60 rounded-lg cursor-pointer">確認</div>
       </div>
     </div>
   );
