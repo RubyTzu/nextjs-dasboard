@@ -226,9 +226,7 @@ const CalculatorButton = ({ value, onClick }: { value: any; onClick: any }) => {
           'bg-neutrals-20': isNum || value === '<-',
         },
       )}
-      onClick={() => {
-        onClick();
-      }}
+      onClick={onClick}
     >
       {value !== '<-' ? (
         value
