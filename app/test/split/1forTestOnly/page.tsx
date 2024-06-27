@@ -62,19 +62,15 @@ export default function Page() {
   };
   return (
     <div className="relative">
-      <div className="fixed top-0 z-0 w-full">
-        <SharerAmountInput />
-      </div>
-      <div className="z-20">
-        <CalculatorAndInput
-          group={group}
-          expenseData={currentExpense}
-          setCurrentExpense={setCurrentExpense}
-          showKeyboard={showKeyboard}
-          setShowKeyboard={setShowKeyboard}
-          setIsNotEqual={setIsNotEqual}
-        />
-      </div>
+      <SharerAmountInput />
+      <CalculatorAndInput
+        group={group}
+        expenseData={currentExpense}
+        setCurrentExpense={setCurrentExpense}
+        showKeyboard={showKeyboard}
+        setShowKeyboard={setShowKeyboard}
+        setIsNotEqual={setIsNotEqual}
+      />
     </div>
   );
 }

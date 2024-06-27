@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CalcContext, CalcProvider } from '@/app/test/(data)/CalcProvider';
 
 import clsx from 'clsx';
@@ -19,6 +19,7 @@ export const CalculatorAndInput = ({
   setCurrentExpense: any;
   setIsNotEqual: any;
 }) => {
+
   const handleFocus = () => {
     setShowKeyboard(true);
   };
@@ -26,6 +27,7 @@ export const CalculatorAndInput = ({
   const handleBlur = () => {
     setShowKeyboard(false);
   };
+
 
   return (
     <CalcProvider>
@@ -68,11 +70,12 @@ function Display({
 
   return (
     <input
-      className="w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0 "
+      className="z-10 w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0 "
       onChange={handleChange}
       onFocus={() => {
         handleFocus();
         onFocusDisplay();
+        console.log('in input onFocus ')
       }}
       onBlur={() => {
         onBlurDisplay();
@@ -100,14 +103,14 @@ const Calculator = ({
 }) => {
   const { display, buttonClick, equalClick, clearClick } =
     useContext<any>(CalcContext);
-const users = group.users;
+  const users = group.users;
 
   const CheckAmountIsNotEqual = () => {
     let addedAmount = 0;
 
     users.forEach((user: any) => {
       const existingIndex = expenseData.sharers.findIndex(
-        (sharer:any) => sharer.id === user.id,
+        (sharer: any) => sharer.id === user.id,
       );
 
       if (existingIndex !== -1) {

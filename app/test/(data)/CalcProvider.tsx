@@ -20,6 +20,7 @@ export const CalcProvider = ({ children }: { children: React.ReactNode }) => {
     const [display, setDisplay] = useState('')
 
     const updateDisplay = (e: any) => {
+        console.log('updateDisplay')
         setDisplay(e)
     }
 
@@ -36,8 +37,17 @@ export const CalcProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     const buttonClick = (num: any) => {
-        const keyPressEvent = new KeyboardEvent('keydown', { key: num })
-        document.dispatchEvent(keyPressEvent);
+        // const keyPressEvent = new KeyboardEvent('keydown', { key: num })
+        // document.dispatchEvent(keyPressEvent);
+        if(num === 'Backspace'){
+            console.log('Backspace')
+            let myString = display
+            myString = myString.split("").reverse().slice(1).reverse().join("")
+            updateDisplay(myString);
+        }else {
+            updateDisplay(display + num);
+        }
+        
     };
 
     const equalClick = () => {
@@ -111,8 +121,8 @@ export const CalcProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     useEffect(() => {
-        document.addEventListener('keydown', handleKeyDown)
-        return () => document.removeEventListener('keydown', handleKeyDown)
+        document.addEventListener('click', handleKeyDown)
+        return () => document.removeEventListener('click', handleKeyDown)
     })
 
     //
@@ -120,7 +130,7 @@ export const CalcProvider = ({ children }: { children: React.ReactNode }) => {
     //
 
     return (
-        <CalcContext.Provider value={{ display,setDisplay, updateDisplay, onFocusDisplay, onBlurDisplay, buttonClick, equalClick, clearClick }}>
+        <CalcContext.Provider value={{ display, setDisplay, updateDisplay, onFocusDisplay, onBlurDisplay, buttonClick, equalClick, clearClick }}>
             {children}
         </CalcContext.Provider>
     )
