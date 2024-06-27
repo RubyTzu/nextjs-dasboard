@@ -114,9 +114,10 @@ export const CalcProvider = ({ children }: { children: React.ReactNode }) => {
                     !focusDisplay && opKey(e.key)
                     break
             }
-        } else {
-            e.preventDefault()
-        }
+        } 
+        // else {
+        //     e.preventDefault()
+        // }
     }
 
     useEffect(() => {

@@ -30,7 +30,6 @@ export function ExpenseSettingStepOne({
   const {
     date,
     category,
-    amount,
     name,
   }: {
     date: string;
@@ -42,7 +41,6 @@ export function ExpenseSettingStepOne({
       | 'shopping'
       | 'entertainment'
       | 'other';
-    amount: any;
     name: string;
   } = expenseData;
 

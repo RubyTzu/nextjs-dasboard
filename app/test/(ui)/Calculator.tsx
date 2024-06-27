@@ -1,6 +1,7 @@
 'use client';
-import { useContext, useEffect, useState, useRef } from 'react';
-import { CalcContext, CalcProvider } from '@/app/test/(data)/CalcProvider';
+import { useContext, useEffect, useRef } from 'react';
+import { CalcContext } from '@/app/test/(data)/CalcProvider';
+import { CalcProvider } from '@/app/test/(data)/CalcProvider';
 
 import clsx from 'clsx';
 import { BackspaceIcon } from './Icons';
@@ -58,7 +59,7 @@ export const CalculatorAndInput = ({
           />
         )}
       </div>
-    </CalcProvider>
+      </CalcProvider>
   );
 };
 

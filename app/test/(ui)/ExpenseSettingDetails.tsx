@@ -75,7 +75,7 @@ export function NextStepButton({
     <div className="mb-8 flex flex-col items-center">
       {phase !== 3 ? (
         <button
-          type="button"
+          // type="button"
           disabled={showKeyboard}
           onClick={(e: any) => handleClick(e, expenseData.id)}
           className="flex w-[180px] items-center justify-between rounded-full bg-highlight-20 px-4 py-2 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
@@ -90,7 +90,8 @@ export function NextStepButton({
         <button
           disabled={isNotEqual}
           type="submit"
-          onClick={() => handleSubmit(expenseData)}
+          onClick={()=>{console.log('click submit')}}
+          onSubmit={() => handleSubmit(expenseData)}
           className="relative flex w-[180px] items-center justify-between rounded-full bg-highlight-20 px-4 py-2 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
         >
           <div
