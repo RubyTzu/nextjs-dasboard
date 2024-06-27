@@ -15,6 +15,7 @@ import addUserIcon from '@/app/test/(ui)/icons/addUser.svg';
 import trashcanIcon from '@/app/test/(ui)/icons/trashcan.svg';
 import dollarIcon from '@/app/test/(ui)/icons/dollar.svg';
 import notePencilIcon from '@/app/test/(ui)/icons/notePencil.svg';
+import backspaceIcon from '@/app/test/(ui)/icons/backspace.svg';
 
 function FoodIcon() {
   return <Image className="w-4" src={foodIcon} alt="" />;
@@ -68,6 +69,10 @@ function NotePencilIcon() {
   return <Image src={notePencilIcon} alt="" />;
 }
 
+function BackspaceIcon() {
+  return <Image src={backspaceIcon} alt="" />;
+}
+
 function NextstepIcon({ currentColor }: { currentColor: any }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={9} height={8} fill="none">
@@ -113,4 +118,5 @@ export {
   DollarIcon,
   NotePencilIcon,
   NextstepIcon,
+  BackspaceIcon,
 };

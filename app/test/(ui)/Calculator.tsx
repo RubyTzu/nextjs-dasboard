@@ -1,8 +1,9 @@
 'use client';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import { CalcContext, CalcProvider } from '@/app/test/(data)/CalcProvider';
 
 import clsx from 'clsx';
+import { BackspaceIcon } from './Icons';
 
 export const CalculatorAndInput = ({
   group,
@@ -19,6 +20,14 @@ export const CalculatorAndInput = ({
   setCurrentExpense: any;
   setIsNotEqual: any;
 }) => {
+  const inputRef = useRef<any>(null);
+
+  const focus = () => {
+    inputRef.current.focus();
+  };
+  const blur = () => {
+    inputRef.current.blur();
+  };
 
   const handleFocus = () => {
     setShowKeyboard(true);
@@ -28,11 +37,15 @@ export const CalculatorAndInput = ({
     setShowKeyboard(false);
   };
 
-
   return (
     <CalcProvider>
       <div className="relative">
-        <Display amount={expenseData.amount} handleFocus={handleFocus} />
+        <Display
+          amount={expenseData.amount}
+          handleFocus={handleFocus}
+          handleBlur={handleBlur}
+          inputRef={inputRef}
+        />
         {showKeyboard && (
           <Calculator
             group={group}
@@ -40,6 +53,8 @@ export const CalculatorAndInput = ({
             expenseData={expenseData}
             setCurrentExpense={setCurrentExpense}
             setIsNotEqual={setIsNotEqual}
+            focus={focus}
+            blur={blur}
           />
         )}
       </div>
@@ -50,9 +65,13 @@ export const CalculatorAndInput = ({
 function Display({
   amount,
   handleFocus,
+  handleBlur,
+  inputRef,
 }: {
   amount: string;
   handleFocus: any;
+  handleBlur: any;
+  inputRef: any;
 }) {
   const { display, setDisplay, updateDisplay, onFocusDisplay, onBlurDisplay } =
     useContext<any>(CalcContext);
@@ -70,12 +89,12 @@ function Display({
 
   return (
     <input
+      ref={inputRef}
       className="z-10 w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0 "
       onChange={handleChange}
       onFocus={() => {
         handleFocus();
         onFocusDisplay();
-        console.log('in input onFocus ')
       }}
       onBlur={() => {
         onBlurDisplay();
@@ -94,12 +113,16 @@ const Calculator = ({
   expenseData,
   setCurrentExpense,
   setIsNotEqual,
+  focus,
+  blur,
 }: {
   group: any;
   handleBlur: any;
   expenseData: any;
   setCurrentExpense: any;
   setIsNotEqual: any;
+  focus: any;
+  blur: any;
 }) => {
   const { display, buttonClick, equalClick, clearClick } =
     useContext<any>(CalcContext);
@@ -124,7 +147,10 @@ const Calculator = ({
   };
 
   return (
-    <div className="fixed bottom-0 left-[50%] flex h-[340px] w-screen translate-x-[-50%] flex-col justify-center bg-black">
+    <div id="calculator"
+      className="fixed bottom-0 left-[50%] flex h-[340px] w-screen translate-x-[-50%] flex-col justify-center bg-black"
+      onClick={focus}
+    >
       <div className="flex items-center justify-center">
         <CalculatorButton value={'1'} onClick={() => buttonClick('1')} />
         <CalculatorButton value={'2'} onClick={() => buttonClick('2')} />
@@ -156,14 +182,16 @@ const Calculator = ({
         <button
           disabled={isNaN(Number(display)) || display < 1}
           type="button"
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation()
             handleBlur();
             setCurrentExpense({ ...expenseData, amount: display });
             CheckAmountIsNotEqual();
+            blur();
           }}
           className="m-[5px] flex h-14 w-[122px] cursor-pointer items-center justify-center rounded-lg bg-highlight-60"
         >
-          完成
+          儲存
         </button>
       </div>
     </div>
@@ -171,18 +199,43 @@ const Calculator = ({
 };
 
 const CalculatorButton = ({ value, onClick }: { value: any; onClick: any }) => {
-  const isNum = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.', 'AC', '<-'].includes(value);
+  const isNum = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '0',
+    '.',
+    'AC',
+  ].includes(value);
+
   const isCalculator = ['÷', 'x', '-', '+', '='].includes(value);
   return (
     <button
       type="button"
-      className={clsx('m-[5px] h-14 w-14 rounded-lg', {
-        'bg-highlight-40': isCalculator,
-        'bg-neutrals-20': isNum,
-      })}
-      onClick={onClick}
+      className={clsx(
+        'm-[5px] flex h-14 w-14 items-center justify-center rounded-lg',
+        {
+          'bg-highlight-40': isCalculator,
+          'bg-neutrals-20': isNum || value === '<-',
+        },
+      )}
+      onClick={() => {
+        onClick();
+      }}
     >
-      {value}
+      {value !== '<-' ? (
+        value
+      ) : (
+        <div className="relative left-[-2px]">
+          <BackspaceIcon />
+        </div>
+      )}
     </button>
   );
 };

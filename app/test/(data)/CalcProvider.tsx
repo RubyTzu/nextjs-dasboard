@@ -3,14 +3,15 @@ import { useState, createContext, useEffect } from "react"
 import { evaluate } from "mathjs"
 
 interface AllContextType {
-    display: string;
-    setDisplay: any;
-    updateDisplay: (e: any) => void;
-    onFocusDisplay: () => void;
-    onBlurDisplay: () => void;
-    buttonClick: (num: any) => void;
-    equalClick: () => void;
-    clearClick: () => void;
+  display: string;
+  setDisplay: any;
+  updateDisplay: (e: any) => void;
+  onFocusDisplay: () => void;
+  onBlurDisplay: () => void;
+  buttonClick: (num: any) => void;
+  equalClick: () => void;
+  clearClick: () => void;
+  setFocusDisplay: any;
 }
 
 export const CalcContext = createContext<AllContextType | null>(null)
@@ -20,7 +21,6 @@ export const CalcProvider = ({ children }: { children: React.ReactNode }) => {
     const [display, setDisplay] = useState('')
 
     const updateDisplay = (e: any) => {
-        console.log('updateDisplay')
         setDisplay(e)
     }
 
@@ -40,10 +40,9 @@ export const CalcProvider = ({ children }: { children: React.ReactNode }) => {
         // const keyPressEvent = new KeyboardEvent('keydown', { key: num })
         // document.dispatchEvent(keyPressEvent);
         if(num === 'Backspace'){
-            console.log('Backspace')
-            let myString = display
-            myString = myString.split("").reverse().slice(1).reverse().join("")
-            updateDisplay(myString);
+          let myString = String(display)
+          myString = myString.split("").reverse().slice(1).reverse().join("")
+          updateDisplay(myString);
         }else {
             updateDisplay(display + num);
         }
@@ -130,8 +129,20 @@ export const CalcProvider = ({ children }: { children: React.ReactNode }) => {
     //
 
     return (
-        <CalcContext.Provider value={{ display, setDisplay, updateDisplay, onFocusDisplay, onBlurDisplay, buttonClick, equalClick, clearClick }}>
-            {children}
-        </CalcContext.Provider>
-    )
+      <CalcContext.Provider
+        value={{
+          display,
+          setDisplay,
+          updateDisplay,
+          onFocusDisplay,
+          onBlurDisplay,
+          buttonClick,
+          equalClick,
+          clearClick,
+          setFocusDisplay,
+        }}
+      >
+        {children}
+      </CalcContext.Provider>
+    );
 }

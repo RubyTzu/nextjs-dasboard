@@ -60,11 +60,11 @@ export function NextStepButton({
   isNotEqual: any;
   showKeyboard: any;
 }) {
-
   function handleClick(e: any, expenseId: any) {
     e.preventDefault();
     setPhase(phase + 1);
     console.log(`phase ${phase} of expense ${expenseId}`);
+    console.log(expenseData);
   }
 
   function handleSubmit(expense: any) {
