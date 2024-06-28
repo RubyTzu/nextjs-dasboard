@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 //import ui
-import { ArrowUpTrayIcon } from '@heroicons/react/24/outline';
+import { ShareLinkIcon } from '@/app/test/(ui)/Icons';
 import SuccessAlert from '@/app/test/(ui)/SuccessAlert';
 
 export default function ShareButton({
@@ -37,16 +37,16 @@ export default function ShareButton({
       {inGroupPage ? (
         <div
           onClick={(e) => handlesShareLink(e)}
-          className="mr-1 flex items-center justify-center rounded-full bg-neutrals-20 p-2"
+          className="scale-[1.17] mr-2 flex items-center justify-center rounded-full bg-neutrals-20 p-2"
         >
-          <ArrowUpTrayIcon className="h-5 w-5" />
+          <ShareLinkIcon />
         </div>
       ) : (
         <div
           onClick={(e) => handlesShareLink(e)}
           className="relative z-[1] flex h-8 w-8 items-center justify-center rounded-full bg-highlight-60"
         >
-          <ArrowUpTrayIcon className="text-grey-400 h-5 w-5 stroke-[2px]" />
+        <ShareLinkIcon />
         </div>
       )}
 

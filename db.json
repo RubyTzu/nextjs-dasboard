@@ -943,7 +943,7 @@
                   "id": "e23",
                   "name": "fruits",
                   "amount": 180,
-                  "date": "2024/6/3",
+                  "date": "2023/6/3",
                   "category": "food",
                   "payerId": "u1",
                   "sharers": [
@@ -962,9 +962,9 @@
                   ],
                   "note": "",
                   "createBy": "u1",
-                  "createAt": "2024/6/3",
+                  "createAt": "2023/6/3",
                   "updateBy": "u1",
-                  "updateAt": "2024/6/3"
+                  "updateAt": "2023/6/3"
               },
               {
                   "id": "e24",

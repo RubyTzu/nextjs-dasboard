@@ -14,8 +14,15 @@ import addGroupIcon from '@/app/test/(ui)/icons/addGroup.svg';
 import addUserIcon from '@/app/test/(ui)/icons/addUser.svg';
 import trashcanIcon from '@/app/test/(ui)/icons/trashcan.svg';
 import dollarIcon from '@/app/test/(ui)/icons/dollar.svg';
+import dollarTwoIcon from '@/app/test/(ui)/icons/dollarTwo.svg';
 import notePencilIcon from '@/app/test/(ui)/icons/notePencil.svg';
 import backspaceIcon from '@/app/test/(ui)/icons/backspace.svg';
+import shareLinkIcon from '@/app/test/(ui)/icons/shareLink.svg';
+import copyLinkIcon from '@/app/test/(ui)/icons/copyLink.svg';
+import homeIcon from '@/app/test/(ui)/icons/home.svg';
+import editIcon from '@/app/test/(ui)/icons/edit.svg';
+import editTwoIcon from '@/app/test/(ui)/icons/editTwo.svg';
+import greaterThanIcon from '@/app/test/(ui)/icons/greaterThan.svg';
 
 function FoodIcon() {
   return <Image className="w-4" src={foodIcon} alt="" />;
@@ -65,12 +72,40 @@ function DollarIcon() {
   return <Image src={dollarIcon} alt="" />;
 }
 
+function DollarTwoIcon() {
+  return <Image src={dollarTwoIcon} alt="" />;
+}
+
 function NotePencilIcon() {
   return <Image src={notePencilIcon} alt="" />;
 }
 
 function BackspaceIcon() {
   return <Image src={backspaceIcon} alt="" />;
+}
+
+function ShareLinkIcon() {
+  return <Image src={shareLinkIcon} alt="" />;
+}
+
+function CopyLinkIcon() {
+  return <Image src={copyLinkIcon} alt="" />;
+}
+
+function HomeIcon() {
+  return <Image src={homeIcon} alt="" />;
+}
+
+function EditIcon() {
+  return <Image src={editIcon} alt="" />;
+}
+
+function EditTwoIcon() {
+  return <Image src={editTwoIcon} alt="" />;
+}
+
+function GreaterThanIcon() {
+  return <Image src={greaterThanIcon} alt="" />;
 }
 
 function NextstepIcon({ currentColor }: { currentColor: any }) {
@@ -116,7 +151,14 @@ export {
   AddUserIcon,
   TrashcanIcon,
   DollarIcon,
+  DollarTwoIcon,
   NotePencilIcon,
   NextstepIcon,
   BackspaceIcon,
+  ShareLinkIcon,
+  CopyLinkIcon,
+  HomeIcon,
+  EditIcon,
+  EditTwoIcon,
+  GreaterThanIcon
 };

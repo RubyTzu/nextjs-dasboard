@@ -11,11 +11,11 @@ export default function Page() {
 
   return (
     <div className="flex min-h-screen flex-col bg-highlight-50">
-      <h1 className="fixed left-[50%] z-[2] w-full translate-x-[-50%] bg-highlight-50 py-5 text-center text-2xl font-bold text-white">
+      <h1 className="pt-7 z-[2] fixed left-[50%] translate-x-[-50%] w-full bg-highlight-50 text-center text-2xl font-semibold tracking-wide text-white">
         群組列表
       </h1>
       <AddGroupButton />
-      <div className="mt-24">
+      <div className="mt-[6.5rem]">
         {data
           ? data.groups.map((group: any) => (
               <GroupButton key={group.id} groupData={group} />

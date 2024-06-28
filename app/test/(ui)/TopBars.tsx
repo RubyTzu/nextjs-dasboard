@@ -3,11 +3,7 @@ import Link from 'next/link';
 //import data
 import { loginUserId } from '@/app/test/(data)/user';
 //import ui
-import {
-  HomeIcon,
-  Cog8ToothIcon,
-  PencilSquareIcon,
-} from '@heroicons/react/24/outline';
+import { HomeIcon, EditIcon, EditTwoIcon } from "@/app/test/(ui)/Icons";
 import clsx from 'clsx';
 
 export function TopGroupBar({
@@ -24,19 +20,19 @@ export function TopGroupBar({
       </Link>
       <h1 className="text-lg">
         {groupData &&
-        groupData.users.some((user: any) => user.id === loginUserId)
+          groupData.users.some((user: any) => user.id === loginUserId)
           ? groupName
           : 'no such Page'}
       </h1>
       <div className="h-6 w-6">
         {groupData &&
-        groupData.users.some((user: any) => user.id === loginUserId) ? (
+          groupData.users.some((user: any) => user.id === loginUserId) ? (
           <Link
             href={`/test/split/group/${groupData.id}/edit`}
             className="h-6 w-6"
             scroll={false}
           >
-            <Cog8ToothIcon />
+            <EditIcon />
           </Link>
         ) : (
           ''
@@ -52,13 +48,13 @@ export function TopGroupSettingBar({ groupData }: { groupData: any }) {
       <div className="h-6 w-8" />
       <h1 className="text-lg">
         {groupData &&
-        groupData.users.some((user: any) => user.id === loginUserId)
+          groupData.users.some((user: any) => user.id === loginUserId)
           ? '群組設定'
           : 'no such Page'}
       </h1>
       <div className="h-6 w-8">
         {groupData &&
-        groupData.users.some((user: any) => user.id === loginUserId) ? (
+          groupData.users.some((user: any) => user.id === loginUserId) ? (
           <Link href={`/test/split/group/${groupData.id}`} scroll={false}>
             <p className="">取消</p>
           </Link>
@@ -87,23 +83,23 @@ export function TopExpenseBar({
       </Link>
       <h1 className="text-lg">
         {expenseData &&
-        (expenseData.payerId === loginUserId ||
-          expenseData.sharers?.some((sharer: any) => sharer.id === loginUserId))
+          (expenseData.payerId === loginUserId ||
+            expenseData.sharers?.some((sharer: any) => sharer.id === loginUserId))
           ? '費用明細'
           : 'no such expense'}
       </h1>
       <div className="h-6 w-6">
         {expenseData &&
-        (expenseData.payerId === loginUserId ||
-          expenseData.sharers?.some(
-            (sharer: any) => sharer.id === loginUserId,
-          )) ? (
+          (expenseData.payerId === loginUserId ||
+            expenseData.sharers?.some(
+              (sharer: any) => sharer.id === loginUserId,
+            )) ? (
           <Link
             href={`/test/split/expense/${expenseData.id}/edit`}
             className="h-6 w-6"
             scroll={false}
           >
-            <PencilSquareIcon />
+            <EditTwoIcon />
           </Link>
         ) : (
           ''
@@ -142,17 +138,17 @@ export function TopExpenseSettingBar({
       </div>
       <h1 className="text-lg">
         {expenseData &&
-        (expenseData.payerId === loginUserId ||
-          expenseData.sharers?.some((sharer: any) => sharer.id === loginUserId))
+          (expenseData.payerId === loginUserId ||
+            expenseData.sharers?.some((sharer: any) => sharer.id === loginUserId))
           ? '編輯費用'
           : 'no such Page'}
       </h1>
       <div className="flex h-6 w-12 items-center justify-end">
         {expenseData &&
-        (expenseData.payerId === loginUserId ||
-          expenseData.sharers?.some(
-            (sharer: any) => sharer.id === loginUserId,
-          )) ? (
+          (expenseData.payerId === loginUserId ||
+            expenseData.sharers?.some(
+              (sharer: any) => sharer.id === loginUserId,
+            )) ? (
           <Link href={`/test/split/expense/${expenseData.id}`} scroll={false}>
             <p className="text-sm">取消</p>
           </Link>

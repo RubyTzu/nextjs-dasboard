@@ -157,7 +157,7 @@ const Calculator = ({
         <CalculatorButton value={'2'} onClick={() => buttonClick('2')} />
         <CalculatorButton value={'3'} onClick={() => buttonClick('3')} />
         <CalculatorButton value={'÷'} onClick={() => buttonClick('/')} />
-        <CalculatorButton value={'x'} onClick={() => buttonClick('*')} />
+        <CalculatorButton value={'×'} onClick={() => buttonClick('*')} />
       </div>
       <div className="flex items-center justify-center">
         <CalculatorButton value={'4'} onClick={() => buttonClick('4')} />
@@ -215,12 +215,12 @@ const CalculatorButton = ({ value, onClick }: { value: any; onClick: any }) => {
     'AC',
   ].includes(value);
 
-  const isCalculator = ['÷', 'x', '-', '+', '='].includes(value);
+  const isCalculator = ['÷', '×', '-', '+', '='].includes(value);
   return (
     <button
       type="button"
       className={clsx(
-        'm-[5px] flex h-14 w-14 items-center justify-center rounded-lg',
+        'm-[5px] flex h-14 w-14 items-center justify-center rounded-lg font-medium',
         {
           'bg-highlight-40': isCalculator,
           'bg-neutrals-20': isNum || value === '<-',

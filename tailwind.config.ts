@@ -33,6 +33,9 @@ const config: Config = {
         sm: '0.875rem',
         base: '1rem',
       },
+      fontFamily: {
+        sans: ['var(--font-inter)', 'var(--font-notoSansJP)','var(--font-notoSansTC)']
+      },
       colors: {
         blue: {
           400: '#2589fe',
@@ -56,6 +59,7 @@ const config: Config = {
           // 400: '#5f5d5e',
           500: '#4a4a4a', //
           // 600: '#1c1a1b',
+          'userBar': '#cad4e0',
           'keyBoard': '#d1d3d9',
         },
         highlight: {
