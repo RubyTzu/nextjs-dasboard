@@ -1,7 +1,8 @@
 'use client';
+//import react
 import { useContext, useEffect, useRef } from 'react';
-import { CalcContext } from '@/app/test/(data)/CalcProvider';
-import { CalcProvider } from '@/app/test/(data)/CalcProvider';
+//import data
+import { CalcContext, CalcProvider } from '@/app/test/(data)/CalcProvider';
 
 import clsx from 'clsx';
 import { BackspaceIcon } from './Icons';

@@ -1,7 +1,6 @@
 //import data
 import { loginUserId } from '@/app/test/(data)/user';
 //import ui
-import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
 import { DollarTwoIcon } from '@/app/test/(ui)/Icons'
 import ShareButton from '@/app/test/(ui)/ShareButton';
 import CopyLinkButton from '@/app/test/(ui)/CopyLinkButton';
