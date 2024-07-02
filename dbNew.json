@@ -2,6 +2,7 @@
     "user": [
         {
             "id": "u1",
+            "lineId": "linIdu1",
             "name": "a",
             "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
             "groups": [
@@ -54,6 +55,7 @@
         },
         {
             "id": "u2",
+            "lineId": "linIdu2",
             "name": "b",
             "picture": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg",
             "groups": [
@@ -106,6 +108,7 @@
         },
         {
             "id": "u3",
+            "lineId": "linIdu3",
             "name": "c",
             "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
             "groups": [
@@ -163,6 +166,7 @@
         },
         {
             "id": "u4",
+            "lineId": "linIdu4",
             "name": "d",
             "picture": "https://images.dog.ceo/breeds/terrier-sealyham/n02095889_1044.jpg",
             "groups": [
@@ -205,6 +209,7 @@
         },
         {
             "id": "u5",
+            "lineId": "linIdu5",
             "name": "e",
             "picture": "https://cdn2.thecatapi.com/images/cib.jpg",
             "groups": [
@@ -237,6 +242,7 @@
         },
         {
             "id": "u6",
+            "lineId": "linIdu6",
             "name": "f",
             "picture": "https://images.dog.ceo/breeds/terrier-patterdale/Patterdale.jpg",
             "groups": [
@@ -274,6 +280,7 @@
         },
         {
             "id": "u7",
+            "lineId": "linIdu7",
             "name": "g",
             "picture": "https://cdn2.thecatapi.com/images/edb.jpg",
             "groups": [
@@ -296,6 +303,7 @@
         },
         {
             "id": "u8",
+            "lineId": "linIdu8",
             "name": "h",
             "picture": "https://images.dog.ceo/breeds/poodle-medium/WhatsApp_Image_2022-08-06_at_4.48.38_PM.jpg",
             "groups": [
@@ -318,6 +326,7 @@
         },
         {
             "id": "u9",
+            "lineId": "linIdu9",
             "name": "i",
             "picture": "https://cdn2.thecatapi.com/images/bo5.jpg",
             "groups": [
@@ -340,6 +349,7 @@
         },
         {
             "id": "u10",
+            "lineId": "linIdu10",
             "name": "j",
             "picture": "https://images.dog.ceo/breeds/hound-english/n02089973_1303.jpg",
             "groups": [
@@ -364,6 +374,9 @@
     "group": [
         {
             "id": "g1",
+            "name": "5月聚餐",
+            "picture": "group other https://",
+            "creatorId": "u1",
             "users": [
                 {
                     "id": "u1",
@@ -386,14 +399,15 @@
                     "picture": "https://images.dog.ceo/breeds/terrier-sealyham/n02095889_1044.jpg"
                 }
             ],
-            "expense": [
+            "expenses": [
                 {
                     "id": "e1",
                     "name": "燒鳥肌肉串",
                     "amount": 210,
-                    "date": "2024/5/28",
+                    "date": "2021-06-02T00:00:00.000Z",
                     "category": "food",
                     "payerId": "u1",
+                    "note": "",
                     "sharers": [
                         {
                             "id": "u1",
@@ -403,12 +417,7 @@
                             "id": "u2",
                             "amount": 105
                         }
-                    ],
-                    "note": "",
-                    "createBy": "u1",
-                    "createAt": "2024/5/28",
-                    "updateBy": "u1",
-                    "updateAt": "2024/5/28"
+                    ]
                 },
                 {
                     "id": "e2",
