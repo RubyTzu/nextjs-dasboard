@@ -8,7 +8,8 @@ import { loginUserId } from '@/app/test/(data)/user';
 import { GreaterThanIcon, expenseIconMap } from '@/app/test/(ui)/Icons';
 
 export default function ExpensesList({ groupData }: { groupData: any }) {
-  let { expensesWithDebts } = filterExpense(groupData.expense); //TODO: change to groupData.expenses
+  let { expensesWithDebts } = filterExpense(groupData.expenses);
+  let groupId = groupData.id;
   let users = groupData.users;
   let expenses = expensesWithDebts;
 
@@ -44,21 +45,34 @@ export default function ExpensesList({ groupData }: { groupData: any }) {
           ) : null}
           {groupedExpenses[date].map((expense: any) => (
             <Fragment key={expense.id}>
-              {expense.sharers.some((sharer: any) => sharer.id === loginUserId) ||
-                expense.payerId.includes(loginUserId) ? (
-                <ExpenseButton users={users} expense={expense} />
+              {expense.sharers.some(
+                (sharer: any) => sharer.id === loginUserId,
+              ) || expense.payerId.includes(loginUserId) ? (
+                <ExpenseButton
+                  users={users}
+                  expense={expense}
+                  groupId={groupId}
+                />
               ) : null}
             </Fragment>
           ))}
         </div>
-      )
+      );
     });
   };
 
   return <>{renderExpensesByDate()}</>;
 }
 
-function ExpenseButton({ users, expense }: { users: any; expense: any }) {
+function ExpenseButton({
+  users,
+  expense,
+  groupId,
+}: {
+  users: any;
+  expense: any;
+  groupId: any;
+}) {
   const {
     id,
     category,
@@ -69,13 +83,13 @@ function ExpenseButton({ users, expense }: { users: any; expense: any }) {
   }: {
     id: string;
     category:
-    | 'food'
-    | 'drink'
-    | 'transport'
-    | 'stay'
-    | 'shopping'
-    | 'entertainment'
-    | 'other';
+      | 'food'
+      | 'drink'
+      | 'transport'
+      | 'stay'
+      | 'shopping'
+      | 'entertainment'
+      | 'other';
     amount: string;
     name: string;
     payerId: string;
@@ -86,15 +100,19 @@ function ExpenseButton({ users, expense }: { users: any; expense: any }) {
 
   const Icon = expenseIconMap[category];
   let nf = new Intl.NumberFormat('en-US');
-
   return (
     <Link
-      href={`/test/split/expense/${id}`}
+      href={`/test/split/group/${groupId}/expense/${id}`}
       className="mx-4 mb-4 flex justify-between rounded-lg bg-white py-3 pl-4 pr-3"
+      scroll={false}
     >
       <div className="flex items-center gap-3">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-highlight-60">
-          {Icon ? <div className="scale-[1.2]"><Icon /> </div> : null}
+          {Icon ? (
+            <div className="scale-[1.2]">
+              <Icon />{' '}
+            </div>
+          ) : null}
         </div>
         <div className="leading-[20px]">
           <p className="font-normal">{name}</p>
@@ -108,11 +126,13 @@ function ExpenseButton({ users, expense }: { users: any; expense: any }) {
 
       <div className="flex items-center gap-2">
         {expenseDebt.includes('-') ? (
-          <p className="text-highlight-30 text-[15px]">
+          <p className="text-[15px] text-highlight-30">
             -${nf.format(Math.abs(expenseDebt))}
           </p>
         ) : (
-          <p className="text-highlight-50 text-[15px]">+${nf.format(expenseDebt)}</p>
+          <p className="text-[15px] text-highlight-50">
+            +${nf.format(expenseDebt)}
+          </p>
         )}
         <GreaterThanIcon />
       </div>

@@ -18,9 +18,8 @@ export function ExpenseDetailOne({
     category,
     amount,
     name,
-    createBy,
+    creatorId,
     createAt,
-    updateBy,
     updateAt,
     payerId,
     sharers,
@@ -35,16 +34,14 @@ export function ExpenseDetailOne({
       | 'other';
     amount: any;
     name: string;
-    createBy: string;
+    creatorId: string;
     createAt: string;
-    updateBy: string;
     updateAt: string;
     payerId: string;
     sharers: string[];
   } = expenseData;
 
-  let createByUser = users.filter((user: any) => user.id === createBy)[0];
-  let updateByUser = users.filter((user: any) => user.id === updateBy)[0];
+  let creatorIdUser = users.filter((user: any) => user.id === creatorId)[0];
 
   const Icon = expenseIconMap[category];
   let nf = new Intl.NumberFormat('en-US');
@@ -63,10 +60,10 @@ export function ExpenseDetailOne({
               <div className="text-xl leading-8">{name}</div>
               <div className="text-xs text-grey-500">
                 <div className="leading-3">
-                  {createAt} {createByUser?.name}新增
+                  {createAt} {creatorIdUser?.name}新增
                 </div>
                 <div className="leading-6">
-                  {updateAt} {updateByUser?.name}最後更新
+                  {updateAt} 最後更新
                 </div>
               </div>
             </div>
