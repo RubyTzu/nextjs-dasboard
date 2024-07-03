@@ -25,17 +25,17 @@ async function getUser(id: any) {
 }
 
 //get expense
-// async function getExpense(id: any) {
-//     const res = await fetch(`http://localhost:3000/expense/${id}`, {
-//         cache: "no-store",
-//     });
+async function getExpense(id: any) {
+    const res = await fetch(`http://localhost:3000/group/${id}/expense/${id}`, {
+        cache: "no-store",
+    });
 
-//     if (!res.ok) throw Error;
+    if (!res.ok) throw Error;
 
-//     const data = await res.json();
+    const data = await res.json();
 
-//     return data;
-// }
+    return data;
+}
 
 //add group
 async function addGroup(payload: any) {
@@ -94,4 +94,4 @@ async function changeGroup(payload: any) {
 
 }
 
-export { getGroup, getUser }
+export { getGroup, getUser, getExpense }

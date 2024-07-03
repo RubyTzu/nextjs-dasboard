@@ -8,7 +8,7 @@ import { loginUserId } from '@/app/test/(data)/user';
 import { GreaterThanIcon, expenseIconMap } from '@/app/test/(ui)/Icons';
 
 export default function ExpensesList({ groupData }: { groupData: any }) {
-  let { expensesWithDebts } = filterExpense(groupData.expense);
+  let { expensesWithDebts } = filterExpense(groupData.expense); //TODO: change to groupData.expenses
   let users = groupData.users;
   let expenses = expensesWithDebts;
 
@@ -25,22 +25,22 @@ export default function ExpensesList({ groupData }: { groupData: any }) {
   // Step 2: Render expenses grouped by date
   const renderExpensesByDate = () => {
     return Object.keys(groupedExpenses).map((date, index) => {
-      const dateObj = new Date();
-      const year = String(dateObj.getUTCFullYear());
-      let dateArray = date.split('/')
-      let formateDate
-      if (dateArray[0] === year) {
-        formateDate = `${dateArray[1]}月${dateArray[2]}日`;
-      } else {
-        formateDate = `${dateArray[0]}年${dateArray[1]}月${dateArray[2]}日`;
-      }
+      // const dateObj = new Date();
+      // const year = String(dateObj.getUTCFullYear());
+      // let dateArray = date.split('/')
+      // let formateDate
+      // if (dateArray[0] === year) {
+      //   formateDate = `${dateArray[1]}月${dateArray[2]}日`;
+      // } else {
+      //   formateDate = `${dateArray[0]}年${dateArray[1]}月${dateArray[2]}日`;
+      // }
 
       return (
         <div key={index}>
           {groupedExpenses[date].find(
             (expense: any) => expense.expenseDebt !== undefined,
           ) ? (
-            <p className="mx-8 mb-3 text-sm text-grey-500">{formateDate}</p>
+            <p className="mx-8 mb-3 text-sm text-grey-500">{date}</p>
           ) : null}
           {groupedExpenses[date].map((expense: any) => (
             <Fragment key={expense.id}>

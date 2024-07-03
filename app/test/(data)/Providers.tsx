@@ -2,7 +2,7 @@
 //import from react
 import { createContext, useContext, useEffect, useState } from 'react';
 //import data
-import { getGroup, getUser } from '@/app/test/(data)/API';
+import { getGroup, getUser, getExpense } from '@/app/test/(data)/API';
 import { loginUserId } from './user';
 
 interface AllContextType {

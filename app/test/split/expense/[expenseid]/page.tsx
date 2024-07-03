@@ -22,6 +22,7 @@ export default function Page() {
   let users: any = useExpenses(params.expenseid).users;
   let groupWithExpense: any = useExpenses(params.expenseid).expense;
   if (!groupWithExpense) return;
+  // console.log(groupWithExpense) TODO: 這裡有expense跟該expense所在的group資料
   let expense = groupWithExpense.expense;
   let group = groupWithExpense.group;
 
