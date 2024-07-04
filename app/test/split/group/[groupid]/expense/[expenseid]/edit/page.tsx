@@ -3,8 +3,8 @@
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 //import data
-import { useGroup, useExpense } from '@/app/test/(data)/Providers';
-import { loginUserId } from '@/app/test/(data)/user';
+import { useGroup, useExpense } from '@/app/test/(data)/(fetchData)/Providers';
+import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 //import ui
 import { TopExpenseSettingBar } from '@/app/test/(ui)/TopBars';
 import {
@@ -22,11 +22,11 @@ export default function Page() {
   const [isNotEqual, setIsNotEqual] = useState(false);
 
   const group = useGroup(params.groupid);
-  const expense: any = useExpense(params.expenseid);
+  const expense: any = useExpense(params.groupid, params.expenseid);
 
   const [currentExpense, setCurrentExpense] = useState(expense);
   const [showKeyboard, setShowKeyboard] = useState(false);
-  
+
   if (!group) return;
 
 

@@ -1,7 +1,7 @@
 'use client';
 //import data
-import { loginUserId } from '@/app/test/(data)/user';
-import { useUser } from '@/app/test/(data)/Providers';
+import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { useUser } from '@/app/test/(data)/(fetchData)/Providers';
 //import ui
 import GroupButton from '@/app/test/(ui)/GroupButton';
 import AddGroupButton from '@/app/test/(ui)/AddGroupButton';
@@ -18,8 +18,8 @@ export default function Page() {
       <div className="mt-[6.5rem]">
         {data
           ? data.groups.map((group: any) => (
-              <GroupButton key={group.id} groupData={group} />
-            ))
+            <GroupButton key={group.id} groupData={group} />
+          ))
           : null}
       </div>
       <div className="mb-16"></div>

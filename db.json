@@ -869,7 +869,7 @@
                     "id": "e23",
                     "name": "fruits",
                     "amount": 180,
-                    "date": "2024-06-03T00:00:00.000Z",
+                    "date": "2023-06-03T00:00:00.000Z",
                     "category": "food",
                     "payerId": "u1",
                     "sharers": [
@@ -892,7 +892,7 @@
                     "id": "e24",
                     "name": "drinks",
                     "amount": 120,
-                    "date": "2024-06-03T00:00:00.000Z",
+                    "date": "2024-06-04T00:00:00.000Z",
                     "category": "food",
                     "payerId": "u3",
                     "sharers": [

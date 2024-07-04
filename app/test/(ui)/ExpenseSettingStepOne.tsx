@@ -1,12 +1,14 @@
+//import data
+import { dateToFormate } from '@/app/test/(data)/(sharedFunction)/formateDate';
 //import ui
 import {
   expenseIconMap,
   DollarIcon,
   NotePencilIcon,
 } from '@/app/test/(ui)/Icons';
+import { CalculatorAndInput } from './Calculator';
 //other
 import clsx from 'clsx';
-import { CalculatorAndInput } from './Calculator';
 
 export function ExpenseSettingStepOne({
   group,
@@ -46,7 +48,6 @@ export function ExpenseSettingStepOne({
 
 
 
-
   const Icon = expenseIconMap[category];
   return (
     <div
@@ -55,7 +56,7 @@ export function ExpenseSettingStepOne({
       })}
     >
       <div className="mb-4 w-fit rounded-full bg-neutrals-20 px-2 py-[1px] text-sm">
-        {date}
+        {dateToFormate(date)}
       </div>
       <div className="my-3 flex items-end justify-between gap-6">
         <div className="flex h-8 w-8 items-center justify-center rounded-md bg-highlight-60">

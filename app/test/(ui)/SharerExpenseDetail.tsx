@@ -1,7 +1,7 @@
 //import from next
 import Image from 'next/image';
 //import data
-import { loginUserId } from '@/app/test/(data)/user';
+import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 
 export default function SharerExpenseDetail({
   expenseData,

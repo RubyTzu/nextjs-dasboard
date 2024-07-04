@@ -1,5 +1,5 @@
 import Navbar from '../(ui)/Navbar';
-import { Providers } from '@/app/test/(data)/Providers';
+import { Providers } from '@/app/test/(data)/(fetchData)/Providers';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

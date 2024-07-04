@@ -1,30 +1,30 @@
-import { loginUserId } from '@/app/test/(data)/user';
+import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 
 function filterExpense(expenses: any) {
 
   let newExpenses = expenses
     .map((expense: any) => ({ ...expense }));
 
-//every one's debt save in to new object
+  //every one's debt save in to new object
   const debts = newExpenses.reduce(calculateDebt, {});
   function calculateDebt(acc: any, expense: any) {
     if (!(expense.payerId in acc)) {
-        acc[expense.payerId] = {}
+      acc[expense.payerId] = {}
     }
     acc[expense.payerId][expense.name] = expense.amount
 
     expense.sharers.forEach((sharer: any) => {
-        if (sharer.id === expense.payerId) {
-            acc[sharer.id][expense.name] -= sharer.amount
-        } else if (sharer.id in acc) {
-            acc[sharer.id][expense.name] = -sharer.amount
-        } else {
-            acc[sharer.id] = {}
-            acc[sharer.id][expense.name] = -sharer.amount
-        }
+      if (sharer.id === expense.payerId) {
+        acc[sharer.id][expense.name] -= sharer.amount
+      } else if (sharer.id in acc) {
+        acc[sharer.id][expense.name] = -sharer.amount
+      } else {
+        acc[sharer.id] = {}
+        acc[sharer.id][expense.name] = -sharer.amount
+      }
     })
     return acc
-}
+  }
 
   //added totalDebt to every one's debt object
   for (let member in debts) {

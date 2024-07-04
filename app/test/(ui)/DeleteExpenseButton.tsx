@@ -1,5 +1,5 @@
 //import data
-import { loginUserId } from '@/app/test/(data)/user';
+import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 
 export default function DeleteExpenseButton({
   expenseData,
@@ -21,8 +21,8 @@ export default function DeleteExpenseButton({
   return (
     <>
       {expenseData &&
-      (payerId === loginUserId ||
-        sharers?.some((sharer: any) => sharer.id === loginUserId)) ? (
+        (payerId === loginUserId ||
+          sharers?.some((sharer: any) => sharer.id === loginUserId)) ? (
         <div
           onClick={handleDelete}
           className="mt-8 flex h-9 w-44 cursor-pointer items-center justify-center rounded-full bg-neutrals-30 text-neutrals-60"

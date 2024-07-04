@@ -2,7 +2,7 @@
 //import react
 import { useContext, useEffect, useRef } from 'react';
 //import data
-import { CalcContext, CalcProvider } from '@/app/test/(data)/CalcProvider';
+import { CalcContext, CalcProvider } from '@/app/test/(data)/(sharedFunction)/CalcProvider';
 
 import clsx from 'clsx';
 import { BackspaceIcon } from './Icons';

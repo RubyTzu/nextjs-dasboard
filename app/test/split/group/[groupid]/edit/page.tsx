@@ -2,8 +2,8 @@
 //import from next & react
 import { useParams } from 'next/navigation';
 //import data
-import { useUser, useGroup } from '@/app/test/(data)/Providers';
-import { loginUserId } from '@/app/test/(data)/user';
+import { useUser, useGroup } from '@/app/test/(data)/(fetchData)/Providers';
+import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 //import ui
 import { TopGroupSettingBar } from '@/app/test/(ui)/TopBars';
 import {

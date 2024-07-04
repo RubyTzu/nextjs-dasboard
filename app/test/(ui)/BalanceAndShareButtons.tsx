@@ -1,5 +1,5 @@
 //import data
-import { loginUserId } from '@/app/test/(data)/user';
+import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 //import ui
 import { DollarTwoIcon } from '@/app/test/(ui)/Icons'
 import ShareButton from '@/app/test/(ui)/ShareButton';

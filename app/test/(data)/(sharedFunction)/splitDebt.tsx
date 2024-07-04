@@ -1,20 +1,20 @@
-import { filterExpense } from "@/app/test/(data)/totalDebts";
+import { filterExpense } from "@/app/test/(data)/(sharedFunction)/totalDebts";
 import { expenses } from '@/app/test/(data)/data';
 
 function splitExpense(groupId: any) {
     let { totalDebts } = filterExpense(expenses)
-    
+
     //split debt initial
     let newTotalDebts: any = { ...totalDebts }
     let splitDebt: any = {}
     let bigCreditor: any = Object.keys(newTotalDebts)[0] //最大債務主
     let bigDebtor: any = Object.keys(newTotalDebts)[0] //最大債務人
-    
+
     //count current debt amount
     const reducer = (acc: any, cur: any) => {
         return acc + Math.abs(cur)
     }
-    
+
     //While there are still debt amount, it keep chasing the debt
     while (Object.values(newTotalDebts).reduce(reducer, 0) as any > 0) {
         for (const p of Object.keys(newTotalDebts)) {
@@ -35,21 +35,21 @@ function splitExpense(groupId: any) {
         // console.log('')
         //Current maximum debt amount
         const debtAmount = Math.min(newTotalDebts[bigCreditor], -newTotalDebts[bigDebtor])
-    
+
         if (Object.keys(splitDebt).includes(bigCreditor)) {
             splitDebt[bigCreditor][bigDebtor] = debtAmount
         } else {
             splitDebt[bigCreditor] = {}
             splitDebt[bigCreditor][bigDebtor] = debtAmount
         }
-    
+
         if (Object.keys(splitDebt).includes(bigDebtor)) {
             splitDebt[bigDebtor][bigCreditor] = -debtAmount
         } else {
             splitDebt[bigDebtor] = {}
             splitDebt[bigDebtor][bigCreditor] = -debtAmount
         }
-    
+
         newTotalDebts[bigCreditor] -= debtAmount
         newTotalDebts[bigDebtor] += debtAmount
     }

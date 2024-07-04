@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 //import data
-import { loginUserId } from '@/app/test/(data)/user';
+import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 
 export default function UsersBar({ groupData }: { groupData: any }) {
   if (!groupData) return;
@@ -17,7 +17,7 @@ export default function UsersBar({ groupData }: { groupData: any }) {
   return (
     <>
       {groupData &&
-      groupData.users.some((user: any) => user.id === loginUserId) ? (
+        groupData.users.some((user: any) => user.id === loginUserId) ? (
         <>
           {groupData.users.length ? (
             <div className="mt-16 flex items-center justify-center gap-4 border-b-grey-userBar border-b-[1px] pb-5 pt-8">

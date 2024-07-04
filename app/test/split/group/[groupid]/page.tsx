@@ -3,8 +3,8 @@
 import { useParams } from 'next/navigation';
 import { Suspense } from 'react';
 //import data
-import { useGroup, useUser } from '@/app/test/(data)/Providers';
-import { loginUserId } from '@/app/test/(data)/user';
+import { useGroup, useUser } from '@/app/test/(data)/(fetchData)/Providers';
+import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 //import ui
 import { TopGroupBar } from '@/app/test/(ui)/TopBars';
 import UsersBar from '@/app/test/(ui)/UsersBar';
