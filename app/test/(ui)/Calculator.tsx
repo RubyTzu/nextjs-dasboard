@@ -26,11 +26,11 @@ export const CalculatorAndInput = ({
 }) => {
   const inputRef = useRef<any>(null);
 
-  const focus = (e) => {
+  const focus = (e: any) => {
     // console.log('focus ' + e.target.id)
     inputRef.current.focus();
   };
-  const blur = (e) => {
+  const blur = (e: any) => {
     // console.log('blur in blur ' + e.target.id)
     inputRef.current.blur();
   };
@@ -86,7 +86,7 @@ function Display({
   handleBlur: any;
   inputRef: any;
   expenseData: any;
-  setCurrentExpens: any;
+  setCurrentExpense: any;
 }) {
   const { display, setDisplay, updateDisplay, onFocusDisplay, onBlurDisplay,equalClick } =
     useContext<any>(CalcContext);
