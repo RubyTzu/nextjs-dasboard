@@ -32,7 +32,7 @@ export default function ExpensesList({ groupData }: { groupData: any }) {
           {groupedExpenses[date].find(
             (expense: any) => expense.expenseDebt !== undefined,
           ) ? (
-            <p className="mx-8 mb-3 text-sm text-grey-500">{dateToFormate(date)}</p>
+            <p className="mx-8 mb-3 text-sm text-grey-500">{dateToFormate(date, false)}</p>
           ) : null}
           {groupedExpenses[date].map((expense: any) => (
             <Fragment key={expense.id}>

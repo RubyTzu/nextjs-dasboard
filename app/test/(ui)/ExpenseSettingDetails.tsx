@@ -57,7 +57,6 @@ export function NextStepButton({
   expenseData,
   isNotEqual,
   setIsNotEqual,
-  showKeyboard,
   setCurrentExpense
 }: {
   phase: number;
@@ -66,7 +65,6 @@ export function NextStepButton({
   expenseData: any;
   isNotEqual: any;
   setIsNotEqual: any;
-  showKeyboard: any;
   setCurrentExpense: any;
 }) {
   const { display, setDisplay, updateDisplay, onFocusDisplay, onBlurDisplay, equalClick } =
@@ -110,7 +108,7 @@ export function NextStepButton({
     <div className="mb-8 flex flex-col items-center">
       {phase !== 3 ? (
         <button
-          disabled={showKeyboard || (isNaN(Number(display)) || display < 1)}
+          disabled={(isNaN(Number(display)) || display < 1)}
           type="button"
           // disabled={showKeyboard}
           onClick={(e: any) => handleClick(e, expenseData.id)}
@@ -119,7 +117,7 @@ export function NextStepButton({
           <div className="text-[10px]">{phase}/3</div>
           <div className="text-sm">下一步</div>
           <div>
-            <NextstepIcon currentColor={showKeyboard ? '#9E9E9E' : '#000'} />
+            <NextstepIcon currentColor={(isNaN(Number(display)) || display < 1) ? '#9E9E9E' : '#000'} />
           </div>
         </button>
       ) : (

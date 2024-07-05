@@ -25,7 +25,6 @@ export default function Page() {
   const expense: any = useExpense(params.groupid, params.expenseid);
 
   const [currentExpense, setCurrentExpense] = useState(expense);
-  const [showKeyboard, setShowKeyboard] = useState(false);
 
   if (!group) return;
 
@@ -45,13 +44,9 @@ export default function Page() {
         <GroupInfoBar expenseData={currentExpense} group={group} />
         <section>
           <ExpenseSettingStepOne
-            group={group}
             expenseData={currentExpense}
             setCurrentExpense={setCurrentExpense}
             phase={phase}
-            showKeyboard={showKeyboard}
-            setShowKeyboard={setShowKeyboard}
-            setIsNotEqual={setIsNotEqual}
           />
           <ExpenseSettingStepTwo
             expenseData={currentExpense}
@@ -76,7 +71,6 @@ export default function Page() {
             setPhase={setPhase}
             isNotEqual={isNotEqual}
             setIsNotEqual={setIsNotEqual}
-            showKeyboard={showKeyboard}
           />
         </section>
         <div className="h-[420px]"></div>

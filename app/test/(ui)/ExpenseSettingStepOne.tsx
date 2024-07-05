@@ -9,23 +9,17 @@ import {
 import { CalculatorAndInput } from './Calculator';
 //other
 import clsx from 'clsx';
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
 
 export function ExpenseSettingStepOne({
-  group,
   expenseData,
   setCurrentExpense,
   phase,
-  showKeyboard,
-  setShowKeyboard,
-  setIsNotEqual,
 }: {
-  group: any;
   expenseData: any;
   setCurrentExpense: any;
   phase: number;
-  showKeyboard: any;
-  setShowKeyboard: any;
-  setIsNotEqual: any;
 }) {
   if (!expenseData) return;
 
@@ -56,8 +50,10 @@ export function ExpenseSettingStepOne({
       })}
     >
       <div className="mb-4 w-fit rounded-full bg-neutrals-20 px-2 py-[1px] text-sm">
-        {dateToFormate(date)}
-      </div>
+        {dateToFormate(date, true)}
+       
+      </div> 
+      <DayPicker className="absolute bg-white z-20 p-5 rounded-lg" />
       <div className="my-3 flex items-end justify-between gap-6">
         <div className="flex h-8 w-8 items-center justify-center rounded-md bg-highlight-60">
           {Icon ? <Icon /> : null}
@@ -80,12 +76,7 @@ export function ExpenseSettingStepOne({
           <DollarIcon />
         </div>
         <CalculatorAndInput
-          group={group}
           expenseData={expenseData}
-          setCurrentExpense={setCurrentExpense}
-          showKeyboard={showKeyboard}
-          setShowKeyboard={setShowKeyboard}
-          setIsNotEqual={setIsNotEqual}
         />
       </div>
       <div className="flex items-center justify-center gap-1 pb-0 pt-3 text-sm">

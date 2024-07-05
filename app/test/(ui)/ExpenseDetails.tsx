@@ -61,10 +61,10 @@ export function ExpenseDetailOne({
               <div className="text-xl leading-8">{name}</div>
               <div className="text-xs text-grey-500">
                 <div className="leading-3">
-                  {dateToFormate(createAt)} {creatorIdUser?.name}新增
+                  {dateToFormate(createAt, true)} {creatorIdUser?.name}新增
                 </div>
                 <div className="leading-6">
-                  {dateToFormate(updateAt)} 最後更新
+                  {dateToFormate(updateAt, true)} 最後更新
                 </div>
               </div>
             </div>
