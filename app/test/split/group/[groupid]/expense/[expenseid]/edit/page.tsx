@@ -70,9 +70,12 @@ export default function Page() {
         <section>
           <NextStepButton
             expenseData={currentExpense}
+            setCurrentExpense={setCurrentExpense}
+            group={group}
             phase={phase}
             setPhase={setPhase}
             isNotEqual={isNotEqual}
+            setIsNotEqual={setIsNotEqual}
             showKeyboard={showKeyboard}
           />
         </section>

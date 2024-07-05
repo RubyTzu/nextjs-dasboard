@@ -1,5 +1,8 @@
 //import from next & react
 import Image from 'next/image';
+import { useContext } from 'react';
+//import data
+import { CalcContext } from '@/app/test/(data)/(sharedFunction)/CalcProvider';
 //import ui
 import { groupIconMap, NextstepIcon } from '@/app/test/(ui)/Icons';
 import clsx from 'clsx';
@@ -50,21 +53,53 @@ export function GroupInfoBar({
 export function NextStepButton({
   phase,
   setPhase,
+  group,
   expenseData,
   isNotEqual,
+  setIsNotEqual,
   showKeyboard,
+  setCurrentExpense
 }: {
   phase: number;
   setPhase: any;
+  group: any;
   expenseData: any;
   isNotEqual: any;
+  setIsNotEqual: any;
   showKeyboard: any;
+  setCurrentExpense: any;
 }) {
+  const { display, setDisplay, updateDisplay, onFocusDisplay, onBlurDisplay, equalClick } =
+    useContext<any>(CalcContext);
+
+  const CheckAmountIsNotEqual = () => {
+    let addedAmount = 0;
+    const users = group.users;
+    users.forEach((user: any) => {
+      const existingIndex = expenseData.sharers.findIndex(
+        (sharer: any) => sharer.id === user.id,
+      );
+
+      if (existingIndex !== -1) {
+        addedAmount += Number(expenseData.sharers[existingIndex].amount);
+      } else {
+        addedAmount = addedAmount;
+      }
+    });
+
+    setIsNotEqual(Number(display) !== addedAmount);
+  };
+
   function handleClick(e: any, expenseId: any) {
     e.preventDefault();
     setPhase(phase + 1);
     console.log(`phase ${phase} of expense ${expenseId}`);
+    console.log(display + ': display shown')
+
+    setCurrentExpense({ ...expenseData, amount: display });
     console.log(expenseData);
+
+    CheckAmountIsNotEqual();
   }
 
   function handleSubmit(expense: any) {
@@ -75,8 +110,9 @@ export function NextStepButton({
     <div className="mb-8 flex flex-col items-center">
       {phase !== 3 ? (
         <button
+          disabled={showKeyboard || (isNaN(Number(display)) || display < 1)}
           type="button"
-          disabled={showKeyboard}
+          // disabled={showKeyboard}
           onClick={(e: any) => handleClick(e, expenseData.id)}
           className="flex w-[180px] items-center justify-between rounded-full bg-highlight-20 px-4 py-2 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
         >
@@ -90,7 +126,7 @@ export function NextStepButton({
         <button
           disabled={isNotEqual}
           type="submit"
-          onClick={()=>{console.log('click submit')}}
+          onClick={() => { console.log('click submit') }}
           onSubmit={() => handleSubmit(expenseData)}
           className="relative flex w-[180px] items-center justify-between rounded-full bg-highlight-20 px-4 py-2 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
         >

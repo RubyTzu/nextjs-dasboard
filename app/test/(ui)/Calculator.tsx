@@ -2,7 +2,7 @@
 //import react
 import { useContext, useEffect, useRef } from 'react';
 //import data
-import { CalcContext, CalcProvider } from '@/app/test/(data)/(sharedFunction)/CalcProvider';
+import { CalcContext } from '@/app/test/(data)/(sharedFunction)/CalcProvider';
 //import ui
 import { BackspaceIcon } from './Icons';
 //import other
@@ -26,12 +26,10 @@ export const CalculatorAndInput = ({
 }) => {
   const inputRef = useRef<any>(null);
 
-  const focus = (e: any) => {
-    // console.log('focus ' + e.target.id)
+  const focus = () => {
     inputRef.current.focus();
   };
-  const blur = (e: any) => {
-    // console.log('blur in blur ' + e.target.id)
+  const blur = () => {
     inputRef.current.blur();
   };
 
@@ -44,21 +42,17 @@ export const CalculatorAndInput = ({
   };
 
   return (
-    <CalcProvider>
       <div className="relative">
         <Display
           amount={expenseData.amount}
-          focus={focus}
           handleFocus={handleFocus}
-          handleBlur={handleBlur}
           inputRef={inputRef}
-          expenseData={expenseData}
-          setCurrentExpense={setCurrentExpense}
         />
         {showKeyboard && (
           <Calculator
             group={group}
             handleBlur={handleBlur}
+            showKeyboard={showKeyboard}
             expenseData={expenseData}
             setCurrentExpense={setCurrentExpense}
             setIsNotEqual={setIsNotEqual}
@@ -67,28 +61,19 @@ export const CalculatorAndInput = ({
           />
         )}
       </div>
-      </CalcProvider>
   );
 };
 
 function Display({
   amount,
-  focus,
   handleFocus,
-  handleBlur,
   inputRef,
-  expenseData,
-  setCurrentExpense
 }: {
   amount: string;
-  focus: any;
   handleFocus: any;
-  handleBlur: any;
   inputRef: any;
-  expenseData: any;
-  setCurrentExpense: any;
 }) {
-  const { display, setDisplay, updateDisplay, onFocusDisplay, onBlurDisplay,equalClick } =
+  const { display, setDisplay, updateDisplay, onFocusDisplay, onBlurDisplay, equalClick } =
     useContext<any>(CalcContext);
 
   useEffect(() => {
@@ -107,21 +92,12 @@ function Display({
       ref={inputRef}
       className="z-10 w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0 "
       onChange={handleChange}
-      onFocus={(e) => {
-        focus(e);
+      onFocus={() => {
         handleFocus();
         onFocusDisplay();
       }}
-      onBlur={(e:any) => {
+      onBlur={() => {
         onBlurDisplay();
-        // equalClick();
-        // console.log(display)
-            if(!isNaN(Number(display)) && display > 0 && e.target.id !== 'calculator'){
-            console.log('blur '+e.target.id)
-              // handleBlur();
-            // setCurrentExpense({ ...expenseData, amount: display });
-            }
-        //     CheckAmountIsNotEqual();
       }}
       type="text"
       inputMode="none"
@@ -134,6 +110,7 @@ function Display({
 const Calculator = ({
   group,
   handleBlur,
+  showKeyboard,
   expenseData,
   setCurrentExpense,
   setIsNotEqual,
@@ -142,47 +119,60 @@ const Calculator = ({
 }: {
   group: any;
   handleBlur: any;
+  showKeyboard: any;
   expenseData: any;
   setCurrentExpense: any;
   setIsNotEqual: any;
   focus: any;
   blur: any;
 }) => {
+  const keyboardRef = useRef<HTMLDivElement>(null);
+
   const { display, buttonClick, equalClick, clearClick } =
     useContext<any>(CalcContext);
-    const CheckAmountIsNotEqual = () => {
-          let addedAmount = 0;
-          const users = group.users;
-          users.forEach((user: any) => {
-            const existingIndex = expenseData.sharers.findIndex(
-              (sharer: any) => sharer.id === user.id,
-            );
-      
-            if (existingIndex !== -1) {
-              addedAmount += Number(expenseData.sharers[existingIndex].amount);
-            } else {
-              addedAmount = addedAmount;
-            }
-          });
-      // console.log(addedAmount)
-      // console.log(display)
-          setIsNotEqual(Number(display) !== addedAmount);
-        };
+
+  const CheckAmountIsNotEqual = () => {
+    let addedAmount = 0;
+    const users = group.users;
+    users.forEach((user: any) => {
+      const existingIndex = expenseData.sharers.findIndex(
+        (sharer: any) => sharer.id === user.id,
+      );
+
+      if (existingIndex !== -1) {
+        addedAmount += Number(expenseData.sharers[existingIndex].amount);
+      } else {
+        addedAmount = addedAmount;
+      }
+    });
+
+    setIsNotEqual(Number(display) !== addedAmount);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent | TouchEvent): void => {
+      if (keyboardRef.current && !keyboardRef.current.contains(e.target as Node)) {
+
+        handleBlur()
+      }
+    };
+
+    const eventType = 'ontouchstart' in window ? 'touchstart' : 'mousedown';
+    // Bind the event listener
+    document.addEventListener(eventType, handleClickOutside);
+
+    // Cleanup the event listener on unmount
+    return () => {
+      document.removeEventListener(eventType, handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div 
-    tabIndex={0}
-    id="calculator"
+    <div
+      ref={keyboardRef}
+      id="calculator"
       className="fixed bottom-0 left-[50%] flex h-[340px] w-screen translate-x-[-50%] flex-col justify-center bg-black"
-      onClick={(e:any) =>focus(e)}
-      onFocus={()=>{
-        console.log('focus keyboard')
-        // handleBlur()
-      }}
-      onBlur={()=>{
-        console.log('blur keyboard')
-        // handleBlur()
-      }}
+      onClick={focus}
     >
       <div className="flex items-center justify-center">
         <CalculatorButton value={'1'} onClick={() => buttonClick('1')} />
@@ -218,16 +208,15 @@ const Calculator = ({
           onClick={(e) => {
             e.stopPropagation()
             equalClick();
-            if(!isNaN(Number(display)) && display > 0){
-            handleBlur();
-            setCurrentExpense({ ...expenseData, amount: display });
-            blur();
-            }
+            // if (!isNaN(Number(display)) && display > 0) {
+              handleBlur();
+              blur();
+            // }
             CheckAmountIsNotEqual();
           }}
           className="m-[5px] flex h-14 w-[122px] cursor-pointer items-center justify-center rounded-lg bg-highlight-60"
         >
-          { !isNaN(Number(display)) ? <>{display > 0?'儲存':'金額需大於零'}</>:"確認"}
+          {!isNaN(Number(display)) ? <>{display > 0 ? '儲存' : '金額需大於零'}</> : "確認"}
         </button>
       </div>
     </div>
