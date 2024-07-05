@@ -72,7 +72,7 @@ function Display({
 
   useEffect(() => {
     if (amount) {
-      setDisplay(amount);
+      setDisplay(Number(amount));
     }
   }, [amount]);
 
@@ -141,7 +141,7 @@ const Calculator = ({
     <div
       ref={keyboardRef}
       id="calculator"
-      className="fixed bottom-0 left-[50%] flex h-[340px] w-screen translate-x-[-50%] flex-col justify-center bg-black"
+      className="fixed bottom-0 left-[50%] flex h-[340px] w-screen translate-x-[-50%] flex-col justify-center bg-highlight-50"
       onClick={handleInputFocus}
     >
       <div className="flex items-center justify-center">

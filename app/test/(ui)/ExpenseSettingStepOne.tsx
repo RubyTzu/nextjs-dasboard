@@ -53,7 +53,7 @@ export function ExpenseSettingStepOne({
         {dateToFormate(date, true)}
        
       </div> 
-      <DayPicker className="absolute bg-white z-20 p-5 rounded-lg" />
+      {/* <DayPicker className="absolute bg-white z-20 p-5 rounded-lg" /> */}
       <div className="my-3 flex items-end justify-between gap-6">
         <div className="flex h-8 w-8 items-center justify-center rounded-md bg-highlight-60">
           {Icon ? <Icon /> : null}
