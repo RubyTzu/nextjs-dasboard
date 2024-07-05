@@ -28,6 +28,8 @@ export const CalculatorAndInput = ({
 
   const focus = () => {
     inputRef.current.focus();
+    console.log('focus on input by tapping keyboard')
+    setShowKeyboard(true);
   };
   const blur = () => {
     inputRef.current.blur();
@@ -38,39 +40,45 @@ export const CalculatorAndInput = ({
   };
 
   const handleBlur = () => {
+    if (inputRef.current && document.activeElement === inputRef.current) {
+      return
+    }
     setShowKeyboard(false);
   };
 
   return (
-      <div className="relative">
-        <Display
-          amount={expenseData.amount}
-          handleFocus={handleFocus}
-          inputRef={inputRef}
+    <div className="relative">
+      <Display
+        amount={expenseData.amount}
+        handleFocus={handleFocus}
+        handleBlur={handleBlur}
+        inputRef={inputRef}
+      />
+      {showKeyboard && (
+        <Calculator
+          group={group}
+          handleBlur={handleBlur}
+          showKeyboard={showKeyboard}
+          expenseData={expenseData}
+          setCurrentExpense={setCurrentExpense}
+          setIsNotEqual={setIsNotEqual}
+          focus={focus}
+          blur={blur}
         />
-        {showKeyboard && (
-          <Calculator
-            group={group}
-            handleBlur={handleBlur}
-            showKeyboard={showKeyboard}
-            expenseData={expenseData}
-            setCurrentExpense={setCurrentExpense}
-            setIsNotEqual={setIsNotEqual}
-            focus={focus}
-            blur={blur}
-          />
-        )}
-      </div>
+      )}
+    </div>
   );
 };
 
 function Display({
   amount,
   handleFocus,
+  handleBlur,
   inputRef,
 }: {
   amount: string;
   handleFocus: any;
+  handleBlur: any;
   inputRef: any;
 }) {
   const { display, setDisplay, updateDisplay, onFocusDisplay, onBlurDisplay, equalClick } =
@@ -97,6 +105,10 @@ function Display({
         onFocusDisplay();
       }}
       onBlur={() => {
+        setTimeout(() => {
+          handleBlur();
+          console.log('blur by input onBlur')
+        }, 100);
         onBlurDisplay();
       }}
       type="text"
@@ -210,8 +222,8 @@ const Calculator = ({
             e.stopPropagation()
             equalClick();
             // if (!isNaN(Number(display)) && display > 0) {
-              handleBlur();
-              blur();
+            handleBlur();
+            blur();
             // }
             CheckAmountIsNotEqual();
           }}
