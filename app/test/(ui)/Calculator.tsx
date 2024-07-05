@@ -151,7 +151,11 @@ const Calculator = ({
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent | TouchEvent): void => {
-      if (keyboardRef.current && !keyboardRef.current.contains(e.target as Node)) {
+      if (
+        keyboardRef.current &&
+        !keyboardRef.current.contains(e.target as Node) &&
+        !isDescendant(keyboardRef.current, e.target as Node)
+      ) {
 
         handleBlur()
       }
@@ -166,6 +170,18 @@ const Calculator = ({
       document.removeEventListener(eventType, handleClickOutside);
     };
   }, []);
+
+// Helper function to check if a node is a descendant of another node
+const isDescendant = (parent: Node, child: Node): boolean => {
+  let node = child.parentNode;
+  while (node !== null) {
+    if (node === parent) {
+      return true;
+    }
+    node = node.parentNode;
+  }
+  return false;
+};
 
   return (
     <div
