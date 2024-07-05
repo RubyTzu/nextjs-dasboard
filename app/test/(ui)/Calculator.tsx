@@ -166,7 +166,7 @@ const Calculator = ({
       if (keyboardRef.current && !keyboardRef.current.contains(e.target as Node)) {
 
         handleBlur()
-        blur();
+        // blur();
       }
     };
 
