@@ -1,11 +1,12 @@
 'use client';
+import { useState } from 'react';
 //import ui
 import { CalculatorAndInput } from '../../(ui)/Calculator';
 import SharerAmountInput from '../../(ui)/SharerAmountInput';
 import DatePickerButton from '@/app/test/(ui)/DatePickerButton';
 
 export default function Page() {
- const currentExpense = {
+const [currentExpense, setCurrentExpense] = useState({
     id: "e1",
     groupId: "g1",
     name: "燒鳥肌肉串",
@@ -33,8 +34,8 @@ export default function Page() {
             editorId: "u1"
         }
     ]
-}
-const date = "2024-07-07T09:18:15.000Z"
+});
+const date = '2024-07-07T09:00:00.000Z';
 
   return (
     <div className="relative">
@@ -42,7 +43,11 @@ const date = "2024-07-07T09:18:15.000Z"
       <CalculatorAndInput
         expenseData={currentExpense}
       /> */}
-       <DatePickerButton date={date} />
+      <DatePickerButton
+        date={date}
+        expenseData={currentExpense}
+        setCurrentExpense={setCurrentExpense}
+      />
     </div>
   );
 }

@@ -50,7 +50,11 @@ export function ExpenseSettingStepOne({
       })}
     >
       <div className="mb-4">
-        {/* <DatePickerButton date={date} /> */}
+        <DatePickerButton
+          date={date}
+          expenseData={expenseData}
+          setCurrentExpense={setCurrentExpense}
+        />
       </div>
       <div className="my-3 flex items-end justify-between gap-6">
         <div className="flex h-8 w-8 items-center justify-center rounded-md bg-highlight-60">
@@ -58,12 +62,12 @@ export function ExpenseSettingStepOne({
         </div>
         <input
           className="w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0 "
-          onChange={() => { }}
+          onChange={() => {}}
           onBlur={(e) => {
             setCurrentExpense({
               ...expenseData,
-              name: e.target.value
-            })
+              name: e.target.value,
+            });
           }}
           type="text"
           defaultValue={name}
@@ -73,9 +77,7 @@ export function ExpenseSettingStepOne({
         <div className="flex h-8 w-8 items-center justify-center rounded-md bg-highlight-60">
           <DollarIcon />
         </div>
-        <CalculatorAndInput
-          expenseData={expenseData}
-        />
+        <CalculatorAndInput expenseData={expenseData} />
       </div>
       <div className="flex items-center justify-center gap-1 pb-0 pt-3 text-sm">
         <div>

@@ -34,7 +34,8 @@ const config: Config = {
         base: '1rem',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'var(--font-notoSansJP)','var(--font-notoSansTC)']
+        sans: ['var(--font-inter)', 'var(--font-notoSansJP)','var(--font-notoSansTC)'],
+        lato:['var(--font-lato)', 'var(--font-notoSansJP)','var(--font-notoSansTC)']
       },
       colors: {
         blue: {
