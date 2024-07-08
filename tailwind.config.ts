@@ -61,6 +61,7 @@ const config: Config = {
           // 600: '#1c1a1b',
           'userBar': '#cad4e0',
           'keyBoard': '#d1d3d9',
+          'calendar': '#bdbdbd'
         },
         highlight: {
           60: '#EBFF79',

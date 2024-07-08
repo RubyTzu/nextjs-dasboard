@@ -2,6 +2,7 @@
 //import ui
 import { CalculatorAndInput } from '../../(ui)/Calculator';
 import SharerAmountInput from '../../(ui)/SharerAmountInput';
+import DatePickerButton from '@/app/test/(ui)/DatePickerButton';
 
 export default function Page() {
  const currentExpense = {
@@ -33,14 +34,15 @@ export default function Page() {
         }
     ]
 }
-
+const date = "2024-07-07T09:18:15.000Z"
 
   return (
     <div className="relative">
-      <SharerAmountInput />
+      {/* <SharerAmountInput />
       <CalculatorAndInput
         expenseData={currentExpense}
-      />
+      /> */}
+       <DatePickerButton date={date} />
     </div>
   );
 }

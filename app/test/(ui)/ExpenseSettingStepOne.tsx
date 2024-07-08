@@ -7,10 +7,10 @@ import {
   NotePencilIcon,
 } from '@/app/test/(ui)/Icons';
 import { CalculatorAndInput } from './Calculator';
+import DatePickerButton from './DatePickerButton';
 //other
 import clsx from 'clsx';
-import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
+
 
 export function ExpenseSettingStepOne({
   expenseData,
@@ -30,13 +30,13 @@ export function ExpenseSettingStepOne({
   }: {
     date: string;
     category:
-      | 'food'
-      | 'drink'
-      | 'transport'
-      | 'stay'
-      | 'shopping'
-      | 'entertainment'
-      | 'other';
+    | 'food'
+    | 'drink'
+    | 'transport'
+    | 'stay'
+    | 'shopping'
+    | 'entertainment'
+    | 'other';
     name: string;
   } = expenseData;
 
@@ -49,19 +49,17 @@ export function ExpenseSettingStepOne({
         hidden: phase !== 1,
       })}
     >
-      <div className="mb-4 w-fit rounded-full bg-neutrals-20 px-2 py-[1px] text-sm">
-        {dateToFormate(date, true)}
-       
-      </div> 
-      {/* <DayPicker className="absolute bg-white z-20 p-5 rounded-lg" /> */}
+      <div className="mb-4">
+        {/* <DatePickerButton date={date} /> */}
+      </div>
       <div className="my-3 flex items-end justify-between gap-6">
         <div className="flex h-8 w-8 items-center justify-center rounded-md bg-highlight-60">
           {Icon ? <Icon /> : null}
         </div>
         <input
           className="w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0 "
-          onChange={() => {}}
-          onBlur={(e)=>{
+          onChange={() => { }}
+          onBlur={(e) => {
             setCurrentExpense({
               ...expenseData,
               name: e.target.value
