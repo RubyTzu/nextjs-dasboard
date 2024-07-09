@@ -113,7 +113,7 @@ function Display({
         //setTimeout to make sure handleKeyboardBlur function happened after inputRef is focus by keyboard
         setTimeout(() => {
           handleKeyboardBlur();
-        }, 100);
+        }, 0);
       }}
       inputMode="none"
       id="display"
