@@ -19,7 +19,7 @@ import greaterThanIcon from '@/app/test/(ui)/icons/greaterThan.svg';
 
 function FoodIcon({ strokeWidth }: { strokeWidth: any }) {
   return (
-    <div className="h-5">
+    <div className="h-5 flex justify-center items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={21}
@@ -40,7 +40,7 @@ function FoodIcon({ strokeWidth }: { strokeWidth: any }) {
 
 function DrinkIcon({ strokeWidth }: { strokeWidth: any }) {
   return (
-    <div className="h-5">
+    <div className="h-5 flex justify-center items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={16}
@@ -61,7 +61,7 @@ function DrinkIcon({ strokeWidth }: { strokeWidth: any }) {
 
 function TransportIcon({ strokeWidth }: { strokeWidth: any }) {
   return (
-    <div className="h-5">
+    <div className="h-5 flex justify-center items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={27}
@@ -89,7 +89,7 @@ function TransportIcon({ strokeWidth }: { strokeWidth: any }) {
 
 function StayIcon({ strokeWidth }: { strokeWidth: any }) {
   return (
-    <div className="h-5">
+    <div className="h-5 flex justify-center items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={25}
@@ -124,7 +124,7 @@ function StayIcon({ strokeWidth }: { strokeWidth: any }) {
 
 function ShoppingIcon({ strokeWidth }: { strokeWidth: any }) {
   return (
-    <div className="h-5">
+    <div className="h-5 flex justify-center items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={22}
@@ -152,7 +152,7 @@ function ShoppingIcon({ strokeWidth }: { strokeWidth: any }) {
 
 function EntertainmentIcon({ strokeWidth }: { strokeWidth: any }) {
   return (
-    <div className="h-5">
+    <div className="h-5 flex justify-center items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={22}
@@ -180,7 +180,7 @@ function EntertainmentIcon({ strokeWidth }: { strokeWidth: any }) {
 
 function OtherIcon({ strokeWidth }: { strokeWidth: any }) {
   return (
-    <div className="h-5">
+    <div className="h-5 flex justify-center items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={23}

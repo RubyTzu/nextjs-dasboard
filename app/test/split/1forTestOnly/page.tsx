@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { CalculatorAndInput } from '../../(ui)/Calculator';
 import SharerAmountInput from '../../(ui)/SharerAmountInput';
 import DatePickerButton from '@/app/test/(ui)/DatePickerButton';
+import ExpenseCategoryButton from '@/app/test/(ui)/ExpenseCategoryButton';
 
 export default function Page() {
 const [currentExpense, setCurrentExpense] = useState({
@@ -39,10 +40,12 @@ const date = '2024-07-07T09:00:00.000Z';
 
   return (
     <div className="relative">
-      {/* <SharerAmountInput />
-      <CalculatorAndInput
+      <SharerAmountInput />
+      <ExpenseCategoryButton
+        setCurrentExpense={setCurrentExpense}
         expenseData={currentExpense}
-      /> */}
+      />
+      <CalculatorAndInput expenseData={currentExpense} />
       <DatePickerButton
         date={date}
         expenseData={currentExpense}

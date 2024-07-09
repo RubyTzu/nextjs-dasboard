@@ -4,15 +4,11 @@ import { useState, useContext, useEffect, useRef } from 'react';
 //import data
 import { CalcContext } from '@/app/test/(data)/(sharedFunction)/CalcProvider';
 //import ui
-import { BackspaceIcon } from './Icons';
+import { BackspaceIcon, DollarIcon } from '@/app/test/(ui)/Icons';
 //import other
 import clsx from 'clsx';
 
-export const CalculatorAndInput = ({
-  expenseData,
-}: {
-  expenseData: any;
-}) => {
+export const CalculatorAndInput = ({ expenseData }: { expenseData: any }) => {
   const [showKeyboard, setShowKeyboard] = useState(false);
   const inputRef = useRef<any>(null);
 
@@ -20,7 +16,7 @@ export const CalculatorAndInput = ({
     inputRef.current.focus();
     setShowKeyboard(true);
   };
-  
+
   const handleInputBlur = () => {
     inputRef.current.blur();
   };
@@ -32,25 +28,34 @@ export const CalculatorAndInput = ({
   const handleKeyboardBlur = () => {
     //To check if the input element referenced by inputRef is currently focused
     if (inputRef.current && document.activeElement === inputRef.current) {
-      return
+      return;
     }
     setShowKeyboard(false);
   };
 
   return (
-    <div className="relative">
-      <Display
-        amount={expenseData.amount}
-        handleKeyboardFocus={handleKeyboardFocus}
-        handleKeyboardBlur={handleKeyboardBlur}
-        inputRef={inputRef}
-      />
+    <div className=" w-fit flex items-end justify-between gap-6">
+      <button
+        type="button"
+        onClick={handleInputFocus}
+        className="flex h-8 w-8 items-center justify-center rounded-md bg-highlight-60"
+      >
+        <DollarIcon />
+      </button>
+      <div className="relative">
+        <Display
+          amount={expenseData.amount}
+          handleKeyboardFocus={handleKeyboardFocus}
+          handleKeyboardBlur={handleKeyboardBlur}
+          inputRef={inputRef}
+        />
         <Calculator
-        showKeyboard={showKeyboard}
+          showKeyboard={showKeyboard}
           handleKeyboardBlur={handleKeyboardBlur}
           handleInputFocus={handleInputFocus}
           handleInputBlur={handleInputBlur}
         />
+      </div>
     </div>
   );
 };
@@ -110,21 +115,22 @@ const Calculator = ({
   handleInputFocus,
   handleInputBlur,
 }: {
-  showKeyboard:any;
+  showKeyboard: any;
   handleKeyboardBlur: any;
   handleInputFocus: any;
   handleInputBlur: any;
 }) => {
   const keyboardRef = useRef<HTMLDivElement>(null);
 
-  const { buttonClick, equalClick, clearClick } =
-    useContext<any>(CalcContext);
+  const { buttonClick, equalClick, clearClick } = useContext<any>(CalcContext);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent | TouchEvent): void => {
-      if (keyboardRef.current && !keyboardRef.current.contains(e.target as Node)) {
-
-        handleKeyboardBlur()
+      if (
+        keyboardRef.current &&
+        !keyboardRef.current.contains(e.target as Node)
+      ) {
+        handleKeyboardBlur();
       }
     };
 
@@ -142,10 +148,13 @@ const Calculator = ({
     <div
       ref={keyboardRef}
       id="calculator"
-      className={clsx("fixed bottom-0 left-[50%] flex h-[340px] w-screen translate-x-[-50%] flex-col justify-center bg-highlight-50 transition-all duration-300", {
-                'z-50 bottom-0 transform opacity-100': showKeyboard,
-                '-z-50 bottom-[-20px] transform opacity-0': !showKeyboard,
-            })}
+      className={clsx(
+        'fixed bottom-0 left-[50%] flex h-[340px] w-screen translate-x-[-50%] flex-col justify-center bg-highlight-50 transition-all duration-300',
+        {
+          'bottom-0 z-50 transform opacity-100': showKeyboard,
+          'bottom-[-20px] -z-50 transform opacity-0': !showKeyboard,
+        },
+      )}
       onClick={handleInputFocus}
     >
       <div className="flex items-center justify-center">
@@ -179,7 +188,7 @@ const Calculator = ({
         <button
           type="button"
           onClick={(e) => {
-            e.stopPropagation()
+            e.stopPropagation();
             equalClick();
             handleKeyboardBlur();
             handleInputBlur();

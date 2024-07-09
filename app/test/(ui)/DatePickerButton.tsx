@@ -7,11 +7,12 @@ import { inter, lato, notoSansJP, notoSansTC } from '@/app/ui/fonts';
 import { CaptionProps, DayPicker, useNavigation } from 'react-day-picker';
 import { format, isValid, parse } from 'date-fns';
 import { zhTW } from 'date-fns/locale';
+import clsx from 'clsx';
 
 function CustomCaptionComponent(
   props: CaptionProps & { dialogRef: React.RefObject<HTMLDialogElement> } & {
     handleDayPickerSelect: any;
-  } & { originDate: any },
+  } & { originDate: any } & { setIsShow: any },
 ) {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
   return (
@@ -21,7 +22,11 @@ function CustomCaptionComponent(
           className="w-9 text-sm"
           onClick={() => {
             props.handleDayPickerSelect(new Date(props.originDate));
-            props.dialogRef.current?.close();
+            props.setIsShow(false);
+
+            setTimeout(() => {
+              props.dialogRef.current?.close();
+            }, 100);
           }}
         >
           取消
@@ -33,6 +38,7 @@ function CustomCaptionComponent(
         <button
           disabled={!previousMonth}
           onClick={() => previousMonth && goToMonth(previousMonth)}
+          className="focus:ring-0"
         >
           <ChevronLeftIcon className="h-5 w-5 stroke-2" />
         </button>
@@ -44,6 +50,7 @@ function CustomCaptionComponent(
         <button
           disabled={!nextMonth}
           onClick={() => nextMonth && goToMonth(nextMonth)}
+          className="focus:ring-0"
         >
           <ChevronRightIcon className="h-5 w-5 stroke-2" />
         </button>
@@ -61,6 +68,7 @@ export default function DatePickerButton({
   expenseData: any;
   setCurrentExpense: any;
 }) {
+  const [isShow, setIsShow] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dialogId = useId();
   const headerId = useId();
@@ -78,9 +86,12 @@ export default function DatePickerButton({
   const [inputValue, setInputValue] = useState(format(date, 'yyyy/MM/dd'));
 
   // Hold the last saved date in state
-  const [lastSavedDate, setLastSavedDate] = useState<Date | undefined>(date);
+  const [lastSavedDate, setLastSavedDate] = useState<any>(date);
 
-  const toggleDialog = () => dialogRef.current?.showModal();
+  const toggleDialog = () => {
+    dialogRef.current?.showModal();
+    setIsShow(true);
+  };
   /**
    * Function to handle the DayPicker select event: update the input value and
    * the selected date, and set the month.
@@ -92,6 +103,7 @@ export default function DatePickerButton({
     } else {
       setSelectedDate(date);
       setInputValue(format(date, 'yyyy/MM/dd'));
+      setMonth(date as any);
     }
   };
 
@@ -107,7 +119,7 @@ export default function DatePickerButton({
     if (isValid(parsedDate)) {
       setSelectedDate(parsedDate);
       setMonth(parsedDate);
-      console.log(selectedDate)
+      console.log(selectedDate);
     } else {
       setSelectedDate(undefined);
     }
@@ -133,66 +145,87 @@ export default function DatePickerButton({
         ref={dialogRef}
         id={dialogId}
         aria-modal
-        className="top-36 z-20 m-0 mx-auto rounded-lg bg-transparent backdrop:bg-black/80"
+        className={clsx(
+          ' z-20 m-0 mx-auto rounded-lg bg-transparent transition-all duration-300',
+          {
+            'top-36 z-50 transform opacity-100  backdrop:bg-black/80': isShow,
+            'top-32 -z-50 transform opacity-0 backdrop:bg-black/20': !isShow,
+          },
+        )}
         aria-labelledby={headerId}
+       onClick={() => {
+            handleDayPickerSelect(new Date(lastSavedDate));
+            setIsShow(false);
+
+            setTimeout(() => {
+              dialogRef.current?.close();
+            }, 100);
+          }}
       >
-        <DayPicker
-          locale={zhTW}
-          weekStartsOn={0}
-          components={{
-            Caption: (props: CaptionProps) => (
-              <CustomCaptionComponent
-                {...props}
-                dialogRef={dialogRef}
-                originDate={lastSavedDate}
-                handleDayPickerSelect={handleDayPickerSelect}
-              />
-            ), // 傳遞 dialogRef 給 CustomCaptionComponent
-          }}
-          className={`rounded-lg bg-white ${lato.variable} ${notoSansJP.variable} ${notoSansTC.variable} font-lato antialiased`}
-          classNames={{
-            table:
-              'pt-3 pb-3 px-5 flex flex-col items-center w-full border-collapse',
-            head_row: 'flex font-medium text-gray-900 mb-2',
-            head_cell: 'm-1 w-9 font-medium text-xs',
-            row: 'flex w-full mt-1',
-            cell: 'text-black rounded-full h-9 w-9 text-center text-[18px] p-0 m-1 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-gray-900/0 [&:has([aria-selected].day-outside)]:text-white [&:has([aria-selected])]:bg-gray-900/0 first:[&:has([aria-selected])]:rounded-l-full last:[&:has([aria-selected])]:rounded-r-full focus-within:relative focus-within:z-20',
-            day: 'h-7 w-7 p-0 font-medium',
-            day_range_end: 'day-range-end',
-            day_selected:
-              'rounded-full bg-highlight-60 text-black hover:bg-highlight-60 hover:text-black focus:bg-highlight-60 focus:text-black',
-            day_today: 'rounded-full font-[700] text-gray-900',
-            day_outside:
-              'day-outside text-gray-500 opacity-50 aria-selected:bg-gray-500 aria-selected:text-gray-900 aria-selected:bg-opacity-10',
-            day_disabled: 'text-gray-500 opacity-50',
-            day_hidden: 'invisible',
-          }}
-          month={month}
-          onMonthChange={setMonth}
-          initialFocus
-          mode="single"
-          selected={selectedDate}
-          onSelect={handleDayPickerSelect}
-          showOutsideDays
-          // fixedWeeks
-          required
-        />
-        <div
-          className="mt-5 w-full rounded-full bg-highlight-20 py-3 text-center"
-          onClick={() => {
-            setLastSavedDate(selectedDate); // Save selected date
-            let formateSelectDate = format(
-              selectedDate as any,
-              "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-            );
-            setCurrentExpense({
-              ...expenseData,
-              date: formateSelectDate,
-            });
-            dialogRef.current?.close();
-          }}
-        >
-          儲存
+        <div onClick={(e: any) => e.stopPropagation()}>
+          <DayPicker
+            locale={zhTW}
+            weekStartsOn={0}
+            components={{
+              Caption: (props: CaptionProps) => (
+                <CustomCaptionComponent
+                  {...props}
+                  dialogRef={dialogRef}
+                  originDate={lastSavedDate}
+                  handleDayPickerSelect={handleDayPickerSelect}
+                  setIsShow={setIsShow}
+                />
+              ), // 傳遞 dialogRef 給 CustomCaptionComponent
+            }}
+            className={`relative rounded-lg bg-white ${lato.variable} ${notoSansJP.variable} ${notoSansTC.variable} font-lato antialiased transition-all duration-200`}
+            classNames={{
+              table:
+                'pt-3 pb-3 px-5 flex flex-col items-center w-full border-collapse',
+              head_row: 'flex font-medium text-gray-900 mb-2',
+              head_cell: 'm-1 w-9 font-medium text-xs',
+              row: 'flex w-full mt-1',
+              cell: 'text-black rounded-full h-9 w-9 text-center text-[18px] p-0 m-1 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-gray-900/0 [&:has([aria-selected].day-outside)]:text-white [&:has([aria-selected])]:bg-gray-900/0 first:[&:has([aria-selected])]:rounded-l-full last:[&:has([aria-selected])]:rounded-r-full focus-within:relative focus-within:z-20',
+              day: 'h-7 w-7 p-0 font-medium',
+              day_range_end: 'day-range-end',
+              day_selected:
+                'rounded-full bg-highlight-60 text-black hover:bg-highlight-60 hover:text-black focus:bg-highlight-60 focus:text-black',
+              day_today: 'rounded-full font-[700] text-gray-900',
+              day_outside:
+                'day-outside text-gray-500 opacity-50 aria-selected:bg-gray-500 aria-selected:text-gray-900 aria-selected:bg-opacity-10',
+              day_disabled: 'text-gray-500 opacity-50',
+              day_hidden: 'invisible',
+            }}
+            month={month}
+            onMonthChange={setMonth}
+            initialFocus
+            mode="single"
+            selected={selectedDate}
+            onSelect={handleDayPickerSelect}
+            showOutsideDays
+            // fixedWeeks
+            required
+          />
+          <div
+            className="mt-5 w-full rounded-full bg-highlight-20 py-3 text-center"
+            onClick={() => {
+              setLastSavedDate(selectedDate); // Save selected date
+              setMonth(selectedDate as any);
+              let formateSelectDate = format(
+                selectedDate as any,
+                "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+              );
+              setCurrentExpense({
+                ...expenseData,
+                date: formateSelectDate,
+              });
+              setIsShow(false);
+              setTimeout(() => {
+                dialogRef.current?.close();
+              }, 100);
+            }}
+          >
+            儲存
+          </div>
         </div>
       </dialog>
     </>
