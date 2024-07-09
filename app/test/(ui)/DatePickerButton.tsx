@@ -153,14 +153,14 @@ export default function DatePickerButton({
           },
         )}
         aria-labelledby={headerId}
-       onClick={() => {
-            handleDayPickerSelect(new Date(lastSavedDate));
-            setIsShow(false);
+        onClick={() => {
+          handleDayPickerSelect(new Date(lastSavedDate));
+          setIsShow(false);
 
-            setTimeout(() => {
-              dialogRef.current?.close();
-            }, 100);
-          }}
+          setTimeout(() => {
+            dialogRef.current?.close();
+          }, 100);
+        }}
       >
         <div onClick={(e: any) => e.stopPropagation()}>
           <DayPicker
@@ -184,11 +184,11 @@ export default function DatePickerButton({
               head_row: 'flex font-medium text-gray-900 mb-2',
               head_cell: 'm-1 w-9 font-medium text-xs',
               row: 'flex w-full mt-1',
-              cell: 'text-black rounded-full h-9 w-9 text-center text-[18px] p-0 m-1 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-gray-900/0 [&:has([aria-selected].day-outside)]:text-white [&:has([aria-selected])]:bg-gray-900/0 first:[&:has([aria-selected])]:rounded-l-full last:[&:has([aria-selected])]:rounded-r-full focus-within:relative focus-within:z-20',
+              cell: 'text-black rounded-full h-9 w-9 text-center text-[18px] p-0 m-1 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-gray-900/0 [&:has([aria-selected].day-outside)]:text-white [&:has([aria-selected])]:bg-gray-900/0 first:[&:has([aria-selected])]:rounded-l-full last:[&:has([aria-selected])]:rounded-r-full focus-within:relative focus-within:z-20 focus:ring-0',
               day: 'h-7 w-7 p-0 font-medium',
               day_range_end: 'day-range-end',
               day_selected:
-                'rounded-full bg-highlight-60 text-black hover:bg-highlight-60 hover:text-black focus:bg-highlight-60 focus:text-black',
+                'rounded-full bg-highlight-60 text-black hover:bg-highlight-60 hover:text-black focus:bg-highlight-60 focus:text-black focus:ring-0',
               day_today: 'rounded-full font-[700] text-gray-900',
               day_outside:
                 'day-outside text-gray-500 opacity-50 aria-selected:bg-gray-500 aria-selected:text-gray-900 aria-selected:bg-opacity-10',
