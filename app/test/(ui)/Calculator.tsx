@@ -45,13 +45,12 @@ export const CalculatorAndInput = ({
         handleKeyboardBlur={handleKeyboardBlur}
         inputRef={inputRef}
       />
-      {showKeyboard && (
         <Calculator
+        showKeyboard={showKeyboard}
           handleKeyboardBlur={handleKeyboardBlur}
           handleInputFocus={handleInputFocus}
           handleInputBlur={handleInputBlur}
         />
-      )}
     </div>
   );
 };
@@ -106,10 +105,12 @@ function Display({
 }
 
 const Calculator = ({
+  showKeyboard,
   handleKeyboardBlur,
   handleInputFocus,
   handleInputBlur,
 }: {
+  showKeyboard:any;
   handleKeyboardBlur: any;
   handleInputFocus: any;
   handleInputBlur: any;
@@ -141,7 +142,10 @@ const Calculator = ({
     <div
       ref={keyboardRef}
       id="calculator"
-      className="fixed bottom-0 left-[50%] flex h-[340px] w-screen translate-x-[-50%] flex-col justify-center bg-highlight-50"
+      className={clsx("fixed bottom-0 left-[50%] flex h-[340px] w-screen translate-x-[-50%] flex-col justify-center bg-highlight-50 transition-all duration-300", {
+                'z-50 bottom-0 transform opacity-100': showKeyboard,
+                '-z-50 bottom-[-20px] transform opacity-0': !showKeyboard,
+            })}
       onClick={handleInputFocus}
     >
       <div className="flex items-center justify-center">

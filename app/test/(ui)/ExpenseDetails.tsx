@@ -55,7 +55,7 @@ export function ExpenseDetailOne({
         <div className="flex w-full justify-between pl-2 pr-3">
           <div className="flex gap-5">
             <div className="z-0 flex h-[72px] w-[72px] items-center justify-center rounded-lg border-[5px] border-white bg-highlight-60">
-              <div className="scale-[1.7]">{Icon ? <Icon /> : null}</div>
+              <div className="scale-[1.4]">{Icon ? <Icon strokeWidth={1.6}/> : null}</div>
             </div>
             <div className="flex flex-col justify-between">
               <div className="text-xl leading-8">{name}</div>

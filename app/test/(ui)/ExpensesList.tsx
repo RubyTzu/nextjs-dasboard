@@ -99,11 +99,7 @@ function ExpenseButton({
     >
       <div className="flex items-center gap-3">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-highlight-60">
-          {Icon ? (
-            <div className="scale-[1.2]">
-              <Icon />{' '}
-            </div>
-          ) : null}
+          {Icon ? <Icon strokeWidth={1}/> : null}
         </div>
         <div className="leading-[20px]">
           <p className="font-normal">{name}</p>
