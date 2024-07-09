@@ -103,7 +103,13 @@ function Display({
       type="button"
       className="flex h-8 w-8 items-center justify-center rounded-md bg-highlight-60"
       onClick={handleKeyboardFocus}
-      onBlur={() => {
+      // onBlur={() => {
+      //   //setTimeout to make sure handleKeyboardBlur function happened after inputRef is focus by keyboard
+      //   setTimeout(() => {
+      //     handleKeyboardBlur();
+      //   }, 100);
+      // }}
+      onMouseOut={() => {
         //setTimeout to make sure handleKeyboardBlur function happened after inputRef is focus by keyboard
         setTimeout(() => {
           handleKeyboardBlur();
