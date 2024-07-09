@@ -193,6 +193,12 @@ const Keyboard = ({
           handleKeyboardBlur();
         }, 0);
       }}
+      onTouchEnd={() => {
+        //setTimeout to make sure handleKeyboardBlur function happened after inputRef is focus by keyboard
+        setTimeout(() => {
+          handleKeyboardBlur();
+        }, 0);
+      }}
       className={clsx(
         'fixed left-[50%] flex h-[340px] w-screen translate-x-[-50%] flex-col justify-start bg-highlight-50 transition-all duration-300',
         {
