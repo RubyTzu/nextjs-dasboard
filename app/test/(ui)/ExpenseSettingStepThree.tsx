@@ -1,111 +1,74 @@
-//import from next & react
 import Image from 'next/image';
-//import ui
 import { NotePencilIcon } from '@/app/test/(ui)/Icons';
-//other
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useEffect } from 'react';
+
+interface User {
+  id: string;
+  name: string;
+  picture: string;
+}
+
+interface Sharer {
+  id: string;
+  amount: number;
+}
+
+interface ExpenseData {
+  amount: number;
+  sharers: Sharer[];
+}
+
+interface ExpenseSettingStepThreeProps {
+  expenseData: ExpenseData;
+  group: { users: User[] };
+  phase: number;
+  setIsNotEqual: (isNotEqual: boolean) => void;
+  updatedSharers: Sharer[];
+  setUpdatedSharers: (sharers: Sharer[]) => void;
+}
 
 export function ExpenseSettingStepThree({
   expenseData,
-  setCurrentExpense,
   group,
   phase,
   setIsNotEqual,
   updatedSharers,
-  setUpdatedSharers
-}: {
-  expenseData: any;
-  setCurrentExpense: any;
-  group: any;
-  phase: number;
-  setIsNotEqual: any;
-  updatedSharers: any;
-  setUpdatedSharers: any;
-}) {
-  if (!expenseData) return null;
-  if (!updatedSharers) return null;
+  setUpdatedSharers,
+}: ExpenseSettingStepThreeProps) {
+  
 
   const users = group.users;
-  // const updatedSharers = [...expenseData.sharers];
-  // const [updatedSharers, setUpdatedSharers] = useState([...expenseData.sharers]);
 
-  const CheckAmountIsNotEqual = () => {
-    let addedAmount = 0;
-
-    users.forEach((user: any) => {
-      const existingIndex = updatedSharers.findIndex(
-        (sharer: any) => sharer.id === user.id,
-      );
-
-      if (existingIndex !== -1) {
-        addedAmount += updatedSharers[existingIndex].amount;
-      } else {
-        addedAmount = addedAmount;
-      }
-    });
-
+  useEffect(() => {
+    const addedAmount = updatedSharers.reduce(
+      (total, sharer) => total + sharer.amount,
+      0,
+    );
     setIsNotEqual(Number(expenseData.amount) !== Number(addedAmount));
-  };
+  }, [updatedSharers, expenseData.amount, setIsNotEqual]);
 
   const handleAllSelect = () => {
-    users.forEach((user: any) => {
-      const existingIndex = updatedSharers.findIndex(
-        (sharer: any) => sharer.id === user.id,
-      );
-      const updatedSharersCopy = [...updatedSharers];
-
-      if (existingIndex !== -1) {
-        updatedSharersCopy[existingIndex].amount =
-          expenseData.amount / users.length;
-      } else {
-        updatedSharersCopy.push({
-          id: user.id,
-          amount: expenseData.amount / users.length,
-        });
-      }
-      setUpdatedSharers(updatedSharersCopy);
-    });
-
-    // setCurrentExpense({
-    //   ...expenseData,
-    //   sharers: updatedSharers,
-    // });
-    CheckAmountIsNotEqual();
+    const updatedSharersCopy = users.map((user) => ({
+      id: user.id,
+      amount: expenseData.amount / users.length,
+    }));
+    setUpdatedSharers(updatedSharersCopy);
   };
 
   const handleAllNoSelect = () => {
-    users.forEach((user: any) => {
-      const existingIndex = updatedSharers.findIndex(
-        (sharer: any) => sharer.id === user.id,
-      );
-
-      const updatedSharersCopy = [...updatedSharers];
-
-      if (existingIndex !== -1) {
-        updatedSharersCopy.splice(existingIndex, 1);
-      }
-      setUpdatedSharers(updatedSharersCopy);
-    });
-
-    // setCurrentExpense({
-    //   ...expenseData,
-    //   sharers: updatedSharers,
-    // });
-    CheckAmountIsNotEqual();
+    setUpdatedSharers([]);
   };
+
+if (!expenseData || !updatedSharers) return null;
 
   const handleSharerToggle = (userId: string) => {
     const existingIndex = updatedSharers.findIndex(
-      (sharer: any) => sharer.id === userId,
+      (sharer) => sharer.id === userId,
     );
     const updatedSharersCopy = [...updatedSharers];
 
-    console.log('I m before')
-
-    console.log(updatedSharers)
     if (existingIndex !== -1) {
-
       updatedSharersCopy.splice(existingIndex, 1);
     } else {
       updatedSharersCopy.push({
@@ -115,13 +78,6 @@ export function ExpenseSettingStepThree({
     }
 
     setUpdatedSharers(updatedSharersCopy);
-    console.log('I m after')
-    console.log(updatedSharers)
-    // setCurrentExpense({
-    //   ...expenseData,
-    //   sharers: updatedSharers,
-    // });
-    CheckAmountIsNotEqual();
   };
 
   return (
@@ -156,14 +112,12 @@ export function ExpenseSettingStepThree({
           )}
         </div>
       </div>
-      {users.map((user: any) => {
+      {users.map((user) => {
         const isChecked = updatedSharers.some(
-          (sharer: any) => sharer.id === user.id,
+          (sharer) => sharer.id === user.id,
         );
         const amountValue = isChecked
-          ? updatedSharers.filter(
-            (sharer: any) => sharer.id === user.id,
-          )[0].amount
+          ? updatedSharers.find((sharer) => sharer.id === user.id)?.amount
           : '0';
 
         return (
@@ -189,7 +143,7 @@ export function ExpenseSettingStepThree({
                 id={user.name}
                 name={user.name}
                 value={user.name}
-                onChange={() => { }}
+                onChange={() => {}}
                 onClick={() => handleSharerToggle(user.id)} // Call handleSharerToggle on change
                 checked={isChecked}
               />

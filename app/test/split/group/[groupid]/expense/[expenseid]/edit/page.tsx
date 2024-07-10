@@ -23,11 +23,12 @@ export default function Page() {
   const expense: any = useExpense(params.groupid, params.expenseid);
 
   const [currentExpense, setCurrentExpense] = useState(expense);
+  const [updatedSharers, setUpdatedSharers] = useState([
+    ...currentExpense.sharers,
+  ]);
+
   if (!currentExpense) return null;
-  const [updatedSharers, setUpdatedSharers] = useState([...currentExpense.sharers]);
-
   if (!group) return;
-
 
   return (
     <form
@@ -56,7 +57,6 @@ export default function Page() {
           />
           <ExpenseSettingStepThree
             expenseData={currentExpense}
-            setCurrentExpense={setCurrentExpense}
             group={group}
             phase={phase}
             setIsNotEqual={setIsNotEqual}
