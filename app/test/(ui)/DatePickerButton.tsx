@@ -90,7 +90,9 @@ export default function DatePickerButton({
 
   const toggleDialog = () => {
     dialogRef.current?.showModal();
-    setIsShow(true);
+    setTimeout(() => {
+      setIsShow(true);
+    }, 0);
   };
   /**
    * Function to handle the DayPicker select event: update the input value and
