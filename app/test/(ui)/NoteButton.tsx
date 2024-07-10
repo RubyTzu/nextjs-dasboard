@@ -81,7 +81,7 @@ export default function NoteButton({
                         <div className="w-9" />
                     </div>
                     <textarea
-                        className="h-60 w-[89vw] resize-none rounded-b-lg bg-white border-none focus:border-none focus:ring-0 focus:outline-none"
+                        className="h-36 w-[89vw] resize-none rounded-b-lg bg-white border-none focus:border-none focus:ring-0 focus:outline-none"
                         onChange={handleChange}
                         value={textareaValue} />
                     <div
