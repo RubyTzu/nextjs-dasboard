@@ -48,7 +48,6 @@ export default function ExpenseCategoryButton({
   const handleKeyboardBlur = () => {
     //To check if the input element referenced by inputRef is currently focused
     if (inputRef.current && document.activeElement === inputRef.current) {
-      inputRef.current.focus();
       return;
     }
     setShowKeyboard(false);
@@ -106,10 +105,17 @@ function Display({
     type="button"
     className="flex h-8 w-8 items-center justify-center rounded-md bg-highlight-60 focus:border-0 focus:ring-0 outline-none"
     onClick={handleKeyboardFocus}
-    onFocus={handleKeyboardFocus}
     onBlur={() => {
       //setTimeout to make sure handleKeyboardBlur function happened after inputRef is focus by keyboard
       setTimeout(() => {
+        console.log('test blur')
+        handleKeyboardBlur();
+      }, 0);
+    }}
+    onMouseOut={() => {
+      //setTimeout to make sure handleKeyboardBlur function happened after inputRef is focus by keyboard
+      setTimeout(() => {
+        console.log('mouse out')
         handleKeyboardBlur();
       }, 0);
     }}
