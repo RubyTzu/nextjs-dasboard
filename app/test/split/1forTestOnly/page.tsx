@@ -51,7 +51,7 @@ const date = '2024-07-07T09:00:00.000Z';
         expenseData={currentExpense}
         setCurrentExpense={setCurrentExpense}
       />
-      <div>test</div>
+      <div>test 2</div>
     </div>
   );
 }
