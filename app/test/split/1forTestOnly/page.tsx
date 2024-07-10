@@ -111,7 +111,7 @@ export default function Page() {
     groupId: "g1",
     name: "燒鳥肌肉串",
     amount: 210,
-    date: "2024-05-28T17:18:15.063Z",
+    date: "2024-05-28T09:18:15.063Z",
     category: "food",
     creatorId: "u1",
     payerId: "u1",
@@ -126,11 +126,11 @@ export default function Page() {
       }
     ],
     note: "I am just testing",
-    createAt: "2024-05-28T17:18:15.063Z",
-    updateAt: "2024-05-28T17:18:15.063Z",
+    createAt: "2024-05-28T09:18:15.063Z",
+    updateAt: "2024-05-28T09:18:15.063Z",
     historys: [
       {
-        editedAt: "2024-05-28T17:18:15.063Z",
+        editedAt: "2024-05-28T09:18:15.063Z",
         editorId: "u1"
       }
     ]
