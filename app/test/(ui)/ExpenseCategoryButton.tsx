@@ -5,6 +5,7 @@ import { useState, useRef, useEffect, Fragment } from 'react';
 import { expenseIconMap } from '@/app/test/(ui)/Icons';
 //import other
 import clsx from 'clsx';
+import Link from 'next/link';
 
 export default function ExpenseCategoryButton({
   expenseData,
@@ -97,23 +98,24 @@ function Display({
 
   const SelectIcon = expenseIconMap[display as keyof typeof expenseIconMap];
 
-  return (
-    <button
-      ref={inputRef}
-      type="button"
-      className="flex h-8 w-8 items-center justify-center rounded-md bg-highlight-60 focus:border-0 focus:ring-0"
-      onClick={handleKeyboardFocus}
-      onMouseOut={() => {
-        //setTimeout to make sure handleKeyboardBlur function happened after inputRef is focus by keyboard
-        setTimeout(() => {
-          handleKeyboardBlur();
-        }, 0);
-      }}
-      inputMode="none"
-      id="display"
+  return ( <>
+    <Link 
+    href="#"
+    ref={inputRef}
+    type="button"
+    className="flex h-8 w-8 items-center justify-center rounded-md bg-highlight-60 focus:border-0 focus:ring-0"
+    onClick={handleKeyboardFocus}
+    onBlur={() => {
+      //setTimeout to make sure handleKeyboardBlur function happened after inputRef is focus by keyboard
+      setTimeout(() => {
+        handleKeyboardBlur();
+      }, 0);
+    }}
+    id="display"
     >
-      {SelectIcon ? <SelectIcon strokeWidth={1.2} /> : null}
-    </button>
+    {SelectIcon ? <SelectIcon strokeWidth={1.2} /> : null}
+    </Link>
+   </>
   );
 }
 
@@ -187,18 +189,6 @@ const Keyboard = ({
   return (
     <div
       onClick={handleInputFocus}
-      onMouseOut={() => {
-        //setTimeout to make sure handleKeyboardBlur function happened after inputRef is focus by keyboard
-        setTimeout(() => {
-          handleKeyboardBlur();
-        }, 0);
-      }}
-      onTouchEnd={() => {
-        //setTimeout to make sure handleKeyboardBlur function happened after inputRef is focus by keyboard
-        setTimeout(() => {
-          handleKeyboardBlur();
-        }, 0);
-      }}
       className={clsx(
         'fixed left-[50%] flex h-[340px] w-screen translate-x-[-50%] flex-col justify-start bg-highlight-50 transition-all duration-300',
         {
