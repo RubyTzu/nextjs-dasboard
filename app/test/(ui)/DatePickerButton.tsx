@@ -1,5 +1,5 @@
 //import next & react
-import { useEffect, useId, useRef, useState } from 'react';
+import { useId, useRef, useState } from 'react';
 //import ui
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
 import { inter, lato, notoSansJP, notoSansTC } from '@/app/ui/fonts';
@@ -73,18 +73,14 @@ export default function DatePickerButton({
   const dialogId = useId();
   const headerId = useId();
 
-  //待研究
   // Hold the month in state to control the calendar when the input changes
   const [month, setMonth] = useState(new Date(date));
-
   // Hold the selected date in state
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(
     new Date(date),
   );
-
   // Hold the input value in state
   const [inputValue, setInputValue] = useState(format(date, 'yyyy/MM/dd'));
-
   // Hold the last saved date in state
   const [lastSavedDate, setLastSavedDate] = useState<any>(date);
 
@@ -148,17 +144,16 @@ export default function DatePickerButton({
         id={dialogId}
         aria-modal
         className={clsx(
-          ' z-20 m-0 mx-auto rounded-lg bg-transparent transition-all duration-300',
+          'z-20 m-0 mx-auto rounded-lg bg-transparent transition-all duration-300',
           {
-            'top-36 z-50 transform opacity-100  backdrop:bg-black/80': isShow,
-            'top-32 -z-50 transform opacity-0 backdrop:bg-black/20': !isShow,
+            'top-16 z-50 transform opacity-100  backdrop:bg-black/80': isShow,
+            'top-20 -z-50 transform opacity-0 backdrop:bg-black/20': !isShow,
           },
         )}
         aria-labelledby={headerId}
         onClick={() => {
           handleDayPickerSelect(new Date(lastSavedDate));
           setIsShow(false);
-
           setTimeout(() => {
             dialogRef.current?.close();
           }, 100);
@@ -182,10 +177,10 @@ export default function DatePickerButton({
             className={`relative rounded-lg bg-white ${lato.variable} ${notoSansJP.variable} ${notoSansTC.variable} font-lato antialiased transition-all duration-200`}
             classNames={{
               table:
-                'pt-3 pb-3 px-5 flex flex-col items-center w-full border-collapse',
+                'pt-3 pb-3 px-5 flex flex-col items-center border-collapse',
               head_row: 'flex font-medium text-gray-900 mb-2',
               head_cell: 'm-1 w-9 font-medium text-xs',
-              row: 'flex w-full mt-1',
+              row: 'flex  mt-1',
               cell: 'text-black rounded-full h-9 w-9 text-center text-[18px] p-0 m-1 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-gray-900/0 [&:has([aria-selected].day-outside)]:text-white [&:has([aria-selected])]:bg-gray-900/0 first:[&:has([aria-selected])]:rounded-l-full last:[&:has([aria-selected])]:rounded-r-full focus-within:relative focus-within:z-20 focus:ring-0 focus:border-0 focus:outline-none',
               day: 'h-7 w-7 p-0 font-medium',
               day_range_end: 'day-range-end',
@@ -208,7 +203,7 @@ export default function DatePickerButton({
             required
           />
           <div
-            className="mt-5 w-full rounded-full bg-highlight-20 py-3 text-center"
+            className="mt-5 rounded-full bg-highlight-20 py-3 text-center"
             onClick={() => {
               setLastSavedDate(selectedDate); // Save selected date
               setMonth(selectedDate as any);

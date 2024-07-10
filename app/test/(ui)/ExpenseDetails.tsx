@@ -3,10 +3,11 @@ import Image from 'next/image';
 import { Fragment } from 'react';
 //import data
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
-import { dateToFormate } from '@/app/test/(data)/(sharedFunction)/formateDate';
 //import ui
 import { expenseIconMap } from '@/app/test/(ui)/Icons';
 import SharerExpenseDetail from '@/app/test/(ui)/SharerExpenseDetail';
+//import other
+import { format } from 'date-fns';
 
 export function ExpenseDetailOne({
   expenseData,
@@ -61,10 +62,10 @@ export function ExpenseDetailOne({
               <div className="text-xl leading-8">{name}</div>
               <div className="text-xs text-grey-500">
                 <div className="leading-3">
-                  {dateToFormate(createAt, true)} {creatorIdUser?.name}新增
+                  {format(createAt, 'yyyy/MM/dd')} {creatorIdUser?.name}新增
                 </div>
                 <div className="leading-6">
-                  {dateToFormate(updateAt, true)} 最後更新
+                  {format(updateAt, 'yyyy/MM/dd')} 最後更新
                 </div>
               </div>
             </div>

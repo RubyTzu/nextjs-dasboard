@@ -1,11 +1,11 @@
 'use client';
 //import from next & react
+import Link from 'next/link';
 import { useState, useRef, useEffect, Fragment } from 'react';
 //import ui
 import { expenseIconMap } from '@/app/test/(ui)/Icons';
 //import other
 import clsx from 'clsx';
-import Link from 'next/link';
 
 export default function ExpenseCategoryButton({
   expenseData,
@@ -108,14 +108,12 @@ function Display({
     onBlur={() => {
       //setTimeout to make sure handleKeyboardBlur function happened after inputRef is focus by keyboard
       setTimeout(() => {
-        console.log('test blur')
         handleKeyboardBlur();
       }, 0);
     }}
     onMouseOut={() => {
       //setTimeout to make sure handleKeyboardBlur function happened after inputRef is focus by keyboard
       setTimeout(() => {
-        console.log('mouse out')
         handleKeyboardBlur();
       }, 0);
     }}
