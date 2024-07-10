@@ -4,7 +4,6 @@ import { useParams } from 'next/navigation';
 import { useState } from 'react';
 //import data
 import { useGroup, useExpense } from '@/app/test/(data)/(fetchData)/Providers';
-import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 //import ui
 import { TopExpenseSettingBar } from '@/app/test/(ui)/TopBars';
 import {
@@ -14,7 +13,6 @@ import {
 import { ExpenseSettingStepOne } from '@/app/test/(ui)/ExpenseSettingStepOne';
 import { ExpenseSettingStepTwo } from '@/app/test/(ui)/ExpenseSettingStepTwo';
 import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
-import SharerAmountInput from '@/app/test/(ui)/SharerAmountInput';
 
 export default function Page() {
   const params = useParams<{ groupid: string; expenseid: string }>();
@@ -25,6 +23,8 @@ export default function Page() {
   const expense: any = useExpense(params.groupid, params.expenseid);
 
   const [currentExpense, setCurrentExpense] = useState(expense);
+  if (!currentExpense) return null;
+  const [updatedSharers, setUpdatedSharers] = useState([...currentExpense.sharers]);
 
   if (!group) return;
 
@@ -60,6 +60,8 @@ export default function Page() {
             group={group}
             phase={phase}
             setIsNotEqual={setIsNotEqual}
+            updatedSharers={updatedSharers}
+            setUpdatedSharers={setUpdatedSharers}
           />
         </section>
         <section>

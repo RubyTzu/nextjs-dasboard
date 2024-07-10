@@ -67,7 +67,7 @@ export function NextStepButton({
   setIsNotEqual: any;
   setCurrentExpense: any;
 }) {
-  const { display, setDisplay, updateDisplay, onFocusDisplay, onBlurDisplay, equalClick } =
+  const { display } =
     useContext<any>(CalcContext);
 
   const CheckAmountIsNotEqual = () => {
@@ -92,7 +92,6 @@ export function NextStepButton({
     e.preventDefault();
     setPhase(phase + 1);
     console.log(`phase ${phase} of expense ${expenseId}`);
-    console.log(display + ': display shown')
 
     setCurrentExpense({ ...expenseData, amount: display });
     console.log(expenseData);
