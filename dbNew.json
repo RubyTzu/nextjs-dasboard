@@ -9,47 +9,47 @@
                 {
                     "id": "g1",
                     "name": "5月聚餐",
-                    "picture": "other"
+                    "picture": "groupIcon01"
                 },
                 {
                     "id": "g2",
                     "name": "2024 Japan",
-                    "picture": "travel"
+                    "picture": "groupIcon02"
                 },
                 {
                     "id": "g3",
                     "name": "fruits and drinks",
-                    "picture": "other"
+                    "picture": "groupIcon03"
                 },
                 {
                     "id": "g4",
                     "name": "新年新希望",
-                    "picture": "health"
+                    "picture": "groupIcon04"
                 },
                 {
                     "id": "g5",
                     "name": "新年新希望123",
-                    "picture": "travel"
+                    "picture": "groupIcon05"
                 },
                 {
                     "id": "g6",
                     "name": "新年新希望456",
-                    "picture": "health"
+                    "picture": "groupIcon06"
                 },
                 {
                     "id": "g7",
                     "name": "group Other 2",
-                    "picture": "other"
+                    "picture": "groupIcon07"
                 },
                 {
                     "id": "g9",
                     "name": "group Travel 3",
-                    "picture": "travel"
+                    "picture": "groupIcon09"
                 },
                 {
                     "id": "g11",
                     "name": "group Other 3",
-                    "picture": "other"
+                    "picture": "groupIcon11"
                 }
             ]
         },
@@ -62,47 +62,47 @@
                 {
                     "id": "g1",
                     "name": "5月聚餐",
-                    "picture": "other"
+                    "picture": "groupIcon01"
                 },
                 {
                     "id": "g2",
                     "name": "2024 Japan",
-                    "picture": "travel"
+                    "picture": "groupIcon02"
                 },
                 {
                     "id": "g3",
                     "name": "fruits and drinks",
-                    "picture": "other"
+                    "picture": "groupIcon03"
                 },
                 {
                     "id": "g4",
                     "name": "新年新希望",
-                    "picture": "health"
+                    "picture": "groupIcon04"
                 },
                 {
                     "id": "g5",
                     "name": "新年新希望123",
-                    "picture": "travel"
+                    "picture": "groupIcon05"
                 },
                 {
                     "id": "g6",
                     "name": "新年新希望456",
-                    "picture": "health"
+                    "picture": "groupIcon06"
                 },
                 {
                     "id": "g9",
                     "name": "group Travel 3",
-                    "picture": "travel"
+                    "picture": "groupIcon09"
                 },
                 {
                     "id": "g10",
                     "name": "group Health 3",
-                    "picture": "health"
+                    "picture": "groupIcon10"
                 },
                 {
                     "id": "g12",
                     "name": "group Games 3",
-                    "picture": "games"
+                    "picture": "groupIcon12"
                 }
             ]
         },
@@ -115,52 +115,52 @@
                 {
                     "id": "g1",
                     "name": "5月聚餐",
-                    "picture": "other"
+                    "picture": "groupIcon01"
                 },
                 {
                     "id": "g2",
                     "name": "2024 Japan",
-                    "picture": "travel"
+                    "picture": "groupIcon02"
                 },
                 {
                     "id": "g3",
                     "name": "fruits and drinks",
-                    "picture": "other"
+                    "picture": "groupIcon03"
                 },
                 {
                     "id": "g4",
                     "name": "新年新希望",
-                    "picture": "health"
+                    "picture": "groupIcon04"
                 },
                 {
                     "id": "g5",
                     "name": "新年新希望123",
-                    "picture": "travel"
+                    "picture": "groupIcon05"
                 },
                 {
                     "id": "g6",
                     "name": "新年新希望456",
-                    "picture": "health"
+                    "picture": "groupIcon06"
                 },
                 {
                     "id": "g8",
                     "name": "group Games 2",
-                    "picture": "games"
+                    "picture": "groupIcon08"
                 },
                 {
                     "id": "g9",
                     "name": "group Travel 3",
-                    "picture": "travel"
+                    "picture": "groupIcon09"
                 },
                 {
                     "id": "g10",
                     "name": "group Health 3",
-                    "picture": "health"
+                    "picture": "groupIcon10"
                 },
                 {
                     "id": "g11",
                     "name": "group Other 3",
-                    "picture": "other"
+                    "picture": "groupIcon11"
                 }
             ]
         },
@@ -173,37 +173,37 @@
                 {
                     "id": "g1",
                     "name": "5月聚餐",
-                    "picture": "other"
+                    "picture": "groupIcon01"
                 },
                 {
                     "id": "g2",
                     "name": "2024 Japan",
-                    "picture": "travel"
+                    "picture": "groupIcon02"
                 },
                 {
                     "id": "g5",
                     "name": "新年新希望123",
-                    "picture": "travel"
+                    "picture": "groupIcon05"
                 },
                 {
                     "id": "g6",
                     "name": "新年新希望456",
-                    "picture": "health"
+                    "picture": "groupIcon06"
                 },
                 {
                     "id": "g8",
                     "name": "group Games 2",
-                    "picture": "games"
+                    "picture": "groupIcon08"
                 },
                 {
                     "id": "g10",
                     "name": "group Health 3",
-                    "picture": "health"
+                    "picture": "groupIcon10"
                 },
                 {
                     "id": "g12",
                     "name": "group Games 3",
-                    "picture": "games"
+                    "picture": "groupIcon12"
                 }
             ]
         },
@@ -216,27 +216,27 @@
                 {
                     "id": "g2",
                     "name": "2024 Japan",
-                    "picture": "travel"
+                    "picture": "groupIcon02"
                 },
                 {
                     "id": "g5",
                     "name": "新年新希望123",
-                    "picture": "travel"
+                    "picture": "groupIcon05"
                 },
                 {
                     "id": "g6",
                     "name": "新年新希望456",
-                    "picture": "health"
+                    "picture": "groupIcon06"
                 },
                 {
                     "id": "g7",
                     "name": "group Other 2",
-                    "picture": "other"
+                    "picture": "groupIcon07"
                 },
                 {
                     "id": "g11",
                     "name": "group Other 3",
-                    "picture": "other"
+                    "picture": "groupIcon11"
                 }
             ]
         },
@@ -249,32 +249,32 @@
                 {
                     "id": "g2",
                     "name": "2024 Japan",
-                    "picture": "travel"
+                    "picture": "groupIcon02"
                 },
                 {
                     "id": "g5",
                     "name": "新年新希望123",
-                    "picture": "travel"
+                    "picture": "groupIcon05"
                 },
                 {
                     "id": "g6",
                     "name": "新年新希望456",
-                    "picture": "health"
+                    "picture": "groupIcon06"
                 },
                 {
                     "id": "g7",
                     "name": "group Other 2",
-                    "picture": "other"
+                    "picture": "groupIcon07"
                 },
                 {
                     "id": "g8",
                     "name": "group Games 2",
-                    "picture": "games"
+                    "picture": "groupIcon08"
                 },
                 {
                     "id": "g12",
                     "name": "group Games 3",
-                    "picture": "games"
+                    "picture": "groupIcon12"
                 }
             ]
         },
@@ -287,17 +287,17 @@
                 {
                     "id": "g5",
                     "name": "新年新希望123",
-                    "picture": "travel"
+                    "picture": "groupIcon05"
                 },
                 {
                     "id": "g9",
                     "name": "group Travel 3",
-                    "picture": "travel"
+                    "picture": "groupIcon09"
                 },
                 {
                     "id": "g11",
                     "name": "group Other 3",
-                    "picture": "other"
+                    "picture": "groupIcon11"
                 }
             ]
         },
@@ -310,17 +310,17 @@
                 {
                     "id": "g5",
                     "name": "新年新希望123",
-                    "picture": "travel"
+                    "picture": "groupIcon05"
                 },
                 {
                     "id": "g8",
                     "name": "group Games 2",
-                    "picture": "games"
+                    "picture": "groupIcon08"
                 },
                 {
                     "id": "g11",
                     "name": "group Other 3",
-                    "picture": "other"
+                    "picture": "groupIcon11"
                 }
             ]
         },
@@ -333,17 +333,17 @@
                 {
                     "id": "g5",
                     "name": "新年新希望123",
-                    "picture": "travel"
+                    "picture": "groupIcon05"
                 },
                 {
                     "id": "g9",
                     "name": "group Travel 3",
-                    "picture": "travel"
+                    "picture": "groupIcon09"
                 },
                 {
                     "id": "g11",
                     "name": "group Other 3",
-                    "picture": "other"
+                    "picture": "groupIcon11"
                 }
             ]
         },
@@ -356,17 +356,17 @@
                 {
                     "id": "g5",
                     "name": "新年新希望123",
-                    "picture": "travel"
+                    "picture": "groupIcon05"
                 },
                 {
                     "id": "g9",
                     "name": "group Travel 3",
-                    "picture": "travel"
+                    "picture": "groupIcon09"
                 },
                 {
                     "id": "g11",
                     "name": "group Other 3",
-                    "picture": "other"
+                    "picture": "groupIcon11"
                 }
             ]
         }
@@ -375,7 +375,7 @@
         {
             "id": "g1",
             "name": "5月聚餐",
-            "picture": "other",
+            "picture": "groupIcon01",
             "creatorId": "u1",
             "expenses": [
                 {
@@ -725,7 +725,7 @@
         {
             "id": "g2",
             "name": "2024 Japan",
-            "picture": "travel",
+            "picture": "groupIcon02",
             "creatorId": "u1",
             "expenses": [
                 {
@@ -862,7 +862,7 @@
         {
             "id": "g3",
             "name": "fruits and drinks",
-            "picture": "other",
+            "picture": "groupIcon03",
             "creatorId": "u1",
             "expenses": [
                 {
@@ -933,7 +933,7 @@
         {
             "id": "g4",
             "name": "新年新希望",
-            "picture": "health",
+            "picture": "groupIcon04",
             "creatorId": "u1",
             "expenses": [
                 {
@@ -1027,7 +1027,7 @@
         {
             "id": "g5",
             "name": "新年新希望123",
-            "picture": "travel",
+            "picture": "groupIcon05",
             "creatorId": "u1",
             "expenses": [],
             "users": [
@@ -1086,7 +1086,7 @@
         {
             "id": "g6",
             "name": "新年新希望456",
-            "picture": "health",
+            "picture": "groupIcon06",
             "creatorId": "u1",
             "expenses": [],
             "users": [
@@ -1125,7 +1125,7 @@
         {
             "id": "g7",
             "name": "group Other 2",
-            "picture": "other",
+            "picture": "groupIcon07",
             "creatorId": "u1",
             "expenses": [],
             "users": [
@@ -1149,7 +1149,7 @@
         {
             "id": "g8",
             "name": "group Games 2",
-            "picture": "games",
+            "picture": "groupIcon08",
             "creatorId": "u3",
             "expenses": [],
             "users": [
@@ -1178,7 +1178,7 @@
         {
             "id": "g9",
             "name": "group Travel 3",
-            "picture": "travel",
+            "picture": "groupIcon09",
             "creatorId": "u1",
             "expenses": [],
             "users": [
@@ -1217,7 +1217,7 @@
         {
             "id": "g10",
             "name": "group Health 3",
-            "picture": "health",
+            "picture": "groupIcon10",
             "creatorId": "u2",
             "expenses": [],
             "users": [
@@ -1241,7 +1241,7 @@
         {
             "id": "g11",
             "name": "group Other 3",
-            "picture": "other",
+            "picture": "groupIcon11",
             "creatorId": "u1",
             "expenses": [],
             "users": [
@@ -1285,7 +1285,7 @@
         {
             "id": "g12",
             "name": "group Games 3",
-            "picture": "games",
+            "picture": "groupIcon12",
             "creatorId": "u2",
             "expenses": [],
             "users": [

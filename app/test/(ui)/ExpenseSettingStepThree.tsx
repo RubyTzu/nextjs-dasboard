@@ -1,7 +1,10 @@
+//import from next & react
 import Image from 'next/image';
-import { NotePencilIcon } from '@/app/test/(ui)/Icons';
-import clsx from 'clsx';
 import { useEffect } from 'react';
+//import ui
+import { NotePencilIcon } from '@/app/test/(ui)/Icons';
+//other
+import clsx from 'clsx';
 
 interface User {
   id: string;
@@ -36,8 +39,6 @@ export function ExpenseSettingStepThree({
   updatedSharers,
   setUpdatedSharers,
 }: ExpenseSettingStepThreeProps) {
-  
-
   const users = group.users;
 
   useEffect(() => {
@@ -60,7 +61,7 @@ export function ExpenseSettingStepThree({
     setUpdatedSharers([]);
   };
 
-if (!expenseData || !updatedSharers) return null;
+  if (!expenseData || !updatedSharers) return null;
 
   const handleSharerToggle = (userId: string) => {
     const existingIndex = updatedSharers.findIndex(
