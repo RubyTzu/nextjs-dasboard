@@ -85,6 +85,9 @@ const config: Config = {
           'onDark-secondary': '#9E9E9E',
         },
       },
+      zIndex: {
+        '100': '100',
+      }
     },
     keyframes: {
       shimmer: {

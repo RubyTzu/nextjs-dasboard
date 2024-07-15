@@ -1,4 +1,6 @@
-//import next & react
+'use client';
+//import from next & react
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useId, useRef, useState } from 'react';
 //import ui
@@ -21,16 +23,17 @@ export default function SharersAmountButton({
     const [sharers, setSharers] = useState(updatedSharers)
     const [lastSavedValue, setLastSavedValue] = useState<any>(sharers);
     const [isShow, setIsShow] = useState(false);
-    const dialogRef = useRef<HTMLDialogElement>(null);
-    const dialogId = useId();
-    const headerId = useId();
+    const [barTop, setBarTop] = useState('100%');
+    const [onFocus, setOnFocus] = useState(false);
+  
+    const router = useRouter();
     if (!updatedSharers) return
 
-    const toggleDialog = () => {
-        dialogRef.current?.showModal();
-        setTimeout(() => {
-            setIsShow(true);
-        }, 0);
+    const handleSharerAmountButton = (e: any) => {
+        e.preventDefault();
+        setIsShow(true);
+        router.refresh();
+        console.log('hello')
     };
 
     const handleChange = (e: any) => {
@@ -38,45 +41,39 @@ export default function SharersAmountButton({
         setSharers(e.target.value);
     };
 
+    const handleClose = (e: any) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsShow(false);
+        router.refresh();
+        console.log(name);
+    };
+
+
     return (
         <>
-            <div onClick={toggleDialog} className="flex w-20 justify-center text-xs">
+            <div onClick={handleSharerAmountButton} className="flex w-20 justify-center text-xs cursor-pointer">
                 <div className="scale-75">
                     <NotePencilIcon />
                 </div>
                 <div>負擔金額</div>
             </div>
-            <dialog
-                role="dialog"
-                ref={dialogRef}
-                id={dialogId}
-                aria-modal
-                className={clsx(
-                    'z-20 m-0 mx-auto rounded-lg bg-transparent transition-all duration-300',
-                    {
-                        'top-16 z-50 transform opacity-100  backdrop:bg-black/80': isShow,
-                        'top-20 -z-50 transform opacity-0 backdrop:bg-black/20': !isShow,
-                    },
-                )}
-                aria-labelledby={headerId}
-                onClick={() => {
-                    setSharers(lastSavedValue);
-                    setIsShow(false);
-                    setTimeout(() => {
-                        dialogRef.current?.close();
-                    }, 100);
-                }}
-            >
-                <div onClick={(e: any) => e.stopPropagation()}>
+            <div>
+                <div
+                    className={clsx(
+                        'fixed left-[50%] translate-x-[-50%] m-0 mx-auto rounded-lg bg-transparent transition-all duration-300',
+                        {
+                            'top-16 z-50 transform opacity-100': isShow,
+                            'top-20 -z-50 transform opacity-0': !isShow,
+                        },
+                    )}
+                >
                     <div className="flex items-center justify-between rounded-t-lg bg-highlight-60 px-7 py-2">
                         <div
                             className="w-9 text-sm"
                             onClick={() => {
                                 setSharers(lastSavedValue);
                                 setIsShow(false);
-                                setTimeout(() => {
-                                    dialogRef.current?.close();
-                                }, 100);
                             }}
                         >
                             取消
@@ -98,7 +95,19 @@ export default function SharersAmountButton({
                                         />
                                         <div>{user.name}</div>
                                     </div>
-                                    <div>amount
+                                    <div>
+                                        <input
+                                            className="w-20 ml-[0px] border-0 border-b-[1px] border-black focus:border-black focus:ring-0 focus:outline-none"
+                                            type="number"
+                                            pattern="[0-9]*"
+                                            inputMode="numeric"
+                                            onFocus={() => {
+                                                setOnFocus(true)
+                                            }}
+                                            onBlur={() => {
+                                                setOnFocus(false)
+                                            }}
+                                        />
                                     </div>
                                 </div>
                             )
@@ -107,17 +116,35 @@ export default function SharersAmountButton({
                     <div
                         className="mt-5 w-full rounded-full bg-highlight-20 py-3 text-center"
                         onClick={() => {
-                            // setLastSavedValue(sharers)
-                            // setIsShow(false);
-                            // setTimeout(() => {
-                            //     dialogRef.current?.close();
-                            // }, 100);
+                            setLastSavedValue(sharers)
+                            setIsShow(false);
                         }}
                     >
                         儲存
                     </div>
                 </div>
-            </dialog>
+                <div
+                    onClick={(e) => handleClose(e)}
+                    className={clsx(
+                        'fixed left-[0%] top-[0%] z-0 min-h-screen w-screen bg-[#000] transition-all duration-200',
+                        {
+                            'z-30 transform opacity-80': isShow,
+                            'z-[-100] transform opacity-20': !isShow,
+                        },
+                    )}
+                ></div>
+                <div
+                    className={clsx(
+                        'z-100 bg-grey-keyBoard fixed bottom-0 left-0 w-full p-6 text-center',
+                        { hidden: !onFocus,
+                           block: onFocus },
+                    )}
+                >
+                    <div className="text-black">小陳負擔$3,000中的$</div>
+                    <div className="text-sm text-neutrals-60">還剩下$3,000還沒被分帳</div>
+                </div>
+            </div>
+
         </>
     )
 }
