@@ -23,11 +23,11 @@ export default function Page() {
   const expense: any = useExpense(params.groupid, params.expenseid);
 
   const [currentExpense, setCurrentExpense] = useState(expense);
+  if (!currentExpense) return null;
   const [updatedSharers, setUpdatedSharers] = useState([
     ...currentExpense.sharers,
   ]);
 
-  if (!currentExpense) return null;
   if (!group) return;
 
   return (
@@ -75,7 +75,7 @@ export default function Page() {
             setIsNotEqual={setIsNotEqual}
           />
         </section>
-        <div className="h-[420px]"></div>
+        {/* <div className="h-[420px]"></div> */}
       </div>
     </form>
   );

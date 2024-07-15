@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 //import ui
 import { NotePencilIcon } from '@/app/test/(ui)/Icons';
+import SharersAmountButton from './SharersAmountButton';
 //other
 import clsx from 'clsx';
 
@@ -50,9 +51,13 @@ export function ExpenseSettingStepThree({
   }, [updatedSharers, expenseData.amount, setIsNotEqual]);
 
   const handleAllSelect = () => {
+    console.log('users are')
+    console.log(users)
+    console.log(updatedSharers)
     const updatedSharersCopy = users.map((user) => ({
       id: user.id,
       amount: expenseData.amount / users.length,
+      // amount: 0,
     }));
     setUpdatedSharers(updatedSharersCopy);
   };
@@ -90,12 +95,17 @@ export function ExpenseSettingStepThree({
       <div className="mx-auto mb-5 px-3 text-xl">選擇分帳成員</div>
       <div className="mb-3 mt-1 flex w-full items-center justify-end px-[14px]">
         <div className="flex gap-3">
-          <div className="flex w-20 justify-center text-xs">
+          {/* <div className="flex w-20 justify-center text-xs">
             <div className="scale-75">
               <NotePencilIcon />
             </div>
             負擔金額
-          </div>
+          </div> */}
+          <SharersAmountButton
+            users={users}
+            updatedSharers={updatedSharers}
+            setUpdatedSharers={setUpdatedSharers}
+          />
           {updatedSharers.length === users.length ? (
             <div
               onClick={handleAllNoSelect}
@@ -144,7 +154,7 @@ export function ExpenseSettingStepThree({
                 id={user.name}
                 name={user.name}
                 value={user.name}
-                onChange={() => {}}
+                onChange={() => { }}
                 onClick={() => handleSharerToggle(user.id)} // Call handleSharerToggle on change
                 checked={isChecked}
               />

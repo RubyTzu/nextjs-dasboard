@@ -17,7 +17,7 @@ function CustomCaptionComponent(
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
   return (
     <div className="border-t-rounded-lg flex flex-col">
-      <div className="flex items-center justify-between rounded-t-lg bg-highlight-60 px-5 py-2">
+      <div className="flex items-center justify-between rounded-t-lg bg-highlight-60 px-7 py-2">
         <div
           className="w-9 text-sm"
           onClick={() => {
@@ -178,11 +178,11 @@ export default function DatePickerButton({
             classNames={{
               table:
                 'pt-3 pb-3 px-5 flex flex-col items-center w-full border-collapse',
-              head_row: 'flex font-medium text-gray-900 mb-2',
-              head_cell: 'm-1 w-9 font-medium text-xs',
+              head_row: 'flex font-[600] text-gray-900 mb-2',
+              head_cell: 'm-1 w-9 font-[600] text-xs',
               row: 'flex w-full mt-1',
               cell: 'text-black rounded-full h-9 w-9 text-center text-[18px] p-0 m-1 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-gray-900/0 [&:has([aria-selected].day-outside)]:text-white [&:has([aria-selected])]:bg-gray-900/0 first:[&:has([aria-selected])]:rounded-l-full last:[&:has([aria-selected])]:rounded-r-full focus-within:relative focus-within:z-20 focus:ring-0 focus:border-0 focus:outline-none',
-              day: 'h-7 w-7 p-0 font-medium',
+              day: 'h-7 w-7 p-0 font-[600]',
               day_range_end: 'day-range-end',
               day_selected:
                 'rounded-full bg-highlight-60 text-black hover:bg-highlight-60 hover:text-black focus:bg-highlight-60 focus:text-black focus:ring-0 focus:border-0 focus:outline-none',

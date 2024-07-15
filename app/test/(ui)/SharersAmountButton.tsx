@@ -1,4 +1,5 @@
 //import next & react
+import Image from 'next/image';
 import { useId, useRef, useState } from 'react';
 //import ui
 import {
@@ -6,21 +7,24 @@ import {
 } from '@/app/test/(ui)/Icons';
 //import other
 import clsx from 'clsx';
+import SharerAmountInput from './SharerAmountInput';
 
-export default function NoteButton({
-    expenseData,
-    setCurrentExpense,
+export default function SharersAmountButton({
+    users,
+    updatedSharers,
+    setUpdatedSharers,
 }: {
-    expenseData: any;
-    setCurrentExpense: any;
+    users: any;
+    updatedSharers: any;
+    setUpdatedSharers: any;
 }) {
-    const [textareaValue, setTextareaValue] = useState(expenseData.note)
-    const [lastSavedValue, setLastSavedValue] = useState<any>(textareaValue);
+    const [sharers, setSharers] = useState(updatedSharers)
+    const [lastSavedValue, setLastSavedValue] = useState<any>(sharers);
     const [isShow, setIsShow] = useState(false);
     const dialogRef = useRef<HTMLDialogElement>(null);
     const dialogId = useId();
     const headerId = useId();
-    if (!expenseData) return
+    if (!updatedSharers) return
 
     const toggleDialog = () => {
         dialogRef.current?.showModal();
@@ -31,16 +35,16 @@ export default function NoteButton({
 
     const handleChange = (e: any) => {
         console.log(e.target.value);
-        setTextareaValue(e.target.value);
+        setSharers(e.target.value);
     };
 
     return (
         <>
-            <div onClick={toggleDialog} className="flex items-center justify-center gap-1 pb-1 pt-2 text-sm">
-                <div>
+            <div onClick={toggleDialog} className="flex w-20 justify-center text-xs">
+                <div className="scale-75">
                     <NotePencilIcon />
                 </div>
-                <div>編輯備註</div>
+                <div>負擔金額</div>
             </div>
             <dialog
                 role="dialog"
@@ -56,7 +60,7 @@ export default function NoteButton({
                 )}
                 aria-labelledby={headerId}
                 onClick={() => {
-                    setTextareaValue(lastSavedValue);
+                    setSharers(lastSavedValue);
                     setIsShow(false);
                     setTimeout(() => {
                         dialogRef.current?.close();
@@ -68,7 +72,7 @@ export default function NoteButton({
                         <div
                             className="w-9 text-sm"
                             onClick={() => {
-                                setTextareaValue(lastSavedValue);
+                                setSharers(lastSavedValue);
                                 setIsShow(false);
                                 setTimeout(() => {
                                     dialogRef.current?.close();
@@ -77,29 +81,37 @@ export default function NoteButton({
                         >
                             取消
                         </div>
-                        <div className="text-normal">編輯備註</div>
+                        <div className="text-normal">編輯負擔金額</div>
                         <div className="w-9" />
                     </div>
-                    <textarea
-                    onFocus={(e) => {
-                        const selectionEnd = e.target.value.length;
-                        e.target.setSelectionRange(selectionEnd, selectionEnd);
-                    }}
-                        className="px-7 py-5 h-36 w-[89vw] resize-none rounded-b-lg bg-white border-none focus:border-none focus:ring-0 focus:outline-none"
-                        onChange={handleChange}
-                        value={textareaValue} />
+                    <div className="hover:scrollbar-thumb-highlight-20 active:scrollbar-thumb-highlight-20 overflow-y-scroll scrollbar scrollbar-thumb-highlight-20 scrollbar-track-sky-300 h-36 flex flex-col gap-4 w-[89vw] rounded-b-lg bg-white border-none px-7 py-5">
+                        {users.map((user: any) => {
+                            return (
+                                <div key={user.id} className="flex justify-between items-center">
+                                    <div className="flex items-center gap-4">
+                                        <Image
+                                            className="bg-grey-200 flex h-[45px] w-[45px] items-center justify-center rounded-full"
+                                            src={user.picture}
+                                            width={45}
+                                            height={45}
+                                            alt="sharer image"
+                                        />
+                                        <div>{user.name}</div>
+                                    </div>
+                                    <div>amount
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
                     <div
                         className="mt-5 w-full rounded-full bg-highlight-20 py-3 text-center"
                         onClick={() => {
-                            setLastSavedValue(textareaValue)
-                            setCurrentExpense({
-                                ...expenseData,
-                                note: textareaValue,
-                            });
-                            setIsShow(false);
-                            setTimeout(() => {
-                                dialogRef.current?.close();
-                            }, 100);
+                            // setLastSavedValue(sharers)
+                            // setIsShow(false);
+                            // setTimeout(() => {
+                            //     dialogRef.current?.close();
+                            // }, 100);
                         }}
                     >
                         儲存
