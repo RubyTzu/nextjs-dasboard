@@ -50,6 +50,8 @@ export function ExpenseSettingStepThree({
     setIsNotEqual(Number(expenseData.amount) !== Number(addedAmount));
   }, [updatedSharers, expenseData.amount, setIsNotEqual]);
 
+  if (!expenseData || !updatedSharers) return null;
+
   const handleAllSelect = () => {
     console.log('users are')
     console.log(users)
@@ -65,8 +67,6 @@ export function ExpenseSettingStepThree({
   const handleAllNoSelect = () => {
     setUpdatedSharers([]);
   };
-
-  if (!expenseData || !updatedSharers) return null;
 
   const handleSharerToggle = (userId: string) => {
     const existingIndex = updatedSharers.findIndex(
@@ -95,12 +95,6 @@ export function ExpenseSettingStepThree({
       <div className="mx-auto mb-5 px-3 text-xl">選擇分帳成員</div>
       <div className="mb-3 mt-1 flex w-full items-center justify-end px-[14px]">
         <div className="flex gap-3">
-          {/* <div className="flex w-20 justify-center text-xs">
-            <div className="scale-75">
-              <NotePencilIcon />
-            </div>
-            負擔金額
-          </div> */}
           <SharersAmountButton
             users={users}
             updatedSharers={updatedSharers}

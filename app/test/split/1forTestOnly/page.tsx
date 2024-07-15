@@ -7,6 +7,7 @@ import DatePickerButton from '@/app/test/(ui)/DatePickerButton';
 import ExpenseCategoryButton from '@/app/test/(ui)/ExpenseCategoryButton';
 import NoteButton from '../../(ui)/NoteButton';
 import { GroupInfoBar } from '@/app/test/(ui)/ExpenseSettingDetails';
+import SharersAmountButton from '../../(ui)/SharersAmountButton';
 
 
 export default function Page() {
@@ -136,19 +137,20 @@ export default function Page() {
       }
     ]
   });
-  const [phase, setPhase] = useState(1);
-
+  // const [phase, setPhase] = useState(3);
+ const [updatedSharers, setUpdatedSharers] = useState([
+   ...currentExpense.sharers,
+ ]);
   return (
     <div className="relative flex flex-col">
       <div className="fixed z-20 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
         <div className="flex h-6 w-12 items-center"></div>
-          <h1 className="text-lg">編輯費用</h1>
-          <div className="flex h-6 w-12 items-center"></div>
+        <h1 className="text-lg">編輯費用</h1>
+        <div className="flex h-6 w-12 items-center"></div>
       </div>
       <GroupInfoBar expenseData={currentExpense} group={group} />
       <section>
-        <div className="relative">
-          {/* <SharerAmountInput /> */}
+        {/* <div className="relative">
           <div
             className='mx-auto py-6 w-fit'
           >
@@ -185,7 +187,12 @@ export default function Page() {
               setCurrentExpense={setCurrentExpense}
             />
           </div>
-        </div>
+        </div> */}
+        <SharersAmountButton
+          users={group.users}
+          updatedSharers={updatedSharers}
+          setUpdatedSharers={setUpdatedSharers}
+        />
       </section>
     </div>
   );
