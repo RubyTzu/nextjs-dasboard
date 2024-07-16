@@ -42,11 +42,13 @@ export function ExpenseSettingStepThree({
 }: ExpenseSettingStepThreeProps) {
   const users = group.users;
 
+  const addedAmount = updatedSharers.reduce(
+    (total, sharer) =>  {return Number(total) + Number(sharer.amount)},
+    0,
+  );
+
   useEffect(() => {
-    const addedAmount = updatedSharers.reduce(
-      (total, sharer) => total + sharer.amount,
-      0,
-    );
+
     setIsNotEqual(Number(expenseData.amount) !== Number(addedAmount));
   }, [updatedSharers, expenseData.amount, setIsNotEqual]);
 
@@ -97,8 +99,10 @@ export function ExpenseSettingStepThree({
         <div className="flex gap-3">
           <SharersAmountButton
             users={users}
+            expenseData={expenseData}
             updatedSharers={updatedSharers}
             setUpdatedSharers={setUpdatedSharers}
+            addedAmount={addedAmount}
           />
           {updatedSharers.length === users.length ? (
             <div

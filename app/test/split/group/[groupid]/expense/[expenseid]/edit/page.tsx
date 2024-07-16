@@ -24,7 +24,7 @@ export default function Page() {
 
   const [currentExpense, setCurrentExpense] = useState(expense);
   const [updatedSharers, setUpdatedSharers] = useState([
-    ...currentExpense.sharers,
+    ...currentExpense?.sharers,
   ]);
 
 if (!currentExpense) return null;
