@@ -102,7 +102,6 @@ export function ExpenseSettingStepThree({
             expenseData={expenseData}
             updatedSharers={updatedSharers}
             setUpdatedSharers={setUpdatedSharers}
-            addedAmount={addedAmount}
           />
           {updatedSharers.length === users.length ? (
             <div

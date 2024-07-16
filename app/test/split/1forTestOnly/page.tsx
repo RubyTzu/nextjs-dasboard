@@ -9,7 +9,6 @@ import NoteButton from '../../(ui)/NoteButton';
 import { GroupInfoBar } from '@/app/test/(ui)/ExpenseSettingDetails';
 import SharersAmountButton from '../../(ui)/SharersAmountButton';
 
-
 export default function Page() {
   const group = {
     id: 'g1',
@@ -109,38 +108,39 @@ export default function Page() {
     ],
   };
   const [currentExpense, setCurrentExpense] = useState({
-    id: "e1",
-    groupId: "g1",
-    name: "燒鳥肌肉串",
+    id: 'e1',
+    groupId: 'g1',
+    name: '燒鳥肌肉串',
     amount: 210,
-    date: "2024-05-28T09:18:15.063Z",
-    category: "food",
-    creatorId: "u1",
-    payerId: "u1",
+    date: '2024-05-28T09:18:15.063Z',
+    category: 'food',
+    creatorId: 'u1',
+    payerId: 'u1',
     sharers: [
       {
-        id: "u1",
-        amount: 105
+        id: 'u1',
+        amount: 105,
       },
       {
-        id: "u2",
-        amount: 105
-      }
+        id: 'u2',
+        amount: 105,
+      },
     ],
-    note: "I am just testing",
-    createAt: "2024-05-28T09:18:15.063Z",
-    updateAt: "2024-05-28T09:18:15.063Z",
+    note: 'I am just testing',
+    createAt: '2024-05-28T09:18:15.063Z',
+    updateAt: '2024-05-28T09:18:15.063Z',
     historys: [
       {
-        editedAt: "2024-05-28T09:18:15.063Z",
-        editorId: "u1"
-      }
-    ]
+        editedAt: '2024-05-28T09:18:15.063Z',
+        editorId: 'u1',
+      },
+    ],
   });
   // const [phase, setPhase] = useState(3);
- const [updatedSharers, setUpdatedSharers] = useState([
-   ...currentExpense.sharers,
- ]);
+  const [updatedSharers, setUpdatedSharers] = useState([
+    ...currentExpense.sharers,
+  ]);
+  
   return (
     <div className="relative flex flex-col">
       <div className="fixed z-20 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
@@ -189,6 +189,8 @@ export default function Page() {
           </div>
         </div> */}
         <SharersAmountButton
+          //  users,
+          expenseData={currentExpense}
           users={group.users}
           updatedSharers={updatedSharers}
           setUpdatedSharers={setUpdatedSharers}
