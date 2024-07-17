@@ -39,7 +39,7 @@ export default function SharersAmountButton({
   useEffect(() => {
     const handleResize: any = () => {
       if (window.visualViewport) {
-        const newTop = `${window.visualViewport.height}px`;
+        const newTop = `${window.visualViewport.height-93}px`;
         setBarTop(newTop);
       }
     };
@@ -217,7 +217,7 @@ export default function SharersAmountButton({
         ></div>
         <div
           className={clsx(
-            'fixed bottom-0 left-0 z-100 w-full bg-grey-keyBoard p-6 text-center',
+            'absolute bottom-0 left-0 z-100 h-fit w-full bg-grey-keyBoard p-6 text-center',
             { hidden: !onFocus, block: onFocus },
           )}
           style={{ top: barTop }}
