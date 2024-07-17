@@ -220,6 +220,7 @@ export default function SharersAmountButton({
             'fixed bottom-0 left-0 z-100 w-full bg-grey-keyBoard p-6 text-center',
             { hidden: !onFocus, block: onFocus },
           )}
+          style={{ top: barTop }}
         >
           <div className="text-black">
             {
