@@ -72,7 +72,8 @@ export function NextStepButton({
   expenseData,
   isNotEqual,
   setIsNotEqual,
-  setCurrentExpense
+  setCurrentExpense,
+  updatedSharers,
 }: {
   phase: number;
   setPhase: any;
@@ -81,9 +82,9 @@ export function NextStepButton({
   isNotEqual: any;
   setIsNotEqual: any;
   setCurrentExpense: any;
+  updatedSharers: any;
 }) {
-  const { display } =
-    useContext<any>(CalcContext);
+  const { display } = useContext<any>(CalcContext);
 
   const CheckAmountIsNotEqual = () => {
     let addedAmount = 0;
@@ -115,14 +116,15 @@ export function NextStepButton({
   }
 
   function handleSubmit(expense: any) {
-    console.log(expenseData);
+    // console.log(expenseData);
+   
   }
 
   return (
     <div className="mb-8 flex flex-col items-center">
       {phase !== 3 ? (
         <button
-          disabled={(isNaN(Number(display)) || display < 1)}
+          disabled={isNaN(Number(display)) || display < 1}
           type="button"
           // disabled={showKeyboard}
           onClick={(e: any) => handleClick(e, expenseData.id)}
@@ -131,14 +133,22 @@ export function NextStepButton({
           <div className="text-[10px]">{phase}/3</div>
           <div className="text-sm">下一步</div>
           <div>
-            <NextstepIcon currentColor={(isNaN(Number(display)) || display < 1) ? '#9E9E9E' : '#000'} />
+            <NextstepIcon
+              currentColor={
+                isNaN(Number(display)) || display < 1 ? '#9E9E9E' : '#000'
+              }
+            />
           </div>
         </button>
       ) : (
         <button
           disabled={isNotEqual}
-          type="submit"
-          onClick={() => { console.log('click submit') }}
+          type="button"
+          onClick={() => {
+            console.log('click submit');
+            setCurrentExpense({ ...expenseData, sharers: updatedSharers });
+            console.log(expenseData);
+          }}
           onSubmit={() => handleSubmit(expenseData)}
           className="relative flex w-[180px] items-center justify-between rounded-full bg-highlight-20 px-4 py-2 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
         >

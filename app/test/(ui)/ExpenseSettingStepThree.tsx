@@ -1,6 +1,6 @@
 //import from next & react
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 //import ui
 import { NotePencilIcon } from '@/app/test/(ui)/Icons';
 import SharersAmountButton from './SharersAmountButton';
@@ -41,6 +41,7 @@ export function ExpenseSettingStepThree({
   setUpdatedSharers,
 }: ExpenseSettingStepThreeProps) {
   const users = group.users;
+  const [sharers, setSharers] = useState<any>(updatedSharers);
 
   const addedAmount = updatedSharers.reduce(
     (total, sharer) =>  {return Number(total) + Number(sharer.amount)},
@@ -64,10 +65,12 @@ export function ExpenseSettingStepThree({
       // amount: 0,
     }));
     setUpdatedSharers(updatedSharersCopy);
+    setSharers(updatedSharersCopy);
   };
 
   const handleAllNoSelect = () => {
     setUpdatedSharers([]);
+    setSharers([])
   };
 
   const handleSharerToggle = (userId: string) => {
@@ -86,6 +89,7 @@ export function ExpenseSettingStepThree({
     }
 
     setUpdatedSharers(updatedSharersCopy);
+    setSharers(updatedSharersCopy);
   };
 
   return (
@@ -102,6 +106,8 @@ export function ExpenseSettingStepThree({
             expenseData={expenseData}
             updatedSharers={updatedSharers}
             setUpdatedSharers={setUpdatedSharers}
+            sharers={sharers}
+            setSharers={setSharers}
           />
           {updatedSharers.length === users.length ? (
             <div
@@ -151,7 +157,7 @@ export function ExpenseSettingStepThree({
                 id={user.name}
                 name={user.name}
                 value={user.name}
-                onChange={() => { }}
+                onChange={() => {}}
                 onClick={() => handleSharerToggle(user.id)} // Call handleSharerToggle on change
                 checked={isChecked}
               />

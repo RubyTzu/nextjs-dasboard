@@ -140,7 +140,7 @@ export default function Page() {
   const [updatedSharers, setUpdatedSharers] = useState([
     ...currentExpense.sharers,
   ]);
-  
+  const [sharers, setSharers] = useState<any>(updatedSharers);
   return (
     <div className="relative flex flex-col">
       <div className="fixed z-20 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
@@ -189,11 +189,13 @@ export default function Page() {
           </div>
         </div> */}
         <SharersAmountButton
-          //  users,
+          // users={users}
           expenseData={currentExpense}
           users={group.users}
           updatedSharers={updatedSharers}
           setUpdatedSharers={setUpdatedSharers}
+          sharers={sharers}
+          setSharers={setSharers}
         />
       </section>
     </div>

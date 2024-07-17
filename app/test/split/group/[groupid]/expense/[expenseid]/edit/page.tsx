@@ -73,6 +73,7 @@ if (!currentExpense) return null;
             setPhase={setPhase}
             isNotEqual={isNotEqual}
             setIsNotEqual={setIsNotEqual}
+            updatedSharers={updatedSharers}
           />
         </section>
         {/* <div className="h-[420px]"></div> */}
