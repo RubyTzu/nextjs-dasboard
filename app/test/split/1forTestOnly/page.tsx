@@ -6,11 +6,13 @@ import SharerAmountInput from '../../(ui)/SharerAmountInput';
 import DatePickerButton from '@/app/test/(ui)/DatePickerButton';
 import ExpenseCategoryButton from '@/app/test/(ui)/ExpenseCategoryButton';
 import NoteButton from '../../(ui)/NoteButton';
-import { GroupInfoBar } from '@/app/test/(ui)/ExpenseSettingDetails';
+import { NextStepButton, GroupInfoBar } from '@/app/test/(ui)/ExpenseSettingDetails';
 import SharersAmountButton from '../../(ui)/SharersAmountButton';
+import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
+
 
 export default function Page() {
-  const group ={
+  const group = {
     id: "g2",
     name: "2024 Japan",
     picture: "groupIcon02",
@@ -130,11 +132,13 @@ export default function Page() {
       }
     ]
   });
-  // const [phase, setPhase] = useState(3);
+  const [phase, setPhase] = useState(3);
   const [updatedSharers, setUpdatedSharers] = useState([
     ...currentExpense.sharers,
   ]);
   const [sharers, setSharers] = useState<any>(updatedSharers);
+  const [isNotEqual, setIsNotEqual] = useState(false);
+
   return (
     <div className="relative flex flex-col">
       <div className="fixed z-20 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
@@ -190,6 +194,24 @@ export default function Page() {
           setUpdatedSharers={setUpdatedSharers}
           sharers={sharers}
           setSharers={setSharers}
+        />
+        <ExpenseSettingStepThree
+          expenseData={currentExpense}
+          group={group}
+          phase={phase}
+          setIsNotEqual={setIsNotEqual}
+          updatedSharers={updatedSharers}
+          setUpdatedSharers={setUpdatedSharers}
+        />
+        <NextStepButton
+          expenseData={currentExpense}
+          setCurrentExpense={setCurrentExpense}
+          group={group}
+          phase={phase}
+          setPhase={setPhase}
+          isNotEqual={isNotEqual}
+          setIsNotEqual={setIsNotEqual}
+          updatedSharers={updatedSharers}
         />
       </section>
     </div>
