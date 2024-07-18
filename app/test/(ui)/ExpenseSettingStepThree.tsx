@@ -190,14 +190,12 @@ export function ExpenseSettingStepThree({
   });
   const router = useRouter();
   const addedAmount = updatedSharers.reduce(
-    (total, sharer) => { return Number(total) + Number(sharer.amount) },
+    (total, sharer) => Number(total) + Number(sharer.amount),
     0,
   );
 
   useEffect(() => {
-
     setIsNotEqual(Number(expenseData.amount) !== Number(addedAmount));
-
 
     const handleResize: any = () => {
       // if (window.visualViewport) {
@@ -205,7 +203,9 @@ export function ExpenseSettingStepThree({
       //   setBarTop(newTop);
       // }
       if (window.visualViewport) {
-        const newBottom = `${window.innerHeight - window.visualViewport.offsetTop - window.visualViewport.height}px`;
+          const newBottom = `${
+            window.innerHeight - window.visualViewport.height
+          }px`;
         setBarBottom(newBottom);
       }
     };
@@ -219,14 +219,14 @@ export function ExpenseSettingStepThree({
         };
       }
     }
-  }, [updatedSharers, expenseData.amount, setIsNotEqual ]);
+  }, [updatedSharers, expenseData.amount, setIsNotEqual]);
 
   if (!expenseData || !updatedSharers) return null;
 
   const handleAllSelect = () => {
-    console.log('users are')
-    console.log(users)
-    console.log(updatedSharers)
+    console.log('users are');
+    console.log(users);
+    console.log(updatedSharers);
     const updatedSharersCopy = users.map((user) => ({
       id: user.id,
       amount: expenseData.amount / users.length,
@@ -238,7 +238,7 @@ export function ExpenseSettingStepThree({
 
   const handleAllNoSelect = () => {
     setUpdatedSharers([]);
-    setSharers([])
+    setSharers([]);
   };
 
   const handleSharerToggle = (userId: string) => {
@@ -264,17 +264,18 @@ export function ExpenseSettingStepThree({
     setUpdatedSharers((prevSharers: any) => {
       // Check if the sharer already exists
       const updatedSharersCopy = prevSharers.map((sharer: any) =>
-        sharer.id === id ? { ...sharer, amount: Number(newAmount) } : sharer
+        sharer.id === id ? { ...sharer, amount: Number(newAmount) } : sharer,
       );
-  
+
       // Add the new sharer if not exists
       if (!prevSharers.some((sharer: any) => sharer.id === id)) {
         updatedSharersCopy.push({ id, amount: Number(newAmount) });
       }
-  
+
       // Filter out sharers with amount 0
       return updatedSharersCopy.filter(
-        (sharer: any) => sharer.amount !== 0 && sharer.amount !== '' && sharer.amount !== '0'
+        (sharer: any) =>
+          sharer.amount !== 0 && sharer.amount !== '' && sharer.amount !== '0',
       );
     });
   };
@@ -288,9 +289,7 @@ export function ExpenseSettingStepThree({
       <div className="mx-auto mb-5 px-3 text-xl">選擇分帳成員</div>
       <div className="mb-3 mt-1 flex w-full items-center justify-end px-[14px]">
         <div className="flex gap-3">
-          <div
-            className="flex w-20 cursor-pointer justify-center text-xs"
-          >
+          <div className="flex w-20 cursor-pointer justify-center text-xs">
             <div className="scale-75">
               <NotePencilIcon />
             </div>
@@ -328,9 +327,9 @@ export function ExpenseSettingStepThree({
         sharer = sharer
           ? sharer
           : {
-            id: user.id,
-            amount: 0,
-          };
+              id: user.id,
+              amount: 0,
+            };
 
         return (
           <div
@@ -347,11 +346,11 @@ export function ExpenseSettingStepThree({
               />
               <div>{user.name}</div>
             </div>
-            <div className="flex justify-between items-center gap-7">
+            <div className="flex items-center justify-between gap-7">
               {/* <p className="text-sm text-neutrals-70">${amountValue}</p> */}
 
               <input
-                className=" text-neutrals-70 bg-transparent w-20 border-0 border-b-[1px] border-black focus:border-black focus:outline-none focus:ring-0 focus:border-highlight-40"
+                className=" w-20 border-0 border-b-[1px] border-black bg-transparent text-neutrals-70 focus:border-black focus:border-highlight-40 focus:outline-none focus:ring-0"
                 type="number"
                 pattern="[0-9]*"
                 inputMode="numeric"
@@ -389,7 +388,7 @@ export function ExpenseSettingStepThree({
                 id={user.name}
                 name={user.name}
                 value={user.name}
-                onChange={() => { }}
+                onChange={() => {}}
                 onClick={() => handleSharerToggle(user.id)} // Call handleSharerToggle on change
                 checked={isChecked}
               />
@@ -397,33 +396,33 @@ export function ExpenseSettingStepThree({
           </div>
         );
       })}
-        <div
-          className={clsx(
-            'fixed left-0 z-100 h-fit w-full bg-grey-keyBoard p-6 text-center',
-            { hidden: !onFocus, block: onFocus },
-          )}
-          style={{ bottom: barBottom }}
-        >
-          <div className="text-black">
-            {
-              users.filter((user: any) => {
-                return user.id === currentSharer.id;
-              })[0]?.name
-            }
-            負擔${expenseData.amount}中的$
-            {currentSharer.amount === '' ? 0 : currentSharer.amount}
-          </div>
-          <div className="text-sm text-neutrals-60">
-            {Number(expenseData.amount) - Number(addedAmount) > 0 ||
-            Number(expenseData.amount) - Number(addedAmount) === 0
-              ? `還剩下$${
-                  Number(expenseData.amount) - Number(addedAmount)
-                }還沒被分帳`
-              : `目前分帳金額多出$${Math.abs(
-                  Number(expenseData.amount) - Number(addedAmount),
-                )}`}
-          </div>
+      <div
+        className={clsx(
+          'fixed left-0 z-100 h-fit w-full bg-grey-keyBoard p-6 text-center',
+          { hidden: !onFocus, block: onFocus },
+        )}
+        style={{ bottom: barBottom }}
+      >
+        <div className="text-black">
+          {
+            users.filter((user: any) => {
+              return user.id === currentSharer.id;
+            })[0]?.name
+          }
+          負擔${expenseData.amount}中的$
+          {currentSharer.amount === '' ? 0 : currentSharer.amount}
         </div>
+        <div className="text-sm text-neutrals-60">
+          {Number(expenseData.amount) - Number(addedAmount) > 0 ||
+          Number(expenseData.amount) - Number(addedAmount) === 0
+            ? `還剩下$${
+                Number(expenseData.amount) - Number(addedAmount)
+              }還沒被分帳`
+            : `目前分帳金額多出$${Math.abs(
+                Number(expenseData.amount) - Number(addedAmount),
+              )}`}
+        </div>
+      </div>
     </div>
   );
 }
