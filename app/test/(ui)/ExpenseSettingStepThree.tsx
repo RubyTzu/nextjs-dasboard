@@ -203,9 +203,18 @@ export function ExpenseSettingStepThree({
       //   setBarTop(newTop);
       // }
       if (window.visualViewport) {
-          const newBottom = `${
-            window.innerHeight - window.visualViewport.height
-          }px`;
+        const newBottom = `${
+          window.innerHeight - window.visualViewport.height
+        }px`;
+        setBarBottom(newBottom);
+      }
+    };
+
+    const handleScroll = () => {
+      if (window.visualViewport) {
+        const newBottom = `${
+          window.innerHeight - window.visualViewport.height
+        }px`;
         setBarBottom(newBottom);
       }
     };
@@ -214,8 +223,10 @@ export function ExpenseSettingStepThree({
       if (window.visualViewport) {
         handleResize(); // Initial setup
         window.visualViewport.addEventListener('resize', handleResize);
+        window.visualViewport.addEventListener('scroll', handleScroll);
         return () => {
           window.visualViewport?.removeEventListener('resize', handleResize);
+          window.visualViewport?.removeEventListener('scroll', handleScroll);
         };
       }
     }
