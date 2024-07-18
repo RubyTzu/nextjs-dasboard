@@ -149,7 +149,7 @@ export default function SharersAmountButton({
                   key={user.id}
                   className="flex items-center justify-between"
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="relative flex items-center gap-4">
                     <Image
                       className="bg-grey-200 flex h-[45px] w-[45px] items-center justify-center rounded-full"
                       src={user.picture}
@@ -159,7 +159,7 @@ export default function SharersAmountButton({
                     />
                     <div>{user.name}</div>
                   </div>
-                  <div>
+                  <div className="absolute right-8">
                     <input
                       className="ml-[0px] w-20 border-0 border-b-[1px] border-black focus:border-black focus:outline-none focus:ring-0"
                       type="number"
