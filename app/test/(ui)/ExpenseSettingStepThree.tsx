@@ -181,7 +181,8 @@ export function ExpenseSettingStepThree({
   const users = group.users;
   const [sharers, setSharers] = useState<any>(updatedSharers);
   const [isShow, setIsShow] = useState(false);
-  const [barTop, setBarTop] = useState('100%');
+  // const [barTop, setBarTop] = useState('100%');
+  const [barBottom, setBarBottom] = useState('0');
   const [onFocus, setOnFocus] = useState(false);
   const [currentSharer, setCurrentSharer] = useState<any>({
     id: '',
@@ -199,9 +200,13 @@ export function ExpenseSettingStepThree({
 
 
     const handleResize: any = () => {
+      // if (window.visualViewport) {
+      //   const newTop = `${window.visualViewport.height-93}px`;
+      //   setBarTop(newTop);
+      // }
       if (window.visualViewport) {
-        const newTop = `${window.visualViewport.height-93}px`;
-        setBarTop(newTop);
+        const newBottom = `${window.innerHeight - window.visualViewport.offsetTop - window.visualViewport.height}px`;
+        setBarBottom(newBottom);
       }
     };
 
@@ -346,7 +351,7 @@ export function ExpenseSettingStepThree({
               {/* <p className="text-sm text-neutrals-70">${amountValue}</p> */}
 
               <input
-                className="text-sm text-neutrals-70 bg-transparent w-20 border-0 border-b-[1px] border-black focus:border-black focus:outline-none focus:ring-0 focus:border-highlight-40"
+                className=" text-neutrals-70 bg-transparent w-20 border-0 border-b-[1px] border-black focus:border-black focus:outline-none focus:ring-0 focus:border-highlight-40"
                 type="number"
                 pattern="[0-9]*"
                 inputMode="numeric"
@@ -397,7 +402,7 @@ export function ExpenseSettingStepThree({
             'fixed left-0 z-100 h-fit w-full bg-grey-keyBoard p-6 text-center',
             { hidden: !onFocus, block: onFocus },
           )}
-          style={{ top: barTop }}
+          style={{ bottom: barBottom }}
         >
           <div className="text-black">
             {
