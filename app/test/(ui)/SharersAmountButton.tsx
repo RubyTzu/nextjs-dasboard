@@ -208,14 +208,14 @@ export default function SharersAmountButton({
         <div
           onClick={(e) => handleClose(e)}
           className={clsx(
-            'fixed left-[0%] top-[0%] z-0 h-[200px] w-screen bg-[#000] transition-all duration-200',
+            'fixed left-[0%] top-[0%] z-0 w-screen bg-[#000] transition-all duration-200',
             {
-              'z-30 transform opacity-80': isShow,
+              'z-30 transform opacity-80 h-screen': isShow,
               'z-[-100] transform opacity-20': !isShow,
             },
           )}
         ></div>
-        <div
+        {/* <div
           className={clsx(
             'fixed left-0 z-100 h-fit w-full bg-grey-keyBoard p-6 text-center',
             { hidden: !onFocus, block: onFocus },
@@ -241,7 +241,7 @@ export default function SharersAmountButton({
                   Number(expenseData.amount) - Number(addedAmount),
                 )}`}
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
