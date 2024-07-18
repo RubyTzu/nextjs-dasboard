@@ -131,7 +131,7 @@ export default function SharersAmountButton({
             <div className="text-normal">編輯負擔金額</div>
             <div className="w-9" />
           </div>
-          <div className="relative flex max-h-36 w-[89vw] flex-col gap-4 overflow-y-scroll rounded-b-lg border-none bg-white px-7 py-5 scrollbar scrollbar-track-sky-300 scrollbar-thumb-highlight-20 hover:scrollbar-thumb-highlight-20 active:scrollbar-thumb-highlight-20">
+          <div className="relative flex max-h-36 w-[89vw] flex-col gap-4 overflow-scroll rounded-b-lg border-none bg-white px-7 py-5 scrollbar scrollbar-track-sky-300 scrollbar-thumb-highlight-20 hover:scrollbar-thumb-highlight-20 active:scrollbar-thumb-highlight-20">
             {users.map((user: any) => {
               let sharer = sharers.filter((sharer: any) => {
                 return sharer.id === user.id;
@@ -147,7 +147,7 @@ export default function SharersAmountButton({
               return (
                 <div
                   key={user.id}
-                  className="flex items-center justify-between"
+                  className="relative flex items-center justify-between"
                 >
                   <div className="relative flex items-center gap-4">
                     <Image
@@ -217,7 +217,7 @@ export default function SharersAmountButton({
         ></div>
         <div
           className={clsx(
-            'absolute bottom-0 left-0 z-100 h-fit w-full bg-grey-keyBoard p-6 text-center',
+            'fixed left-0 z-100 h-fit w-full bg-grey-keyBoard p-6 text-center',
             { hidden: !onFocus, block: onFocus },
           )}
           style={{ top: barTop }}
