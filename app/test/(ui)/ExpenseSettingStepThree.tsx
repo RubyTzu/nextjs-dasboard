@@ -210,23 +210,43 @@ export function ExpenseSettingStepThree({
       }
     };
 
-    const handleScroll = () => {
-      if (window.visualViewport) {
-        const newBottom = `${
-          window.innerHeight - window.visualViewport.height
-        }px`;
-        setBarBottom(newBottom);
-      }
+    const throttle = (func: (...args: any[]) => void, limit: number) => {
+      let lastFunc: NodeJS.Timeout | null = null;
+      let lastRan: number | null = null;
+      return function (...args: any[]) {
+        if (!lastRan) {
+          func(...args);
+          lastRan = Date.now();
+        } else {
+          if (lastFunc) clearTimeout(lastFunc);
+          lastFunc = setTimeout(
+            function () {
+              if (lastRan !== null && Date.now() - lastRan >= limit) {
+                func(...args);
+                lastRan = Date.now();
+              }
+            },
+            limit - (lastRan !== null ? Date.now() - lastRan : 0),
+          );
+        }
+      };
     };
+    const handleResizeThrottled = throttle(handleResize, 50);
 
     if (typeof window !== 'undefined') {
       if (window.visualViewport) {
         handleResize(); // Initial setup
-        window.visualViewport.addEventListener('resize', handleResize);
-        window.visualViewport.addEventListener('scroll', handleScroll);
+        window.visualViewport.addEventListener('resize', handleResizeThrottled);
+        window.visualViewport.addEventListener('scroll', handleResizeThrottled);
         return () => {
-          window.visualViewport?.removeEventListener('resize', handleResize);
-          window.visualViewport?.removeEventListener('scroll', handleScroll);
+          window.visualViewport?.removeEventListener(
+            'resize',
+            handleResizeThrottled,
+          );
+          window.visualViewport?.removeEventListener(
+            'scroll',
+            handleResizeThrottled,
+          );
         };
       }
     }
