@@ -397,21 +397,33 @@ export function ExpenseSettingStepThree({
                     });
                   }
                 }}
-                onBlur={() => {
+                onBlur={(e: any) => {
                   setOnFocus(false);
+                  let value = e.target.value.replace(/^0+/, '');
+                  if (value === '' || Number(value) < 0) {
+                    value = '0';
+                  }
+                  updateAmount(user.id, value);
+                  sharer =
+                    sharer && String(sharer.amount).replace(/^0+/, '') !== ''
+                      ? sharer
+                      : {
+                          id: user.id,
+                          amount: 0,
+                        };
                 }}
                 onChange={(e: any) => {
-                  let value = e.target.value.replace(/^0+/, ''); // Remove leading zeros
+                  let value = e.target.value;
                   if (value === '' || Number(value) < 0) {
                     value = '0';
                   }
                   updateAmount(user.id, value);
                   setCurrentSharer({
                     ...sharer,
-                    amount: Number(value),
+                    amount: value,
                   });
                 }}
-                value={sharer.amount === 0 ? '' : sharer.amount} // Prevent display of 0
+                value={sharer.amount === 0 && !onFocus ? 0 : sharer.amount} // Prevent display of 0
               />
               <input
                 className="relative h-5 w-5 rounded-full border-[1.5px] border-black ring-transparent checked:border-black checked:bg-highlight-60 checked:text-highlight-60 checked:before:absolute checked:before:left-[50%] checked:before:top-[50%] checked:before:block checked:before:h-4 checked:before:w-4 checked:before:translate-x-[-50%] checked:before:translate-y-[-50%] checked:before:rounded-full checked:before:bg-highlight-60 hover:checked:border-black focus:ring-transparent checked:focus:border-black"

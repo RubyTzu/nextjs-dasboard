@@ -161,7 +161,7 @@ export default function SharersAmountButton({
                   </div>
                   <div className="absolute right-8">
                     <input
-                      className="ml-[0px] w-20 border-0 border-b-[1px] border-black focus:border-black focus:outline-none focus:ring-0"
+                      className=" w-20 border-0 border-b-[1px] border-black bg-transparent text-neutrals-70 focus:border-black focus:border-highlight-40 focus:outline-none focus:ring-0"
                       type="number"
                       pattern="[0-9]*"
                       inputMode="numeric"
@@ -177,21 +177,38 @@ export default function SharersAmountButton({
                           });
                         }
                       }}
-                      onBlur={() => {
+                      onBlur={(e: any) => {
                         setOnFocus(false);
+                        let value = e.target.value.replace(/^0+/, '');
+                        if (value === '' || Number(value) < 0) {
+                          value = '0';
+                        }
+                        updateAmount(user.id, value);
+                        sharer =
+                          sharer &&
+                          String(sharer.amount).replace(/^0+/, '') !== ''
+                            ? sharer
+                            : {
+                                id: user.id,
+                                amount: 0,
+                              };
+
+                        console.log(sharer.amount);
                       }}
                       onChange={(e: any) => {
-                        let value = e.target.value.replace(/^0+/, ''); // Remove leading zeros
+                        let value = e.target.value;
                         if (value === '' || Number(value) < 0) {
                           value = '0';
                         }
                         updateAmount(user.id, value);
                         setCurrentSharer({
                           ...sharer,
-                          amount: Number(value),
+                          amount: value,
                         });
                       }}
-                      value={sharer.amount === 0 ? '' : sharer.amount} // Prevent display of 0
+                      value={
+                        sharer.amount === 0 && !onFocus ? 0 : sharer.amount
+                      } // Prevent display of 0
                     />
                   </div>
                 </div>
