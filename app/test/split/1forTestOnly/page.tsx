@@ -9,6 +9,7 @@ import NoteButton from '../../(ui)/NoteButton';
 import { NextStepButton, GroupInfoBar } from '@/app/test/(ui)/ExpenseSettingDetails';
 import SharersAmountButton from '../../(ui)/SharersAmountButton';
 import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
+import GroupPictureButton from '../../(ui)/GroupPictureButton';
 
 
 export default function Page() {
@@ -132,6 +133,7 @@ export default function Page() {
       }
     ]
   });
+  const [currentGroup, setCurrentGroup] = useState();
   const [phase, setPhase] = useState(3);
   const [updatedSharers, setUpdatedSharers] = useState([
     ...currentExpense.sharers,
@@ -186,8 +188,7 @@ export default function Page() {
             />
           </div>
         </div> */}
-        <SharersAmountButton
-          // users={users}
+        {/* <SharersAmountButton
           expenseData={currentExpense}
           users={group.users}
           updatedSharers={updatedSharers}
@@ -212,8 +213,12 @@ export default function Page() {
           isNotEqual={isNotEqual}
           setIsNotEqual={setIsNotEqual}
           updatedSharers={updatedSharers}
-        />
+        /> */}
       </section>
+      <div className="w-fit">
+      <GroupPictureButton groupData={group} setCurrentGroup={setCurrentGroup} />
+      </div>
+      
     </div>
   );
 }
