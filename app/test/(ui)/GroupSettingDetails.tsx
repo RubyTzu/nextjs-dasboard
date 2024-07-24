@@ -1,6 +1,6 @@
 //import from next & react
 import Image from 'next/image';
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 //import ui
 import { AddUserIcon, groupIconMap } from '@/app/test/(ui)/Icons';
 import DeleteGroupButton from './DeleteGroupButton';
@@ -65,12 +65,6 @@ export function GroupNameSetting({
           ) : null}
           <p className="text-xl">{name}</p>
         </div>
-        {/* <div
-          onClick={() => handleClick(id)}
-          className="cursor-pointer text-sm text-grey-500"
-        >
-          編輯
-        </div> */}
         <GroupNameButton
           groupData={groupData}
           setCurrentGroup={setCurrentGroup}
@@ -80,12 +74,22 @@ export function GroupNameSetting({
   );
 }
 
-export function GroupUsersSetting({ groupData }: { groupData: any }) {
-  if (!groupData) return;
-
+export function GroupUsersSetting({
+  groupData,
+  setCurrentGroup,
+}: {
+  groupData: any;
+  setCurrentGroup: any;
+}) {
   function handladdUser() {
     console.log('user add!');
   }
+  useEffect(() => {
+     console.log('group Data change!');
+     console.log(groupData)
+  }, [groupData]);
+
+  if (!groupData) return;
 
   return (
     <>
@@ -105,10 +109,14 @@ export function GroupUsersSetting({ groupData }: { groupData: any }) {
           </div>
         </div>
         <div>
-          {groupData.users.map((user: any) => {
+          {groupData.users.map((user: any, idx: string) => {
             return (
-              <Fragment key={user.id}>
-                <GroupUser userData={user} />
+              <Fragment key={idx}>
+                <GroupUser
+                  userData={user}
+                  groupData={groupData}
+                  setCurrentGroup={setCurrentGroup}
+                />
               </Fragment>
             );
           })}

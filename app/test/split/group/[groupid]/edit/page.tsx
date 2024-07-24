@@ -20,12 +20,15 @@ export default function Page() {
   return (
     <form method="post" action={`/test/split/group/${params.groupid}`}>
       <div className="relative flex flex-col">
-        <TopGroupSettingBar groupData={currentGroup} />
+        <TopGroupSettingBar groupData={group} />
         <GroupNameSetting
           groupData={currentGroup}
           setCurrentGroup={setCurrentGroup}
         />
-        <GroupUsersSetting groupData={currentGroup} />
+        <GroupUsersSetting
+          groupData={currentGroup}
+          setCurrentGroup={setCurrentGroup}
+        />
         <GroupOtherSetting groupData={currentGroup} />
         <GroupSave groupData={currentGroup} />
       </div>

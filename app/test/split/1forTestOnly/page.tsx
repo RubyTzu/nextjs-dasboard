@@ -11,6 +11,7 @@ import SharersAmountButton from '../../(ui)/SharersAmountButton';
 import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
 import GroupPictureButton from '../../(ui)/GroupPictureButton';
 import GroupNameButton from '../../(ui)/GroupNameButton';
+import { GroupUsersSetting } from '../../(ui)/GroupSettingDetails';
 
 
 export default function Page() {
@@ -222,6 +223,10 @@ export default function Page() {
           setCurrentGroup={setCurrentGroup}
         />
         <GroupNameButton groupData={group} setCurrentGroup={setCurrentGroup} />
+        <GroupUsersSetting
+          groupData={group}
+          setCurrentGroup={setCurrentGroup}
+        />
       </div>
     </div>
   );

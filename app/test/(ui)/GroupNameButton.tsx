@@ -84,7 +84,7 @@ export default function GroupNameButton({
         />
         <input
           ref={inputRef}
-          className="relative top-[92px] z-40 mx-auto w-[80%] border-0 border-b border-b-white bg-transparent px-0 text-xl text-white focus:border-b focus:border-highlight-20 focus:outline-none focus:ring-0"
+          className="relative top-[92px] z-40 mx-auto w-[80%] border-0 border-b border-b-white bg-transparent px-0 text-xl text-white focus:border-b focus:border-white focus:outline-none focus:ring-0"
           type="text"
           value={currentName}
           onChange={handleChange}
