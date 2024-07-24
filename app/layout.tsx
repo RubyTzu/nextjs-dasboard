@@ -1,5 +1,16 @@
+import type { Viewport } from 'next';
 import '@/app/ui/global.css';
 import { inter, notoSansJP, notoSansTC } from '@/app/ui/fonts';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  interactiveWidget: 'resizes-content',
+  // Also supported by less commonly used
+  // interactiveWidget: 'resizes-visual',
+};
 
 export const metadata = {
   title: 'Next JS Test',
@@ -13,12 +24,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content"
-        />
-      </head>
       <body
         className={`${inter.variable} ${notoSansJP.variable} ${notoSansTC.variable} font-sans antialiased`}
       >
