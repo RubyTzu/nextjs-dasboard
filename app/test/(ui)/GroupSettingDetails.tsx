@@ -6,13 +6,17 @@ import { AddUserIcon, groupIconMap } from '@/app/test/(ui)/Icons';
 import DeleteGroupButton from './DeleteGroupButton';
 import { GroupUser } from './GroupUserButton';
 // import { CameraIcon } from '@heroicons/react/24/outline';
-import {
-  CameraIcon,
-  NotePencilIcon,
-} from '@/app/test/(ui)/Icons';
+import { CameraIcon, NotePencilIcon } from '@/app/test/(ui)/Icons';
 import GroupPictureButton from './GroupPictureButton';
+import GroupNameButton from './GroupNameButton';
 
-export function GroupNameSetting({ groupData, setCurrentGroup }: { groupData: any, setCurrentGroup: unknown }) {
+export function GroupNameSetting({
+  groupData,
+  setCurrentGroup,
+}: {
+  groupData: any;
+  setCurrentGroup: unknown;
+}) {
   if (!groupData) return;
   const {
     id,
@@ -21,21 +25,21 @@ export function GroupNameSetting({ groupData, setCurrentGroup }: { groupData: an
   }: {
     id: string;
     picture:
-    | 'groupIcon01'
-    | 'groupIcon02'
-    | 'groupIcon03'
-    | 'groupIcon04'
-    | 'groupIcon05'
-    | 'groupIcon06'
-    | 'groupIcon07'
-    | 'groupIcon08'
-    | 'groupIcon09'
-    | 'groupIcon10'
-    | 'groupIcon11'
-    | 'groupIcon12'
-    | 'groupIcon13'
-    | 'groupIcon14'
-    | 'groupIcon15';
+      | 'groupIcon01'
+      | 'groupIcon02'
+      | 'groupIcon03'
+      | 'groupIcon04'
+      | 'groupIcon05'
+      | 'groupIcon06'
+      | 'groupIcon07'
+      | 'groupIcon08'
+      | 'groupIcon09'
+      | 'groupIcon10'
+      | 'groupIcon11'
+      | 'groupIcon12'
+      | 'groupIcon13'
+      | 'groupIcon14'
+      | 'groupIcon15';
     name: string;
   } = groupData;
 
@@ -54,30 +58,23 @@ export function GroupNameSetting({ groupData, setCurrentGroup }: { groupData: an
       <div className="m-6 mt-16 flex items-center justify-between pt-6">
         <div className="flex items-center gap-4">
           {Icon ? (
-            // <div className="relative">
-            //   <Image
-            //     src={Icon}
-            //     className="z-0 flex h-[72px] w-[72px] items-center justify-center rounded-lg bg-highlight-60"
-            //     width={200}
-            //     height={200}
-            //     alt={picture}
-            //   />
-            //   <div
-            //   onClick={handleGroupPicture}
-            //     className="absolute right-0 bottom-0 translate-x-[5px] translate-y-[5px] w-7 h-7 bg-white rounded-full p-[7px] shadow"
-            //   > <CameraIcon />
-            //   </div>
-            // </div>
-            < GroupPictureButton groupData={groupData} setCurrentGroup={setCurrentGroup} />
+            <GroupPictureButton
+              groupData={groupData}
+              setCurrentGroup={setCurrentGroup}
+            />
           ) : null}
           <p className="text-xl">{name}</p>
         </div>
-        <div
+        {/* <div
           onClick={() => handleClick(id)}
           className="cursor-pointer text-sm text-grey-500"
         >
           編輯
-        </div>
+        </div> */}
+        <GroupNameButton
+          groupData={groupData}
+          setCurrentGroup={setCurrentGroup}
+        />
       </div>
     </>
   );

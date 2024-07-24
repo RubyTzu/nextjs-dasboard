@@ -339,5 +339,5 @@ export {
   EditIcon,
   EditTwoIcon,
   GreaterThanIcon,
-  CameraIcon
+  CameraIcon,
 };

@@ -16,12 +16,15 @@ import { useState } from 'react';
 export default function Page() {
   const params = useParams<{ groupid: string }>();
   const group = useGroup(params.groupid);
-const [currentGroup, setCurrentGroup]=useState(group)
+  const [currentGroup, setCurrentGroup] = useState(group);
   return (
     <form method="post" action={`/test/split/group/${params.groupid}`}>
       <div className="relative flex flex-col">
         <TopGroupSettingBar groupData={currentGroup} />
-        <GroupNameSetting groupData={currentGroup} setCurrentGroup={setCurrentGroup}/>
+        <GroupNameSetting
+          groupData={currentGroup}
+          setCurrentGroup={setCurrentGroup}
+        />
         <GroupUsersSetting groupData={currentGroup} />
         <GroupOtherSetting groupData={currentGroup} />
         <GroupSave groupData={currentGroup} />

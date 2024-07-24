@@ -10,6 +10,7 @@ import { NextStepButton, GroupInfoBar } from '@/app/test/(ui)/ExpenseSettingDeta
 import SharersAmountButton from '../../(ui)/SharersAmountButton';
 import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
 import GroupPictureButton from '../../(ui)/GroupPictureButton';
+import GroupNameButton from '../../(ui)/GroupNameButton';
 
 
 export default function Page() {
@@ -216,9 +217,12 @@ export default function Page() {
         /> */}
       </section>
       <div className="w-fit">
-      <GroupPictureButton groupData={group} setCurrentGroup={setCurrentGroup} />
+        <GroupPictureButton
+          groupData={group}
+          setCurrentGroup={setCurrentGroup}
+        />
+        <GroupNameButton groupData={group} setCurrentGroup={setCurrentGroup} />
       </div>
-      
     </div>
   );
 }

@@ -34,8 +34,16 @@ const config: Config = {
         base: '1rem',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'var(--font-notoSansJP)','var(--font-notoSansTC)'],
-        lato:['var(--font-lato)', 'var(--font-notoSansJP)','var(--font-notoSansTC)']
+        sans: [
+          'var(--font-inter)',
+          'var(--font-notoSansJP)',
+          'var(--font-notoSansTC)',
+        ],
+        lato: [
+          'var(--font-lato)',
+          'var(--font-notoSansJP)',
+          'var(--font-notoSansTC)',
+        ],
       },
       colors: {
         blue: {
@@ -60,9 +68,9 @@ const config: Config = {
           // 400: '#5f5d5e',
           500: '#4a4a4a', //
           // 600: '#1c1a1b',
-          'userBar': '#cad4e0',
-          'keyBoard': '#d1d3d9',
-          'calendar': '#bdbdbd'
+          userBar: '#cad4e0',
+          keyBoard: '#d1d3d9',
+          calendar: '#bdbdbd',
         },
         highlight: {
           60: '#EBFF79',
@@ -87,7 +95,10 @@ const config: Config = {
       },
       zIndex: {
         '100': '100',
-      }
+      },
+      content: {
+        checkWhiteIcon: 'url("../test/(ui)/icons/checkWhite.svg")',
+      },
     },
     keyframes: {
       shimmer: {
@@ -97,9 +108,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('tailwind-scrollbar'),
-  ],
+  plugins: [require('@tailwindcss/forms'), require('tailwind-scrollbar')],
 };
 export default config;

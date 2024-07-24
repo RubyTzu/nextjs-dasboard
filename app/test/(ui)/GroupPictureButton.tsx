@@ -39,11 +39,11 @@ export default function GroupPictureButton({
     name: string;
   } = groupData;
 
-  const [currentPicture, setCurrentPicture] = useState(groupData.picture);
+  const [currentPicture, setCurrentPicture] = useState(picture);
   const [lastSavedPicture, setLastSavedPicture] = useState<any>(currentPicture);
   const [isShow, setIsShow] = useState(false);
   const router = useRouter();
-  const Icon = groupIconMap[picture];
+  const Icon = groupIconMap[currentPicture];
   const allGroupPicture = [
     'groupIcon01',
     'groupIcon02',
@@ -107,19 +107,43 @@ export default function GroupPictureButton({
       </div>
       <div
         className={clsx(
-          'fixed left-0 m-0 h-fit w-full rounded-lg bg-transparent transition-all duration-300',
+          'fixed left-0 m-0 h-fit w-full rounded-lg bg-transparent transition-all duration-200',
           {
             'top-0 z-50 opacity-100': isShow,
-            'top-10 -z-50 opacity-0': !isShow,
+            'top-5 -z-50 opacity-0': !isShow,
           },
         )}
       >
-        <TopBar name="群組圖片" handleClick={handleSave} rightBtnName="完成" />
-        <div className="relative top-14 flex max-h-[calc(100vh-56px)] w-full flex-wrap items-start gap-y-0 overflow-scroll">
+        <TopBar
+          name="群組圖片"
+          leftBtnName="取消"
+          rightBtnName="完成"
+          handleLeftClick={handleClose}
+          handleRightClick={handleSave}
+        />
+        <div className="relative top-[60px] flex max-h-[calc(100vh-56px)] w-full flex-wrap items-start gap-y-0 overflow-scroll">
           {allGroupPicture.map((picture: any, idx: any) => {
             const Icon = groupIconMap[picture as keyof typeof groupIconMap];
             return (
-              <div className="max-w-[33.33%]" key={idx}>
+              <div
+                className={clsx(
+                  'after:content-checkWhiteIcon relative max-w-[33.33%] before:absolute before:top-0 before:h-full before:w-full before:bg-neutrals-60 before:opacity-50 after:absolute after:left-[50%] after:top-[50%] after:z-100 after:w-8 after:translate-x-[-50%] after:translate-y-[-50%]',
+                  {
+                    '': currentPicture === picture,
+                    'before:hidden after:hidden': currentPicture !== picture,
+                  },
+                )}
+                key={idx}
+              >
+                <input
+                  defaultChecked={currentPicture === picture}
+                  type="radio"
+                  name="groupPicture"
+                  className="absolute left-[50%] top-[50%] h-full w-full translate-x-[-50%] translate-y-[-50%] opacity-0"
+                  onChange={() => {
+                    setCurrentPicture(picture);
+                  }}
+                />
                 <Image
                   src={Icon}
                   className="z-0 flex items-center justify-center bg-black"
