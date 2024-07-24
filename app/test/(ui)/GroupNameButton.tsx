@@ -31,12 +31,10 @@ export default function GroupNameButton({
   if (!groupData) return;
 
   const toggleDialog = () => {
-     setIsShow(true);
-     setTimeout(() => {
-       if (inputRef.current) {
-         inputRef.current.focus();
-       }
-     }, 0);
+    setIsShow(true);
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
     router.refresh();
   };
 
