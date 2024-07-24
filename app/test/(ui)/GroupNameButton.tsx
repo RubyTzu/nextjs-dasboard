@@ -87,7 +87,7 @@ export default function GroupNameButton({
           onChange={handleChange}
         />
         <div
-          className="fixed bottom-10 left-[50%] z-40 mx-auto w-[80%] rounded-full bg-highlight-20 py-3 text-center translate-x-[-50%]"
+          className="fixed top-56 left-[50%] z-40 mx-auto w-[80%] rounded-full bg-highlight-20 py-3 text-center translate-x-[-50%]"
           onClick={handleSave}
         >
           儲存
