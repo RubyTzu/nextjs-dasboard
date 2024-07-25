@@ -9,6 +9,7 @@ import { GroupUser } from './GroupUserButton';
 import { CameraIcon, NotePencilIcon } from '@/app/test/(ui)/Icons';
 import GroupPictureButton from './GroupPictureButton';
 import GroupNameButton from './GroupNameButton';
+import AddUserButton from './AddUserButton';
 
 export function GroupNameSetting({
   groupData,
@@ -96,7 +97,7 @@ export function GroupUsersSetting({
       <div className="mx-6 flex flex-col">
         <p className="text-sm text-grey-500">群組成員</p>
         <div className="mb-4 mt-4 flex items-center justify-between">
-          <div
+          {/* <div
             onClick={() => handladdUser()}
             className="flex cursor-pointer items-center gap-4"
           >
@@ -106,7 +107,11 @@ export function GroupUsersSetting({
               </div>
             </div>
             <p className="">新增成員</p>
-          </div>
+          </div> */}
+          <AddUserButton
+            groupData={groupData}
+            setCurrentGroup={setCurrentGroup}
+          />
         </div>
         <div>
           {groupData.users.map((user: any, idx: string) => {
@@ -126,14 +131,23 @@ export function GroupUsersSetting({
   );
 }
 
-export function GroupOtherSetting({ groupData }: { groupData: any }) {
+export function GroupOtherSetting({
+  groupData,
+  setCurrentGroup,
+}: {
+  groupData: any;
+  setCurrentGroup: any;
+}) {
   if (!groupData) return;
 
   return (
     <>
       <div className="mx-6 mt-4 flex flex-col">
         <p className="text-sm text-grey-500">其他設定</p>
-        <DeleteGroupButton groupData={groupData} />
+        <DeleteGroupButton
+          groupData={groupData}
+          setCurrentGroup={setCurrentGroup}
+        />
       </div>
     </>
   );

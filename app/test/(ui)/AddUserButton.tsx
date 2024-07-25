@@ -3,9 +3,10 @@
 import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
 //import ui
+import { AddUserIcon } from '@/app/test/(ui)/Icons';
 import NameModal from './NameModal';
 
-export default function GroupNameButton({
+export default function AddUserButton({
   groupData,
   setCurrentGroup,
 }: {
@@ -13,13 +14,15 @@ export default function GroupNameButton({
   setCurrentGroup: any;
 }) {
   const {
-    name,
+    users,
   }: {
-    name: string;
+    users: any;
   } = groupData;
 
-  const [currentName, setCurrentName] = useState(name);
-  const [lastSavedName, setLastSavedName] = useState<any>(currentName);
+  const [currentGroupUsers, setCurrentGroupUsers] = useState(users);
+  const [currentGroupUserName, setCurrentGroupUserName] = useState('');
+  const [lastSavedGroupUsers, setLastSavedGroupUsers] =
+    useState<any>(currentGroupUsers);
   const [isShow, setIsShow] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -36,41 +39,55 @@ export default function GroupNameButton({
 
   const handleChange = (e: any) => {
     console.log(e.target.value);
-    setCurrentName(e.target.value);
+    setCurrentGroupUserName(e.target.value);
   };
 
   const handleClose = () => {
-    setCurrentName(lastSavedName);
+    setCurrentGroupUsers(lastSavedGroupUsers);
     setIsShow(false);
     router.refresh();
   };
 
   const handleSave = () => {
-    setLastSavedName(currentName);
+    let newUsers = [
+      ...currentGroupUsers,
+      {
+        name: currentGroupUserName,
+        picture: '',
+      },
+    ];
+    setCurrentGroupUsers(newUsers);
+    setLastSavedGroupUsers(newUsers);
     setCurrentGroup({
       ...groupData,
-      name: currentName,
+      users: newUsers,
     });
     setIsShow(false);
+    setCurrentGroupUserName('');
   };
 
   return (
-    <div className="relative">
+    <>
       <div
         onClick={toggleDialog}
-        className="relative cursor-pointer text-sm text-grey-500"
+        className="flex cursor-pointer items-center gap-4"
       >
-        編輯
+        <div className="relative flex h-11 w-11 items-center justify-center rounded-full">
+          <div className="absolute left-[13px]">
+            <AddUserIcon />
+          </div>
+        </div>
+        <p className="">新增成員</p>
       </div>
       <NameModal
         isShow={isShow}
         handleChange={handleChange}
         handleClose={handleClose}
         handleSave={handleSave}
-        TopBarName='群組名稱'
+        TopBarName="成員名稱"
         inputRef={inputRef}
-        currentValue={currentName}
+        currentValue={currentGroupUserName}
       />
-    </div>
+    </>
   );
 }

@@ -29,7 +29,10 @@ export default function Page() {
           groupData={currentGroup}
           setCurrentGroup={setCurrentGroup}
         />
-        <GroupOtherSetting groupData={currentGroup} />
+        <GroupOtherSetting
+          groupData={currentGroup}
+          setCurrentGroup={setCurrentGroup}
+        />
         <GroupSave groupData={currentGroup} />
       </div>
     </form>

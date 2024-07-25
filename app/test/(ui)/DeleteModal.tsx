@@ -41,7 +41,7 @@ export default function DeleteModal({
         onClick={handleClose}
       >
         <div onClick={(e: any) => e.stopPropagation()}>
-          <div className="flex h-20 items-center justify-center">
+          <div className="flex h-20 items-center justify-center px-6 mt-3 mb-4">
             <div className="text-normal">{hintWord}</div>
           </div>
           <div className="mx-4 mb-3 flex items-center justify-between">

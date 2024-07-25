@@ -1,9 +1,12 @@
 //import from next & react
 import Image from 'next/image';
 import { useId, useRef, useState } from 'react';
+//import data
+import { loginUserId } from '../(data)/(fetchData)/user';
 //import ui
 import { TrashcanIcon } from '@/app/test/(ui)/Icons';
 import DeleteModal from './DeleteModal';
+
 
 export function GroupUser({
   userData,
@@ -29,7 +32,6 @@ export function GroupUser({
     }, 0);
   };
 
-
   const handleClose = () => {
     setGroupUsers(lastSavedGroupUsers);
     setIsShow(false);
@@ -40,7 +42,7 @@ export function GroupUser({
 
   const handleSave = (e: any) => {
     let currentGroupUsers = [...GroupUsers];
-    
+
     const userIndex = currentGroupUsers.findIndex(
       (user: any) => user.id === userData.id,
     );
@@ -48,7 +50,6 @@ export function GroupUser({
     if (userIndex !== -1) {
       currentGroupUsers.splice(userIndex, 1);
     }
-
 
     setGroupUsers(currentGroupUsers);
     setLastSavedGroupUsers(currentGroupUsers);
@@ -60,36 +61,58 @@ export function GroupUser({
     setTimeout(() => {
       dialogRef.current?.close();
     }, 100);
-
   };
+
+  const isAdmin = groupData.creatorId === loginUserId;
 
   return (
     <div className="mb-4 flex items-center justify-between">
       <div className="flex items-center gap-4">
-        <Image
-          className="h-11 w-11 rounded-full bg-highlight-60"
-          src={userData.picture}
-          width={32}
-          height={32}
-          alt="user's image"
-        />
-        <p>{userData.name}</p>
+        {userData.picture !== '' ? (
+          <Image
+            className="h-11 w-11 rounded-full bg-neutrals-20"
+            src={userData.picture}
+            width={32}
+            height={32}
+            alt="user's image"
+          />
+        ) : (
+          <div className="h-11 w-11 rounded-full bg-neutrals-20"></div>
+        )}
+        <p>
+          {userData.name}
+          {groupData.creatorId === userData.id ? (
+            <span>&emsp;(管理員)</span>
+          ) : (
+            ''
+          )}
+        </p>
       </div>
-      <div
-        onClick={handleToggle}
-        className="flex h-8 w-8 items-center justify-center"
-      >
-        <TrashcanIcon />
-      </div>
-      <DeleteModal
-        dialogRef={dialogRef}
-        dialogId={dialogId}
-        isShow={isShow}
-        headerId={headerId}
-        handleClose={handleClose}
-        handleSave={(e: any) => handleSave(e)}
-        hintWord="確定要刪除成員嗎？"
-      />
+      {isAdmin && groupData.creatorId === userData.id ? (
+        <div></div>
+      ) : (
+        <>
+          {isAdmin && (
+            <>
+              <div
+                onClick={handleToggle}
+                className="flex h-8 w-8 items-center justify-center"
+              >
+                <TrashcanIcon />
+              </div>
+              <DeleteModal
+                dialogRef={dialogRef}
+                dialogId={dialogId}
+                isShow={isShow}
+                headerId={headerId}
+                handleClose={handleClose}
+                handleSave={(e: any) => handleSave(e)}
+                hintWord="確定要刪除成員嗎？"
+              />
+            </>
+          )}
+        </>
+      )}
     </div>
   );
 }
