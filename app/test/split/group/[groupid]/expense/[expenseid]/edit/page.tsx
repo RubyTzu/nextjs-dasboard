@@ -76,7 +76,6 @@ if (!currentExpense) return null;
             updatedSharers={updatedSharers}
           />
         </section>
-        {/* <div className="h-[420px]"></div> */}
       </div>
     </form>
   );

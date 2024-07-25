@@ -1,6 +1,7 @@
 'use client';
 //import from next & react
 import { useParams } from 'next/navigation';
+import { useState } from 'react';
 //import data
 import { useGroup } from '@/app/test/(data)/(fetchData)/Providers';
 //import ui
@@ -11,7 +12,6 @@ import {
   GroupSave,
   GroupUsersSetting,
 } from '@/app/test/(ui)/GroupSettingDetails';
-import { useState } from 'react';
 
 export default function Page() {
   const params = useParams<{ groupid: string }>();

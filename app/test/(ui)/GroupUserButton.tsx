@@ -7,7 +7,6 @@ import { loginUserId } from '../(data)/(fetchData)/user';
 import { TrashcanIcon } from '@/app/test/(ui)/Icons';
 import DeleteModal from './DeleteModal';
 
-
 export function GroupUser({
   userData,
   groupData,

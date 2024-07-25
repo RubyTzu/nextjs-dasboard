@@ -1,12 +1,9 @@
 //import from next & react
-import Image from 'next/image';
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 //import ui
-import { AddUserIcon, groupIconMap } from '@/app/test/(ui)/Icons';
+import { groupIconMap } from '@/app/test/(ui)/Icons';
 import DeleteGroupButton from './DeleteGroupButton';
 import { GroupUser } from './GroupUserButton';
-// import { CameraIcon } from '@heroicons/react/24/outline';
-import { CameraIcon, NotePencilIcon } from '@/app/test/(ui)/Icons';
 import GroupPictureButton from './GroupPictureButton';
 import GroupNameButton from './GroupNameButton';
 import AddUserButton from './AddUserButton';
