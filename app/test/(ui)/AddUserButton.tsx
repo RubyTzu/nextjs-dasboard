@@ -19,10 +19,9 @@ export default function AddUserButton({
     users: any;
   } = groupData;
 
-  const [currentGroupUsers, setCurrentGroupUsers] = useState(users);
   const [currentGroupUserName, setCurrentGroupUserName] = useState('');
-  const [lastSavedGroupUsers, setLastSavedGroupUsers] =
-    useState<any>(currentGroupUsers);
+  const [lastSavedGroup, setLastSavedGroup] =
+    useState<any>(groupData);
   const [isShow, setIsShow] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -43,25 +42,23 @@ export default function AddUserButton({
   };
 
   const handleClose = () => {
-    setCurrentGroupUsers(lastSavedGroupUsers);
+    setCurrentGroup(lastSavedGroup);
     setIsShow(false);
     router.refresh();
   };
 
   const handleSave = () => {
-    let newUsers = [
-      ...currentGroupUsers,
+    let newGroup = {
+      ...groupData,
+      users:[
+      ...users,
       {
         name: currentGroupUserName,
         picture: '',
       },
-    ];
-    setCurrentGroupUsers(newUsers);
-    setLastSavedGroupUsers(newUsers);
-    setCurrentGroup({
-      ...groupData,
-      users: newUsers,
-    });
+    ]};
+    setCurrentGroup(newGroup);
+    setLastSavedGroup(newGroup);
     setIsShow(false);
     setCurrentGroupUserName('');
   };

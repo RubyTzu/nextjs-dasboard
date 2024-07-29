@@ -12,6 +12,7 @@ export default function DeleteModal({
   handleClose,
   handleSave,
   hintWord,
+  idx
 }: {
   dialogRef: any;
   dialogId: any;
@@ -20,6 +21,7 @@ export default function DeleteModal({
   handleClose: any;
   handleSave: any;
   hintWord: string;
+  idx: string;
 }) {
   return (
     <>
@@ -52,6 +54,7 @@ export default function DeleteModal({
               取消
             </div>
             <div
+              id={idx}
               className="flex h-8 w-24 items-center justify-center rounded-lg bg-highlight-60 text-neutrals-90"
               onClick={handleSave}
             >

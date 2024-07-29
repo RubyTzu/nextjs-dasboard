@@ -6,19 +6,22 @@ import { loginUserId } from '../(data)/(fetchData)/user';
 //import ui
 import { TrashcanIcon } from '@/app/test/(ui)/Icons';
 import DeleteModal from './DeleteModal';
-
 export function GroupUser({
+  idx,
   userData,
   groupData,
   setCurrentGroup,
 }: {
+  idx: any;
   userData: any;
   groupData: any;
   setCurrentGroup: any;
 }) {
-  const [GroupUsers, setGroupUsers] = useState(groupData.users);
-  const [lastSavedGroupUsers, setLastSavedGroupUsers] =
-    useState<any>(GroupUsers);
+  // const [GroupUsers, setGroupUsers] = useState(groupData.users);
+  // const [lastSavedGroupUsers, setLastSavedGroupUsers] =
+  //   useState<any>(GroupUsers);
+  const [lastSavedGroup, setLastSavedGroup] =
+    useState<any>(groupData);
   const [isShow, setIsShow] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dialogId = useId();
@@ -32,7 +35,7 @@ export function GroupUser({
   };
 
   const handleClose = () => {
-    setGroupUsers(lastSavedGroupUsers);
+    setCurrentGroup(lastSavedGroup);
     setIsShow(false);
     setTimeout(() => {
       dialogRef.current?.close();
@@ -40,21 +43,24 @@ export function GroupUser({
   };
 
   const handleSave = (e: any) => {
-    let currentGroupUsers = [...GroupUsers];
-
+    let currentGroupUsers = [...groupData.users];
+console.log('e.target.id')
+console.log(e.target.id)
     const userIndex = currentGroupUsers.findIndex(
-      (user: any) => user.id === userData.id,
+      (user: any) => user.name === userData.name && e.target.id === idx,
     );
 
     if (userIndex !== -1) {
       currentGroupUsers.splice(userIndex, 1);
     }
 
-    setGroupUsers(currentGroupUsers);
-    setLastSavedGroupUsers(currentGroupUsers);
+    setLastSavedGroup({
+      ...groupData,
+      users: currentGroupUsers
+    });
     setCurrentGroup({
       ...groupData,
-      users: currentGroupUsers,
+      users: currentGroupUsers
     });
     setIsShow(false);
     setTimeout(() => {
@@ -107,6 +113,7 @@ export function GroupUser({
                 handleClose={handleClose}
                 handleSave={(e: any) => handleSave(e)}
                 hintWord="確定要刪除成員嗎？"
+                idx={idx}
               />
             </>
           )}

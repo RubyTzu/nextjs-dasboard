@@ -7,6 +7,8 @@ import { GroupUser } from './GroupUserButton';
 import GroupPictureButton from './GroupPictureButton';
 import GroupNameButton from './GroupNameButton';
 import AddUserButton from './AddUserButton';
+//import other
+import { v4 as uuidv4 } from 'uuid';
 
 export function GroupNameSetting({
   groupData,
@@ -23,21 +25,21 @@ export function GroupNameSetting({
   }: {
     id: string;
     picture:
-      | 'groupIcon01'
-      | 'groupIcon02'
-      | 'groupIcon03'
-      | 'groupIcon04'
-      | 'groupIcon05'
-      | 'groupIcon06'
-      | 'groupIcon07'
-      | 'groupIcon08'
-      | 'groupIcon09'
-      | 'groupIcon10'
-      | 'groupIcon11'
-      | 'groupIcon12'
-      | 'groupIcon13'
-      | 'groupIcon14'
-      | 'groupIcon15';
+    | 'groupIcon01'
+    | 'groupIcon02'
+    | 'groupIcon03'
+    | 'groupIcon04'
+    | 'groupIcon05'
+    | 'groupIcon06'
+    | 'groupIcon07'
+    | 'groupIcon08'
+    | 'groupIcon09'
+    | 'groupIcon10'
+    | 'groupIcon11'
+    | 'groupIcon12'
+    | 'groupIcon13'
+    | 'groupIcon14'
+    | 'groupIcon15';
     name: string;
   } = groupData;
 
@@ -83,8 +85,8 @@ export function GroupUsersSetting({
     console.log('user add!');
   }
   useEffect(() => {
-     console.log('group Data change!');
-     console.log(groupData)
+    console.log('group Data change!');
+    console.log(groupData)
   }, [groupData]);
 
   if (!groupData) return;
@@ -94,27 +96,19 @@ export function GroupUsersSetting({
       <div className="mx-6 flex flex-col">
         <p className="text-sm text-grey-500">群組成員</p>
         <div className="mb-4 mt-4 flex items-center justify-between">
-          {/* <div
-            onClick={() => handladdUser()}
-            className="flex cursor-pointer items-center gap-4"
-          >
-            <div className="relative flex h-11 w-11 items-center justify-center rounded-full">
-              <div className="absolute left-[13px]">
-                <AddUserIcon />
-              </div>
-            </div>
-            <p className="">新增成員</p>
-          </div> */}
           <AddUserButton
             groupData={groupData}
             setCurrentGroup={setCurrentGroup}
           />
         </div>
         <div>
-          {groupData.users.map((user: any, idx: string) => {
+          {groupData.users.map((user: any) => {
+            let idx = uuidv4();
+            
             return (
               <Fragment key={idx}>
                 <GroupUser
+                idx={idx}
                   userData={user}
                   groupData={groupData}
                   setCurrentGroup={setCurrentGroup}
