@@ -1,7 +1,7 @@
 'use client';
 //import from next & react
 import { useParams } from 'next/navigation';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 //import data
 import { useGroup } from '@/app/test/(data)/(fetchData)/Providers';
 //import ui
@@ -17,6 +17,13 @@ export default function Page() {
   const params = useParams<{ groupid: string }>();
   const group = useGroup(params.groupid);
   const [currentGroup, setCurrentGroup] = useState(group);
+ 
+  useEffect(() => {
+    if (group) {
+      setCurrentGroup(group);
+    }
+  }, [group]);
+ 
   return (
     <form method="post" action={`/test/split/group/${params.groupid}`}>
       <div className="relative flex flex-col">
@@ -33,7 +40,7 @@ export default function Page() {
           groupData={currentGroup}
           setCurrentGroup={setCurrentGroup}
         />
-        <GroupSave groupData={currentGroup} />
+        {/* <GroupSave groupData={currentGroup} /> */}
       </div>
     </form>
   );

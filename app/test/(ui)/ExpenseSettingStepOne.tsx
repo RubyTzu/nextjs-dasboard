@@ -6,24 +6,49 @@ import ExpenseCategoryButton from './ExpenseCategoryButton';
 import clsx from 'clsx';
 import NoteButton from './NoteButton';
 
+interface SettingExpense {
+  id: string;
+  name: undefined;
+  category: undefined;
+  amount: number | string;
+  date: undefined;
+  note: undefined;
+  payerId: string;
+  sharers: {
+    id: string;
+    amount: number;
+  }[];
+};
+
+interface AddingExpense {
+  name: string;
+  category: string;
+  amount: number | string;
+  date: string;
+  note: string;
+  payerId: string;
+  sharers: {
+    id: string;
+    amount: number;
+  }[];
+};
+
+interface ExpenseSettingStepOneProps {
+  group?: any;
+  expenseData?: SettingExpense | AddingExpense;
+  setCurrentExpense: any;
+  phase: number;
+}
+
 export function ExpenseSettingStepOne({
+  group,
   expenseData,
   setCurrentExpense,
   phase,
-}: {
-  expenseData: any;
-  setCurrentExpense: any;
-  phase: number;
-}) {
-  if (!expenseData) return;
+}: ExpenseSettingStepOneProps) {
 
-  const {
-    date,
-    name,
-  }: {
-    date: string;
-    name: string;
-  } = expenseData;
+  const date = expenseData?.date || '';
+  const name = expenseData?.name || '';
 
   return (
     <div
@@ -31,38 +56,40 @@ export function ExpenseSettingStepOne({
         hidden: phase !== 1,
       })}
     >
-      <div className="mb-4">
-        <DatePickerButton
-          date={date}
+      {group && expenseData ? <>
+        <div className="mb-4">
+          <DatePickerButton
+            date={date}
+            expenseData={expenseData}
+            setCurrentExpense={setCurrentExpense}
+          />
+        </div>
+        <div className="my-3 flex items-end justify-between gap-6">
+          <ExpenseCategoryButton
+            setCurrentExpense={setCurrentExpense}
+            expenseData={expenseData}
+          />
+          <input
+            className="w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0"
+            onChange={() => { }}
+            onBlur={(e) => {
+              setCurrentExpense({
+                ...expenseData,
+                name: e.target.value,
+              });
+            }}
+            type="text"
+            defaultValue={name}
+          />
+        </div>
+        <div className="my-3">
+          <CalculatorAndInput expenseData={expenseData} />
+        </div>
+        <NoteButton
           expenseData={expenseData}
           setCurrentExpense={setCurrentExpense}
         />
-      </div>
-      <div className="my-3 flex items-end justify-between gap-6">
-        <ExpenseCategoryButton
-          setCurrentExpense={setCurrentExpense}
-          expenseData={expenseData}
-        />
-        <input
-          className="w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0"
-          onChange={() => { }}
-          onBlur={(e) => {
-            setCurrentExpense({
-              ...expenseData,
-              name: e.target.value,
-            });
-          }}
-          type="text"
-          defaultValue={name}
-        />
-      </div>
-      <div className="my-3">
-        <CalculatorAndInput expenseData={expenseData} />
-      </div>
-      <NoteButton
-        expenseData={expenseData}
-        setCurrentExpense={setCurrentExpense}
-      />
+      </> : null}
     </div>
   );
 }

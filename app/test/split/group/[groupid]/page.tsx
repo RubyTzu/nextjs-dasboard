@@ -35,7 +35,7 @@ export default function Page() {
         <UsersBar groupData={group} />
         <BalanceAndShareButtons groupData={group} groupName={groupName} />
         <ExpensesList groupData={group} />
-        <AddExpenseButton />
+        <AddExpenseButton groupId={params.groupid}/>
       </Suspense>
     </div>
   );

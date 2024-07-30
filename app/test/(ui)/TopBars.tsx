@@ -50,7 +50,7 @@ export function TopGroupSettingBar({ groupData }: { groupData: any }) {
         {groupData &&
           groupData.users.some((user: any) => user.id === loginUserId)
           ? '群組設定'
-          : 'no such Page'}
+          : ''}
       </h1>
       <div className="h-6 w-8">
         {groupData &&
@@ -110,21 +110,32 @@ export function TopExpenseBar({
 }
 
 export function TopExpenseSettingBar({
+  isAddPage,
   group,
   expenseData,
   phase,
   setPhase,
+  hintword,
+  cancelLink
 }: {
+  isAddPage: boolean;
   group: any;
   expenseData: any;
   phase: number;
-  setPhase: any;
+  setPhase: (phase: number) => void;
+  hintword: string;
+  cancelLink: string;
 }) {
   function handleClick() {
     if (phase === 1) return;
     setPhase(phase - 1);
     console.log(phase);
   }
+
+  const shouldRender = expenseData && group && (
+    isAddPage ||
+    (expenseData.payerId === loginUserId || expenseData.sharers?.some((sharer: any) => sharer.id === loginUserId))
+  );
 
   return (
     <div className="fixed z-20 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
@@ -139,27 +150,16 @@ export function TopExpenseSettingBar({
         </div>
       </div>
       <h1 className="text-lg">
-        {expenseData &&
-          (expenseData.payerId === loginUserId ||
-            expenseData.sharers?.some((sharer: any) => sharer.id === loginUserId))
-          ? '編輯費用'
-          : 'no such Page'}
+        {shouldRender && hintword }
       </h1>
       <div className="flex h-6 w-12 items-center justify-end">
-        {expenseData &&
-          (expenseData.payerId === loginUserId ||
-            expenseData.sharers?.some(
-              (sharer: any) => sharer.id === loginUserId,
-            )) ? (
-          <Link
-            href={`/test/split/group/${group.id}/expense/${expenseData.id}`}
-            scroll={false}
-          >
-            <p className="text-sm">取消</p>
-          </Link>
-        ) : (
-          ''
-        )}
+        <>
+          {shouldRender && (
+            <Link href={cancelLink} scroll={false}>
+              <p className="text-sm">取消</p>
+            </Link>
+          )}
+        </>
       </div>
     </div>
   );
