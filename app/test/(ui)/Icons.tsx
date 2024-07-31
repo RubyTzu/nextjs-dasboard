@@ -33,6 +33,7 @@ import editTwoIcon from '@/app/test/(ui)/icons/editTwo.svg';
 import greaterThanIcon from '@/app/test/(ui)/icons/greaterThan.svg';
 import cameraIcon from '@/app/test/(ui)/icons/camera.svg';
 import leaveIcon from '@/app/test/(ui)/icons/leave.svg';
+import backArrowIcon from '@/app/test/(ui)/icons/backArrow.svg';
 
 function FoodIcon({ strokeWidth }: { strokeWidth: any }) {
   return (
@@ -297,6 +298,10 @@ function LeaveIcon() {
   return <Image src={leaveIcon} alt="" />;
 }
 
+function BackArrowIcon() {
+  return <Image src={backArrowIcon} alt="" />;
+}
+
 const expenseIconMap = {
   food: FoodIcon,
   drink: DrinkIcon,
@@ -346,4 +351,5 @@ export {
   GreaterThanIcon,
   CameraIcon,
   LeaveIcon,
+  BackArrowIcon
 };

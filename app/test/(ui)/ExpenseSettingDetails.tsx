@@ -175,12 +175,7 @@ export function NextStepButton({
                 { hidden: !isNotEqual && isNotZero, block: isNotEqual || !isNotZero },
               )}
             >
-              {isNotZero ? 
-              <>
-                目前分帳總額 不等於 {expenseData.amount} 元
-              </> : <>
-                總金額不可為 0
-              </>}
+             目前分帳總額 不等於 {expenseData.amount} 元
             </div>
             <div className="text-[10px]">3/3</div>
             <div className="text-sm">確認</div>

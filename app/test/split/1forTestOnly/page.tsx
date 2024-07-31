@@ -10,7 +10,7 @@ import { NextStepButton, GroupInfoBar } from '@/app/test/(ui)/ExpenseSettingDeta
 import SharersAmountButton from '../../(ui)/SharersAmountButton';
 import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
 import GroupPictureButton from '../../(ui)/GroupPictureButton';
-import GroupNameButton from '../../(ui)/GroupNameButton';
+import GroupNameButton from '../../(ui)/EditGroupNameButton';
 import { GroupUsersSetting } from '../../(ui)/GroupSettingDetails';
 
 

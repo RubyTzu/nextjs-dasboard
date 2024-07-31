@@ -3,7 +3,7 @@
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 //import data
-import { useGroup, useExpense } from '@/app/test/(data)/(fetchData)/Providers';
+import { useGroup } from '@/app/test/(data)/(fetchData)/Providers';
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 //import ui
 import { TopExpenseSettingBar } from '@/app/test/(ui)/TopBars';

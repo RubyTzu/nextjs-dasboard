@@ -5,7 +5,7 @@ import { useState, useRef } from 'react';
 //import ui
 import NameModal from './NameModal';
 
-export default function GroupNameButton({
+export default function EditGroupNameButton({
   groupData,
   setCurrentGroup,
 }: {

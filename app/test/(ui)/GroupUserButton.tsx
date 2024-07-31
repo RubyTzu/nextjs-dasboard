@@ -1,25 +1,24 @@
-//import from next & react
 import Image from 'next/image';
 import { useId, useRef, useState } from 'react';
-//import data
 import { loginUserId } from '../(data)/(fetchData)/user';
-//import ui
 import { TrashcanIcon } from '@/app/test/(ui)/Icons';
 import DeleteModal from './DeleteModal';
+
 export function GroupUser({
   idx,
   userData,
   groupData,
   setCurrentGroup,
+  isAddPage,
+  loginUserData
 }: {
   idx: any;
   userData: any;
   groupData: any;
   setCurrentGroup: any;
+  isAddPage: boolean;
+  loginUserData: any;
 }) {
-  // const [GroupUsers, setGroupUsers] = useState(groupData.users);
-  // const [lastSavedGroupUsers, setLastSavedGroupUsers] =
-  //   useState<any>(GroupUsers);
   const [lastSavedGroup, setLastSavedGroup] =
     useState<any>(groupData);
   const [isShow, setIsShow] = useState(false);
@@ -44,8 +43,6 @@ export function GroupUser({
 
   const handleSave = (e: any) => {
     let currentGroupUsers = [...groupData.users];
-console.log('e.target.id')
-console.log(e.target.id)
     const userIndex = currentGroupUsers.findIndex(
       (user: any) => user.name === userData.name && e.target.id === idx,
     );
@@ -69,6 +66,9 @@ console.log(e.target.id)
   };
 
   const isAdmin = groupData.creatorId === loginUserId;
+  const isMemberAdmin = (groupData.creatorId === userData.id) && groupData.creatorId !== undefined;
+  const showAdminLabel = isAddPage && loginUserData.id === idx || isMemberAdmin;
+  const showDeleteButton = (isAddPage && loginUserData.id !== idx) || (isAdmin && !isMemberAdmin);
 
   return (
     <div className="mb-4 flex items-center justify-between">
@@ -86,39 +86,33 @@ console.log(e.target.id)
         )}
         <p>
           {userData.name}
-          {groupData.creatorId === userData.id ? (
+          {showAdminLabel ? (
             <span>&emsp;(管理員)</span>
           ) : (
             ''
           )}
         </p>
       </div>
-      {isAdmin && groupData.creatorId === userData.id ? (
-        <div></div>
-      ) : (
+      {showDeleteButton ? (
         <>
-          {isAdmin && (
-            <>
-              <div
-                onClick={handleToggle}
-                className="flex h-8 w-8 items-center justify-center"
-              >
-                <TrashcanIcon />
-              </div>
-              <DeleteModal
-                dialogRef={dialogRef}
-                dialogId={dialogId}
-                isShow={isShow}
-                headerId={headerId}
-                handleClose={handleClose}
-                handleSave={(e: any) => handleSave(e)}
-                hintWord="確定要刪除成員嗎？"
-                idx={idx}
-              />
-            </>
-          )}
+          <div
+            onClick={handleToggle}
+            className="flex h-8 w-8 items-center justify-center"
+          >
+            <TrashcanIcon />
+          </div>
+          <DeleteModal
+            dialogRef={dialogRef}
+            dialogId={dialogId}
+            isShow={isShow}
+            headerId={headerId}
+            handleClose={handleClose}
+            handleSave={(e: any) => handleSave(e)}
+            hintWord="確定要刪除成員嗎？"
+            idx={idx}
+          />
         </>
-      )}
+      ) : null}
     </div>
   );
 }

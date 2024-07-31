@@ -91,7 +91,7 @@ export default function GroupPictureButton({
   };
 
   return (
-    <div className="relative">
+    <div className="relative grow-0">
       <div onClick={toggleDialog} className="relative">
         <Image
           src={Icon}

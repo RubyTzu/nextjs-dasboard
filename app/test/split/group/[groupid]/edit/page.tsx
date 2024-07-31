@@ -1,7 +1,7 @@
 'use client';
 //import from next & react
 import { useParams } from 'next/navigation';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 //import data
 import { useGroup } from '@/app/test/(data)/(fetchData)/Providers';
 //import ui
@@ -12,29 +12,41 @@ import {
   GroupSave,
   GroupUsersSetting,
 } from '@/app/test/(ui)/GroupSettingDetails';
+import { BackArrowIcon } from '@/app/test/(ui)/Icons';
 
 export default function Page() {
   const params = useParams<{ groupid: string }>();
   const group = useGroup(params.groupid);
   const [currentGroup, setCurrentGroup] = useState(group);
- 
+
   useEffect(() => {
     if (group) {
       setCurrentGroup(group);
     }
   }, [group]);
- 
+
   return (
     <form method="post" action={`/test/split/group/${params.groupid}`}>
       <div className="relative flex flex-col">
-        <TopGroupSettingBar groupData={group} />
+        <TopGroupSettingBar
+          groupData={currentGroup}
+          isAddPage={false}
+          middleHintword="群組設定"
+          leftHintWord={<BackArrowIcon />}
+          rightHintWord=""
+          leftCancelLink={`/test/split/group/${params.groupid}`}
+          rightCancelLink=""
+        />
         <GroupNameSetting
           groupData={currentGroup}
           setCurrentGroup={setCurrentGroup}
+          isAddPage={false}
         />
         <GroupUsersSetting
           groupData={currentGroup}
           setCurrentGroup={setCurrentGroup}
+          isAddPage={false}
+          loginUserData={""}
         />
         <GroupOtherSetting
           groupData={currentGroup}

@@ -32,10 +32,10 @@ export default function NameModal({
       >
         <TopBar
           name={TopBarName}
-          leftBtnName="取消"
-          rightBtnName=""
-          handleLeftClick={handleClose}
-          handleRightClick={() => {}}
+          leftBtnName=""
+          rightBtnName="取消"
+          handleLeftClick={() => {}}
+          handleRightClick={handleClose}
         />
         <input
           ref={inputRef}

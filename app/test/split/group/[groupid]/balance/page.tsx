@@ -7,10 +7,7 @@ import { useGroup, useUser } from '@/app/test/(data)/(fetchData)/Providers';
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 //import ui
 import { TopGroupBar } from '@/app/test/(ui)/TopBars';
-import UsersBar from '@/app/test/(ui)/UsersBar';
-import BalanceAndShareButtons from '@/app/test/(ui)/BalanceAndShareButtons';
-import ExpensesList from '@/app/test/(ui)/ExpensesList';
-import AddExpenseButton from '@/app/test/(ui)/AddExpenseButton';
+import BalanceAmount from '@/app/test/(ui)/BalanceAmount';
 //import ui loading fallback
 import { UsersBarSkeleton } from '@/app/test/(ui)/LoadingSkeletons';
 
@@ -31,15 +28,11 @@ export default function Page() {
   return (
     <div className="flex flex-col">
       <Suspense fallback={<UsersBarSkeleton />}>
-        <TopGroupBar 
-        groupData={group} 
-        groupName={groupName} 
-        isBalancePage={false}
-        />
-        <UsersBar groupData={group} />
-        <BalanceAndShareButtons groupData={group} groupName={groupName} />
-        <ExpensesList groupData={group} />
-        <AddExpenseButton groupId={params.groupid}/>
+        <TopGroupBar
+          groupData={group}
+          groupName={groupName}
+          isBalancePage={true} />
+        <BalanceAmount />
       </Suspense>
     </div>
   );
