@@ -1,7 +1,28 @@
 import { filterExpense } from "@/app/test/(data)/(sharedFunction)/totalDebts";
-import { expenses } from '@/app/test/(data)/data';
 
-function splitExpense(groupId: any) {
+interface Sharer {
+    id: string;
+    amount: string | number;
+}
+
+interface Expense {
+    id: string;
+    name: string;
+    amount: string | number;
+    date: string;
+    category: string;
+    payerId: string;
+    sharers: Sharer[];
+    note: string;
+}
+
+interface SplitExpenseResult {
+    [userId: string]: {
+        [expenseId: string]: number;
+    };
+}
+
+function splitExpense(expenses: Expense[]): SplitExpenseResult {
     let { totalDebts } = filterExpense(expenses)
 
     //split debt initial

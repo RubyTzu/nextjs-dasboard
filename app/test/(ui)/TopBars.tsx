@@ -8,40 +8,38 @@ import clsx from 'clsx';
 
 export function TopGroupBar({
   groupData,
-  groupName,
   isBalancePage
 }: {
   groupData: any;
-  groupName: string;
   isBalancePage: boolean;
 }) {
+  const hasGroupData = Boolean(groupData);
+  const isUserInGroup = hasGroupData && groupData.users.some((user: any) => user.id === loginUserId);
+
   return (
     <div className="fixed z-10 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
-      {isBalancePage ? 
-       <Link href={`/test/split/group/${groupData.id}`} className="h-6 w-6 flex">
-        <BackArrowIcon />
-      </Link> : 
-      <Link href="/test/split/groups" className="h-6 w-6">
-        <HomeIcon />
-      </Link>}
+      <div className="h-6 w-6">
+        {isBalancePage && hasGroupData ? (
+          <Link href={`/test/split/group/${groupData.id}`} className="flex">
+            <BackArrowIcon />
+          </Link>
+        ) : hasGroupData ? (
+          <Link href="/test/split/groups">
+            <HomeIcon />
+          </Link>
+        ) : null}
+      </div>
       <h1 className="text-lg">
-        {groupData &&
-          groupData.users.some((user: any) => user.id === loginUserId)
-          ? groupName
-          : 'no such Page'}
+        {isUserInGroup ? groupData.name : ''}
       </h1>
       <div className="h-6 w-6">
-        {!isBalancePage && (groupData &&
-          groupData.users.some((user: any) => user.id === loginUserId)) ? (
+        {!isBalancePage && isUserInGroup && (
           <Link
             href={`/test/split/group/${groupData.id}/edit`}
-            className="h-6 w-6"
             scroll={false}
           >
             <EditIcon />
           </Link>
-        ) : (
-          ''
         )}
       </div>
     </div>

@@ -9,10 +9,8 @@ import CopyLinkButton from '@/app/test/(ui)/CopyLinkButton';
 
 export default function BalanceAndShareButtons({
   groupData,
-  groupName,
 }: {
   groupData: any;
-  groupName: string;
 }) {
   if (!groupData) return;
 
@@ -37,8 +35,8 @@ export default function BalanceAndShareButtons({
             <p className="ml-1 font-medium">結餘</p>
           </Link>
           <div className="flex items-center gap-2">
-            <ShareButton id={id} name={groupName} inGroupPage={true} />
-            <CopyLinkButton id={id} name={groupName} inGroupPage={true} />
+            <ShareButton id={id} name={groupData.name} inGroupPage={true} />
+            <CopyLinkButton id={id} name={groupData.name} inGroupPage={true} />
           </div>
         </div>
       ) : null}

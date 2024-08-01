@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <Providers>
         <CalcProvider>
-          <main className="h-dvh min-h-screen w-full bg-primary-100">
+          <main className="h-dvh min-h-screen w-full bg-neutrals-0">
             {children}
           </main>
         </CalcProvider>
