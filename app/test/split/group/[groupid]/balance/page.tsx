@@ -1,7 +1,7 @@
 'use client';
 //import from next & react
 import { useParams } from 'next/navigation';
-import { Suspense, useEffect } from 'react';
+import { Suspense } from 'react';
 //import data
 import { useGroup } from '@/app/test/(data)/(fetchData)/Providers';
 //import ui

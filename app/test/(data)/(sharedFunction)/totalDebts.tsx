@@ -1,6 +1,41 @@
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+interface Sharer {
+  id: string;
+  amount: string | number;
+}
 
-function filterExpense(expenses: any) {
+interface Expense {
+  id: string;
+  name: string;
+  amount: string | number;
+  date: string;
+  category: string;
+  payerId: string;
+  sharers: Sharer[];
+  note: string;
+}
+
+interface Debts {
+  [userId: string]: {
+    [expenseName: string]: number;
+  };
+}
+
+interface TotalDebts {
+  [userId: string]: number; // Total debt amount for each user
+}
+
+interface ExpensesWithDebts {
+  [expenseId: string]: Expense & { expenseDebt?: string };
+}
+
+interface SplitExpenseResult {
+  debts: Debts;
+  totalDebts: TotalDebts;
+  expensesWithDebts: ExpensesWithDebts;
+}
+
+function filterExpense(expenses: Expense[]): SplitExpenseResult {
 
   let newExpenses = expenses
     .map((expense: any) => ({ ...expense }));
@@ -61,7 +96,8 @@ function filterExpense(expenses: any) {
     expensesWithDebts[expense].expenseDebt =
       userDebts[expensesWithDebts[expense].name]?.toFixed(2);
   }
-
+  console.log('totalDebts')
+console.log(totalDebts)
   return { debts, totalDebts, expensesWithDebts }
 }
 
