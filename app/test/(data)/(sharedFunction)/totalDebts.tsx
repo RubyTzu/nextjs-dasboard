@@ -96,8 +96,7 @@ function filterExpense(expenses: Expense[]): SplitExpenseResult {
     expensesWithDebts[expense].expenseDebt =
       userDebts[expensesWithDebts[expense].name]?.toFixed(2);
   }
-  console.log('totalDebts')
-console.log(totalDebts)
+
   return { debts, totalDebts, expensesWithDebts }
 }
 

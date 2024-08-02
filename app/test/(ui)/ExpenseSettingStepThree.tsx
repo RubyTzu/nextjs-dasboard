@@ -72,8 +72,16 @@ export function ExpenseSettingStepThree({
     0,
   ) || '';
 
+  const remainingAmount = Number(expenseData.amount) - Number(addedAmount);
+  const adjustedRemainingAmount = Math.abs(remainingAmount) < 0.1 ? 0 : remainingAmount;
+
   useEffect(() => {
-    setIsNotEqual(Number(expenseData?.amount) !== Number(addedAmount));
+    const difference = Math.abs(Number(expenseData?.amount) - Number(addedAmount));
+
+    const isNotEqual = difference >= 0.1;
+    
+    // 设置 isNotEqual 的值
+    setIsNotEqual(isNotEqual);
 
     const handleResize: any = () => {
       if (window.visualViewport) {
@@ -128,10 +136,28 @@ export function ExpenseSettingStepThree({
   const handleAllSelect = () => {
     console.log('users are');
     console.log(users);
+
+    const totalAmount = Number(expenseData.amount);
+    const numberOfSharers = users.length;
+
+    // Calculate the base amount each sharer gets, allowing for decimal values
+    const baseAmount = (totalAmount / numberOfSharers).toFixed(2); // Keep 2 decimal places
+
+    // Convert baseAmount to number for further calculations
+    const baseAmountNumber = parseFloat(baseAmount);
+
+    // Calculate the total distributed amount
+    const totalDistributedAmount = baseAmountNumber * numberOfSharers;
+
+    // Calculate the amount to be rounded off (remainder)
+    const roundingDifference = totalAmount - totalDistributedAmount;
+
+    // Create the updated sharers array
     const updatedSharersCopy = users.map((user) => ({
       id: user.id,
-      amount: Number(expenseData.amount) / users.length,
+      amount: baseAmountNumber,
     }));
+
     setCurrentExpense({
       ...expenseData,
       sharers: updatedSharersCopy
@@ -236,7 +262,6 @@ export function ExpenseSettingStepThree({
               id: user.id,
               amount: 0,
             };
-
           return (
             <div
               className="my-2 flex w-full items-center justify-between px-7"
@@ -338,13 +363,9 @@ export function ExpenseSettingStepThree({
             {currentSharer.amount === '' ? 0 : currentSharer.amount}
           </div>
           <div className="text-sm text-neutrals-60">
-            {Number(expenseData.amount) - Number(addedAmount) > 0 ||
-              Number(expenseData.amount) - Number(addedAmount) === 0
-              ? `還剩下$${Number(expenseData.amount) - Number(addedAmount)
-              }還沒被分帳`
-              : `目前分帳金額多出$${Math.abs(
-                Number(expenseData.amount) - Number(addedAmount),
-              )}`}
+            {adjustedRemainingAmount > 0
+              ? `還剩下$${adjustedRemainingAmount}還沒被分帳`
+              : `目前分帳金額多出$${Math.abs(adjustedRemainingAmount)}`}
           </div>
         </div>
       </> : null}

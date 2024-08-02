@@ -18,7 +18,7 @@ export function TopGroupBar({
 
   return (
     <div className="fixed z-10 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
-      <div className="h-6 w-6">
+      <div className="h-6 w-6 flex">
         {isBalancePage && hasGroupData ? (
           <Link href={`/test/split/group/${groupData.id}`} className="flex">
             <BackArrowIcon />

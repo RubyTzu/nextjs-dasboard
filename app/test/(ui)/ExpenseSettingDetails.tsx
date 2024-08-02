@@ -116,11 +116,16 @@ export function NextStepButton({
   const addedAmount = expenseData?.sharers.reduce(
     (total, sharer) => Number(total) + Number(sharer.amount),
     0,
-  );
+  ) || 0;
 
   useEffect(() => {
-    setIsNotEqual(Number(expenseData?.amount) !== Number(addedAmount));
-  }, [expenseData?.amount, setIsNotEqual]);
+    const difference = Math.abs(Number(expenseData?.amount) - Number(addedAmount));
+
+    const isNotEqual = difference >= 0.1;
+    
+    // 设置 isNotEqual 的值
+    setIsNotEqual(isNotEqual);
+  }, [expenseData?.amount, setIsNotEqual,addedAmount]);
 
   function handleClick(e: any, expenseId: any) {
     e.preventDefault();
