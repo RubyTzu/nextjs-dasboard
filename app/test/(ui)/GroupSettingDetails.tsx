@@ -7,9 +7,9 @@ import { GroupUser } from './GroupUserButton';
 import GroupPictureButton from './GroupPictureButton';
 import EditGroupNameButton from './EditGroupNameButton';
 import AddUserButton from './AddUserButton';
+import AddGroupNameButton from './AddGroupNameButton';
 //import other
 import { v4 as uuidv4 } from 'uuid';
-import AddGroupNameButton from './AddGroupNameButton';
 
 export function GroupNameSetting({
   groupData,
