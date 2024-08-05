@@ -1,6 +1,3 @@
-//import next & react
-import { useId, useRef, useState } from 'react';
-//import ui
 //import other
 import clsx from 'clsx';
 

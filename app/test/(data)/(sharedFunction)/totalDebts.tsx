@@ -1,4 +1,5 @@
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+
 interface Sharer {
   id: string;
   amount: string | number;
@@ -25,14 +26,10 @@ interface TotalDebts {
   [userId: string]: number; // Total debt amount for each user
 }
 
-interface ExpensesWithDebts {
-  [expenseId: string]: Expense & { expenseDebt?: string };
-}
-
 interface SplitExpenseResult {
   debts: Debts;
   totalDebts: TotalDebts;
-  expensesWithDebts: ExpensesWithDebts;
+  expensesWithDebts: Expense[];
 }
 
 function filterExpense(expenses: Expense[]): SplitExpenseResult {
