@@ -6,10 +6,12 @@ export function BalanceAmount({ totalAmount }: { totalAmount: number }) {
   let nf = new Intl.NumberFormat('en-US');
 
   return (
-    <div className="mt-16 flex flex-col items-center justify-center border-b-grey-userBar border-b-[1px] pb-6 pt-6">
+    <div className="mt-16 w-full flex flex-col items-center justify-center border-b-grey-userBar border-b-[1px] pb-6 pt-6">
       <div className="text-sm text-neutrals-70 leading-5">
-        {totalAmount > 0 || totalAmount === 0 ? "個人待收款總額" : "個人待繳款總額"}
-
+        {totalAmount === 0 ? <>&ensp;</> :
+          <>
+            {totalAmount > 0 ? "個人待收款總額" : "個人待繳款總額"}
+          </>}
       </div>
       <div className={clsx("text-xl ", {
         "text-highlight-50": totalAmount > 0 || totalAmount === 0,

@@ -31,6 +31,7 @@ export default function Page() {
         <BalanceAndShareButtons groupData={group} />
         <ExpensesList groupData={group} />
         <AddExpenseButton groupId={params.groupid}/>
+      
       </Suspense>
     </div>
   );

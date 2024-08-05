@@ -10,6 +10,7 @@ import AddUserButton from './AddUserButton';
 //import other
 import { v4 as uuidv4 } from 'uuid';
 import AddGroupNameButton from './AddGroupNameButton';
+import clsx from "clsx";
 
 export function GroupNameSetting({
   groupData,
@@ -49,7 +50,9 @@ export function GroupNameSetting({
   return (
     <>
       <div className="m-6 mt-16 flex items-center justify-between pt-6">
-        <div className="flex items-center gap-4">
+        <div className={clsx("flex items-center gap-4",{
+          "w-full": isAddPage,
+        })}>
           {Icon ? (
             <GroupPictureButton
               groupData={groupData}

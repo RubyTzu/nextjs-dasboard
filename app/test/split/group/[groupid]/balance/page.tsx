@@ -12,6 +12,8 @@ import { BalanceAmount } from '@/app/test/(ui)/BalanceAmount';
 import { BalanceDetails } from '@/app/test/(ui)/BalanceDetails';
 //import ui loading fallback
 import { UsersBarSkeleton } from '@/app/test/(ui)/LoadingSkeletons';
+//import other
+import clsx from "clsx";
 
 interface Debt {
   [expenseId: string]: number;
@@ -70,7 +72,9 @@ export default function Page() {
 
 
   return (
-    <div className="flex flex-col">
+    <div className={clsx("flex flex-col",{
+      "items-center": totalAmount === 0
+    })}>
       <Suspense fallback={<UsersBarSkeleton />}>
         <TopGroupBar
           groupData={group}
@@ -80,7 +84,10 @@ export default function Page() {
         <BalanceDetails groupUsers={group?.users}
           ownerDebt={ownerDebt}
           totalAmount={totalAmount}
-        /> : null}
+        /> : 
+        <div className="mt-9">
+          -尚未有費用紀錄-
+          </div>}
       </Suspense>
     </div>
   );

@@ -84,15 +84,11 @@ export function GroupUser({
         ) : (
           <div className="h-11 w-11 rounded-full bg-neutrals-20"></div>
         )}
-        <p>
-          {userData.name}
-          {showAdminLabel ? (
-            <span>&emsp;(管理員)</span>
-          ) : (
-            ''
-          )}
-        </p>
+        <p>{userData.name}</p>
       </div>
+      {showAdminLabel ? (
+        <div className="relative left-[0.3rem] text-sm text-neutrals-70">管理員</div>
+      ) : null}
       {showDeleteButton ? (
         <>
           <div
