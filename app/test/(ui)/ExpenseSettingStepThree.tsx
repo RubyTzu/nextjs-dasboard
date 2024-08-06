@@ -10,6 +10,7 @@ interface User {
   id: string;
   name: string;
   picture: string;
+  adoptable: boolean;
 }
 
 interface Sharer {
@@ -25,10 +26,7 @@ interface SettingExpense {
   date: undefined;
   note: undefined;
   payerId: string;
-  sharers: {
-    id: string;
-    amount: number;
-  }[];
+  sharers: Sharer[];
 };
 
 interface AddingExpense {
@@ -268,14 +266,17 @@ export function ExpenseSettingStepThree({
               key={user.id}
             >
               <div className="flex items-center gap-4">
+              {user.adoptable === false ?
                 <Image
                   className="h-12 w-12 rounded-full"
                   src={user.picture}
                   width={50}
                   height={50}
                   alt="user's picture"
-                />
-                <div>{user.name}</div>
+                /> :
+                <div className="h-12 w-12 rounded-full bg-neutrals-20" />
+                }
+                <div className="truncate w-28">{user.name}</div>
               </div>
               <div className="flex items-center justify-between gap-7">
                 <input

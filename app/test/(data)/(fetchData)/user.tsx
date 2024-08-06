@@ -1,5 +1,5 @@
 //login userId
-let loginUserId = 'u1';
+let loginUserId = 'u2222';
 
 
 export { loginUserId };

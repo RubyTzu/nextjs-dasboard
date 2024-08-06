@@ -33,6 +33,12 @@ interface SplitExpenseResult {
 }
 
 function filterExpense(expenses: Expense[]): SplitExpenseResult {
+if(!expenses) {
+  const debts = {}
+  const totalDebts = {}
+  const expensesWithDebts:any[] = []
+  return { debts, totalDebts, expensesWithDebts }
+}
 
   let newExpenses = expenses
     .map((expense: any) => ({ ...expense }));

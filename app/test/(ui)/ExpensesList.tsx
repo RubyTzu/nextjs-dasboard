@@ -10,9 +10,9 @@ import { GreaterThanIcon, expenseIconMap } from '@/app/test/(ui)/Icons';
 import { format } from 'date-fns';
 
 export default function ExpensesList({ groupData }: { groupData: any }) {
-  let { expensesWithDebts } = filterExpense(groupData.expenses);
-  let groupId = groupData.id;
-  let users = groupData.users;
+  let { expensesWithDebts } = filterExpense(groupData?.expenses);
+  let groupId = groupData?.id;
+  let users = groupData?.users;
   let expenses = expensesWithDebts;
 
   // Step 1: Group expenses by date

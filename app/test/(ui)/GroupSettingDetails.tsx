@@ -10,11 +10,7 @@ import AddUserButton from './AddUserButton';
 import AddGroupNameButton from './AddGroupNameButton';
 //import other
 import { v4 as uuidv4 } from 'uuid';
-<<<<<<< HEAD
-import AddGroupNameButton from './AddGroupNameButton';
 import clsx from "clsx";
-=======
->>>>>>> fd7314acdde37741c7c2f2486e84f85102459c70
 
 export function GroupNameSetting({
   groupData,

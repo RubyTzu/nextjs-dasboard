@@ -73,7 +73,7 @@ export function GroupUser({
   return (
     <div className="mb-4 flex items-center justify-between">
       <div className="flex items-center gap-4">
-        {userData.picture !== '' ? (
+        {userData.adoptable === false ? (
           <Image
             className="h-11 w-11 rounded-full bg-neutrals-20"
             src={userData.picture}
@@ -84,7 +84,7 @@ export function GroupUser({
         ) : (
           <div className="h-11 w-11 rounded-full bg-neutrals-20"></div>
         )}
-        <p>{userData.name}</p>
+        <p className="truncate w-56">{userData.name}</p>
       </div>
       {showAdminLabel ? (
         <div className="relative left-[0.3rem] text-sm text-neutrals-70">管理員</div>
