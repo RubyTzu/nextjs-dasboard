@@ -15,7 +15,6 @@ export default function DeleteGroupButton({
 }) {
   const isAdmin = groupData.creatorId === loginUserId;
 
-  // const [GroupUsers, setGroupUsers] = useState(groupData.users);
   const [lastSavedGroup, setLastSavedGroup] =
     useState<any>(groupData);
   const [isShow, setIsShow] = useState(false);
