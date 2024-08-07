@@ -111,7 +111,7 @@ export function GroupUsersSetting({
         <div>
           {isAddPage ? <>
             <GroupUser
-              idx={loginUserData.id}
+              idx={loginUserData?.id}
               userData={loginUserData}
               groupData={groupData}
               setCurrentGroup={setCurrentGroup}

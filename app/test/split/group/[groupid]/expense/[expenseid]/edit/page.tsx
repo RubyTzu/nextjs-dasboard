@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 //import data
 import { useGroup, useExpense } from '@/app/test/(data)/(fetchData)/Providers';
+import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 //import ui
 import { TopExpenseSettingBar } from '@/app/test/(ui)/TopBars';
 import {
@@ -73,7 +74,11 @@ export default function Page() {
           hintword='編輯費用'
           cancelLink={`/test/split/group/${params.groupid}/expense/${expenseId}`}
         />
-        <GroupInfoBar expenseData={currentExpense} group={group} />
+         {expense &&
+          (expense.sharers?.some((sharer: any) => sharer.id === loginUserId) ||
+            expense.payerId?.includes(loginUserId)) ? (
+          <>
+          <GroupInfoBar expenseData={currentExpense} group={group} />
         <section>
           <ExpenseSettingStepOne
             group={group}
@@ -106,6 +111,10 @@ export default function Page() {
             isNotZero={true}
           />
         </section>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
     </form>
   );

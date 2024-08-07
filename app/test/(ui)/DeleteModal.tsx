@@ -28,7 +28,7 @@ export default function DeleteModal({
         id={dialogId}
         aria-modal
         className={clsx(
-          'z-20 m-0 mx-auto w-[60%] translate-y-[-50%] rounded-lg bg-white transition-all duration-300 focus:!border-none focus:outline-none',
+          'z-20 m-0 mx-auto w-[60%] translate-y-[-50%] rounded-lg bg-white transition-all duration-300 focus:!border-none focus:outline-none drop-shadow-xl',
           {
             'top-[40%] z-50 transform opacity-100  backdrop:bg-highlight-50/80':
               isShow,
@@ -43,7 +43,7 @@ export default function DeleteModal({
           <div className="flex h-20 items-center justify-center px-6 mt-3 mb-4">
             <div className="text-normal">{hintWord}</div>
           </div>
-          <div className="mx-4 mb-3 flex items-center justify-between">
+          <div className="mx-4 mb-3 flex gap-3 items-center justify-between">
             <div
               className="flex h-8 w-24 items-center justify-center rounded-lg bg-highlight-30 text-white"
               onClick={handleClose}

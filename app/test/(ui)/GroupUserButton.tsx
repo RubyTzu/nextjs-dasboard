@@ -66,14 +66,14 @@ export function GroupUser({
   };
 
   const isAdmin = groupData.creatorId === loginUserId;
-  const isMemberAdmin = (groupData.creatorId === userData.id) && groupData.creatorId !== undefined;
-  const showAdminLabel = isAddPage && loginUserData.id === idx || isMemberAdmin;
-  const showDeleteButton = (isAddPage && loginUserData.id !== idx) || (isAdmin && !isMemberAdmin);
+  const isMemberAdmin = (groupData.creatorId === userData?.id) && groupData.creatorId !== undefined;
+  const showAdminLabel = isAddPage && loginUserData?.id === idx || isMemberAdmin;
+  const showDeleteButton = (isAddPage && loginUserData?.id !== idx) || (isAdmin && !isMemberAdmin);
 
   return (
     <div className="mb-4 flex items-center justify-between">
       <div className="flex items-center gap-4">
-        {userData.adoptable === false ? (
+        {userData?.adoptable === false || userData?.id === loginUserId ? (
           <Image
             className="h-11 w-11 rounded-full bg-neutrals-20"
             src={userData.picture}
@@ -84,7 +84,7 @@ export function GroupUser({
         ) : (
           <div className="h-11 w-11 rounded-full bg-neutrals-20"></div>
         )}
-        <p className="truncate w-56">{userData.name}</p>
+        <p className="truncate w-56">{userData?.name}</p>
       </div>
       {showAdminLabel ? (
         <div className="relative left-[0.3rem] text-sm text-neutrals-70">管理員</div>

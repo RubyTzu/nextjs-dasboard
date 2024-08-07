@@ -39,16 +39,18 @@ export default function Page() {
         <BalanceAndShareButtons groupData={group} />
         <ExpensesList groupData={group} />
         <AddExpenseButton groupId={params.groupid} />
-        {group?.users.some((user: any) => {
-          return (user.id !== loginUserId) && user.adoptable === true
-        }) && <JoinGroupModal
+        {group?.users.some((user: any) => user.adoptable === true) 
+        && !group?.users.some((user: any) => user.id === loginUserId) 
+        && <JoinGroupModal
             groupData={currentGroup}
             setCurrentGroup={setCurrentGroup}
           />
         }
-{!group?.users.some((user: any) => {user.adoptable === true}) && <AlertModal
+        {group?.users.every((user: any) => user.adoptable === false )
+        && !group?.users.some((user: any) => user.id === loginUserId)
+         && <AlertModal
           url={`/test/split/groups`}
-          hintWord="目前群組中無成員空位， 請聯絡群組成員新增空位"
+          hintWord="目前群組中無成員空位，請聯絡群組成員新增空位"
           buttonHintWord="確定"
         />
         }

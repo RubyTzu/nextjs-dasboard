@@ -40,7 +40,7 @@ export default function UsersBar({ groupData }: { groupData: any }) {
           )}
         </>
       ) : (
-        <NoneUsersBar text="no such group" />
+        <NoneUsersBar text="" />
       )}
     </>
   );
