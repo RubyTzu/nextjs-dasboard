@@ -2,9 +2,11 @@
 //import data
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 import { useUser } from '@/app/test/(data)/(fetchData)/Providers';
+import { UserGroup } from '../../(data)/(sharedFunction)/types';
 //import ui
 import GroupButton from '@/app/test/(ui)/GroupButton';
 import AddGroupButton from '@/app/test/(ui)/AddGroupButton';
+
 
 export default function Page() {
   const data = useUser(loginUserId);
@@ -17,7 +19,7 @@ export default function Page() {
       <AddGroupButton />
       <div className="mt-[6.5rem]">
         {data
-          ? data.groups.map((group: any) => (
+          ? data.groups.map((group: UserGroup) => (
             <GroupButton key={group.id} groupData={group} />
           ))
           : null}

@@ -2,6 +2,7 @@
 import Link from 'next/link';
 //import data
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { Group, GroupUser } from '../(data)/(sharedFunction)/types';
 //import ui
 import { DollarTwoIcon } from '@/app/test/(ui)/Icons'
 import ShareButton from '@/app/test/(ui)/ShareButton';
@@ -10,7 +11,7 @@ import CopyLinkButton from '@/app/test/(ui)/CopyLinkButton';
 export default function BalanceAndShareButtons({
   groupData,
 }: {
-  groupData: any;
+  groupData: Group;
 }) {
   if (!groupData) return;
 
@@ -19,12 +20,12 @@ export default function BalanceAndShareButtons({
     users,
   }: {
     id: string;
-    users: string[];
+    users: GroupUser[];
   } = groupData;
 
   return (
     <>
-      {groupData && users.some((user: any) => user.id === loginUserId) ? (
+      {groupData && users.some((user: GroupUser) => user.id === loginUserId) ? (
         <div className="flex items-center justify-center gap-2 pb-3 pt-6">
           <Link 
           href={`/test/split/group/${groupData.id}/balance`}

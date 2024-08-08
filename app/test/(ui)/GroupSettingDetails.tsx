@@ -1,9 +1,11 @@
 //import from next & react
 import { Fragment, useEffect } from 'react';
+//import data
+import { Group, User } from '../(data)/(sharedFunction)/types';
 //import ui
 import { groupIconMap } from '@/app/test/(ui)/Icons';
 import DeleteGroupButton from './DeleteGroupButton';
-import { GroupUser } from './GroupUserButton';
+import { GroupUserButton } from './GroupUserButton';
 import GroupPictureButton from './GroupPictureButton';
 import EditGroupNameButton from './EditGroupNameButton';
 import AddUserButton from './AddUserButton';
@@ -17,32 +19,14 @@ export function GroupNameSetting({
   setCurrentGroup,
   isAddPage
 }: {
-  groupData: any;
-  setCurrentGroup: unknown;
+  groupData: Group;
+  setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
   isAddPage: boolean;
 }) {
   if (!groupData) return;
   const {
     picture,
     name,
-  }: {
-    picture:
-    | 'groupIcon01'
-    | 'groupIcon02'
-    | 'groupIcon03'
-    | 'groupIcon04'
-    | 'groupIcon05'
-    | 'groupIcon06'
-    | 'groupIcon07'
-    | 'groupIcon08'
-    | 'groupIcon09'
-    | 'groupIcon10'
-    | 'groupIcon11'
-    | 'groupIcon12'
-    | 'groupIcon13'
-    | 'groupIcon14'
-    | 'groupIcon15';
-    name: string;
   } = groupData;
 
   const Icon = groupIconMap[picture];
@@ -86,10 +70,10 @@ export function GroupUsersSetting({
   isAddPage,
   loginUserData
 }: {
-  groupData: any;
-  setCurrentGroup: any;
-  isAddPage: any;
-  loginUserData: any;
+  groupData: Group;
+  setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
+  isAddPage: boolean;
+  loginUserData: User;
 }) {
   useEffect(() => {
     console.log('group Data change!');
@@ -110,7 +94,7 @@ export function GroupUsersSetting({
         </div>
         <div>
           {isAddPage ? <>
-            <GroupUser
+            <GroupUserButton
               idx={loginUserData?.id}
               userData={loginUserData}
               groupData={groupData}
@@ -124,7 +108,7 @@ export function GroupUsersSetting({
 
                 return (
                   <Fragment key={idx}>
-                    <GroupUser
+                    <GroupUserButton
                       idx={idx}
                       userData={user}
                       groupData={groupData}
@@ -142,7 +126,7 @@ export function GroupUsersSetting({
 
                 return (
                   <Fragment key={idx}>
-                    <GroupUser
+                    <GroupUserButton
                       idx={idx}
                       userData={user}
                       groupData={groupData}

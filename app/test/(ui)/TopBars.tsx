@@ -2,6 +2,7 @@
 import Link from 'next/link';
 //import data
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { Group, GroupUser,ExtendedExpense, Sharer } from '../(data)/(sharedFunction)/types';
 //import ui
 import { HomeIcon, EditIcon, EditTwoIcon, BackArrowIcon } from '@/app/test/(ui)/Icons';
 import clsx from 'clsx';
@@ -10,11 +11,11 @@ export function TopGroupBar({
   groupData,
   isBalancePage
 }: {
-  groupData: any;
+  groupData: Group;
   isBalancePage: boolean;
 }) {
   const hasGroupData = Boolean(groupData);
-  const isUserInGroup = hasGroupData && groupData.users.some((user: any) => user.id === loginUserId);
+  const isUserInGroup = hasGroupData && groupData.users.some((user: GroupUser) => user.id === loginUserId);
 
   return (
     <div className="fixed z-10 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
@@ -55,10 +56,10 @@ export function TopGroupSettingBar({
   leftCancelLink,
   rightCancelLink
 }: {
-  groupData: any;
+  groupData: Group;
   isAddPage: boolean;
   middleHintword: string;
-  leftHintWord: any;
+  leftHintWord: string | React.ReactNode;
   rightHintWord: string;
   leftCancelLink: string;
   rightCancelLink: string;
@@ -66,7 +67,7 @@ export function TopGroupSettingBar({
 
   const shouldRender = groupData && (
     isAddPage ||
-    (groupData.users.some((user: any) => user.id === loginUserId))
+    (groupData.users.some((user: GroupUser) => user.id === loginUserId))
   );
 
   return (
@@ -96,8 +97,8 @@ export function TopExpenseBar({
   expenseData,
   group,
 }: {
-  expenseData: any;
-  group: any;
+  expenseData: ExtendedExpense;
+  group: Group;
 }) {
   if (!group) return;
   let groupId = group.id;
@@ -110,7 +111,7 @@ export function TopExpenseBar({
       <h1 className="text-lg">
         {expenseData &&
           (expenseData.payerId === loginUserId ||
-            expenseData.sharers?.some((sharer: any) => sharer.id === loginUserId))
+            expenseData.sharers?.some((sharer: Sharer) => sharer.id === loginUserId))
           ? '費用明細'
           : 'no such expense'}
       </h1>
@@ -118,7 +119,7 @@ export function TopExpenseBar({
         {expenseData &&
           (expenseData.payerId === loginUserId ||
             expenseData.sharers?.some(
-              (sharer: any) => sharer.id === loginUserId,
+              (sharer: Sharer) => sharer.id === loginUserId,
             )) ? (
           <Link
             href={`/test/split/group/${groupId}/expense/${expenseData.id}/edit`}
@@ -145,10 +146,10 @@ export function TopExpenseSettingBar({
   cancelLink
 }: {
   isAddPage: boolean;
-  group: any;
-  expenseData: any;
+  group: Group;
+  expenseData:ExtendedExpense;
   phase: number;
-  setPhase: (phase: number) => void;
+  setPhase: React.Dispatch<React.SetStateAction<number>>;
   hintword: string;
   cancelLink: string;
 }) {
@@ -160,7 +161,7 @@ export function TopExpenseSettingBar({
 
   const shouldRender = expenseData && group && (
     isAddPage ||
-    (expenseData.payerId === loginUserId || expenseData.sharers?.some((sharer: any) => sharer.id === loginUserId))
+    (expenseData.payerId === loginUserId || expenseData.sharers?.some((sharer: Sharer) => sharer.id === loginUserId))
   );
 
   return (

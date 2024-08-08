@@ -4,19 +4,19 @@ import { Fragment } from 'react';
 //import data
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 import { filterExpense } from '@/app/test/(data)/(sharedFunction)/totalDebts';
+import { Expense, Group, Sharer, ExtendedExpense, GroupUser } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import { GreaterThanIcon, expenseIconMap } from '@/app/test/(ui)/Icons';
 //import other
 import { format } from 'date-fns';
 
-export default function ExpensesList({ groupData }: { groupData: any }) {
+export default function ExpensesList({ groupData }: { groupData: Group }) {
   let { expensesWithDebts } = filterExpense(groupData?.expenses);
   let groupId = groupData?.id;
   let users = groupData?.users;
   let expenses = expensesWithDebts;
-
   // Step 1: Group expenses by date
-  const groupedExpenses = expenses.reduce((acc: any, expense: any) => {
+  const groupedExpenses = expenses.reduce((acc: { [date: string]: ExtendedExpense[] }, expense: ExtendedExpense) => {
     const date = expense.date;
     if (!acc[date]) {
       acc[date] = [];
@@ -28,23 +28,22 @@ export default function ExpensesList({ groupData }: { groupData: any }) {
   // Step 2: Render expenses grouped by date
   const renderExpensesByDate = () => {
     return Object.keys(groupedExpenses).map((date, index) => {
-      let formateDate: any = new Date(date)
-      // formateDate = format(formateDate, (formateDate.getFullYear() === new Date().getFullYear() ? '' : 'yyyy/') + 'MM/dd')
-      formateDate = format(formateDate,'yyyy/MM/dd')
+      let formateDate: Date | string = new Date(date)
+      formateDate = format(formateDate, 'yyyy/MM/dd')
 
       return (
         <div key={index}>
           {groupedExpenses[date].find(
-            (expense: any) => expense.expenseDebt !== undefined,
+            (expense: ExtendedExpense) => expense.expenseDebt !== undefined,
           ) ? (
             <p className="mx-8 mb-3 text-sm text-grey-500">
               {formateDate}
             </p>
           ) : null}
-          {groupedExpenses[date].map((expense: any) => (
+          {groupedExpenses[date].map((expense: Expense) => (
             <Fragment key={expense.id}>
               {expense.sharers.some(
-                (sharer: any) => sharer.id === loginUserId,
+                (sharer: Sharer) => sharer.id === loginUserId,
               ) || expense.payerId.includes(loginUserId) ? (
                 <ExpenseButton
                   users={users}
@@ -67,34 +66,20 @@ function ExpenseButton({
   expense,
   groupId,
 }: {
-  users: any;
-  expense: any;
-  groupId: any;
+  users: GroupUser[];
+  expense: ExtendedExpense;
+  groupId: string;
 }) {
   const {
     id,
-    category,
-    amount,
     name,
+    amount,
+    category,
     payerId,
     expenseDebt,
-  }: {
-    id: string;
-    category:
-    | 'food'
-    | 'drink'
-    | 'transport'
-    | 'stay'
-    | 'shopping'
-    | 'entertainment'
-    | 'other';
-    amount: string;
-    name: string;
-    payerId: string;
-    expenseDebt: any;
   } = expense;
 
-  const payerData = users.filter((user: any) => user.id === payerId)[0];
+  const payerData = users.filter((user: GroupUser) => user.id === payerId)[0];
 
   const Icon = expenseIconMap[category];
   let nf = new Intl.NumberFormat('en-US');
@@ -119,13 +104,13 @@ function ExpenseButton({
       </div>
 
       <div className="flex items-center gap-2">
-        {expenseDebt.includes('-') ? (
+        {expenseDebt?.includes('-') ? (
           <p className="text-[15px] text-highlight-30">
-            -${nf.format(Math.abs(expenseDebt))}
+            -${nf.format(Math.abs(Number(expenseDebt)))}
           </p>
         ) : (
           <p className="text-[15px] text-highlight-50">
-            +${nf.format(expenseDebt)}
+            +${nf.format(Number(expenseDebt))}
           </p>
         )}
         <GreaterThanIcon />

@@ -1,33 +1,19 @@
 //import next & react
 import { useEffect, useId, useRef, useState } from 'react';
+//import data
+import { Group, GroupUser } from '../(data)/(sharedFunction)/types';
 //import other
 import clsx from 'clsx';
 
-interface User {
-    id: string;
-    name: string;
-    picture: string;
-    adoptable: boolean;
-}
-
-interface Group {
-    id: string;
-    name: string;
-    picture: string;
-    creatorId: string;
-    expenses: unknown;
-    users: User[];
-}
-
 interface Prop {
     groupData: Group;
-    setCurrentGroup: any;
+    setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
 }
 
 export default function JoinGroupModal({ groupData, setCurrentGroup }: Prop) {
-    const [tempUsers, setTempUsers] = useState<User[]>([]);
+    const [tempUsers, setTempUsers] = useState<GroupUser[]>([]);
     const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
-    const [isShow, setIsShow] = useState(true);
+    const [isShow, setIsShow] = useState<boolean>(true);
     const dialogRef = useRef<HTMLDialogElement>(null);
     const dialogId = useId();
     const headerId = useId();
@@ -71,7 +57,7 @@ export default function JoinGroupModal({ groupData, setCurrentGroup }: Prop) {
 
 
     const handleSave = () => {
-        const updatedUsers = tempUsers.map((user: any) => ({
+        const updatedUsers = tempUsers.map((user: GroupUser) => ({
             ...user,
             adoptable: user.adoptable === false ? false : user.adoptable
         }))
@@ -101,7 +87,7 @@ export default function JoinGroupModal({ groupData, setCurrentGroup }: Prop) {
                 aria-labelledby={headerId}
                 onClick={() => { }}
             >
-                <div className="w-[226px]" onClick={(e: any) => e.stopPropagation()}>
+                <div className="w-[226px]" onClick={(e: React.SyntheticEvent) => e.stopPropagation()}>
                     <div className="flex justify-center items-center gap-2 rounded-t-lg bg-highlight-60 py-2">
                         <div
                             className="text-sm"
@@ -115,7 +101,7 @@ export default function JoinGroupModal({ groupData, setCurrentGroup }: Prop) {
                     </div>
 
                     <div className="flex flex-col gap-3 w-full bg-neutrals-0 overflow-scroll max-h-[340px] px-11 ring-0 outline-0 !border-none">
-                        {tempUsers?.map((user: any) => (
+                        {tempUsers?.map((user: GroupUser) => (
                             <div key={user.id} className="flex items-center gap-3 !border-none">
                                 <input
                                     id={user.name}

@@ -5,12 +5,12 @@ import { useState, useEffect } from 'react';
 //import data
 import { useGroup } from '@/app/test/(data)/(fetchData)/Providers';
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { Group, GroupUser } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import { TopGroupSettingBar } from '@/app/test/(ui)/TopBars';
 import {
   GroupNameSetting,
   GroupOtherSetting,
-  GroupSave,
   GroupUsersSetting,
 } from '@/app/test/(ui)/GroupSettingDetails';
 import { BackArrowIcon } from '@/app/test/(ui)/Icons';
@@ -18,7 +18,7 @@ import { BackArrowIcon } from '@/app/test/(ui)/Icons';
 export default function Page() {
   const params = useParams<{ groupid: string }>();
   const group = useGroup(params.groupid);
-  const [currentGroup, setCurrentGroup] = useState(group);
+  const [currentGroup, setCurrentGroup] = useState<Group>(group);
 
   useEffect(() => {
     if (group) {
@@ -27,7 +27,7 @@ export default function Page() {
   }, [group]);
 
   const hasGroupData = Boolean(currentGroup);
-  const isUserInGroup = hasGroupData && currentGroup.users.some((user: any) => user.id === loginUserId);
+  const isUserInGroup = hasGroupData && currentGroup.users.some((user: GroupUser) => user.id === loginUserId);
 
   return (
     <form method="post" action={`/test/split/group/${params.groupid}`}>
@@ -60,7 +60,6 @@ export default function Page() {
             />
           </>
         }
-        {/* <GroupSave groupData={currentGroup} /> */}
       </div>
     </form>
   );

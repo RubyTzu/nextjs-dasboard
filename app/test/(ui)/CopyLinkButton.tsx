@@ -20,7 +20,7 @@ export default function CopyLinkButton({
   const base = 'http://localhost:3000/test/split/group/';
   const links = base + id;
 
-  const handleCopyLink = (e: any) => {
+  const handleCopyLink = (e: React.SyntheticEvent) => {
     e.preventDefault();
     navigator.clipboard.writeText(links);
     setIsShow(true);

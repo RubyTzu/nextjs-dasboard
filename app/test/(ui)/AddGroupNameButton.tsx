@@ -1,9 +1,11 @@
+import {Group} from "@/app/test/(data)/(sharedFunction)/types"
+
 export default function AddGroupNameButton({
     groupData,
     setCurrentGroup,
 }: {
-    groupData: any;
-    setCurrentGroup: any;
+    groupData: Group;
+    setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
 }) {
     const {
         name,
@@ -11,7 +13,7 @@ export default function AddGroupNameButton({
         name: string;
     } = groupData;
 
-    const handleChange = (e: any) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentGroup({
             ...groupData,
             name: e.target.value

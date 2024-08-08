@@ -12,11 +12,12 @@ import {
     GroupSave,
     GroupUsersSetting,
 } from '@/app/test/(ui)/GroupSettingDetails';
+import { Group } from '@/app/test/(data)/(sharedFunction)/types';
 
 export default function Page() {
     const params = useParams<{ groupid: string }>();
     const data = useUser(loginUserId);
-    const [currentGroup, setCurrentGroup] = useState({
+    const [currentGroup, setCurrentGroup] = useState<Group>({
         name: "未命名群組",
         picture: "groupIcon01",
         users: []

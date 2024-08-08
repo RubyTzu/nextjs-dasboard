@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import { useId, useRef, useState } from 'react';
 import { loginUserId } from '../(data)/(fetchData)/user';
+import { User, Group, GroupUser } from '../(data)/(sharedFunction)/types';
 import { TrashcanIcon } from '@/app/test/(ui)/Icons';
 import DeleteModal from './DeleteModal';
 
-export function GroupUser({
+export function GroupUserButton({
   idx,
   userData,
   groupData,
@@ -12,12 +13,12 @@ export function GroupUser({
   isAddPage,
   loginUserData
 }: {
-  idx: any;
-  userData: any;
-  groupData: any;
-  setCurrentGroup: any;
+  idx: string;
+  userData: GroupUser;
+  groupData: Group;
+  setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
   isAddPage: boolean;
-  loginUserData: any;
+  loginUserData: GroupUser;
 }) {
   const [lastSavedGroup, setLastSavedGroup] =
     useState<any>(groupData);

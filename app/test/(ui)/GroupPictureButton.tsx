@@ -3,40 +3,24 @@
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useState } from 'react';
+//import data
+import { Group } from '../(data)/(sharedFunction)/types';
 //import ui
 import { CameraIcon, groupIconMap } from '@/app/test/(ui)/Icons';
 //import other
 import clsx from 'clsx';
 import { TopBar } from './TopBars';
 
+
 export default function GroupPictureButton({
   groupData,
   setCurrentGroup,
 }: {
-  groupData: any;
-  setCurrentGroup: any;
+  groupData: Group;
+  setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
 }) {
   const {
     picture,
-  }: {
-    id: string;
-    picture:
-      | 'groupIcon01'
-      | 'groupIcon02'
-      | 'groupIcon03'
-      | 'groupIcon04'
-      | 'groupIcon05'
-      | 'groupIcon06'
-      | 'groupIcon07'
-      | 'groupIcon08'
-      | 'groupIcon09'
-      | 'groupIcon10'
-      | 'groupIcon11'
-      | 'groupIcon12'
-      | 'groupIcon13'
-      | 'groupIcon14'
-      | 'groupIcon15';
-    name: string;
   } = groupData;
 
   const [currentPicture, setCurrentPicture] = useState(picture);
@@ -44,7 +28,7 @@ export default function GroupPictureButton({
   const [isShow, setIsShow] = useState(false);
   const router = useRouter();
   const Icon = groupIconMap[currentPicture];
-  const allGroupPicture = [
+  const allGroupPicture:string[] = [
     'groupIcon01',
     'groupIcon02',
     'groupIcon03',
@@ -70,10 +54,9 @@ export default function GroupPictureButton({
     router.refresh();
   };
 
-  const handleChange = (e: any) => {
-    console.log(e.target.value);
-    setCurrentPicture(e.target.value);
-  };
+  const handleChange = () => {
+    setCurrentPicture(picture);
+  }
 
   const handleClose = () => {
     setCurrentPicture(lastSavedPicture);
@@ -122,7 +105,7 @@ export default function GroupPictureButton({
           handleRightClick={handleSave}
         />
         <div className="relative top-[60px] flex max-h-[calc(100vh-56px)] w-full flex-wrap items-start gap-y-0 overflow-scroll">
-          {allGroupPicture.map((picture: any, idx: any) => {
+          {allGroupPicture.map((picture, idx) => {
             const Icon = groupIconMap[picture as keyof typeof groupIconMap];
             return (
               <div
@@ -140,9 +123,7 @@ export default function GroupPictureButton({
                   type="radio"
                   name="groupPicture"
                   className="absolute left-[50%] top-[50%] h-full w-full translate-x-[-50%] translate-y-[-50%] opacity-0"
-                  onChange={() => {
-                    setCurrentPicture(picture);
-                  }}
+                  onChange={handleChange}
                 />
                 <Image
                   src={Icon}

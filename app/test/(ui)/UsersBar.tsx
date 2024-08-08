@@ -3,8 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 //import data
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { Group, GroupUser } from '@/app/test/(data)/(sharedFunction)/types';
 
-export default function UsersBar({ groupData }: { groupData: any }) {
+export default function UsersBar({ groupData }: { groupData: Group }) {
   if (!groupData) return;
   let frontUsers = [];
 
@@ -17,12 +18,12 @@ export default function UsersBar({ groupData }: { groupData: any }) {
   return (
     <>
       {groupData &&
-        groupData.users.some((user: any) => user.id === loginUserId) ? (
+        groupData.users.some((user: GroupUser) => user.id === loginUserId) ? (
         <>
           {groupData.users.length ? (
             <div className="mt-16 flex items-center justify-center gap-4 border-b-grey-userBar border-b-[1px] pb-5 pt-8">
               <ul className="flex items-center justify-center gap-2">
-                {frontUsers.map((user: any) => (
+                {frontUsers.map((user: GroupUser) => (
                   <UserBarImage user={user} key={user.id} />
                 ))}
               </ul>
@@ -54,7 +55,7 @@ function NoneUsersBar({ text }: { text: string }) {
   );
 }
 
-function UserBarImage({ user }: { user: any }) {
+function UserBarImage({ user }: { user: GroupUser }) {
   return (
     <>
       {user ? (

@@ -2,36 +2,19 @@
 //import from next
 import Link from 'next/link';
 import Image from 'next/image';
+//import data
+import { UserGroup } from '../(data)/(sharedFunction)/types';
 //import ui
 import { groupIconMap } from '@/app/test/(ui)/Icons';
 import CopyLinkButton from '@/app/test/(ui)/CopyLinkButton';
 import ShareButton from '@/app/test/(ui)/ShareButton';
 
-export default function GroupButton({ groupData }: { groupData: any }) {
+export default function GroupButton({ groupData }: { groupData: UserGroup }) {
   const {
     id,
     picture,
     name,
-  }: {
-    id: string;
-    picture:
-      | 'groupIcon01'
-      | 'groupIcon02'
-      | 'groupIcon03'
-      | 'groupIcon04'
-      | 'groupIcon05'
-      | 'groupIcon06'
-      | 'groupIcon07'
-      | 'groupIcon08'
-      | 'groupIcon09'
-      | 'groupIcon10'
-      | 'groupIcon11'
-      | 'groupIcon12'
-      | 'groupIcon13'
-      | 'groupIcon14'
-      | 'groupIcon15';
-    name: string;
-  } = groupData;
+  }= groupData;
 
   const Icon = groupIconMap[picture];
 
