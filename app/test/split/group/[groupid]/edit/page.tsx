@@ -27,7 +27,9 @@ export default function Page() {
   }, [group]);
 
   const hasGroupData = Boolean(currentGroup);
-  const isUserInGroup = hasGroupData && currentGroup.users.some((user: GroupUser) => user.id === loginUserId);
+  const isUserInGroup =
+    hasGroupData &&
+    currentGroup.users.some((user: GroupUser) => user.id === loginUserId);
 
   return (
     <form method="post" action={`/test/split/group/${params.groupid}`}>
@@ -41,7 +43,7 @@ export default function Page() {
           leftCancelLink={`/test/split/group/${params.groupid}`}
           rightCancelLink=""
         />
-        {isUserInGroup &&
+        {isUserInGroup && (
           <>
             <GroupNameSetting
               groupData={currentGroup}
@@ -52,14 +54,19 @@ export default function Page() {
               groupData={currentGroup}
               setCurrentGroup={setCurrentGroup}
               isAddPage={false}
-              loginUserData={""}
+              loginUserData={{
+                id: '',
+                name: '',
+                picture: '',
+                adoptable: false,
+              }}
             />
             <GroupOtherSetting
               groupData={currentGroup}
               setCurrentGroup={setCurrentGroup}
             />
           </>
-        }
+        )}
       </div>
     </form>
   );

@@ -1,7 +1,7 @@
 //import from next & react
 import { Fragment, useEffect } from 'react';
 //import data
-import { Group, User } from '../(data)/(sharedFunction)/types';
+import { Group, GroupUser, User } from '../(data)/(sharedFunction)/types';
 //import ui
 import { groupIconMap } from '@/app/test/(ui)/Icons';
 import DeleteGroupButton from './DeleteGroupButton';
@@ -73,7 +73,7 @@ export function GroupUsersSetting({
   groupData: Group;
   setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
   isAddPage: boolean;
-  loginUserData: User;
+  loginUserData: GroupUser;
 }) {
   useEffect(() => {
     console.log('group Data change!');
@@ -93,17 +93,17 @@ export function GroupUsersSetting({
           />
         </div>
         <div>
-          {isAddPage ? <>
-            <GroupUserButton
-              idx={loginUserData?.id}
-              userData={loginUserData}
-              groupData={groupData}
-              setCurrentGroup={setCurrentGroup}
-              isAddPage={isAddPage}
-              loginUserData={loginUserData}
-            />
-            {
-              groupData.users.map((user: any) => {
+          {isAddPage ? (
+            <>
+              <GroupUserButton
+                idx={loginUserData?.id}
+                userData={loginUserData}
+                groupData={groupData}
+                setCurrentGroup={setCurrentGroup}
+                isAddPage={isAddPage}
+                loginUserData={loginUserData}
+              />
+              {groupData.users.map((user: GroupUser) => {
                 let idx = uuidv4();
 
                 return (
@@ -118,10 +118,11 @@ export function GroupUsersSetting({
                     />
                   </Fragment>
                 );
-              })
-            }</> :
-            <>{
-              groupData.users.map((user: any) => {
+              })}
+            </>
+          ) : (
+            <>
+              {groupData.users.map((user: GroupUser) => {
                 let idx = uuidv4();
 
                 return (
@@ -136,10 +137,9 @@ export function GroupUsersSetting({
                     />
                   </Fragment>
                 );
-              })
-            }</>
-          }
-
+              })}
+            </>
+          )}
         </div>
       </div>
     </>
