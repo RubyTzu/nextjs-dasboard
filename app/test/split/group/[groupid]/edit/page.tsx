@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 //import data
 import { useGroup } from '@/app/test/(data)/(fetchData)/Providers';
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
-import { Group, GroupUser } from '@/app/test/(data)/(sharedFunction)/types';
+import { Group } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import { TopGroupSettingBar } from '@/app/test/(ui)/TopBars';
 import {
@@ -16,8 +16,8 @@ import {
 import { BackArrowIcon } from '@/app/test/(ui)/Icons';
 
 export default function Page() {
-  const params = useParams<{ groupid: string }>();
-  const group = useGroup(params.groupid);
+  const { groupid } = useParams<{ groupid: string }>();
+  const group = useGroup(groupid);
   const [currentGroup, setCurrentGroup] = useState<Group>(group);
 
   useEffect(() => {
@@ -28,19 +28,19 @@ export default function Page() {
 
   const hasGroupData = Boolean(currentGroup);
   const isUserInGroup =
-    hasGroupData &&
-    currentGroup.users.some((user: GroupUser) => user.id === loginUserId);
+    hasGroupData && 
+    currentGroup.users?.some((user) => user.id === loginUserId);
 
   return (
-    <form method="post" action={`/test/split/group/${params.groupid}`}>
+    <form method="post" action={`/test/split/group/${groupid}`}>
       <div className="relative flex flex-col">
         <TopGroupSettingBar
-          groupData={currentGroup}
-          isAddPage={false}
+         isAddPage={false} 
+         groupData={currentGroup}
           middleHintword="群組設定"
           leftHintWord={<BackArrowIcon />}
           rightHintWord=""
-          leftCancelLink={`/test/split/group/${params.groupid}`}
+          leftCancelLink={`/test/split/group/${groupid}`}
           rightCancelLink=""
         />
         {isUserInGroup && (

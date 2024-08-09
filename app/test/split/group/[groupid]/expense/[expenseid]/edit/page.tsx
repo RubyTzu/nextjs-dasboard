@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 //import data
 import { useGroup, useExpense } from '@/app/test/(data)/(fetchData)/Providers';
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { ExtendedExpense, ExtendedGroup } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import { TopExpenseSettingBar } from '@/app/test/(ui)/TopBars';
 import {
@@ -15,41 +16,14 @@ import { ExpenseSettingStepOne } from '@/app/test/(ui)/ExpenseSettingStepOne';
 import { ExpenseSettingStepTwo } from '@/app/test/(ui)/ExpenseSettingStepTwo';
 import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
 
-interface SettingExpense {
-  id: string;
-  name: undefined;
-  category: undefined;
-  amount: number | string;
-  date: undefined;
-  note: undefined;
-  payerId: string;
-  sharers: {
-    id: string;
-    amount: number;
-  }[];
-};
-
-interface AddingExpense {
-  name: string;
-  category: string;
-  amount: number | string;
-  date: string;
-  note: string;
-  payerId: string;
-  sharers: {
-    id: string;
-    amount: number;
-  }[];
-};
-
 export default function Page() {
-  const params = useParams<{ groupid: string; expenseid: string }>();
-  const [phase, setPhase] = useState(1);
-  const [isNotEqual, setIsNotEqual] = useState(false);
+  const { groupid, expenseid } = useParams<{ groupid: string; expenseid: string }>();
+  const [phase, setPhase] = useState<number>(1);
+  const [isNotEqual, setIsNotEqual] = useState<boolean>(false);
 
-  const group = useGroup(params.groupid);
-  const expense: SettingExpense | AddingExpense = useExpense(params.groupid, params.expenseid);
-  const [currentExpense, setCurrentExpense] = useState(expense);
+  const group: ExtendedGroup = useGroup(groupid);
+  const expense: ExtendedExpense = useExpense(groupid, expenseid);
+  const [currentExpense, setCurrentExpense] = useState<ExtendedExpense>(expense);
 
   useEffect(() => {
     if (expense) {
@@ -57,12 +31,10 @@ export default function Page() {
     }
   }, [expense]);
 
-  const expenseId = expense && 'id' in expense ? expense.id : null
-
   return (
     <form
       method="post"
-      action={`/test/split/group/${params.groupid}/expense/${params.expenseid}`}
+      action={`/test/split/group/${groupid}/expense/${expenseid}`}
     >
       <div className="relative flex flex-col">
         <TopExpenseSettingBar
@@ -72,45 +44,45 @@ export default function Page() {
           phase={phase}
           setPhase={setPhase}
           hintword='編輯費用'
-          cancelLink={`/test/split/group/${params.groupid}/expense/${expenseId}`}
+          cancelLink={`/test/split/group/${groupid}/expense/${expenseid}`}
         />
-         {expense &&
-          (expense.sharers?.some((sharer: any) => sharer.id === loginUserId) ||
+        {expense &&
+          (expense.sharers?.some((sharer) => sharer.id === loginUserId) ||
             expense.payerId?.includes(loginUserId)) ? (
           <>
-          <GroupInfoBar expenseData={currentExpense} group={group} />
-        <section>
-          <ExpenseSettingStepOne
-            group={group}
-            expenseData={currentExpense}
-            setCurrentExpense={setCurrentExpense}
-            phase={phase}
-          />
-          <ExpenseSettingStepTwo
-            expenseData={currentExpense}
-            setCurrentExpense={setCurrentExpense}
-            group={group}
-            phase={phase}
-          />
-          <ExpenseSettingStepThree
-            expenseData={currentExpense}
-            setCurrentExpense={setCurrentExpense}
-            group={group}
-            phase={phase}
-            setIsNotEqual={setIsNotEqual}
-          />
-        </section>
-        <section>
-          <NextStepButton
-            expenseData={currentExpense}
-            setCurrentExpense={setCurrentExpense}
-            phase={phase}
-            setPhase={setPhase}
-            isNotEqual={isNotEqual}
-            setIsNotEqual={setIsNotEqual}
-            isNotZero={true}
-          />
-        </section>
+            <GroupInfoBar expenseData={currentExpense} group={group} />
+            <section>
+              <ExpenseSettingStepOne
+                group={group}
+                expenseData={currentExpense}
+                setCurrentExpense={setCurrentExpense}
+                phase={phase}
+              />
+              <ExpenseSettingStepTwo
+                expenseData={currentExpense}
+                setCurrentExpense={setCurrentExpense}
+                group={group}
+                phase={phase}
+              />
+              <ExpenseSettingStepThree
+                expenseData={currentExpense}
+                setCurrentExpense={setCurrentExpense}
+                group={group}
+                phase={phase}
+                setIsNotEqual={setIsNotEqual}
+              />
+            </section>
+            <section>
+              <NextStepButton
+                expenseData={currentExpense}
+                setCurrentExpense={setCurrentExpense}
+                phase={phase}
+                setPhase={setPhase}
+                isNotEqual={isNotEqual}
+                setIsNotEqual={setIsNotEqual}
+                isNotZero={true}
+              />
+            </section>
           </>
         ) : (
           <></>

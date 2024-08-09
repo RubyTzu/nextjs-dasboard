@@ -1,5 +1,7 @@
 //import next & react
 import { useId, useRef, useState } from 'react';
+//import data
+import { ExtendedExpense } from '../(data)/(sharedFunction)/types';
 //import ui
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
 import { inter, lato, notoSansJP, notoSansTC } from '@/app/ui/fonts';
@@ -11,8 +13,8 @@ import clsx from 'clsx';
 
 function CustomCaptionComponent(
   props: CaptionProps & { dialogRef: React.RefObject<HTMLDialogElement> } & {
-    handleDayPickerSelect: any;
-  } & { originDate: any } & { setIsShow: any },
+    handleDayPickerSelect: (date: Date | undefined)=> void;
+  } & { originDate: string } & { setIsShow: React.Dispatch<React.SetStateAction<boolean>> },
 ) {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
   return (
@@ -60,29 +62,24 @@ function CustomCaptionComponent(
 }
 
 export default function DatePickerButton({
-  date,
   expenseData,
   setCurrentExpense,
 }: {
-  date: any;
-  expenseData: any;
-  setCurrentExpense: any;
+  expenseData: ExtendedExpense;
+  setCurrentExpense: React.Dispatch<React.SetStateAction<ExtendedExpense>>;
 }) {
-  const [isShow, setIsShow] = useState(false);
+  const {date} = expenseData
+  const [isShow, setIsShow] = useState<boolean>(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dialogId = useId();
   const headerId = useId();
 
-  // Hold the month in state to control the calendar when the input changes
-  const [month, setMonth] = useState(new Date(date));
-  // Hold the selected date in state
+  const [month, setMonth] = useState<Date>(new Date(date));
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(
     new Date(date),
   );
-  // Hold the input value in state
   const [inputValue, setInputValue] = useState(format(date, 'yyyy/MM/dd'));
-  // Hold the last saved date in state
-  const [lastSavedDate, setLastSavedDate] = useState<any>(date);
+  const [lastSavedDate, setLastSavedDate] = useState<string>(date);
 
   const toggleDialog = () => {
     dialogRef.current?.showModal();
@@ -90,27 +87,20 @@ export default function DatePickerButton({
       setIsShow(true);
     }, 0);
   };
-  /**
-   * Function to handle the DayPicker select event: update the input value and
-   * the selected date, and set the month.
-   */
-  const handleDayPickerSelect = (date: any) => {
+
+  const handleDayPickerSelect = (date: Date | undefined) => {
     if (!date) {
       setInputValue('');
       setSelectedDate(undefined);
     } else {
       setSelectedDate(date);
       setInputValue(format(date, 'yyyy/MM/dd'));
-      setMonth(date as any);
+      setMonth(date as Date);
     }
   };
 
-  /**
-   * Handle the input change event: parse the input value to a date, update the
-   * selected date and set the month.
-   */
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value); // keep the input value in sync
+    setInputValue(e.target.value);
 
     const parsedDate = parse(e.target.value, 'yyyy/MM/dd', new Date());
 
@@ -159,7 +149,7 @@ export default function DatePickerButton({
           }, 100);
         }}
       >
-        <div onClick={(e: any) => e.stopPropagation()}>
+        <div onClick={(e) => e.stopPropagation()}>
           <DayPicker
             locale={zhTW}
             weekStartsOn={0}
@@ -172,7 +162,7 @@ export default function DatePickerButton({
                   handleDayPickerSelect={handleDayPickerSelect}
                   setIsShow={setIsShow}
                 />
-              ), // 傳遞 dialogRef 給 CustomCaptionComponent
+              )
             }}
             className={`relative rounded-lg bg-white ${lato.variable} ${notoSansJP.variable} ${notoSansTC.variable} font-lato antialiased transition-all duration-200`}
             classNames={{
@@ -199,16 +189,15 @@ export default function DatePickerButton({
             selected={selectedDate}
             onSelect={handleDayPickerSelect}
             showOutsideDays
-            // fixedWeeks
             required
           />
           <div
             className="mt-5 w-full rounded-full bg-highlight-20 py-3 text-center"
             onClick={() => {
-              setLastSavedDate(selectedDate); // Save selected date
-              setMonth(selectedDate as any);
+              setLastSavedDate(String(selectedDate));
+              setMonth(selectedDate as Date);
               let formateSelectDate = format(
-                selectedDate as any,
+                selectedDate as Date,
                 "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
               );
               setCurrentExpense({

@@ -2,22 +2,22 @@
 import { useId, useRef, useState } from 'react';
 //import data
 import { loginUserId } from '../(data)/(fetchData)/user';
+import { Group, GroupUser } from '../(data)/(sharedFunction)/types';
 //import ui
 import { TrashcanIcon, LeaveIcon } from '@/app/test/(ui)/Icons';
 import DeleteModal from './DeleteModal';
 
+interface Props {
+  groupData: Group;
+  setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
+}
+
 export default function DeleteGroupButton({
   groupData,
   setCurrentGroup,
-}: {
-  groupData: any;
-  setCurrentGroup: any;
-}) {
+}: Props) {
   const isAdmin = groupData.creatorId === loginUserId;
-
-  const [lastSavedGroup, setLastSavedGroup] =
-    useState<any>(groupData);
-  const [isShow, setIsShow] = useState(false);
+  const [isShow, setIsShow] = useState<boolean>(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dialogId = useId();
   const headerId = useId();
@@ -49,17 +49,12 @@ export default function DeleteGroupButton({
     let currentGroupUsers = [...groupData.users];
 
     const userIndex = currentGroupUsers.findIndex(
-      (user: any) => user.id === id,
+      (user: GroupUser) => user.id === id,
     );
 
     if (userIndex !== -1) {
       currentGroupUsers.splice(userIndex, 1);
     }
-
-    setLastSavedGroup({
-      ...groupData,
-      users: currentGroupUsers
-    });
     setCurrentGroup({
       ...groupData,
       users: currentGroupUsers,
@@ -68,7 +63,6 @@ export default function DeleteGroupButton({
     setTimeout(() => {
       dialogRef.current?.close();
     }, 100);
-    console.log(groupData);
     console.log('leave Group!');
   };
 

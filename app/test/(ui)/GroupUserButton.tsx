@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useId, useRef, useState } from 'react';
 import { loginUserId } from '../(data)/(fetchData)/user';
-import { User, Group, GroupUser } from '../(data)/(sharedFunction)/types';
+import { Group, GroupUser } from '../(data)/(sharedFunction)/types';
 import { TrashcanIcon } from '@/app/test/(ui)/Icons';
 import DeleteModal from './DeleteModal';
 
@@ -21,8 +21,8 @@ export function GroupUserButton({
   loginUserData: GroupUser;
 }) {
   const [lastSavedGroup, setLastSavedGroup] =
-    useState<any>(groupData);
-  const [isShow, setIsShow] = useState(false);
+    useState<Group>(groupData);
+  const [isShow, setIsShow] = useState<boolean>(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dialogId = useId();
   const headerId = useId();
@@ -42,10 +42,10 @@ export function GroupUserButton({
     }, 100);
   };
 
-  const handleSave = (e: any) => {
+  const handleSave = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     let currentGroupUsers = [...groupData.users];
     const userIndex = currentGroupUsers.findIndex(
-      (user: any) => user.name === userData.name && e.target.id === idx,
+      (user: GroupUser) => user.name === userData.name && e.currentTarget.id === idx,
     );
 
     if (userIndex !== -1) {
@@ -74,7 +74,7 @@ export function GroupUserButton({
   return (
     <div className="mb-4 flex items-center justify-between">
       <div className="flex items-center gap-4">
-        {userData?.adoptable === false || userData?.id === loginUserId ? (
+        {(userData?.adoptable === false || userData?.id === loginUserId) && userData.picture !== "" ? (
           <Image
             className="h-11 w-11 rounded-full bg-neutrals-20"
             src={userData.picture}
@@ -104,7 +104,7 @@ export function GroupUserButton({
             isShow={isShow}
             headerId={headerId}
             handleClose={handleClose}
-            handleSave={(e: any) => handleSave(e)}
+            handleSave={handleSave}
             hintWord="確定要刪除成員嗎？"
             idx={idx}
           />

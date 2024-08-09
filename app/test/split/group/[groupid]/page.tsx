@@ -5,7 +5,7 @@ import { Suspense, useState, useEffect } from 'react';
 //import data
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 import { useGroup } from '@/app/test/(data)/(fetchData)/Providers';
-import { Group, GroupUser } from '@/app/test/(data)/(sharedFunction)/types';
+import { ExtendedGroup, GroupUser } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import { TopGroupBar } from '@/app/test/(ui)/TopBars';
 import UsersBar from '@/app/test/(ui)/UsersBar';
@@ -19,8 +19,8 @@ import { UsersBarSkeleton } from '@/app/test/(ui)/LoadingSkeletons';
 
 export default function Page() {
   const { groupid } = useParams<{ groupid: string }>();
-  const group = useGroup(groupid);
-  const [currentGroup, setCurrentGroup] = useState<Group>(group);
+  const group: ExtendedGroup = useGroup(groupid);
+  const [currentGroup, setCurrentGroup] = useState<ExtendedGroup>(group);
 
   useEffect(() => {
     if (group) {
@@ -28,18 +28,18 @@ export default function Page() {
     }
   }, [group]);
 
-  const isGroupFull = group?.users.every((user: GroupUser) => !user.adoptable);
-  const isUserInGroup = group?.users.some((user: GroupUser) => user.id === loginUserId);
-  const isUserAdoptable = group?.users.some((user: GroupUser) => user.adoptable === true);
+  const isGroupFull = group?.users?.every((user) => !user.adoptable);
+  const isUserInGroup = group?.users?.some((user) => user.id === loginUserId);
+  const isUserAdoptable = group?.users?.some((user) => user.adoptable === true);
 
   return (
     <div className="flex flex-col">
       <Suspense fallback={<UsersBarSkeleton />}>
         <TopGroupBar
-          groupData={group}
           isBalancePage={false}
+          groupData={group}
         />
-        {isGroupFull && isUserInGroup && (
+        {isUserInGroup && (
           <>
             <UsersBar groupData={group} />
             <BalanceAndShareButtons groupData={group} />

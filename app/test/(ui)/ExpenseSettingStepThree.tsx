@@ -1,51 +1,17 @@
 //import from next & react
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+//import data
+import { ExtendedExpense, ExtendedGroup, GroupUser } from '../(data)/(sharedFunction)/types';
 //import ui
 import { NotePencilIcon } from '@/app/test/(ui)/Icons';
 //other
 import clsx from 'clsx';
 
-interface User {
-  id: string;
-  name: string;
-  picture: string;
-  adoptable: boolean;
-}
-
-interface Sharer {
-  id: string;
-  amount: number;
-}
-
-interface SettingExpense {
-  id: string;
-  name: undefined;
-  category: undefined;
-  amount: number | string;
-  date: undefined;
-  note: undefined;
-  payerId: string;
-  sharers: Sharer[];
-};
-
-interface AddingExpense {
-  name: string;
-  category: string;
-  amount: number | string;
-  date: string;
-  note: string;
-  payerId: string;
-  sharers: {
-    id: string;
-    amount: number;
-  }[];
-};
-
 interface ExpenseSettingStepThreeProps {
-  expenseData: SettingExpense | AddingExpense;
-  setCurrentExpense: (expense: SettingExpense | AddingExpense) => void;
-  group: { users: User[] };
+  expenseData: ExtendedExpense;
+  setCurrentExpense: (expense: ExtendedExpense) => void;
+  group: ExtendedGroup;
   phase: number;
   setIsNotEqual: (isNotEqual: boolean) => void;
 }
@@ -70,7 +36,7 @@ export function ExpenseSettingStepThree({
     0,
   ) || '';
 
-  const remainingAmount = Number(expenseData.amount) - Number(addedAmount);
+  const remainingAmount = expenseData && Number(expenseData.amount) - Number(addedAmount);
   const adjustedRemainingAmount = Math.abs(remainingAmount) < 0.1 ? 0 : remainingAmount;
 
   useEffect(() => {
@@ -151,10 +117,10 @@ export function ExpenseSettingStepThree({
     const roundingDifference = totalAmount - totalDistributedAmount;
 
     // Create the updated sharers array
-    const updatedSharersCopy = users.map((user) => ({
+    const updatedSharersCopy = users ? users.map((user) => ({
       id: user.id,
       amount: baseAmountNumber,
-    }));
+    })): [];
 
     setCurrentExpense({
       ...expenseData,
@@ -242,7 +208,7 @@ export function ExpenseSettingStepThree({
             )}
           </div>
         </div>
-        {users.map((user) => {
+        {users && users.map((user) => {
           const isChecked = expenseData.sharers.some(
             (sharer) => sharer.id === user.id,
           );
@@ -355,7 +321,7 @@ export function ExpenseSettingStepThree({
           style={{ bottom: barBottom }}
         >
           <div className="text-black">
-            {
+            {users &&
               users.filter((user: any) => {
                 return user.id === currentSharer.id;
               })[0]?.name

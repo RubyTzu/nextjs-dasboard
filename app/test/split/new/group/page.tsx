@@ -15,7 +15,6 @@ import {
 import { Group } from '@/app/test/(data)/(sharedFunction)/types';
 
 export default function Page() {
-    const params = useParams<{ groupid: string }>();
     const data = useUser(loginUserId);
     const [currentGroup, setCurrentGroup] = useState<Group>({
         name: "未命名群組",
@@ -23,13 +22,12 @@ export default function Page() {
         users: []
     });
 
-
     return (
         <form method="post" action={`/test/split/groups`}>
             <div className="relative flex flex-col">
                 <TopGroupSettingBar
-                    groupData={currentGroup}
                     isAddPage={true}
+                    groupData={currentGroup}
                     middleHintword="建立群組"
                     leftHintWord=""
                     rightHintWord="取消"

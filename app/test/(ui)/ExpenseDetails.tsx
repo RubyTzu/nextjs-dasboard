@@ -3,19 +3,25 @@ import Image from 'next/image';
 import { Fragment } from 'react';
 //import data
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { ExtendedExpense, GroupUser } from '../(data)/(sharedFunction)/types';
 //import ui
 import { expenseIconMap } from '@/app/test/(ui)/Icons';
 import SharerExpenseDetail from '@/app/test/(ui)/SharerExpenseDetail';
 //import other
 import { format } from 'date-fns';
 
+interface ExpenseDetailProps {
+  expenseData: ExtendedExpense;
+}
+
+interface ExpenseDetailExtendProps extends ExpenseDetailProps {
+  users: GroupUser[];
+}
+
 export function ExpenseDetailOne({
   expenseData,
   users,
-}: {
-  expenseData: any;
-  users: any;
-}) {
+}: ExpenseDetailExtendProps) {
   const {
     category,
     amount,
@@ -25,25 +31,8 @@ export function ExpenseDetailOne({
     updateAt,
     payerId,
     sharers,
-  }: {
-    category:
-    | 'food'
-    | 'drink'
-    | 'transport'
-    | 'stay'
-    | 'shopping'
-    | 'entertainment'
-    | 'other';
-    amount: any;
-    name: string;
-    creatorId: string;
-    createAt: string;
-    updateAt: string;
-    payerId: string;
-    sharers: string[];
   } = expenseData;
-
-  let creatorIdUser = users.filter((user: any) => user.id === creatorId)[0];
+  let creatorIdUser = users.filter((user) => user.id === creatorId)[0];
 
   const Icon = expenseIconMap[category];
   let nf = new Intl.NumberFormat('en-US');
@@ -52,20 +41,20 @@ export function ExpenseDetailOne({
     <>
       {expenseData &&
         (payerId === loginUserId ||
-          sharers?.some((sharer: any) => sharer.id === loginUserId)) ? (
+          sharers?.some((sharer) => sharer.id === loginUserId)) ? (
         <div className="flex w-full justify-between pl-2 pr-3">
           <div className="flex gap-5">
             <div className="z-0 flex h-[72px] w-[72px] items-center justify-center rounded-lg border-[5px] border-white bg-highlight-60">
-              <div className="scale-[1.4]">{Icon ? <Icon strokeWidth={1.6}/> : null}</div>
+              <div className="scale-[1.4]">{Icon ? <Icon strokeWidth={1.6} /> : null}</div>
             </div>
             <div className="flex flex-col justify-between">
               <div className="text-xl leading-8">{name}</div>
               <div className="text-xs text-grey-500">
                 <div className="leading-3">
-                  {format(createAt, 'yyyy/MM/dd')} {creatorIdUser?.name}新增
+                  {createAt && format(createAt, 'yyyy/MM/dd')} {creatorIdUser?.name}新增
                 </div>
                 <div className="leading-6">
-                  {format(updateAt, 'yyyy/MM/dd')} 最後更新
+                  {updateAt && format(updateAt, 'yyyy/MM/dd')} 最後更新
                 </div>
               </div>
             </div>
@@ -73,7 +62,7 @@ export function ExpenseDetailOne({
           <div className="text-xl leading-8">${nf.format(amount)}</div>
         </div>
       ) : (
-        <div>no such expense</div>
+        <div></div>
       )}
     </>
   );
@@ -82,28 +71,21 @@ export function ExpenseDetailOne({
 export function ExpenseDetailTwo({
   expenseData,
   users,
-}: {
-  expenseData: any;
-  users: any;
-}) {
+}: ExpenseDetailExtendProps) {
   const {
     amount,
     payerId,
     sharers,
-  }: {
-    amount: any;
-    payerId: string;
-    sharers: string[];
   } = expenseData;
 
-  let payerData = users.filter((user: any) => user.id === payerId)[0];
+  let payerData = users.filter((user) => user.id === payerId)[0];
   let nf = new Intl.NumberFormat('en-US');
 
   return (
     <>
       {expenseData &&
         (payerId === loginUserId ||
-          sharers?.some((sharer: any) => sharer.id === loginUserId)) ? (
+          sharers?.some((sharer) => sharer.id === loginUserId)) ? (
         <div className="mt-7 w-full px-3">
           <div className="flex gap-4">
             {payerData ? (
@@ -124,7 +106,7 @@ export function ExpenseDetailTwo({
             </div>
           </div>
 
-          {sharers.map((sharer: any, idx: any) => {
+          {sharers.map((sharer, idx) => {
             return (
               <Fragment key={idx}>
                 {sharer.id !== payerId ? (
@@ -141,7 +123,7 @@ export function ExpenseDetailTwo({
           })}
 
           {sharers.length === 1 &&
-            sharers.some((sharer: any) => sharer.id === payerId) ? (
+            sharers.some((sharer) => sharer.id === payerId) ? (
             <div className="my-5 flex w-full items-center justify-end">
               已結清無欠款
             </div>
@@ -152,22 +134,18 @@ export function ExpenseDetailTwo({
   );
 }
 
-export function ExpenseDetailThree({ expenseData }: { expenseData: any }) {
+export function ExpenseDetailThree({ expenseData }: ExpenseDetailProps) {
   const {
     payerId,
     sharers,
     note,
-  }: {
-    payerId: string;
-    sharers: string[];
-    note: string;
   } = expenseData;
 
   return (
     <>
       {expenseData &&
         (payerId === loginUserId ||
-          sharers?.some((sharer: any) => sharer.id === loginUserId)) ? (
+          sharers?.some((sharer) => sharer.id === loginUserId)) ? (
         <div className="mx-1 w-full">
           <div className="text-sm">備註</div>
           <div className="mt-2 min-h-[101px] rounded-lg bg-white p-3 text-base">

@@ -1,13 +1,13 @@
 //import next & react
 import { useEffect, useId, useRef, useState } from 'react';
 //import data
-import { Group, GroupUser } from '../(data)/(sharedFunction)/types';
+import { ExtendedGroup, GroupUser } from '../(data)/(sharedFunction)/types';
 //import other
 import clsx from 'clsx';
 
 interface Prop {
-    groupData: Group;
-    setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
+    groupData: ExtendedGroup;
+    setCurrentGroup: React.Dispatch<React.SetStateAction<ExtendedGroup>>;
 }
 
 export default function JoinGroupModal({ groupData, setCurrentGroup }: Prop) {

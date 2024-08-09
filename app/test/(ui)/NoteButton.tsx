@@ -1,5 +1,7 @@
 //import next & react
 import { useId, useRef, useState } from 'react';
+//import data
+import { ExtendedExpense } from '../(data)/(sharedFunction)/types';
 //import ui
 import {
     NotePencilIcon,
@@ -11,11 +13,11 @@ export default function NoteButton({
     expenseData,
     setCurrentExpense,
 }: {
-    expenseData: any;
-    setCurrentExpense: any;
+    expenseData: ExtendedExpense;
+    setCurrentExpense: React.Dispatch<React.SetStateAction<ExtendedExpense>>;
 }) {
     const [textareaValue, setTextareaValue] = useState(expenseData.note)
-    const [lastSavedValue, setLastSavedValue] = useState<any>(textareaValue);
+    const [lastSavedValue, setLastSavedValue] = useState<string>(textareaValue);
     const [isShow, setIsShow] = useState(false);
     const dialogRef = useRef<HTMLDialogElement>(null);
     const dialogId = useId();
@@ -29,9 +31,8 @@ export default function NoteButton({
         }, 0);
     };
 
-    const handleChange = (e: any) => {
-        console.log(e.target.value);
-        setTextareaValue(e.target.value);
+    const handleChange = (value: string) => {
+        setTextareaValue(value);
     };
 
     return (
@@ -63,7 +64,7 @@ export default function NoteButton({
                     }, 100);
                 }}
             >
-                <div onClick={(e: any) => e.stopPropagation()}>
+                <div onClick={(e: React.SyntheticEvent) => e.stopPropagation()}>
                     <div className="flex items-center justify-between rounded-t-lg bg-highlight-60 px-7 py-2">
                         <div
                             className="w-9 text-sm"
@@ -86,7 +87,7 @@ export default function NoteButton({
                         e.target.setSelectionRange(selectionEnd, selectionEnd);
                     }}
                         className="px-7 py-5 h-36 w-[89vw] resize-none rounded-b-lg bg-white border-none focus:border-none focus:ring-0 focus:outline-none"
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e.target.value)}
                         value={textareaValue} />
                     <div
                         className="mt-5 w-full rounded-full bg-highlight-20 py-3 text-center"

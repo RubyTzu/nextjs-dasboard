@@ -3,33 +3,24 @@ import Image from 'next/image';
 import { useContext, useEffect } from 'react';
 //import data
 import { CalcContext } from '@/app/test/(data)/(sharedFunction)/CalcProvider';
+import { ExtendedExpense, ExtendedGroup } from '../(data)/(sharedFunction)/types';
 //import ui
 import { groupIconMap, NextstepIcon } from '@/app/test/(ui)/Icons';
 import clsx from 'clsx';
 
-interface Group {
-  picture:
-  | 'groupIcon01'
-  | 'groupIcon02'
-  | 'groupIcon03'
-  | 'groupIcon04'
-  | 'groupIcon05'
-  | 'groupIcon06'
-  | 'groupIcon07'
-  | 'groupIcon08'
-  | 'groupIcon09'
-  | 'groupIcon10'
-  | 'groupIcon11'
-  | 'groupIcon12'
-  | 'groupIcon13'
-  | 'groupIcon14'
-  | 'groupIcon15';
-  name: string;
+interface GroupInfoBarProps {
+  expenseData?: ExtendedExpense;
+  group?: ExtendedGroup;
 }
 
-interface GroupInfoBarProps {
-  expenseData?: any;
-  group?: Group;
+interface NextStepButtonProps {
+  phase: number;
+  setPhase: (phase: number) => void;
+  expenseData: ExtendedExpense;
+  isNotEqual: boolean;
+  setIsNotEqual: (isNotEqual: boolean) => void;
+  setCurrentExpense: (expense: ExtendedExpense) => void;
+  isNotZero: boolean;
 }
 
 export function GroupInfoBar({
@@ -66,33 +57,6 @@ export function GroupInfoBar({
   );
 }
 
-interface SettingExpense {
-  id: string;
-  name: undefined;
-  category: undefined;
-  amount: number | string;
-  date: undefined;
-  note: undefined;
-  payerId: string;
-  sharers: {
-    id: string;
-    amount: number;
-  }[];
-};
-
-interface AddingExpense {
-  name: string;
-  category: string;
-  amount: number | string;
-  date: string;
-  note: string;
-  payerId: string;
-  sharers: {
-    id: string;
-    amount: number;
-  }[];
-};
-
 export function NextStepButton({
   phase,
   setPhase,
@@ -101,15 +65,7 @@ export function NextStepButton({
   setIsNotEqual,
   setCurrentExpense,
   isNotZero
-}: {
-  phase: number;
-  setPhase: (phase: number) => void;
-  expenseData: SettingExpense | AddingExpense;
-  isNotEqual: boolean;
-  setIsNotEqual: (isNotEqual: boolean) => void;
-  setCurrentExpense: (expense: SettingExpense | AddingExpense) => void;
-  isNotZero: boolean;
-}) {
+}: NextStepButtonProps) {
   const { display } = useContext<any>(CalcContext);
   const expenseId = expenseData && 'id' in expenseData ? expenseData.id : null
 
@@ -122,10 +78,9 @@ export function NextStepButton({
     const difference = Math.abs(Number(expenseData?.amount) - Number(addedAmount));
 
     const isNotEqual = difference >= 0.1;
-    
-    // 设置 isNotEqual 的值
+
     setIsNotEqual(isNotEqual);
-  }, [expenseData?.amount, setIsNotEqual,addedAmount]);
+  }, [expenseData?.amount, setIsNotEqual, addedAmount]);
 
   function handleClick(e: any, expenseId: any) {
     e.preventDefault();
@@ -139,7 +94,6 @@ export function NextStepButton({
 
   function handleSubmit(expense: any) {
     // console.log(expenseData);
-
   }
 
   return (
@@ -149,7 +103,6 @@ export function NextStepButton({
           <button
             disabled={isNaN(Number(display)) || display < 1}
             type="button"
-            // disabled={showKeyboard}
             onClick={(e: any) => handleClick(e, expenseId)}
             className="flex w-[180px] items-center justify-between rounded-full bg-highlight-20 px-4 py-2 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
           >
@@ -180,7 +133,7 @@ export function NextStepButton({
                 { hidden: !isNotEqual && isNotZero, block: isNotEqual || !isNotZero },
               )}
             >
-             目前分帳總額 不等於 {expenseData.amount} 元
+              目前分帳總額 不等於 {expenseData.amount} 元
             </div>
             <div className="text-[10px]">3/3</div>
             <div className="text-sm">確認</div>

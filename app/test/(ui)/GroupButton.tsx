@@ -3,13 +3,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
 //import data
-import { UserGroup } from '../(data)/(sharedFunction)/types';
+import { Group } from '../(data)/(sharedFunction)/types';
 //import ui
 import { groupIconMap } from '@/app/test/(ui)/Icons';
 import CopyLinkButton from '@/app/test/(ui)/CopyLinkButton';
 import ShareButton from '@/app/test/(ui)/ShareButton';
 
-export default function GroupButton({ groupData }: { groupData: UserGroup }) {
+export default function GroupButton({ groupData }: { groupData: Group }) {
   const {
     id,
     picture,
@@ -36,8 +36,8 @@ export default function GroupButton({ groupData }: { groupData: UserGroup }) {
         <p className="pl-3 font-normal">{name}</p>
       </div>
       <div className="flex items-center gap-2">
-        <ShareButton id={id} name={name} inGroupPage={false} />
-        <CopyLinkButton id={id} name={name} inGroupPage={false} />
+        <ShareButton id={id || ""} name={name} inGroupPage={false} />
+        <CopyLinkButton id={id || ""} name={name} inGroupPage={false} />
       </div>
     </Link>
   );

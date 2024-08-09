@@ -3,27 +3,26 @@ import Image from 'next/image';
 import Link from 'next/link';
 //import data
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
-import { Group, GroupUser } from '@/app/test/(data)/(sharedFunction)/types';
+import { ExtendedGroup, GroupUser } from '@/app/test/(data)/(sharedFunction)/types';
 
-export default function UsersBar({ groupData }: { groupData: Group }) {
-  if (!groupData) return;
+export default function UsersBar({ groupData }: { groupData: ExtendedGroup }) {
   let frontUsers = [];
 
-  if (groupData.users.length > 5) {
+  if (groupData.users && groupData.users.length > 5) {
     frontUsers = groupData.users.slice(0, 5);
-  } else {
+  } else if (groupData.users) {
     frontUsers = groupData.users;
-  }
+  } else return
 
   return (
     <>
       {groupData &&
-        groupData.users.some((user: GroupUser) => user.id === loginUserId) ? (
+        groupData.users.some((user) => user.id === loginUserId) ? (
         <>
           {groupData.users.length ? (
             <div className="mt-16 flex items-center justify-center gap-4 border-b-grey-userBar border-b-[1px] pb-5 pt-8">
               <ul className="flex items-center justify-center gap-2">
-                {frontUsers.map((user: GroupUser) => (
+                {frontUsers.map((user) => (
                   <UserBarImage user={user} key={user.id} />
                 ))}
               </ul>
@@ -66,8 +65,8 @@ function UserBarImage({ user }: { user: GroupUser }) {
             height={200}
             alt={user.name}
             className="h-11 w-11 max-w-full rounded-full border-none object-cover align-middle shadow"
-          />: <div className="h-11 w-11 max-w-full rounded-full border-none object-cover align-middle shadow bg-neutrals-20"></div>}
-          
+          /> : <div className="h-11 w-11 max-w-full rounded-full border-none object-cover align-middle shadow bg-neutrals-20"></div>}
+
         </li>
       ) : null}
     </>

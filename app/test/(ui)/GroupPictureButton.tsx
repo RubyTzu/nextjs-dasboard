@@ -4,31 +4,29 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useState } from 'react';
 //import data
-import { Group } from '../(data)/(sharedFunction)/types';
+import { Group, GroupPicture } from '../(data)/(sharedFunction)/types';
 //import ui
 import { CameraIcon, groupIconMap } from '@/app/test/(ui)/Icons';
 //import other
 import clsx from 'clsx';
 import { TopBar } from './TopBars';
 
+interface Props {
+  groupData: Group;
+  setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
+}
 
 export default function GroupPictureButton({
   groupData,
   setCurrentGroup,
-}: {
-  groupData: Group;
-  setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
-}) {
-  const {
-    picture,
-  } = groupData;
-
-  const [currentPicture, setCurrentPicture] = useState(picture);
-  const [lastSavedPicture, setLastSavedPicture] = useState<any>(currentPicture);
-  const [isShow, setIsShow] = useState(false);
+}: Props) {
+  const { picture } = groupData;
+  const [currentPicture, setCurrentPicture] = useState<GroupPicture>(picture);
+  const [lastSavedPicture, setLastSavedPicture] = useState<GroupPicture>(currentPicture);
+  const [isShow, setIsShow] = useState<boolean>(false);
   const router = useRouter();
   const Icon = groupIconMap[currentPicture];
-  const allGroupPicture:string[] = [
+  const allGroupPicture: GroupPicture[] = [
     'groupIcon01',
     'groupIcon02',
     'groupIcon03',
@@ -45,7 +43,6 @@ export default function GroupPictureButton({
     'groupIcon14',
     'groupIcon15',
   ];
-  if (!groupData) return;
 
   const toggleDialog = () => {
     setTimeout(() => {
@@ -54,7 +51,7 @@ export default function GroupPictureButton({
     router.refresh();
   };
 
-  const handleChange = () => {
+  const handleChange = (picture: GroupPicture) => {
     setCurrentPicture(picture);
   }
 
@@ -84,7 +81,6 @@ export default function GroupPictureButton({
           alt={picture}
         />
         <div className="absolute bottom-0 right-0 h-7 w-7 translate-x-[5px] translate-y-[5px] rounded-full bg-white p-[7px] shadow">
-          {' '}
           <CameraIcon />
         </div>
       </div>
@@ -123,7 +119,7 @@ export default function GroupPictureButton({
                   type="radio"
                   name="groupPicture"
                   className="absolute left-[50%] top-[50%] h-full w-full translate-x-[-50%] translate-y-[-50%] opacity-0"
-                  onChange={handleChange}
+                  onChange={() => handleChange(picture)}
                 />
                 <Image
                   src={Icon}

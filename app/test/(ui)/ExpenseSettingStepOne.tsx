@@ -1,3 +1,5 @@
+//import data
+import { ExtendedExpense, ExtendedGroup } from '../(data)/(sharedFunction)/types';
 //import ui
 import { CalculatorAndInput } from './Calculator';
 import DatePickerButton from './DatePickerButton';
@@ -6,37 +8,10 @@ import ExpenseCategoryButton from './ExpenseCategoryButton';
 import clsx from 'clsx';
 import NoteButton from './NoteButton';
 
-interface SettingExpense {
-  id: string;
-  name: undefined;
-  category: undefined;
-  amount: number | string;
-  date: undefined;
-  note: undefined;
-  payerId: string;
-  sharers: {
-    id: string;
-    amount: number;
-  }[];
-};
-
-interface AddingExpense {
-  name: string;
-  category: string;
-  amount: number | string;
-  date: string;
-  note: string;
-  payerId: string;
-  sharers: {
-    id: string;
-    amount: number;
-  }[];
-};
-
 interface ExpenseSettingStepOneProps {
-  group?: any;
-  expenseData?: SettingExpense | AddingExpense;
-  setCurrentExpense: any;
+  group?: ExtendedGroup;
+  expenseData?: ExtendedExpense;
+  setCurrentExpense: React.Dispatch<React.SetStateAction<ExtendedExpense>>;
   phase: number;
 }
 
@@ -47,7 +22,6 @@ export function ExpenseSettingStepOne({
   phase,
 }: ExpenseSettingStepOneProps) {
 
-  const date = expenseData?.date || '';
   const name = expenseData?.name || '';
 
   return (
@@ -59,7 +33,6 @@ export function ExpenseSettingStepOne({
       {group && expenseData ? <>
         <div className="mb-4">
           <DatePickerButton
-            date={date}
             expenseData={expenseData}
             setCurrentExpense={setCurrentExpense}
           />

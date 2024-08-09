@@ -35,7 +35,7 @@ import cameraIcon from '@/app/test/(ui)/icons/camera.svg';
 import leaveIcon from '@/app/test/(ui)/icons/leave.svg';
 import backArrowIcon from '@/app/test/(ui)/icons/backArrow.svg';
 
-function FoodIcon({ strokeWidth }: { strokeWidth: any }) {
+function FoodIcon({ strokeWidth }: { strokeWidth: number }) {
   return (
     <div className="h-5 flex justify-center items-center">
       <svg

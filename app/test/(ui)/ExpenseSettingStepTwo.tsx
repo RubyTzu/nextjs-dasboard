@@ -1,5 +1,7 @@
 //import from next & react
 import Image from 'next/image';
+//import data
+import { ExtendedExpense, ExtendedGroup } from '../(data)/(sharedFunction)/types';
 //other
 import clsx from 'clsx';
 
@@ -9,9 +11,9 @@ export function ExpenseSettingStepTwo({
   group,
   phase,
 }: {
-  expenseData: any;
-  setCurrentExpense: any;
-  group: any;
+  expenseData: ExtendedExpense;
+  setCurrentExpense: React.Dispatch<React.SetStateAction<ExtendedExpense>>;
+  group: ExtendedGroup;
   phase: number;
 }) {
 
@@ -23,7 +25,7 @@ export function ExpenseSettingStepTwo({
     >
       {expenseData && group ? <>
         <p className="mb-5 text-xl">選擇付款人</p>
-        {group.users.map((user: any) => {
+        {group.users && group.users.map((user) => {
           return (
             <div
               className="my-2 flex w-full items-center justify-between px-7"

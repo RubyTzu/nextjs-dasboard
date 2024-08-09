@@ -2,14 +2,14 @@
 //import data
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 import { useUser } from '@/app/test/(data)/(fetchData)/Providers';
-import { UserGroup } from '../../(data)/(sharedFunction)/types';
+import { LoginUser } from '../../(data)/(sharedFunction)/types';
 //import ui
 import GroupButton from '@/app/test/(ui)/GroupButton';
 import AddGroupButton from '@/app/test/(ui)/AddGroupButton';
 
 
 export default function Page() {
-  const data = useUser(loginUserId);
+  const userData: LoginUser = useUser(loginUserId);
 
   return (
     <div className="flex min-h-screen flex-col bg-highlight-50">
@@ -18,8 +18,8 @@ export default function Page() {
       </h1>
       <AddGroupButton />
       <div className="mt-[6.5rem]">
-        {data
-          ? data.groups.map((group: UserGroup) => (
+        {userData
+          ? userData.groups.map((group) => (
             <GroupButton key={group.id} groupData={group} />
           ))
           : null}

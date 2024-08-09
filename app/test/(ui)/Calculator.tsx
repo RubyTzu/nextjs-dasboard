@@ -3,22 +3,23 @@
 import { useState, useContext, useEffect, useRef } from 'react';
 //import data
 import { CalcContext } from '@/app/test/(data)/(sharedFunction)/CalcProvider';
+import { ExtendedExpense } from '../(data)/(sharedFunction)/types';
 //import ui
 import { BackspaceIcon, DollarIcon } from '@/app/test/(ui)/Icons';
 //import other
 import clsx from 'clsx';
 
-export const CalculatorAndInput = ({ expenseData }: { expenseData: any }) => {
-  const [showKeyboard, setShowKeyboard] = useState(false);
-  const inputRef = useRef<any>(null);
+export const CalculatorAndInput = ({ expenseData }: { expenseData: ExtendedExpense }) => {
+  const [showKeyboard, setShowKeyboard] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInputFocus = () => {
-    inputRef.current.focus();
+    inputRef.current?.focus();
     setShowKeyboard(true);
   };
 
   const handleInputBlur = () => {
-    inputRef.current.blur();
+    inputRef.current?.blur();
   };
 
   const handleKeyboardFocus = () => {
@@ -26,7 +27,7 @@ export const CalculatorAndInput = ({ expenseData }: { expenseData: any }) => {
   };
 
   const handleKeyboardBlur = () => {
-    //To check if the input element referenced by inputRef is currently focused
+   
     if (inputRef.current && document.activeElement === inputRef.current) {
       return;
     }
@@ -66,13 +67,18 @@ function Display({
   handleKeyboardBlur,
   inputRef,
 }: {
-  amount: string;
-  handleKeyboardFocus: any;
-  handleKeyboardBlur: any;
-  inputRef: any;
+  amount: number | string;
+  handleKeyboardFocus: () => void;
+  handleKeyboardBlur: () => void;
+  inputRef: React.RefObject<HTMLInputElement>;
 }) {
-  const { display, setDisplay, updateDisplay, onFocusDisplay, onBlurDisplay } =
-    useContext<any>(CalcContext);
+  const context = useContext(CalcContext);
+
+  if (!context) {
+    throw new Error('CalcContext must be used within a CalcProvider');
+  }
+
+  const { display, setDisplay, updateDisplay, onFocusDisplay, onBlurDisplay } = context;
 
   useEffect(() => {
     if (amount || amount === "") {
@@ -80,8 +86,7 @@ function Display({
     }
   }, [amount]);
 
-  const handleChange = (e: any) => {
-    console.log(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateDisplay(e.target.value);
   };
 
@@ -95,7 +100,6 @@ function Display({
         onFocusDisplay();
       }}
       onBlur={() => {
-        //setTimeout to make sure handleKeyboardBlur function happened after inputRef is focus by keyboard
         setTimeout(() => {
           handleKeyboardBlur();
         }, 100);
@@ -115,14 +119,19 @@ const Calculator = ({
   handleInputFocus,
   handleInputBlur,
 }: {
-  showKeyboard: any;
-  handleKeyboardBlur: any;
-  handleInputFocus: any;
-  handleInputBlur: any;
+  showKeyboard: boolean;
+  handleKeyboardBlur: () => void;
+  handleInputFocus: () => void;
+  handleInputBlur: () => void;
 }) => {
   const keyboardRef = useRef<HTMLDivElement>(null);
+  const context = useContext(CalcContext);
 
-  const { buttonClick, equalClick, clearClick } = useContext<any>(CalcContext);
+  if (!context) {
+    throw new Error('CalcContext must be used within a CalcProvider');
+  }
+
+  const { buttonClick, equalClick, clearClick } = context;
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent | TouchEvent): void => {
@@ -135,10 +144,9 @@ const Calculator = ({
     };
 
     const eventType = 'ontouchstart' in window ? 'touchstart' : 'mousedown';
-    // Bind the event listener
+
     document.addEventListener(eventType, handleClickOutside);
 
-    // Cleanup the event listener on unmount
     return () => {
       document.removeEventListener(eventType, handleClickOutside);
     };
@@ -202,7 +210,7 @@ const Calculator = ({
   );
 };
 
-const CalculatorButton = ({ value, onClick }: { value: any; onClick: any }) => {
+const CalculatorButton = ({ value, onClick }: { value: string; onClick: () => void }) => {
   const isNum = [
     '1',
     '2',

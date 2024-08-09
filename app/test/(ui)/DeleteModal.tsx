@@ -1,6 +1,17 @@
 //import other
 import clsx from 'clsx';
 
+interface Props {
+  dialogRef: React.Ref<HTMLDialogElement>;
+  dialogId: string;
+  isShow: boolean;
+  headerId: string;
+  handleClose: () => void;
+  handleSave: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  hintWord: string;
+  idx: string;
+}
+
 export default function DeleteModal({
   dialogRef,
   dialogId,
@@ -10,16 +21,7 @@ export default function DeleteModal({
   handleSave,
   hintWord,
   idx
-}: {
-  dialogRef: any;
-  dialogId: any;
-  isShow: any;
-  headerId: any;
-  handleClose: any;
-  handleSave: any;
-  hintWord: string;
-  idx: string;
-}) {
+}: Props) {
   return (
     <>
       <dialog
@@ -39,7 +41,7 @@ export default function DeleteModal({
         aria-labelledby={headerId}
         onClick={handleClose}
       >
-        <div onClick={(e: any) => e.stopPropagation()}>
+        <div onClick={(e: React.SyntheticEvent) => e.stopPropagation()}>
           <div className="flex h-20 items-center justify-center px-6 mt-3 mb-4">
             <div className="text-normal">{hintWord}</div>
           </div>

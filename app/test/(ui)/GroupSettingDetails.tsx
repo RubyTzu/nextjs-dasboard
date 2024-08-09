@@ -1,7 +1,7 @@
 //import from next & react
 import { Fragment, useEffect } from 'react';
 //import data
-import { Group, GroupUser, User } from '../(data)/(sharedFunction)/types';
+import { Group, GroupUser } from '../(data)/(sharedFunction)/types';
 //import ui
 import { groupIconMap } from '@/app/test/(ui)/Icons';
 import DeleteGroupButton from './DeleteGroupButton';
@@ -14,27 +14,39 @@ import AddGroupNameButton from './AddGroupNameButton';
 import { v4 as uuidv4 } from 'uuid';
 import clsx from "clsx";
 
+interface GroupNameSettingProps {
+  groupData: Group;
+  setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
+  isAddPage: boolean;
+}
+
+interface GroupUsersSettingProps {
+  groupData: Group;
+  setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
+  isAddPage: boolean;
+  loginUserData: GroupUser;
+}
+
+interface GroupOtherSettingProps {
+  groupData: Group;
+  setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
+}
+
 export function GroupNameSetting({
   groupData,
   setCurrentGroup,
   isAddPage
-}: {
-  groupData: Group;
-  setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
-  isAddPage: boolean;
-}) {
-  if (!groupData) return;
+}: GroupNameSettingProps) {
   const {
     picture,
     name,
   } = groupData;
-
   const Icon = groupIconMap[picture];
 
   return (
     <>
       <div className="m-6 mt-16 flex items-center justify-between pt-6">
-        <div className={clsx("flex items-center gap-4",{
+        <div className={clsx("flex items-center gap-4", {
           "w-full": isAddPage,
         })}>
           {Icon ? (
@@ -69,18 +81,11 @@ export function GroupUsersSetting({
   setCurrentGroup,
   isAddPage,
   loginUserData
-}: {
-  groupData: Group;
-  setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
-  isAddPage: boolean;
-  loginUserData: GroupUser;
-}) {
+}: GroupUsersSettingProps) {
   useEffect(() => {
     console.log('group Data change!');
     console.log(groupData)
   }, [groupData]);
-
-  if (!groupData) return;
 
   return (
     <>
@@ -149,11 +154,7 @@ export function GroupUsersSetting({
 export function GroupOtherSetting({
   groupData,
   setCurrentGroup,
-}: {
-  groupData: any;
-  setCurrentGroup: any;
-}) {
-  if (!groupData) return;
+}: GroupOtherSettingProps) {
 
   return (
     <>
@@ -168,7 +169,7 @@ export function GroupOtherSetting({
   );
 }
 
-export function GroupSave({ groupData }: { groupData: any }) {
+export function GroupSave({ groupData }: { groupData: Group }) {
   function handleClick() {
     console.log(`group ${groupData.id} has changed and saved`);
     console.log(groupData);
