@@ -5,6 +5,7 @@ import { useState } from 'react';
 //import data
 import { useUser } from '@/app/test/(data)/(fetchData)/Providers';
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { Group } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import { TopGroupSettingBar } from '@/app/test/(ui)/TopBars';
 import {
@@ -12,7 +13,6 @@ import {
     GroupSave,
     GroupUsersSetting,
 } from '@/app/test/(ui)/GroupSettingDetails';
-import { Group } from '@/app/test/(data)/(sharedFunction)/types';
 
 export default function Page() {
     const data = useUser(loginUserId);

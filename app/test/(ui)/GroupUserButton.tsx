@@ -1,7 +1,10 @@
+//import from next & react
 import Image from 'next/image';
 import { useId, useRef, useState } from 'react';
+//import data
 import { loginUserId } from '../(data)/(fetchData)/user';
-import { Group, GroupUser } from '../(data)/(sharedFunction)/types';
+import { ExtendedGroup, GroupUser } from '../(data)/(sharedFunction)/types';
+//import ui
 import { TrashcanIcon } from '@/app/test/(ui)/Icons';
 import DeleteModal from './DeleteModal';
 
@@ -11,17 +14,17 @@ export function GroupUserButton({
   groupData,
   setCurrentGroup,
   isAddPage,
-  loginUserData
+  loginUserData,
 }: {
   idx: string;
   userData: GroupUser;
-  groupData: Group;
-  setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
+  groupData: ExtendedGroup;
+  setCurrentGroup: React.Dispatch<React.SetStateAction<ExtendedGroup>>;
   isAddPage: boolean;
   loginUserData: GroupUser;
 }) {
   const [lastSavedGroup, setLastSavedGroup] =
-    useState<Group>(groupData);
+    useState<ExtendedGroup>(groupData);
   const [isShow, setIsShow] = useState<boolean>(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dialogId = useId();
@@ -43,9 +46,19 @@ export function GroupUserButton({
   };
 
   const handleSave = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    let currentGroupUsers = [...groupData.users];
+    let currentGroupUsers = groupData.users
+      ? [...groupData.users]
+      : [
+          {
+            id: '',
+            name: '',
+            picture: '',
+            adoptable: false,
+          },
+        ];
     const userIndex = currentGroupUsers.findIndex(
-      (user: GroupUser) => user.name === userData.name && e.currentTarget.id === idx,
+      (user: GroupUser) =>
+        user.name === userData.name && e.currentTarget.id === idx,
     );
 
     if (userIndex !== -1) {
@@ -54,11 +67,11 @@ export function GroupUserButton({
 
     setLastSavedGroup({
       ...groupData,
-      users: currentGroupUsers
+      users: currentGroupUsers,
     });
     setCurrentGroup({
       ...groupData,
-      users: currentGroupUsers
+      users: currentGroupUsers,
     });
     setIsShow(false);
     setTimeout(() => {
@@ -67,14 +80,18 @@ export function GroupUserButton({
   };
 
   const isAdmin = groupData.creatorId === loginUserId;
-  const isMemberAdmin = (groupData.creatorId === userData?.id) && groupData.creatorId !== undefined;
-  const showAdminLabel = isAddPage && loginUserData?.id === idx || isMemberAdmin;
-  const showDeleteButton = (isAddPage && loginUserData?.id !== idx) || (isAdmin && !isMemberAdmin);
+  const isMemberAdmin =
+    groupData.creatorId === userData?.id && groupData.creatorId !== undefined;
+  const showAdminLabel =
+    (isAddPage && loginUserData?.id === idx) || isMemberAdmin;
+  const showDeleteButton =
+    (isAddPage && loginUserData?.id !== idx) || (isAdmin && !isMemberAdmin);
 
   return (
     <div className="mb-4 flex items-center justify-between">
       <div className="flex items-center gap-4">
-        {(userData?.adoptable === false || userData?.id === loginUserId) && userData.picture !== "" ? (
+        {(userData?.adoptable === false || userData?.id === loginUserId) &&
+        userData.picture !== '' ? (
           <Image
             className="h-11 w-11 rounded-full bg-neutrals-20"
             src={userData.picture}
@@ -85,10 +102,12 @@ export function GroupUserButton({
         ) : (
           <div className="h-11 w-11 rounded-full bg-neutrals-20"></div>
         )}
-        <p className="truncate w-56">{userData?.name}</p>
+        <p className="w-56 truncate">{userData?.name}</p>
       </div>
       {showAdminLabel ? (
-        <div className="relative left-[0.3rem] text-sm text-neutrals-70">管理員</div>
+        <div className="relative left-[0.3rem] text-sm text-neutrals-70">
+          管理員
+        </div>
       ) : null}
       {showDeleteButton ? (
         <>

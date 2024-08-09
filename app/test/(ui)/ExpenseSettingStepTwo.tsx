@@ -9,19 +9,21 @@ import {
 //other
 import clsx from 'clsx';
 
-export function ExpenseSettingStepTwo({
-  expenseData,
-  setCurrentExpense,
-  group,
-  phase,
-}: {
+interface Props{
   expenseData: ExtendedExpense | Expense;
   setCurrentExpense: React.Dispatch<
     React.SetStateAction<ExtendedExpense | Expense>
   >;
   group: ExtendedGroup;
   phase: number;
-}) {
+}
+
+export function ExpenseSettingStepTwo({
+  expenseData,
+  setCurrentExpense,
+  group,
+  phase,
+}: Props) {
   return (
     <div
       className={clsx('my-6 flex w-full flex-col items-center', {

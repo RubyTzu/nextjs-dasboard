@@ -2,7 +2,7 @@
 import Link from 'next/link';
 //import data
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
-import { ExtendedGroup, GroupUser } from '../(data)/(sharedFunction)/types';
+import { ExtendedGroup } from '../(data)/(sharedFunction)/types';
 //import ui
 import { DollarTwoIcon } from '@/app/test/(ui)/Icons'
 import ShareButton from '@/app/test/(ui)/ShareButton';

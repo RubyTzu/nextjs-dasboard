@@ -56,9 +56,9 @@ function FoodIcon({ strokeWidth }: { strokeWidth: number }) {
   )
 }
 
-function DrinkIcon({ strokeWidth }: { strokeWidth: any }) {
+function DrinkIcon({ strokeWidth }: { strokeWidth: number }) {
   return (
-    <div className="h-5 flex justify-center items-center">
+    <div className="flex h-5 items-center justify-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={16}
@@ -74,12 +74,12 @@ function DrinkIcon({ strokeWidth }: { strokeWidth: any }) {
         />
       </svg>
     </div>
-  )
+  );
 }
 
-function TransportIcon({ strokeWidth }: { strokeWidth: any }) {
+function TransportIcon({ strokeWidth }: { strokeWidth: number }) {
   return (
-    <div className="h-5 flex justify-center items-center">
+    <div className="flex h-5 items-center justify-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={27}
@@ -102,12 +102,12 @@ function TransportIcon({ strokeWidth }: { strokeWidth: any }) {
         />
       </svg>
     </div>
-  )
+  );
 }
 
-function StayIcon({ strokeWidth }: { strokeWidth: any }) {
+function StayIcon({ strokeWidth }: { strokeWidth: number }) {
   return (
-    <div className="h-5 flex justify-center items-center">
+    <div className="flex h-5 items-center justify-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={25}
@@ -137,12 +137,12 @@ function StayIcon({ strokeWidth }: { strokeWidth: any }) {
         />
       </svg>
     </div>
-  )
+  );
 }
 
-function ShoppingIcon({ strokeWidth }: { strokeWidth: any }) {
+function ShoppingIcon({ strokeWidth }: { strokeWidth: number }) {
   return (
-    <div className="h-5 flex justify-center items-center">
+    <div className="flex h-5 items-center justify-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={22}
@@ -165,12 +165,12 @@ function ShoppingIcon({ strokeWidth }: { strokeWidth: any }) {
         />
       </svg>
     </div>
-  )
+  );
 }
 
-function EntertainmentIcon({ strokeWidth }: { strokeWidth: any }) {
+function EntertainmentIcon({ strokeWidth }: { strokeWidth: number }) {
   return (
-    <div className="h-5 flex justify-center items-center">
+    <div className="flex h-5 items-center justify-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={22}
@@ -193,18 +193,13 @@ function EntertainmentIcon({ strokeWidth }: { strokeWidth: any }) {
         />
       </svg>
     </div>
-  )
+  );
 }
 
-function OtherIcon({ strokeWidth }: { strokeWidth: any }) {
+function OtherIcon({ strokeWidth }: { strokeWidth: number }) {
   return (
-    <div className="h-5 flex justify-center items-center">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={23}
-        height={7}
-        fill="none"
-      >
+    <div className="flex h-5 items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width={23} height={7} fill="none">
         <path
           stroke="#000001"
           strokeLinecap="round"
@@ -214,7 +209,7 @@ function OtherIcon({ strokeWidth }: { strokeWidth: any }) {
         />
       </svg>
     </div>
-  )
+  );
 }
 
 function CheckIcon() {

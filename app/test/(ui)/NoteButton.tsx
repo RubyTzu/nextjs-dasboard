@@ -9,15 +9,14 @@ import {
 //import other
 import clsx from 'clsx';
 
-export default function NoteButton({
-  expenseData,
-  setCurrentExpense,
-}: {
+interface Props {
   expenseData: ExtendedExpense | Expense;
   setCurrentExpense: React.Dispatch<
     React.SetStateAction<ExtendedExpense | Expense>
   >;
-}) {
+}
+
+export default function NoteButton({ expenseData, setCurrentExpense }: Props) {
   const [textareaValue, setTextareaValue] = useState(expenseData.note);
   const [lastSavedValue, setLastSavedValue] = useState<string>(textareaValue);
   const [isShow, setIsShow] = useState(false);

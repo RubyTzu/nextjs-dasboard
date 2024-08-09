@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 //import data
 import { useGroup } from '@/app/test/(data)/(fetchData)/Providers';
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { Expense } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import { TopExpenseSettingBar } from '@/app/test/(ui)/TopBars';
 import {
@@ -14,7 +15,7 @@ import {
 import { ExpenseSettingStepOne } from '@/app/test/(ui)/ExpenseSettingStepOne';
 import { ExpenseSettingStepTwo } from '@/app/test/(ui)/ExpenseSettingStepTwo';
 import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
-import { Expense } from '@/app/test/(data)/(sharedFunction)/types';
+
 
 export default function Page() {
     const params = useParams<{ groupid: string; }>();

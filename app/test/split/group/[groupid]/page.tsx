@@ -5,7 +5,7 @@ import { Suspense, useState, useEffect } from 'react';
 //import data
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 import { useGroup } from '@/app/test/(data)/(fetchData)/Providers';
-import { ExtendedGroup, GroupUser } from '@/app/test/(data)/(sharedFunction)/types';
+import { ExtendedGroup } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import { TopGroupBar } from '@/app/test/(ui)/TopBars';
 import UsersBar from '@/app/test/(ui)/UsersBar';

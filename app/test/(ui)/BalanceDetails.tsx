@@ -2,7 +2,8 @@
 import Image from 'next/image';
 //import data
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
-import { Debt, User, GroupUser } from '../(data)/(sharedFunction)/types'; //import other
+import { Debt, User, GroupUser } from '../(data)/(sharedFunction)/types'; 
+//import other
 import clsx from 'clsx';
 
 interface Prop {

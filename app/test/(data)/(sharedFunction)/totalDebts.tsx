@@ -4,34 +4,39 @@ import { Expense, Debts, TotalDebts, ExtendedExpense } from '@/app/test/(data)/(
 interface SplitExpenseResult {
   debts: Debts;
   totalDebts: TotalDebts;
-  expensesWithDebts: Expense[];
+  expensesWithDebts: ExtendedExpense[];
 }
 
-function filterExpense(expenses: Expense[]): SplitExpenseResult {
+function filterExpense(expenses: ExtendedExpense[]): SplitExpenseResult {
   if (!expenses) {
     return {
       debts: {},
       totalDebts: {},
-      expensesWithDebts: []
+      expensesWithDebts: [],
     };
   }
 
-  const newExpenses: ExtendedExpense[] = expenses.map(expense => ({ ...expense }));
+  const newExpenses: ExtendedExpense[] = expenses.map((expense) => ({
+    ...expense
+  }));
 
   // Calculate debts
-  const debts: Debts = newExpenses.reduce((acc: Debts, expense: ExtendedExpense) => {
+  const debts: Debts = newExpenses.reduce((acc: Debts, expense: Expense) => {
     if (!acc[expense.payerId]) {
       acc[expense.payerId] = { totalDebt: 0 };
     }
     acc[expense.payerId][expense.name] = expense.amount;
 
-    expense.sharers.forEach(sharer => {
+    expense.sharers.forEach((sharer) => {
       if (sharer.id === expense.payerId) {
-        acc[sharer.id][expense.name] -= sharer.amount;
+        acc[sharer.id][expense.name] -= Number(sharer.amount);
       } else if (acc[sharer.id]) {
-        acc[sharer.id][expense.name] = -sharer.amount;
+        acc[sharer.id][expense.name] = -Number(sharer.amount);
       } else {
-        acc[sharer.id] = { [expense.name]: -sharer.amount, totalDebt: 0 };
+        acc[sharer.id] = {
+          [expense.name]: -Number(sharer.amount),
+          totalDebt: 0,
+        };
       }
     });
 
@@ -39,10 +44,10 @@ function filterExpense(expenses: Expense[]): SplitExpenseResult {
   }, {} as Debts);
 
   // Add totalDebt to each user's debt object
-  Object.keys(debts).forEach(member => {
+  Object.keys(debts).forEach((member) => {
     debts[member]['totalDebt'] = Object.values(debts[member]).reduce(
-      (acc, debt) => acc + (debt ?? 0), 
-      0
+      (acc, debt) => acc + (debt ?? 0),
+      0,
     );
   });
 
@@ -53,7 +58,7 @@ function filterExpense(expenses: Expense[]): SplitExpenseResult {
   }, {} as TotalDebts);
 
   // Map expenses with added debts
-  const expensesWithDebts: ExtendedExpense[] = newExpenses.map(expense => {
+  const expensesWithDebts: ExtendedExpense[] = newExpenses.map((expense) => {
     const newExpense = { ...expense };
     const userDebts = debts[loginUserId];
     newExpense.expenseDebt = userDebts?.[expense.name]?.toFixed(2) || '0.00';
@@ -63,7 +68,7 @@ function filterExpense(expenses: Expense[]): SplitExpenseResult {
   return {
     debts,
     totalDebts,
-    expensesWithDebts
+    expensesWithDebts,
   };
 }
 
