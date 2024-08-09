@@ -1,7 +1,7 @@
 //import next & react
 import { useId, useRef, useState } from 'react';
 //import data
-import { ExtendedExpense } from '../(data)/(sharedFunction)/types';
+import { ExtendedExpense, Expense } from '../(data)/(sharedFunction)/types';
 //import ui
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
 import { inter, lato, notoSansJP, notoSansTC } from '@/app/ui/fonts';
@@ -65,10 +65,12 @@ export default function DatePickerButton({
   expenseData,
   setCurrentExpense,
 }: {
-  expenseData: ExtendedExpense;
-  setCurrentExpense: React.Dispatch<React.SetStateAction<ExtendedExpense>>;
+  expenseData: ExtendedExpense | Expense;
+  setCurrentExpense: React.Dispatch<
+    React.SetStateAction<ExtendedExpense | Expense>
+  >;
 }) {
-  const {date} = expenseData
+  const { date } = expenseData;
   const [isShow, setIsShow] = useState<boolean>(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dialogId = useId();
@@ -162,7 +164,7 @@ export default function DatePickerButton({
                   handleDayPickerSelect={handleDayPickerSelect}
                   setIsShow={setIsShow}
                 />
-              )
+              ),
             }}
             className={`relative rounded-lg bg-white ${lato.variable} ${notoSansJP.variable} ${notoSansTC.variable} font-lato antialiased transition-all duration-200`}
             classNames={{

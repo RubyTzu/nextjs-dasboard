@@ -2,14 +2,14 @@
 import { useId, useRef, useState } from 'react';
 //import data
 import { loginUserId } from '../(data)/(fetchData)/user';
-import { Group, GroupUser } from '../(data)/(sharedFunction)/types';
+import { ExtendedGroup, GroupUser } from '../(data)/(sharedFunction)/types';
 //import ui
 import { TrashcanIcon, LeaveIcon } from '@/app/test/(ui)/Icons';
 import DeleteModal from './DeleteModal';
 
 interface Props {
-  groupData: Group;
-  setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
+  groupData: ExtendedGroup;
+  setCurrentGroup: React.Dispatch<React.SetStateAction<ExtendedGroup>>;
 }
 
 export default function DeleteGroupButton({
@@ -21,6 +21,9 @@ export default function DeleteGroupButton({
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dialogId = useId();
   const headerId = useId();
+  const users = groupData.users
+    ? groupData.users
+    : [{ id: '', name: '', picture: '', adoptable: false }];
 
   const handleToggle = () => {
     dialogRef.current?.showModal();
@@ -46,7 +49,7 @@ export default function DeleteGroupButton({
   };
 
   const handleLeaveGroup = (id: string) => {
-    let currentGroupUsers = [...groupData.users];
+    let currentGroupUsers = [...users];
 
     const userIndex = currentGroupUsers.findIndex(
       (user: GroupUser) => user.id === id,

@@ -3,13 +3,17 @@
 import { useState, useContext, useEffect, useRef } from 'react';
 //import data
 import { CalcContext } from '@/app/test/(data)/(sharedFunction)/CalcProvider';
-import { ExtendedExpense } from '../(data)/(sharedFunction)/types';
+import { ExtendedExpense, Expense } from '../(data)/(sharedFunction)/types';
 //import ui
 import { BackspaceIcon, DollarIcon } from '@/app/test/(ui)/Icons';
 //import other
 import clsx from 'clsx';
 
-export const CalculatorAndInput = ({ expenseData }: { expenseData: ExtendedExpense }) => {
+export const CalculatorAndInput = ({
+  expenseData,
+}: {
+  expenseData: ExtendedExpense | Expense;
+}) => {
   const [showKeyboard, setShowKeyboard] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -27,7 +31,6 @@ export const CalculatorAndInput = ({ expenseData }: { expenseData: ExtendedExpen
   };
 
   const handleKeyboardBlur = () => {
-   
     if (inputRef.current && document.activeElement === inputRef.current) {
       return;
     }
@@ -35,7 +38,7 @@ export const CalculatorAndInput = ({ expenseData }: { expenseData: ExtendedExpen
   };
 
   return (
-    <div className=" w-fit flex items-end justify-between gap-6">
+    <div className=" flex w-fit items-end justify-between gap-6">
       <button
         type="button"
         onClick={handleInputFocus}

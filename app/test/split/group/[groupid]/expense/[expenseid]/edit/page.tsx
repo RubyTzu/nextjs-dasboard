@@ -5,7 +5,11 @@ import { useState, useEffect } from 'react';
 //import data
 import { useGroup, useExpense } from '@/app/test/(data)/(fetchData)/Providers';
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
-import { ExtendedExpense, ExtendedGroup } from '@/app/test/(data)/(sharedFunction)/types';
+import {
+  ExtendedExpense,
+  ExtendedGroup,
+  Expense,
+} from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import { TopExpenseSettingBar } from '@/app/test/(ui)/TopBars';
 import {
@@ -23,7 +27,9 @@ export default function Page() {
 
   const group: ExtendedGroup = useGroup(groupid);
   const expense: ExtendedExpense = useExpense(groupid, expenseid);
-  const [currentExpense, setCurrentExpense] = useState<ExtendedExpense>(expense);
+  const [currentExpense, setCurrentExpense] = useState<
+    ExtendedExpense | Expense
+  >(expense);
 
   useEffect(() => {
     if (expense) {

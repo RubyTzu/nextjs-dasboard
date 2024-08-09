@@ -14,33 +14,7 @@ import {
 import { ExpenseSettingStepOne } from '@/app/test/(ui)/ExpenseSettingStepOne';
 import { ExpenseSettingStepTwo } from '@/app/test/(ui)/ExpenseSettingStepTwo';
 import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
-
-interface SettingExpense {
-    id: string;
-    name: undefined;
-    category: undefined;
-    amount: number | string;
-    date: undefined;
-    note: undefined;
-    payerId: string;
-    sharers: {
-        id: string;
-        amount: number;
-    }[];
-};
-
-interface AddingExpense {
-    name: string;
-    category: string;
-    amount: number | string;
-    date: string;
-    note: string;
-    payerId: string;
-    sharers: {
-        id: string;
-        amount: number;
-    }[];
-};
+import { Expense } from '@/app/test/(data)/(sharedFunction)/types';
 
 export default function Page() {
     const params = useParams<{ groupid: string; }>();
@@ -48,14 +22,14 @@ export default function Page() {
     const [isNotEqual, setIsNotEqual] = useState(false);
     const [isNotZero, setIsNotZero] = useState(false);
     const group = useGroup(params.groupid);
-    const [currentExpense, setCurrentExpense] = useState<SettingExpense | AddingExpense>({
-        name: "未命名費用",
-        category: "food",
-        amount: "",
-        date: new Date().toISOString(),
-        note: "",
-        payerId: loginUserId,
-        sharers: []
+    const [currentExpense, setCurrentExpense] = useState<Expense>({
+      name: '未命名費用',
+      category: 'food',
+      amount: 0,
+      date: new Date().toISOString(),
+      note: '',
+      payerId: loginUserId,
+      sharers: [],
     });
 
     useEffect(() => {

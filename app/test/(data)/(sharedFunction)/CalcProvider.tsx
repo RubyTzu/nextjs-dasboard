@@ -3,7 +3,7 @@ import { useState, createContext, useEffect } from 'react';
 import { evaluate } from 'mathjs';
 
 export interface AllContextType {
-  display: string;
+  display: string | number;
   setDisplay: any;
   updateDisplay: (updateDisplayString: string) => void;
   onFocusDisplay: () => void;

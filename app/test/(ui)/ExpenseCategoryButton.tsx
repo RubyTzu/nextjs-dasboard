@@ -3,15 +3,21 @@
 import Link from 'next/link';
 import { useState, useRef, useEffect, Fragment, FC } from 'react';
 //import data
-import { ExpenseCategory, ExtendedExpense } from '../(data)/(sharedFunction)/types';
+import {
+  ExpenseCategory,
+  ExtendedExpense,
+  Expense,
+} from '../(data)/(sharedFunction)/types';
 //import ui
 import { expenseIconMap } from '@/app/test/(ui)/Icons';
 //import other
 import clsx from 'clsx';
 
 interface ExpenseCategoryButtonProps {
-  expenseData: ExtendedExpense;
-  setCurrentExpense: React.Dispatch<React.SetStateAction<ExtendedExpense>>;
+  expenseData: ExtendedExpense | Expense;
+  setCurrentExpense: React.Dispatch<
+    React.SetStateAction<ExtendedExpense | Expense>
+  >;
 }
 
 interface DisplayProps {
@@ -28,16 +34,20 @@ interface KeyboardProps {
   handleKeyboardBlur: () => void;
   handleInputFocus: () => void;
   setDisplay: React.Dispatch<React.SetStateAction<string | number>>;
-  expenseData: ExtendedExpense;
-  setCurrentExpense: React.Dispatch<React.SetStateAction<ExtendedExpense>>;
+  expenseData: ExtendedExpense | Expense;
+  setCurrentExpense: React.Dispatch<
+    React.SetStateAction<ExtendedExpense | Expense>
+  >;
 }
 
 interface CategoryButtonProps {
   Icon: FC<{ strokeWidth: number }>;
   category: { category: ExpenseCategory; title: string };
   setDisplay: React.Dispatch<React.SetStateAction<string | number>>;
-  expenseData: ExtendedExpense;
-  setCurrentExpense: React.Dispatch<React.SetStateAction<ExtendedExpense>>;
+  expenseData: ExtendedExpense | Expense;
+  setCurrentExpense: React.Dispatch<
+    React.SetStateAction<ExtendedExpense | Expense>
+  >;
 }
 
 export default function ExpenseCategoryButton({
@@ -54,10 +64,6 @@ export default function ExpenseCategoryButton({
   const handleInputFocus = () => {
     inputRef.current?.focus();
     setShowKeyboard(true);
-  };
-
-  const handleInputBlur = () => {
-    inputRef.current?.blur();
   };
 
   const handleKeyboardFocus = () => {

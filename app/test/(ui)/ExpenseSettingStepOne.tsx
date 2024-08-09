@@ -1,5 +1,9 @@
 //import data
-import { ExtendedExpense, ExtendedGroup } from '../(data)/(sharedFunction)/types';
+import {
+  ExtendedExpense,
+  ExtendedGroup,
+  Expense,
+} from '../(data)/(sharedFunction)/types';
 //import ui
 import { CalculatorAndInput } from './Calculator';
 import DatePickerButton from './DatePickerButton';
@@ -10,8 +14,10 @@ import NoteButton from './NoteButton';
 
 interface ExpenseSettingStepOneProps {
   group?: ExtendedGroup;
-  expenseData?: ExtendedExpense;
-  setCurrentExpense: React.Dispatch<React.SetStateAction<ExtendedExpense>>;
+  expenseData?: ExtendedExpense | Expense;
+  setCurrentExpense: React.Dispatch<
+    React.SetStateAction<ExtendedExpense | Expense>
+  >;
   phase: number;
 }
 

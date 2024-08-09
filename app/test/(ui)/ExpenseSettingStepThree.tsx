@@ -2,15 +2,20 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 //import data
-import { ExtendedExpense, ExtendedGroup, GroupUser } from '../(data)/(sharedFunction)/types';
+import {
+  ExtendedExpense,
+  ExtendedGroup,
+  Sharer,
+  Expense,
+} from '../(data)/(sharedFunction)/types';
 //import ui
 import { NotePencilIcon } from '@/app/test/(ui)/Icons';
 //other
 import clsx from 'clsx';
 
 interface ExpenseSettingStepThreeProps {
-  expenseData: ExtendedExpense;
-  setCurrentExpense: (expense: ExtendedExpense) => void;
+  expenseData: ExtendedExpense | Expense;
+  setCurrentExpense: (expense: ExtendedExpense | Expense) => void;
   group: ExtendedGroup;
   phase: number;
   setIsNotEqual: (isNotEqual: boolean) => void;
@@ -26,9 +31,9 @@ export function ExpenseSettingStepThree({
   const users = group?.users || '';
   const [barBottom, setBarBottom] = useState('0');
   const [onFocus, setOnFocus] = useState(false);
-  const [currentSharer, setCurrentSharer] = useState<any>({
+  const [currentSharer, setCurrentSharer] = useState<Sharer>({
     id: '',
-    amount: '',
+    amount: 0,
   });
 
   const addedAmount = expenseData?.sharers.reduce(
@@ -44,10 +49,9 @@ export function ExpenseSettingStepThree({
 
     const isNotEqual = difference >= 0.1;
     
-    // 设置 isNotEqual 的值
     setIsNotEqual(isNotEqual);
 
-    const handleResize: any = () => {
+    const handleResize = () => {
       if (window.visualViewport) {
         const newBottom = `${window.innerHeight - window.visualViewport.height
           }px`;
@@ -76,6 +80,7 @@ export function ExpenseSettingStepThree({
         }
       };
     };
+    
     const handleResizeThrottled = throttle(handleResize, 50);
 
     if (typeof window !== 'undefined') {
@@ -155,18 +160,18 @@ export function ExpenseSettingStepThree({
     })
   };
 
-  const updateAmount = (id: any, newAmount: any) => {
-    let updatedSharersCopy = expenseData.sharers.map((sharer: any) =>
+  const updateAmount = (id: string, newAmount: number | string) => {
+    let updatedSharersCopy = expenseData.sharers.map((sharer) =>
       sharer.id === id ? { ...sharer, amount: Number(newAmount) } : sharer,
     );
 
-    if (!expenseData.sharers.some((sharer: any) => sharer.id === id)) {
+    if (!expenseData.sharers.some((sharer) => sharer.id === id)) {
       updatedSharersCopy.push({ id, amount: Number(newAmount) });
     }
 
     updatedSharersCopy = updatedSharersCopy.filter(
-      (sharer: any) =>
-        sharer.amount !== 0 && sharer.amount !== '' && sharer.amount !== '0',
+      (sharer) =>
+        sharer.amount !== 0 && sharer.amount !== '' && sharer.amount !== 0,
     );
 
     setCurrentExpense({
@@ -216,7 +221,7 @@ export function ExpenseSettingStepThree({
             ? expenseData.sharers.find((sharer) => sharer.id === user.id)?.amount
             : '0';
 
-          let sharer = expenseData.sharers.filter((sharer: any) => {
+          let sharer = expenseData.sharers.filter((sharer) => {
             return sharer.id === user.id;
           })[0];
 
@@ -232,17 +237,18 @@ export function ExpenseSettingStepThree({
               key={user.id}
             >
               <div className="flex items-center gap-4">
-              {user.adoptable === false ?
-                <Image
-                  className="h-12 w-12 rounded-full"
-                  src={user.picture}
-                  width={50}
-                  height={50}
-                  alt="user's picture"
-                /> :
-                <div className="h-12 w-12 rounded-full bg-neutrals-20" />
-                }
-                <div className="truncate w-28">{user.name}</div>
+                {user.adoptable === false ? (
+                  <Image
+                    className="h-12 w-12 rounded-full"
+                    src={user.picture}
+                    width={50}
+                    height={50}
+                    alt="user's picture"
+                  />
+                ) : (
+                  <div className="h-12 w-12 rounded-full bg-neutrals-20" />
+                )}
+                <div className="w-28 truncate">{user.name}</div>
               </div>
               <div className="flex items-center justify-between gap-7">
                 <input
@@ -258,11 +264,11 @@ export function ExpenseSettingStepThree({
                     } else {
                       setCurrentSharer({
                         id: user.id,
-                        amount: '0',
+                        amount: 0,
                       });
                     }
                   }}
-                  onBlur={(e: any) => {
+                  onBlur={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setOnFocus(false);
                     let value = e.target.value.replace(/^0+/, '');
                     if (value === '' || Number(value) < 0) {
@@ -273,13 +279,13 @@ export function ExpenseSettingStepThree({
                       sharer && String(sharer.amount).replace(/^0+/, '') !== ''
                         ? sharer
                         : {
-                          id: user.id,
-                          amount: 0,
-                        };
+                            id: user.id,
+                            amount: 0,
+                          };
 
                     console.log(sharer.amount);
                   }}
-                  onChange={(e: any) => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     let value = e.target.value;
                     if (value === '' || Number(value) < 0) {
                       value = '0';
@@ -287,7 +293,7 @@ export function ExpenseSettingStepThree({
                     updateAmount(user.id, value);
                     setCurrentSharer({
                       ...sharer,
-                      amount: value,
+                      amount: Number(value),
                     });
                   }}
                   value={sharer.amount === 0 ? '' : sharer.amount} // Prevent display of 0
@@ -302,7 +308,7 @@ export function ExpenseSettingStepThree({
                   id={user.name}
                   name={user.name}
                   value={user.name}
-                  onChange={() => { }}
+                  onChange={() => {}}
                   onClick={() => handleSharerToggle(user.id)} // Call handleSharerToggle on change
                   checked={isChecked}
                 />
@@ -322,7 +328,7 @@ export function ExpenseSettingStepThree({
         >
           <div className="text-black">
             {users &&
-              users.filter((user: any) => {
+              users.filter((user) => {
                 return user.id === currentSharer.id;
               })[0]?.name
             }

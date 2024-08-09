@@ -108,41 +108,43 @@ export function GroupUsersSetting({
                 isAddPage={isAddPage}
                 loginUserData={loginUserData}
               />
-              {groupData.users.map((user: GroupUser) => {
-                let idx = uuidv4();
+              {groupData.users &&
+                groupData.users.map((user: GroupUser) => {
+                  let idx = uuidv4();
 
-                return (
-                  <Fragment key={idx}>
-                    <GroupUserButton
-                      idx={idx}
-                      userData={user}
-                      groupData={groupData}
-                      setCurrentGroup={setCurrentGroup}
-                      isAddPage={isAddPage}
-                      loginUserData={loginUserData}
-                    />
-                  </Fragment>
-                );
-              })}
+                  return (
+                    <Fragment key={idx}>
+                      <GroupUserButton
+                        idx={idx}
+                        userData={user}
+                        groupData={groupData}
+                        setCurrentGroup={setCurrentGroup}
+                        isAddPage={isAddPage}
+                        loginUserData={loginUserData}
+                      />
+                    </Fragment>
+                  );
+                })}
             </>
           ) : (
             <>
-              {groupData.users.map((user: GroupUser) => {
-                let idx = uuidv4();
+              {groupData.users &&
+                groupData.users.map((user: GroupUser) => {
+                  let idx = uuidv4();
 
-                return (
-                  <Fragment key={idx}>
-                    <GroupUserButton
-                      idx={idx}
-                      userData={user}
-                      groupData={groupData}
-                      setCurrentGroup={setCurrentGroup}
-                      isAddPage={isAddPage}
-                      loginUserData={loginUserData}
-                    />
-                  </Fragment>
-                );
-              })}
+                  return (
+                    <Fragment key={idx}>
+                      <GroupUserButton
+                        idx={idx}
+                        userData={user}
+                        groupData={groupData}
+                        setCurrentGroup={setCurrentGroup}
+                        isAddPage={isAddPage}
+                        loginUserData={loginUserData}
+                      />
+                    </Fragment>
+                  );
+                })}
             </>
           )}
         </div>

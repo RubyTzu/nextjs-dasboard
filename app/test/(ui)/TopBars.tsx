@@ -2,7 +2,11 @@
 import Link from 'next/link';
 //import data
 import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
-import { ExtendedGroup, ExtendedExpense } from '../(data)/(sharedFunction)/types';
+import {
+  ExtendedGroup,
+  ExtendedExpense,
+  Expense,
+} from '../(data)/(sharedFunction)/types';
 //import ui
 import { HomeIcon, EditIcon, EditTwoIcon, BackArrowIcon } from '@/app/test/(ui)/Icons';
 import clsx from 'clsx';
@@ -30,7 +34,7 @@ interface TopExpenseBarProps {
 interface TopExpenseSettingBarProps {
   isAddPage: boolean;
   group: ExtendedGroup;
-  expenseData: ExtendedExpense;
+  expenseData: ExtendedExpense | Expense;
   phase: number;
   setPhase: React.Dispatch<React.SetStateAction<number>>;
   hintword: string;

@@ -273,7 +273,7 @@ function GreaterThanIcon() {
   return <Image src={greaterThanIcon} alt="" />;
 }
 
-function NextstepIcon({ currentColor }: { currentColor: any }) {
+function NextstepIcon({ currentColor }: { currentColor: string }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={9} height={8} fill="none">
       <path
