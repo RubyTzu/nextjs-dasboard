@@ -3,21 +3,21 @@ import { useState, createContext, useEffect } from 'react';
 import { evaluate } from 'mathjs';
 
 export interface AllContextType {
-  display: string | number;
-  setDisplay: any;
+  display: string;
+  setDisplay: React.Dispatch<React.SetStateAction<string>>;
   updateDisplay: (updateDisplayString: string) => void;
   onFocusDisplay: () => void;
   onBlurDisplay: () => void;
   buttonClick: (num: string) => void; 
   equalClick: () => void;
   clearClick: () => void;
-  setFocusDisplay: any;
+  setFocusDisplay: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const CalcContext = createContext<AllContextType | null>(null);
 
 export const CalcProvider = ({ children }: { children: React.ReactNode }) => {
-  const [display, setDisplay] = useState('');
+  const [display, setDisplay] = useState<string>('');
 
   const updateDisplay = (updateDisplayString: string) => {
     setDisplay(updateDisplayString);
@@ -59,9 +59,10 @@ export const CalcProvider = ({ children }: { children: React.ReactNode }) => {
     setFocusDisplay(false);
   };
 
-  const buttonClick = (num: any) => {
+  const buttonClick = (num: string) => {
     if (num === 'Backspace') {
       let myString = String(display);
+      // console.log(typeof num)
       myString = myString.split('').reverse().slice(1).reverse().join('');
       updateDisplay(myString);
     } else {
@@ -77,7 +78,7 @@ export const CalcProvider = ({ children }: { children: React.ReactNode }) => {
         // Determine whether there are non-zero digits after the decimal point
         const hasDecimal = result % 1 !== 0;
 
-        function hasTwoZeroesAfterDecimal(num: any) {
+        function hasTwoZeroesAfterDecimal(num: number) {
           let fixedNumStr = num.toFixed(2);
           let parts = fixedNumStr.split('.');
 
@@ -114,11 +115,12 @@ export const CalcProvider = ({ children }: { children: React.ReactNode }) => {
     setDisplay(display.slice(0, -1));
   };
 
-  const opKey = (op: any) => {
+  const opKey = (op: string | number) => {
+    console.log(typeof op)
     setDisplay(display + op);
   };
 
-  const handleKeyDown = (e: any) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
     if (allowedKeys.includes(e.key)) {
       switch (e.key) {
         case 'Backspace':
@@ -140,8 +142,8 @@ export const CalcProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    document.addEventListener('click', handleKeyDown);
-    return () => document.removeEventListener('click', handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   });
 
   return (

@@ -3,11 +3,12 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 //import data
 import { getGroup, getUser, getExpense } from '@/app/test/(data)/(fetchData)/API';
+import { ExtendedExpense, ExtendedGroup, LoginUser } from '../(sharedFunction)/types';
 
 interface AllContextType {
-  users: { [key: string]: any };
-  groups: { [key: string]: any };
-  expenses: { [key: string]: any };
+  users: { [key: string]: LoginUser };
+  groups: { [key: string]: ExtendedGroup };
+  expenses: { [key: string]: ExtendedExpense };
   fetchUser: (userId: string) => void;
   fetchGroup: (groupId: string) => void;
   fetchExpense: (groupId: string, expenseId: string) => void;
@@ -16,9 +17,9 @@ interface AllContextType {
 const AllContext = createContext<AllContextType | null>(null);
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
-  const [users, setUsers] = useState<{ [key: string]: any }>({});
-  const [groups, setGroups] = useState<{ [key: string]: any }>({});
-  const [expenses, setExpenses] = useState<{ [key: string]: any }>([]);
+  const [users, setUsers] = useState<{ [key: string]: LoginUser }>({});
+  const [groups, setGroups] = useState<{ [key: string]: ExtendedGroup }>({});
+  const [expenses, setExpenses] = useState<{ [key: string]: ExtendedExpense }>({});
 
   const fetchUser = async (userId: string) => {
     if (!users[userId]) {

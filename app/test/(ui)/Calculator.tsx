@@ -85,7 +85,7 @@ function Display({
 
   useEffect(() => {
     if (amount || amount === "") {
-      setDisplay(Number(amount));
+      setDisplay(String(amount));
     }
   }, [amount]);
 
