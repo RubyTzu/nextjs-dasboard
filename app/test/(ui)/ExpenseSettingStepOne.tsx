@@ -67,13 +67,9 @@ export function ExpenseSettingStepOne({
         </div>
         <div className="my-3">
           <Calculator
-            isTotalAmount={true}
             expenseData={expenseData}
             setCurrentExpense={setCurrentExpense}
             setisIncorrectNum={setisIncorrectNum}
-            handleInputFocus={handleInputFocus}
-            handleInputBlur={handleInputBlur}
-            handleInputChange={handleInputChange}
           />
         </div>
         <NoteButton

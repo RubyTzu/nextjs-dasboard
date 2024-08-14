@@ -5,25 +5,17 @@ import { CalculatorKeyboardAndInput } from './CalculatorDetail';
 import { Expense, ExtendedExpense } from '../(data)/(sharedFunction)/types';
 
 interface Props {
-  isTotalAmount: boolean;
   expenseData: ExtendedExpense | Expense;
   setCurrentExpense: React.Dispatch<
     React.SetStateAction<ExtendedExpense | Expense>>;
   setisIncorrectNum: React.Dispatch<
     React.SetStateAction<boolean>>;
-  handleInputFocus: any;
-  handleInputBlur: any;
-  handleInputChange: any;
 }
 
 export const Calculator = ({
-  isTotalAmount,
   expenseData,
   setCurrentExpense,
   setisIncorrectNum,
-  handleInputFocus,
-  handleInputBlur,
-  handleInputChange,
 }: Props) => {
   const [display, setDisplay] = useState<string>('');
 
@@ -65,6 +57,10 @@ export const Calculator = ({
 
   const onBlurDisplay = () => {
     setFocusDisplay(false);
+    const isValidNum = !isNaN(Number(display)) && Number(display) > 1;
+    if (isValidNum && expenseData.amount !== Number(display)) {
+      setCurrentExpense({ ...expenseData, amount: Number(display) });
+    }
   };
 
   const buttonClick = (num: string) => {
@@ -161,21 +157,10 @@ export const Calculator = ({
     return () => document.removeEventListener('keydown', handleKeyDown);
   });
 
-  const handleUpdateBlur = () => {
-    if (isTotalAmount) {
-      setCurrentExpense({ ...expenseData, amount: Number(display) });
-    } else {
-      handleInputBlur(display);
-    }
-  };
 
   return (
     <>
-      {isTotalAmount ? <>
         <CalculatorKeyboardAndInput
-          handleOtherChangeFuc={handleInputChange}
-          handleOtherFocusFuc={handleInputFocus}
-          handleOtherBlurFuc={handleUpdateTotalAmountBlur}
           expenseData={expenseData}
           display={display}
           setDisplay={setDisplay}
@@ -186,23 +171,6 @@ export const Calculator = ({
           equalClick={equalClick}
           clearClick={clearClick}
         />
-      </> : <>
-        <CalculatorKeyboardAndInput
-          handleOtherChangeFuc={handleInputChange}
-          handleOtherFocusFuc={handleInputFocus}
-          handleOtherBlurFuc={handleUpdateSharerAmountBlur}
-          expenseData={expenseData}
-          display={display}
-          setDisplay={setDisplay}
-          updateDisplay={updateDisplay}
-          onFocusDisplay={onFocusDisplay}
-          onBlurDisplay={onBlurDisplay}
-          buttonClick={buttonClick}
-          equalClick={equalClick}
-          clearClick={clearClick}
-        />
-      </>}
-
     </>
   );
 };

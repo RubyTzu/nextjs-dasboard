@@ -89,8 +89,8 @@ export function SharerAmountInput({ users, sharer, user, expenseData, setIsNotEq
 
   return (
     <>
-      {/* <input
-        className=" w-20 border-0 border-b-[1px] border-black bg-transparent text-neutrals-70 focus:border-black focus:border-highlight-40 focus:outline-none focus:ring-0"
+      <input
+        className=" w-20 border-0 border-b-[1px] border-black bg-transparent text-neutrals-70 focus:border-highlight-40 focus:outline-none focus:ring-0"
         type="number"
         pattern="[0-9]*"
         inputMode="numeric"
@@ -98,15 +98,11 @@ export function SharerAmountInput({ users, sharer, user, expenseData, setIsNotEq
         onBlur={handleInputBlur}
         onChange={handleInputChange}
         value={sharer.amount === 0 ? '' : sharer.amount}
-      /> */}
+      />
       <Calculator
-        isTotalAmount={false}
         expenseData={expenseData}
         setCurrentExpense={setCurrentExpense}
         setisIncorrectNum={setisIncorrectNum}
-        handleInputFocus={handleInputFocus}
-        handleInputBlur={handleInputBlur}
-        handleInputChange={handleInputChange}
       />
     </>
   )

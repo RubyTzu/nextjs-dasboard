@@ -9,9 +9,6 @@ import { BackspaceIcon, DollarIcon } from '@/app/test/(ui)/Icons';
 import clsx from 'clsx';
 
 interface SharedCalculatorProps {
-  handleOtherChangeFuc: any;
-  handleOtherFocusFuc: any;
-  handleOtherBlurFuc: any;
   display: string;
   setDisplay: React.Dispatch<React.SetStateAction<string>>;
   updateDisplay: (updateDisplayString: string) => void;
@@ -49,9 +46,6 @@ interface CalculatorButtonProps {
 }
 
 export const CalculatorKeyboardAndInput = ({
-  handleOtherChangeFuc,
-  handleOtherFocusFuc,
-  handleOtherBlurFuc,
   expenseData,
   display,
   setDisplay,
@@ -96,9 +90,6 @@ export const CalculatorKeyboardAndInput = ({
       </button>
       <div className="relative">
         <Display
-          handleOtherChangeFuc={handleOtherChangeFuc}
-          handleOtherFocusFuc={handleOtherFocusFuc}
-          handleOtherBlurFuc={handleOtherBlurFuc}
           amount={expenseData.amount}
           handleKeyboardFocus={handleKeyboardFocus}
           handleKeyboardBlur={handleKeyboardBlur}
@@ -124,9 +115,6 @@ export const CalculatorKeyboardAndInput = ({
 };
 
 function Display({
-  handleOtherChangeFuc,
-  handleOtherFocusFuc,
-  handleOtherBlurFuc,
   amount,
   handleKeyboardFocus,
   handleKeyboardBlur,
@@ -145,19 +133,16 @@ function Display({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateDisplay(e.target.value);
-    handleOtherChangeFuc();
   };
 
   const handleFocus = () => {
     handleKeyboardFocus();
     onFocusDisplay();
-    handleOtherFocusFuc();
   }
 
   const handleBlur = () => {
     setTimeout(() => handleKeyboardBlur(), 100);
     onBlurDisplay();
-    handleOtherBlurFuc();
   }
 
   return (

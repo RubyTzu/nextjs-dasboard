@@ -961,11 +961,11 @@
                         },
                         {
                             "id": "u2",
-                            "amount": "70"
+                            "amount": 70
                         },
                         {
                             "id": "u3",
-                            "amount": "90"
+                            "amount": 90
                         }
                     ],
                     "note": ""
@@ -2160,11 +2160,11 @@
                 },
                 {
                     "id": "u2",
-                    "amount": "70"
+                    "amount": 70
                 },
                 {
                     "id": "u3",
-                    "amount": "90"
+                    "amount": 90
                 }
             ],
             "note": "",
