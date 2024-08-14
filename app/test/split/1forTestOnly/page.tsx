@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
 //import ui
-import { CalculatorAndInput } from '../../(ui)/Calculator';
-import SharerAmountInput from '../../(ui)/SharerAmountInput';
+import { CalculatorAndInput } from '../../(ui)/CalculatorDetail';
+import { SharerAmountInput } from '../../(ui)/SharerAmountInput';
 import DatePickerButton from '@/app/test/(ui)/DatePickerButton';
 import ExpenseCategoryButton from '@/app/test/(ui)/ExpenseCategoryButton';
 import NoteButton from '../../(ui)/NoteButton';

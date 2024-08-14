@@ -24,6 +24,7 @@ export default function Page() {
   const { groupid, expenseid } = useParams<{ groupid: string; expenseid: string }>();
   const [phase, setPhase] = useState<number>(1);
   const [isNotEqual, setIsNotEqual] = useState<boolean>(false);
+  const [isIncorrectNum, setisIncorrectNum] = useState<boolean>(false);
 
   const group: ExtendedGroup = useGroup(groupid);
   const expense: ExtendedExpense = useExpense(groupid, expenseid);
@@ -51,6 +52,7 @@ export default function Page() {
           setPhase={setPhase}
           hintword='編輯費用'
           cancelLink={`/test/split/group/${groupid}/expense/${expenseid}`}
+          isIncorrectNum={isIncorrectNum}
         />
         {expense &&
           (expense.sharers?.some((sharer) => sharer.id === loginUserId) ||
@@ -63,6 +65,7 @@ export default function Page() {
                 expenseData={currentExpense}
                 setCurrentExpense={setCurrentExpense}
                 phase={phase}
+                setisIncorrectNum={setisIncorrectNum}
               />
               <ExpenseSettingStepTwo
                 expenseData={currentExpense}
@@ -76,17 +79,18 @@ export default function Page() {
                 group={group}
                 phase={phase}
                 setIsNotEqual={setIsNotEqual}
+                setisIncorrectNum={setisIncorrectNum}
               />
             </section>
             <section>
               <NextStepButton
                 expenseData={currentExpense}
-                setCurrentExpense={setCurrentExpense}
                 phase={phase}
                 setPhase={setPhase}
                 isNotEqual={isNotEqual}
                 setIsNotEqual={setIsNotEqual}
                 isNotZero={true}
+                isIncorrectNum={isIncorrectNum}
               />
             </section>
           </>

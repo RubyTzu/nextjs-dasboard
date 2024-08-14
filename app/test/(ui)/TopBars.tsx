@@ -39,6 +39,7 @@ interface TopExpenseSettingBarProps {
   setPhase: React.Dispatch<React.SetStateAction<number>>;
   hintword: string;
   cancelLink: string;
+  isIncorrectNum: boolean;
 }
 
 interface TopBarProps {
@@ -170,7 +171,8 @@ export function TopExpenseSettingBar({
   phase,
   setPhase,
   hintword,
-  cancelLink
+  cancelLink,
+  isIncorrectNum
 }: TopExpenseSettingBarProps) {
 
 
@@ -188,14 +190,18 @@ export function TopExpenseSettingBar({
   return (
     <div className="fixed z-20 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
       <div className="flex h-6 w-12 items-center justify-start">
-        <div
+        <button
+          disabled={isIncorrectNum}
+          type="button"
           onClick={handleClick}
           className={clsx('cursor-pointer text-sm', {
             hidden: phase === 1,
+            "text-white": !isIncorrectNum,
+            "text-neutrals-30": isIncorrectNum,
           })}
         >
           上一步
-        </div>
+        </button>
       </div>
       <h1 className="text-lg">
         {shouldRender && hintword}

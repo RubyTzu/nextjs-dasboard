@@ -1,8 +1,7 @@
 //import from next & react
 import Image from 'next/image';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 //import data
-import { CalcContext } from '@/app/test/(data)/(sharedFunction)/CalcProvider';
 import {
   ExtendedExpense,
   ExtendedGroup,
@@ -23,8 +22,8 @@ interface NextStepButtonProps {
   expenseData: ExtendedExpense | Expense;
   isNotEqual: boolean;
   setIsNotEqual: (isNotEqual: boolean) => void;
-  setCurrentExpense: (expense: ExtendedExpense | Expense) => void;
   isNotZero: boolean;
+  isIncorrectNum: boolean;
 }
 
 export function GroupInfoBar({
@@ -67,16 +66,10 @@ export function NextStepButton({
   expenseData,
   isNotEqual,
   setIsNotEqual,
-  setCurrentExpense,
-  isNotZero
+  isNotZero,
+  isIncorrectNum
 }: NextStepButtonProps) {
-  const context = useContext(CalcContext);
 
-  if (!context) {
-    throw new Error('CalcContext must be used within a CalcProvider');
-  }
-
-  const { display } = context;
 
   const expenseId = expenseData && 'id' in expenseData ? expenseData.id : ''
 
@@ -98,7 +91,6 @@ export function NextStepButton({
     setPhase(phase + 1);
     console.log(`phase ${phase} of expense ${expenseId}`);
 
-    setCurrentExpense({ ...expenseData, amount: Number(display) });
     console.log(expenseData);
   }
 
@@ -112,7 +104,7 @@ export function NextStepButton({
         <>
           {phase !== 3 ? (
             <button
-              disabled={isNaN(Number(display)) || Number(display) < 1}
+              disabled={isIncorrectNum}
               type="button"
               onClick={(e: React.SyntheticEvent) => handleClick(e, expenseId)}
               className="flex w-[180px] items-center justify-between rounded-full bg-highlight-20 px-4 py-2 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
@@ -122,7 +114,7 @@ export function NextStepButton({
               <div>
                 <NextstepIcon
                   currentColor={
-                    isNaN(Number(display)) || Number(display) < 1
+                    isIncorrectNum
                       ? '#9E9E9E'
                       : '#000'
                   }

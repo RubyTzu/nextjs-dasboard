@@ -5,7 +5,7 @@ import {
   Expense,
 } from '../(data)/(sharedFunction)/types';
 //import ui
-import { CalculatorAndInput } from './Calculator';
+import { Calculator } from './Calculator';
 import DatePickerButton from './DatePickerButton';
 import ExpenseCategoryButton from './ExpenseCategoryButton';
 //other
@@ -19,6 +19,9 @@ interface ExpenseSettingStepOneProps {
     React.SetStateAction<ExtendedExpense | Expense>
   >;
   phase: number;
+  setisIncorrectNum: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
 }
 
 export function ExpenseSettingStepOne({
@@ -26,6 +29,7 @@ export function ExpenseSettingStepOne({
   expenseData,
   setCurrentExpense,
   phase,
+  setisIncorrectNum
 }: ExpenseSettingStepOneProps) {
 
   const name = expenseData?.name || '';
@@ -62,7 +66,15 @@ export function ExpenseSettingStepOne({
           />
         </div>
         <div className="my-3">
-          <CalculatorAndInput expenseData={expenseData} />
+          <Calculator
+            isTotalAmount={true}
+            expenseData={expenseData}
+            setCurrentExpense={setCurrentExpense}
+            setisIncorrectNum={setisIncorrectNum}
+            handleInputFocus={handleInputFocus}
+            handleInputBlur={handleInputBlur}
+            handleInputChange={handleInputChange}
+          />
         </div>
         <NoteButton
           expenseData={expenseData}
