@@ -245,6 +245,8 @@ export const SharerCalculator = ({
 
     if (isValidNum && sharer.amount !== Number(display)) {
       handleInputBlur(display)
+    } else if(display === '') {
+      handleInputBlur(display)
     }
   };
 

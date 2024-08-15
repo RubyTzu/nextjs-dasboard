@@ -179,7 +179,8 @@ export const SharerAmountCalculator = ({
         users={users}
         expenseData={expenseData}
         setIsNotEqual={setIsNotEqual}
-        currentSharer={currentSharer}
+        sharer={sharer}
+        display={display}
         showKeyboard={showKeyboard}
       />
       <CalculatorKeyboard

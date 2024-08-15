@@ -122,6 +122,7 @@ export function NextStepButton({
               </div>
             </button>
           ) : (
+            <>
             <button
               disabled={isNotEqual && isNotZero}
               type="button"
@@ -147,6 +148,8 @@ export function NextStepButton({
               <div className="text-sm">確認</div>
               <div></div>
             </button>
+            <div className="h-[400px]"></div>
+            </>
           )}
         </>
       ) : null}
