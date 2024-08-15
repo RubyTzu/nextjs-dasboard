@@ -1,3 +1,5 @@
+//import react
+import { Fragment } from 'react';
 //import data
 import {
   ExtendedExpense,
@@ -10,6 +12,7 @@ import SelectSharerButton from './SelectSharerButton';
 import ExpenseSettingSharer from './ExpenseSettingSharer';
 //other
 import clsx from 'clsx';
+
 
 interface ExpenseSettingStepThreeProps {
   expenseData: ExtendedExpense | Expense;
@@ -73,7 +76,7 @@ export function ExpenseSettingStepThree({
                     amount: 0,
                   };
               return (
-                <div key={user.id}>
+                <Fragment key={user.id}>
                   <ExpenseSettingSharer
                     user={user}
                     users={users}
@@ -84,7 +87,7 @@ export function ExpenseSettingStepThree({
                     isChecked={isChecked}
                     setisIncorrectNum={setisIncorrectNum}
                   />
-                </div>
+                </Fragment>
               );
             })}
         </>

@@ -2,11 +2,12 @@
 //import react
 import { useState, useEffect, useRef } from 'react';
 //import data
-import { ExtendedExpense, Expense } from '../(data)/(sharedFunction)/types';
+import { ExtendedExpense, Expense, Sharer, GroupUser } from '../(data)/(sharedFunction)/types';
 //import ui
 import { BackspaceIcon, DollarIcon } from '@/app/test/(ui)/Icons';
 //import other
 import clsx from 'clsx';
+import { SharerAmountHint } from './SharerAmountHint';
 
 interface SharedCalculatorProps {
   display: string;
@@ -22,8 +23,17 @@ interface ButtonClickHandlers {
   clearClick: () => void;
 }
 
-interface CalculatorKeyboardAndInputProps extends SharedCalculatorProps, ButtonClickHandlers {
+interface TotalAmountCalculatorProps extends SharedCalculatorProps, ButtonClickHandlers {
   expenseData: ExtendedExpense | Expense;
+}
+
+interface SharerAmountCalculatorProps extends SharedCalculatorProps, ButtonClickHandlers {
+  expenseData: ExtendedExpense | Expense;
+  sharer: Sharer;
+  users: GroupUser[];
+  setIsNotEqual: React.Dispatch<
+    React.SetStateAction<boolean>>;
+  currentSharer: Sharer;
 }
 
 interface DisplayProps extends SharedCalculatorProps {
@@ -45,7 +55,7 @@ interface CalculatorButtonProps {
   onClick: () => void;
 }
 
-export const CalculatorKeyboardAndInput = ({
+export const TotalAmountCalculator = ({
   expenseData,
   display,
   setDisplay,
@@ -55,7 +65,7 @@ export const CalculatorKeyboardAndInput = ({
   buttonClick,
   equalClick,
   clearClick,
-}: CalculatorKeyboardAndInputProps) => {
+}: TotalAmountCalculatorProps) => {
   const [showKeyboard, setShowKeyboard] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -88,7 +98,7 @@ export const CalculatorKeyboardAndInput = ({
       >
         <DollarIcon />
       </button>
-      <div className="relative">
+      <div className="relative w-48">
         <Display
           amount={expenseData.amount}
           handleKeyboardFocus={handleKeyboardFocus}
@@ -110,6 +120,77 @@ export const CalculatorKeyboardAndInput = ({
           clearClick={clearClick}
         />
       </div>
+    </div>
+  );
+};
+
+export const SharerAmountCalculator = ({
+  sharer,
+  expenseData,
+  display,
+  setDisplay,
+  updateDisplay,
+  onFocusDisplay,
+  onBlurDisplay,
+  buttonClick,
+  equalClick,
+  clearClick,
+  users,
+  setIsNotEqual,
+  currentSharer,
+}: SharerAmountCalculatorProps) => {
+  const [showKeyboard, setShowKeyboard] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleInputFocus = () => {
+    inputRef.current?.focus();
+    setShowKeyboard(true);
+  };
+
+  const handleInputBlur = () => {
+    inputRef.current?.blur();
+  };
+
+  const handleKeyboardFocus = () => {
+    setShowKeyboard(true);
+  };
+
+  const handleKeyboardBlur = () => {
+    if (inputRef.current && document.activeElement === inputRef.current) {
+      return;
+    }
+    setShowKeyboard(false);
+  };
+
+  return (
+    <div className="relative w-20">
+      <Display
+        amount={sharer ? sharer.amount : 0}
+        handleKeyboardFocus={handleKeyboardFocus}
+        handleKeyboardBlur={handleKeyboardBlur}
+        inputRef={inputRef}
+        display={display}
+        setDisplay={setDisplay}
+        updateDisplay={updateDisplay}
+        onFocusDisplay={onFocusDisplay}
+        onBlurDisplay={onBlurDisplay}
+      />
+      <SharerAmountHint
+        users={users}
+        expenseData={expenseData}
+        setIsNotEqual={setIsNotEqual}
+        currentSharer={currentSharer}
+        showKeyboard={showKeyboard}
+      />
+      <CalculatorKeyboard
+        showKeyboard={showKeyboard}
+        handleKeyboardBlur={handleKeyboardBlur}
+        handleInputFocus={handleInputFocus}
+        handleInputBlur={handleInputBlur}
+        buttonClick={buttonClick}
+        equalClick={equalClick}
+        clearClick={clearClick}
+      />
     </div>
   );
 };
@@ -148,7 +229,7 @@ function Display({
   return (
     <input
       ref={inputRef}
-      className="z-10 w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0"
+      className="w-full z-10 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0"
       onChange={handleChange}
       onFocus={handleFocus}
       onBlur={handleBlur}
@@ -210,7 +291,10 @@ const CalculatorKeyboard = ({
         ))}
       </div>
       <div className="flex items-center justify-center">
-        {['7', '8', '9', '=', 'AC'].map(value => (
+        {['7', '8', '9'].map(value => (
+          <CalculatorButton key={value} value={value} onClick={() => buttonClick(value)} />
+        ))}
+        {['=', 'AC'].map(value => (
           <CalculatorButton key={value} value={value} onClick={() => (value === '=' ? equalClick() : clearClick())} />
         ))}
       </div>

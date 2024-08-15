@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { ExtendedExpense, Expense, GroupUser, Sharer } from '../(data)/(sharedFunction)/types';
 //import ui
 import { SharerAmountHint } from './SharerAmountHint';
-import { Calculator } from './Calculator';
+import { SharerCalculator } from './Calculator';
 
 interface SharerAmountInputProps {
   users: GroupUser[];
@@ -17,7 +17,6 @@ interface SharerAmountInputProps {
 }
 
 export function SharerAmountInput({ users, sharer, user, expenseData, setIsNotEqual, setCurrentExpense, setisIncorrectNum }: SharerAmountInputProps) {
-  // const [onFocus, setOnFocus] = useState(false);
   const [currentSharer, setCurrentSharer] = useState<Sharer>({
     id: '',
     amount: 0,
@@ -44,7 +43,6 @@ export function SharerAmountInput({ users, sharer, user, expenseData, setIsNotEq
   };
 
   const handleInputFocus = () => {
-    // setOnFocus(true);
     setCurrentSharer(sharer);
     if (sharer) {
       setCurrentSharer(sharer);
@@ -56,9 +54,8 @@ export function SharerAmountInput({ users, sharer, user, expenseData, setIsNotEq
     }
   }
 
-  const handleInputBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // setOnFocus(false);
-    let value = e.target.value.replace(/^0+/, '');
+  const handleInputBlur = (newValue: string) => {
+    let value = newValue.replace(/^0+/, '');
     if (value === '' || Number(value) < 0) {
       value = '0';
     }
@@ -74,8 +71,8 @@ export function SharerAmountInput({ users, sharer, user, expenseData, setIsNotEq
     console.log(sharer.amount);
   }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value;
+  const handleInputChange = (newValue: string) => {
+    let value = newValue;
     if (value === '' || Number(value) < 0) {
       value = '0';
     }
@@ -89,20 +86,17 @@ export function SharerAmountInput({ users, sharer, user, expenseData, setIsNotEq
 
   return (
     <>
-      <input
-        className=" w-20 border-0 border-b-[1px] border-black bg-transparent text-neutrals-70 focus:border-highlight-40 focus:outline-none focus:ring-0"
-        type="number"
-        pattern="[0-9]*"
-        inputMode="numeric"
-        onFocus={handleInputFocus}
-        onBlur={handleInputBlur}
-        onChange={handleInputChange}
-        value={sharer.amount === 0 ? '' : sharer.amount}
-      />
-      <Calculator
+      <SharerCalculator
+        sharer={sharer}
+        handleInputBlur={handleInputBlur}
+        handleInputFocus={handleInputFocus}
+        handleInputChange={handleInputChange}
         expenseData={expenseData}
         setCurrentExpense={setCurrentExpense}
         setisIncorrectNum={setisIncorrectNum}
+        users={users}
+        setIsNotEqual={setIsNotEqual}
+        currentSharer={currentSharer}
       />
     </>
   )

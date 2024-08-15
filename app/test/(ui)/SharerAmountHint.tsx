@@ -9,12 +9,11 @@ interface SharerAmountHintProps {
     users: GroupUser[];
     expenseData: ExtendedExpense | Expense;
     setIsNotEqual: React.Dispatch<React.SetStateAction<boolean>>;
-    onFocus: boolean;
     currentSharer: Sharer;
+    showKeyboard: boolean;
   }
 
-export function SharerAmountHint({ users, expenseData, setIsNotEqual, onFocus, currentSharer }: SharerAmountHintProps) {
-    const [barBottom, setBarBottom] = useState('0');
+export function SharerAmountHint({ users, expenseData, setIsNotEqual, currentSharer,showKeyboard }: SharerAmountHintProps) {
     const addedAmount = expenseData?.sharers.reduce(
       (total, sharer) => Number(total) + Number(sharer.amount),
       0,
@@ -29,45 +28,19 @@ export function SharerAmountHint({ users, expenseData, setIsNotEqual, onFocus, c
   
       setIsNotEqual(isNotEqual);
   
-      const handleResize = () => {
-        if (window.visualViewport) {
-          const newBottom = `${window.innerHeight - window.visualViewport.height
-            }px`;
-          setBarBottom(newBottom);
-        }
-      };
-  
-      if (typeof window !== 'undefined') {
-        if (window.visualViewport) {
-          handleResize(); // Initial setup
-          window.visualViewport.addEventListener('resize', handleResize);
-          window.visualViewport.addEventListener('scroll', handleResize);
-          return () => {
-            window.visualViewport?.removeEventListener(
-              'resize',
-              handleResize,
-            );
-            window.visualViewport?.removeEventListener(
-              'scroll',
-              handleResize,
-            );
-          };
-        }
-      }
     }, [expenseData?.sharers, expenseData?.amount, setIsNotEqual]);
   
     return (
       <div
         className={clsx(
-          'fixed left-0 z-100 h-fit w-full bg-grey-keyBoard p-6 text-center',
+          'fixed bottom-[300px] left-0 z-100 h-fit w-full bg-black p-3 text-center transition-all duration-300',
           {
-            hidden: !onFocus,
-            block: onFocus,
+            'z-100 transform opacity-100': showKeyboard,
+            '-z-50 transform opacity-0': !showKeyboard,
           },
         )}
-        style={{ bottom: barBottom }}
       >
-        <div className="text-black">
+        <div className="text-white">
           {users &&
             users.filter((user) => {
               return user.id === currentSharer.id;
@@ -76,7 +49,7 @@ export function SharerAmountHint({ users, expenseData, setIsNotEqual, onFocus, c
           負擔${expenseData.amount}中的$
           {currentSharer.amount === '' ? 0 : currentSharer.amount}
         </div>
-        <div className="text-sm text-neutrals-60">
+        <div className="text-sm text-white">
           {adjustedRemainingAmount > 0
             ? `還剩下$${adjustedRemainingAmount}還沒被分帳`
             : `目前分帳金額多出$${Math.abs(adjustedRemainingAmount)}`}

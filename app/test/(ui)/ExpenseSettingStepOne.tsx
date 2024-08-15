@@ -5,7 +5,7 @@ import {
   Expense,
 } from '../(data)/(sharedFunction)/types';
 //import ui
-import { Calculator } from './Calculator';
+import { TotalCalculator } from './Calculator';
 import DatePickerButton from './DatePickerButton';
 import ExpenseCategoryButton from './ExpenseCategoryButton';
 //other
@@ -66,7 +66,7 @@ export function ExpenseSettingStepOne({
           />
         </div>
         <div className="my-3">
-          <Calculator
+          <TotalCalculator
             expenseData={expenseData}
             setCurrentExpense={setCurrentExpense}
             setisIncorrectNum={setisIncorrectNum}
