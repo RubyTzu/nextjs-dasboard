@@ -163,6 +163,7 @@ export const TotalCalculator = ({
     if (isNaN(Number(display)) || Number(display) < 1) {
       setisIncorrectNum(true)
     } else {
+      console.log('what?')
       setisIncorrectNum(false)
     }
 
