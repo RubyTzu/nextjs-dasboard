@@ -19,7 +19,7 @@ interface ExpenseSettingStepOneProps {
     React.SetStateAction<ExtendedExpense | Expense>
   >;
   phase: number;
-  setisIncorrectNum: React.Dispatch<
+  setisIncorrectTotalNum: React.Dispatch<
     React.SetStateAction<boolean>
   >;
 }
@@ -29,7 +29,7 @@ export function ExpenseSettingStepOne({
   expenseData,
   setCurrentExpense,
   phase,
-  setisIncorrectNum
+  setisIncorrectTotalNum
 }: ExpenseSettingStepOneProps) {
 
   const name = expenseData?.name || '';
@@ -69,7 +69,7 @@ export function ExpenseSettingStepOne({
           <TotalCalculator
             expenseData={expenseData}
             setCurrentExpense={setCurrentExpense}
-            setisIncorrectNum={setisIncorrectNum}
+            setisIncorrectTotalNum={setisIncorrectTotalNum}
           />
         </div>
         <NoteButton

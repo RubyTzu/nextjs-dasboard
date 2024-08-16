@@ -3,10 +3,10 @@ import { useState } from 'react';
 //import data
 import { ExtendedExpense, Expense, GroupUser, Sharer } from '../(data)/(sharedFunction)/types';
 //import ui
-import { SharerAmountHint } from './SharerAmountHint';
 import { SharerCalculator } from './Calculator';
 
 interface SharerAmountInputProps {
+  isChecked: boolean;
   users: GroupUser[];
   sharer: Sharer;
   user: GroupUser;
@@ -16,7 +16,7 @@ interface SharerAmountInputProps {
   setisIncorrectNum: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function SharerAmountInput({ users, sharer, user, expenseData, setIsNotEqual, setCurrentExpense, setisIncorrectNum }: SharerAmountInputProps) {
+export function SharerAmountInput({ isChecked,users, sharer, user, expenseData, setIsNotEqual, setCurrentExpense, setisIncorrectNum }: SharerAmountInputProps) {
   const [currentSharer, setCurrentSharer] = useState<Sharer>({
     id: '',
     amount: 0,
@@ -67,8 +67,6 @@ export function SharerAmountInput({ users, sharer, user, expenseData, setIsNotEq
           id: user.id,
           amount: 0,
         };
-
-    console.log(sharer.amount);
   }
 
   const handleInputChange = (newValue: string) => {
@@ -87,12 +85,12 @@ export function SharerAmountInput({ users, sharer, user, expenseData, setIsNotEq
   return (
     <>
       <SharerCalculator
+      isChecked={isChecked}
         sharer={sharer}
         handleInputBlur={handleInputBlur}
         handleInputFocus={handleInputFocus}
         handleInputChange={handleInputChange}
         expenseData={expenseData}
-        setCurrentExpense={setCurrentExpense}
         setisIncorrectNum={setisIncorrectNum}
         users={users}
         setIsNotEqual={setIsNotEqual}

@@ -23,7 +23,7 @@ interface NextStepButtonProps {
   isNotEqual: boolean;
   setIsNotEqual: (isNotEqual: boolean) => void;
   isNotZero: boolean;
-  isIncorrectNum: boolean;
+  isIncorrectTotalNum: boolean;
 }
 
 export function GroupInfoBar({
@@ -67,7 +67,7 @@ export function NextStepButton({
   isNotEqual,
   setIsNotEqual,
   isNotZero,
-  isIncorrectNum
+  isIncorrectTotalNum
 }: NextStepButtonProps) {
 
 
@@ -104,7 +104,7 @@ export function NextStepButton({
         <>
           {phase !== 3 ? (
             <button
-              disabled={isIncorrectNum}
+              disabled={isIncorrectTotalNum}
               type="button"
               onClick={(e: React.SyntheticEvent) => handleClick(e, expenseId)}
               className="flex w-[180px] items-center justify-between rounded-full bg-highlight-20 px-4 py-2 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
@@ -114,7 +114,7 @@ export function NextStepButton({
               <div>
                 <NextstepIcon
                   currentColor={
-                    isIncorrectNum
+                    isIncorrectTotalNum
                       ? '#9E9E9E'
                       : '#000'
                   }

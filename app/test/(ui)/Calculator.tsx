@@ -8,15 +8,19 @@ interface TotalProps {
   expenseData: ExtendedExpense | Expense;
   setCurrentExpense: React.Dispatch<
     React.SetStateAction<ExtendedExpense | Expense>>;
-  setisIncorrectNum: React.Dispatch<
+  setisIncorrectTotalNum: React.Dispatch<
     React.SetStateAction<boolean>>;
 }
 
-interface SharerProps extends TotalProps {
+interface SharerProps {
+  isChecked: boolean;
   sharer: Sharer;
   handleInputBlur: (newValue: string) => void;
   handleInputFocus: () => void;
   handleInputChange: (newValue: string) => void;
+  expenseData: ExtendedExpense | Expense;
+  setisIncorrectNum: React.Dispatch<
+    React.SetStateAction<boolean>>;
   users: GroupUser[];
   setIsNotEqual: React.Dispatch<
     React.SetStateAction<boolean>>;
@@ -26,7 +30,7 @@ interface SharerProps extends TotalProps {
 export const TotalCalculator = ({
   expenseData,
   setCurrentExpense,
-  setisIncorrectNum,
+  setisIncorrectTotalNum,
 }: TotalProps) => {
   const [display, setDisplay] = useState<string>('');
 
@@ -116,7 +120,7 @@ export const TotalCalculator = ({
         );
       }
     } catch (error) {
-      setDisplay('語法錯誤，請再試一次');
+      setDisplay('錯誤，請再試一次');
       setTimeout(() => {
         setDisplay('');
       }, 1500);
@@ -161,10 +165,9 @@ export const TotalCalculator = ({
     document.addEventListener('keydown', handleKeyDown);
 
     if (isNaN(Number(display)) || Number(display) < 1) {
-      setisIncorrectNum(true)
+      setisIncorrectTotalNum(true)
     } else {
-      console.log('what?')
-      setisIncorrectNum(false)
+      setisIncorrectTotalNum(false)
     }
 
     return () => document.removeEventListener('keydown', handleKeyDown);
@@ -189,12 +192,12 @@ export const TotalCalculator = ({
 };
 
 export const SharerCalculator = ({
+  isChecked,
   sharer,
   handleInputBlur,
   handleInputFocus,
   handleInputChange,
   expenseData,
-  setCurrentExpense,
   setisIncorrectNum,
   users,
   setIsNotEqual,
@@ -246,7 +249,7 @@ export const SharerCalculator = ({
 
     if (isValidNum && sharer.amount !== Number(display)) {
       handleInputBlur(display)
-    } else if(display === '') {
+    } else if (display === '') {
       handleInputBlur(display)
     }
   };
@@ -254,7 +257,7 @@ export const SharerCalculator = ({
   const buttonClick = (num: string) => {
     if (num === 'Backspace') {
       let myString = String(display);
-      // console.log(typeof num)
+
       myString = myString.split('').reverse().slice(1).reverse().join('');
       updateDisplay(myString);
     } else {
@@ -292,7 +295,7 @@ export const SharerCalculator = ({
         );
       }
     } catch (error) {
-      setDisplay('語法錯誤，請再試一次');
+      setDisplay('錯誤，請再試一次');
       setTimeout(() => {
         setDisplay('');
       }, 1500);
@@ -349,6 +352,7 @@ export const SharerCalculator = ({
   return (
     <>
       <SharerAmountCalculator
+        isChecked={isChecked}
         sharer={sharer}
         expenseData={expenseData}
         display={display}

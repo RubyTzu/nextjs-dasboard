@@ -9,49 +9,106 @@ interface SharerAmountHintProps {
   users: GroupUser[];
   expenseData: ExtendedExpense | Expense;
   setIsNotEqual: React.Dispatch<React.SetStateAction<boolean>>;
-  sharer: Sharer;
+  currentSharer: Sharer;
   display: string;
-  showKeyboard: boolean;
 }
 
-export function SharerAmountHint({ users, expenseData, setIsNotEqual, sharer, display, showKeyboard }: SharerAmountHintProps) {
-  const addedAmount = expenseData?.sharers.reduce(
-    (total, sharer) => Number(total) + Number(sharer.amount),
-    0,
-  ) || '';
+export function SharerAmountHint({ users, expenseData, setIsNotEqual, currentSharer, display }: SharerAmountHintProps) {
+  const [addedAmount, setAddedAmount] = useState<string>('')
+
+  useEffect(() => {
+    const displayValue = display;
+    let newSharers = expenseData?.sharers
+    let newAmount = expenseData?.sharers.reduce(
+      (total, sharer) => total + Number(sharer.amount),
+      0
+    );
+    console.log("newAmount")
+    console.log(newAmount)
+    if (!isNaN(Number(displayValue)) && Number(displayValue) > 0 && Number(displayValue) !== 0 && !displayValue.includes('-')) {
+      newSharers = expenseData?.sharers.map((sharer) => {
+        return sharer.id === currentSharer.id
+          ? { ...sharer, amount: Number(displayValue) }
+          : sharer
+      })
+
+      newAmount = newSharers.reduce(
+        (total, sharer) => { 
+          console.log('now add ')
+          console.log(sharer.amount)
+          return total + Number(sharer.amount) 
+        },
+        0
+      );
+      setAddedAmount(String(newAmount));
+      const difference = Math.abs(Number(expenseData?.amount) - Number(String(newAmount)));
+
+      const isNotEqual = difference >= 0.1;
+
+      if (isNaN(newAmount)) {
+
+        setIsNotEqual(true);
+      } else {
+        setIsNotEqual(isNotEqual);
+      }
+
+
+    } else if (displayValue === "") {
+      newSharers = expenseData?.sharers.map((sharer) => {
+        return sharer.id === currentSharer.id
+          ? { ...sharer, amount: 0 }
+          : sharer
+      })
+
+      newAmount = newSharers.reduce(
+        (total, sharer) => total + Number(sharer.amount),
+        0
+      );
+      setAddedAmount(String(newAmount));
+      const difference = Math.abs(Number(expenseData?.amount) - Number(String(newAmount)));
+
+      const isNotEqual = difference >= 0.1;
+
+      if (isNaN(newAmount)) {
+
+        setIsNotEqual(true);
+      } else {
+        setIsNotEqual(isNotEqual);
+      }
+    } else {
+
+      setAddedAmount('no');
+
+      setIsNotEqual(true);
+    }
+
+
+    console.log(displayValue)
+    console.log(!isNaN(Number(displayValue)))
+
+  }, [display, expenseData?.sharers])
+
   const remainingAmount = expenseData && Number(expenseData.amount) - Number(addedAmount);
   const adjustedRemainingAmount = Math.abs(remainingAmount) < 0.1 ? 0 : remainingAmount;
 
-  useEffect(() => {
-    const difference = Math.abs(Number(expenseData?.amount) - Number(addedAmount));
-
-    const isNotEqual = difference >= 0.1;
-
-    setIsNotEqual(isNotEqual);
-
-  }, [expenseData?.sharers, expenseData?.amount, setIsNotEqual, display]);
 
   return (
     <div
-      className={clsx(
-        'fixed bottom-[300px] left-0 z-100 h-fit w-full bg-black p-3 text-center transition-all duration-300',
-        {
-          'z-100 transform opacity-100': showKeyboard,
-          '-z-50 transform opacity-0': !showKeyboard,
-        },
-      )}
+      className='absolute top-[-28px] w-full py-3 bg-black flex flex-col items-center'
     >
-      <div className="text-white">
-        {users &&
+      <div className="text-white flex justify-center">
+        <div className="max-w-[30%] truncate h-fit">{users &&
           users.filter((user) => {
-            return user.id === sharer.id;
+            return user.id === currentSharer.id;
           })[0]?.name
-        }
-        負擔 ${expenseData.amount} 中的 ${display}
+        }&nbsp;</div>
+        <div>
+           負擔 ${expenseData.amount} 中的 ${display}
+        </div>
+       
       </div>
       <div className="text-sm text-white">
-        {/* {console.log(addedAmount)} */}
-        {addedAmount || (!isNaN(Number(display)) && display !== "") ? <>
+        {!isNaN(Number(addedAmount)) && (!isNaN(Number(display)) && String(Number(display)) !== "") ? <>
           {adjustedRemainingAmount > 0
             ? `還剩下$${adjustedRemainingAmount}還沒被分帳`
             : `目前分帳金額多出$${Math.abs(adjustedRemainingAmount)}`}

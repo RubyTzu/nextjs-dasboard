@@ -59,6 +59,7 @@ export default function ExpenseSettingSharer({ user, users, sharer, expenseData,
             </div>
             <div className="flex items-center justify-between gap-7">
                 <SharerAmountInput
+                    isChecked={isChecked}
                     users={users}
                     sharer={sharer}
                     user={user}
@@ -77,7 +78,7 @@ export default function ExpenseSettingSharer({ user, users, sharer, expenseData,
                     id={user.name}
                     name={user.name}
                     value={user.name}
-                    onChange={() => { }}
+                    onChange={() => {}}
                     onClick={() => handleSharerToggle(user.id)}
                     checked={isChecked}
                 />
