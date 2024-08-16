@@ -13,10 +13,9 @@ interface Props {
     setIsNotEqual: React.Dispatch<React.SetStateAction<boolean>>;
     setCurrentExpense: React.Dispatch<React.SetStateAction<ExtendedExpense | Expense>>;
     isChecked: boolean;
-    setisIncorrectNum: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ExpenseSettingSharer({ user, users, sharer, expenseData, setIsNotEqual, setCurrentExpense, isChecked, setisIncorrectNum }: Props) {
+export default function ExpenseSettingSharer({ user, users, sharer, expenseData, setIsNotEqual, setCurrentExpense, isChecked }: Props) {
 
     const handleSharerToggle = (userId: string) => {
         const existingIndex = expenseData.sharers.findIndex(
@@ -66,7 +65,6 @@ export default function ExpenseSettingSharer({ user, users, sharer, expenseData,
                     expenseData={expenseData}
                     setIsNotEqual={setIsNotEqual}
                     setCurrentExpense={setCurrentExpense}
-                    setisIncorrectNum={setisIncorrectNum}
                 />
                 <input
                     className="relative h-5 w-5 rounded-full border-[1.5px] border-black ring-transparent checked:border-black checked:bg-highlight-60 checked:text-highlight-60 checked:before:absolute 

@@ -25,7 +25,6 @@ export default function Page() {
   const [phase, setPhase] = useState<number>(1);
   const [isNotEqual, setIsNotEqual] = useState<boolean>(false);
   const [isIncorrectTotalNum, setisIncorrectTotalNum] = useState<boolean>(false);
-  const [isIncorrectNum, setisIncorrectNum] = useState<boolean>(false);
 
   const group: ExtendedGroup = useGroup(groupid);
   const expense: ExtendedExpense = useExpense(groupid, expenseid);
@@ -79,7 +78,6 @@ export default function Page() {
                 group={group}
                 phase={phase}
                 setIsNotEqual={setIsNotEqual}
-                setisIncorrectNum={setisIncorrectNum}
               />
             </section>
             <section>

@@ -298,7 +298,7 @@ function SharerDisplay({
   return (
     <input
       ref={inputRef}
-      className="w-full z-10 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0"
+      className="z-10 w-full border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0"
       onChange={handleChange}
       onFocus={handleFocus}
       onBlur={handleBlur}
@@ -306,6 +306,7 @@ function SharerDisplay({
       inputMode="none"
       id="display"
       value={display}
+      maxLength={10}
     />
   );
 }

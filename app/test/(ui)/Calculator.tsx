@@ -19,8 +19,6 @@ interface SharerProps {
   handleInputFocus: () => void;
   handleInputChange: (newValue: string) => void;
   expenseData: ExtendedExpense | Expense;
-  setisIncorrectNum: React.Dispatch<
-    React.SetStateAction<boolean>>;
   users: GroupUser[];
   setIsNotEqual: React.Dispatch<
     React.SetStateAction<boolean>>;
@@ -198,7 +196,6 @@ export const SharerCalculator = ({
   handleInputFocus,
   handleInputChange,
   expenseData,
-  setisIncorrectNum,
   users,
   setIsNotEqual,
   currentSharer
@@ -338,12 +335,6 @@ export const SharerCalculator = ({
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
-
-    if (isNaN(Number(display)) || Number(display) < 1) {
-      setisIncorrectNum(true)
-    } else {
-      setisIncorrectNum(false)
-    }
 
     return () => document.removeEventListener('keydown', handleKeyDown);
   });

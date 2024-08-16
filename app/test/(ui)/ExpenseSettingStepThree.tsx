@@ -22,7 +22,6 @@ interface ExpenseSettingStepThreeProps {
   group: ExtendedGroup;
   phase: number;
   setIsNotEqual: React.Dispatch<React.SetStateAction<boolean>>;
-  setisIncorrectNum: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function ExpenseSettingStepThree({
@@ -31,7 +30,6 @@ export function ExpenseSettingStepThree({
   group,
   phase,
   setIsNotEqual,
-  setisIncorrectNum,
 }: ExpenseSettingStepThreeProps) {
   const users = group?.users || '';
 
@@ -85,7 +83,6 @@ export function ExpenseSettingStepThree({
                     setIsNotEqual={setIsNotEqual}
                     setCurrentExpense={setCurrentExpense}
                     isChecked={isChecked}
-                    setisIncorrectNum={setisIncorrectNum}
                   />
                 </Fragment>
               );
