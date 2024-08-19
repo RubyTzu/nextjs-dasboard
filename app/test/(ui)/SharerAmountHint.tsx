@@ -87,7 +87,7 @@ export function SharerAmountHint({ users, expenseData, setIsNotEqual, currentSha
 
   return (
     <div
-      className='absolute top-[-28px] w-full py-3 bg-black flex flex-col items-center'
+      className='absolute top-[-28px] w-full py-3 bg-highlight-50 flex flex-col items-center'
     >
       <div className="text-white flex justify-center">
         <div className="max-w-[30%] truncate h-fit">{users &&
