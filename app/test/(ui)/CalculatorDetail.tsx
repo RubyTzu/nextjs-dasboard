@@ -165,7 +165,7 @@ export const SharerAmountCalculator = ({
     const handleResize = () => {
       if (showKeyboard && inputRef.current?.id === sharer.id) {
         const element = document.getElementById(inputRef.current?.id);
-        const yOffset = 0;
+        const yOffset = -200;
 
         if (element) {
           const y = element.getBoundingClientRect().bottom + window.scrollY + yOffset;
