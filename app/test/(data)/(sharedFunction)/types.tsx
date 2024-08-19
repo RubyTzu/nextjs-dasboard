@@ -10,7 +10,7 @@ export interface LoginUser extends User {
 }
 
 export interface GroupUser extends User {
-  adoptable: boolean;
+  adoptable?: boolean;
 }
 
 export interface Group {
