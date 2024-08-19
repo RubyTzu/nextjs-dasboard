@@ -15,7 +15,7 @@ interface SharerAmountInputProps {
   setCurrentExpense: React.Dispatch<React.SetStateAction<ExtendedExpense | Expense>>;
 }
 
-export function SharerAmountInput({ isChecked,users, sharer, user, expenseData, setIsNotEqual, setCurrentExpense, }: SharerAmountInputProps) {
+export function SharerAmountInput({ isChecked, users, sharer, user, expenseData, setIsNotEqual, setCurrentExpense, }: SharerAmountInputProps) {
   const [currentSharer, setCurrentSharer] = useState<Sharer>({
     id: '',
     amount: 0,
@@ -84,7 +84,7 @@ export function SharerAmountInput({ isChecked,users, sharer, user, expenseData, 
   return (
     <>
       <SharerCalculator
-      isChecked={isChecked}
+        isChecked={isChecked}
         sharer={sharer}
         handleInputBlur={handleInputBlur}
         handleInputFocus={handleInputFocus}

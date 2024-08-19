@@ -23,8 +23,7 @@ export function SharerAmountHint({ users, expenseData, setIsNotEqual, currentSha
       (total, sharer) => total + Number(sharer.amount),
       0
     );
-    console.log("newAmount")
-    console.log(newAmount)
+
     if (!isNaN(Number(displayValue)) && Number(displayValue) > 0 && Number(displayValue) !== 0 && !displayValue.includes('-')) {
       newSharers = expenseData?.sharers.map((sharer) => {
         return sharer.id === currentSharer.id
@@ -34,8 +33,6 @@ export function SharerAmountHint({ users, expenseData, setIsNotEqual, currentSha
 
       newAmount = newSharers.reduce(
         (total, sharer) => { 
-          console.log('now add ')
-          console.log(sharer.amount)
           return total + Number(sharer.amount) 
         },
         0
@@ -81,10 +78,6 @@ export function SharerAmountHint({ users, expenseData, setIsNotEqual, currentSha
 
       setIsNotEqual(true);
     }
-
-
-    console.log(displayValue)
-    console.log(!isNaN(Number(displayValue)))
 
   }, [display, expenseData?.sharers])
 

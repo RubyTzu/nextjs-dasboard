@@ -1,13 +1,7 @@
 'use client';
 import { useState } from 'react';
 //import ui
-import { CalculatorAndInput } from '../../(ui)/CalculatorDetail';
-import { SharerAmountInput } from '../../(ui)/SharerAmountInput';
-import DatePickerButton from '@/app/test/(ui)/DatePickerButton';
-import ExpenseCategoryButton from '@/app/test/(ui)/ExpenseCategoryButton';
-import NoteButton from '../../(ui)/NoteButton';
 import {
-  NextStepButton,
   GroupInfoBar,
 } from '@/app/test/(ui)/ExpenseSettingDetails';
 import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
@@ -18,6 +12,7 @@ import {
   ExtendedExpense,
   ExtendedGroup,
   Group,
+  Expense
 } from '../../(data)/(sharedFunction)/types';
 
 export default function Page() {
@@ -105,7 +100,7 @@ export default function Page() {
       },
     ],
   };
-  const [currentExpense, setCurrentExpense] = useState<ExtendedExpense>({
+  const [currentExpense, setCurrentExpense] = useState<ExtendedExpense | Expense>({
     id: 'e17',
     // groupId: "g2",
     name: 'plane ticket',
@@ -151,11 +146,8 @@ export default function Page() {
     users: [],
   });
   const [phase, setPhase] = useState(3);
-  const [updatedSharers, setUpdatedSharers] = useState([
-    ...currentExpense.sharers,
-  ]);
-  const [sharers, setSharers] = useState<any>(updatedSharers);
-  const [isNotEqual, setIsNotEqual] = useState(false);
+  const [isNotEqual, setIsNotEqual] = useState<boolean>(false);
+
 
   return (
     <div className="relative flex flex-col">
@@ -165,90 +157,13 @@ export default function Page() {
         <div className="flex h-6 w-12 items-center"></div>
       </div>
       <GroupInfoBar expenseData={currentExpense} group={group} />
-      <section>
-        {/* <div className="relative">
-          <div
-            className='mx-auto py-6 w-fit'
-          >
-            <div className="mb-4">
-              <DatePickerButton
-                date={currentExpense.date}
-                expenseData={currentExpense}
-                setCurrentExpense={setCurrentExpense}
-              />
-            </div>
-            <div className="my-3 flex items-end justify-between gap-6">
-              <ExpenseCategoryButton
-                setCurrentExpense={setCurrentExpense}
-                expenseData={currentExpense}
-              />
-              <input
-                className="w-48 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0"
-                onChange={() => { }}
-                onBlur={(e) => {
-                  setCurrentExpense({
-                    ...currentExpense,
-                    name: e.target.value,
-                  });
-                }}
-                type="text"
-                defaultValue={currentExpense.name}
-              />
-            </div>
-            <div className="my-3">
-              <CalculatorAndInput expenseData={currentExpense} />
-            </div>
-            <NoteButton
-              expenseData={currentExpense}
-              setCurrentExpense={setCurrentExpense}
-            />
-          </div>
-        </div> */}
-        {/* <SharersAmountButton
-          expenseData={currentExpense}
-          users={group.users}
-          updatedSharers={updatedSharers}
-          setUpdatedSharers={setUpdatedSharers}
-          sharers={sharers}
-          setSharers={setSharers}
-        />
-        <ExpenseSettingStepThree
-          expenseData={currentExpense}
-          group={group}
-          phase={phase}
-          setIsNotEqual={setIsNotEqual}
-          updatedSharers={updatedSharers}
-          setUpdatedSharers={setUpdatedSharers}
-        />
-        <NextStepButton
-          expenseData={currentExpense}
-          setCurrentExpense={setCurrentExpense}
-          group={group}
-          phase={phase}
-          setPhase={setPhase}
-          isNotEqual={isNotEqual}
-          setIsNotEqual={setIsNotEqual}
-          updatedSharers={updatedSharers}
-        /> */}
-      </section>
-      <div className="w-fit">
-        <GroupPictureButton
-          groupData={group}
-          setCurrentGroup={setCurrentGroup}
-        />
-        <GroupNameButton groupData={group} setCurrentGroup={setCurrentGroup} />
-        <GroupUsersSetting
-          groupData={group}
-          setCurrentGroup={setCurrentGroup}
-          isAddPage={false}
-          loginUserData={{
-            id: '',
-            name: '',
-            picture: '',
-            adoptable: false,
-          }}
-        />
-      </div>
+      <ExpenseSettingStepThree
+        expenseData={currentExpense}
+        setCurrentExpense={setCurrentExpense}
+        group={group}
+        phase={phase}
+        setIsNotEqual={setIsNotEqual}
+      />
     </div>
   );
 }

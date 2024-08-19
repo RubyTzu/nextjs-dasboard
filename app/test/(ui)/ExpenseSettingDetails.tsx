@@ -148,7 +148,6 @@ export function NextStepButton({
               <div className="text-sm">確認</div>
               <div></div>
             </button>
-            <div className="h-[400px]"></div>
             </>
           )}
         </>

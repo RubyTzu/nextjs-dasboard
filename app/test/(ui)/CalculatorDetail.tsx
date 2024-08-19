@@ -45,6 +45,7 @@ interface TotalDisplayProps extends SharedCalculatorProps {
 }
 
 interface SharerDisplayProps extends SharedCalculatorProps {
+  id: string;
   isChecked: boolean;
   amount: number | string;
   handleKeyboardFocus: () => void;
@@ -160,6 +161,26 @@ export const SharerAmountCalculator = ({
   const [showKeyboard, setShowKeyboard] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (showKeyboard && inputRef.current?.id === sharer.id) {
+        setTimeout(() => {
+          document.body.style.paddingBottom = `400px`;
+          document.body.style.backgroundColor = `#fbfbf8`;
+        }, 0)
+
+      } else if(!showKeyboard && inputRef.current?.id === sharer.id){
+        document.body.style.paddingBottom = `0px`;
+      }
+
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [sharer, showKeyboard,inputRef.current]);
+
   const handleInputFocus = () => {
     inputRef.current?.focus();
     setShowKeyboard(true);
@@ -183,6 +204,7 @@ export const SharerAmountCalculator = ({
   return (
     <div className="relative w-20">
       <SharerDisplay
+        id={sharer.id}
         isChecked={isChecked}
         amount={sharer.amount}
         handleKeyboardFocus={handleKeyboardFocus}
@@ -252,13 +274,14 @@ function TotalDisplay({
       onBlur={handleBlur}
       type="text"
       inputMode="none"
-      id="display"
+      id="totalDisplay"
       value={display}
     />
   );
 }
 
 function SharerDisplay({
+  id,
   isChecked,
   amount,
   handleKeyboardFocus,
@@ -304,7 +327,7 @@ function SharerDisplay({
       onBlur={handleBlur}
       type="text"
       inputMode="none"
-      id="display"
+      id={id}
       value={display}
       maxLength={10}
     />
@@ -340,7 +363,7 @@ const TotalCalculatorKeyboard = ({
   return (
     <div
       ref={keyboardRef}
-      id="calculator"
+      id="totalCalculatorKeyboard"
       className={clsx(
         'fixed bottom-0 left-[50%] flex h-[340px] w-screen translate-x-[-50%] flex-col justify-center bg-highlight-50 transition-all duration-300',
         {
@@ -426,7 +449,7 @@ const SharerCalculatorKeyboard = ({
   return (
     <div
       ref={keyboardRef}
-      id="calculator"
+      id="sharerCalculatorKeyboard"
       className={clsx(
         'fixed bottom-0 left-[50%] flex h-[340px] w-screen translate-x-[-50%] flex-col justify-center bg-highlight-50 transition-all duration-300',
         {
