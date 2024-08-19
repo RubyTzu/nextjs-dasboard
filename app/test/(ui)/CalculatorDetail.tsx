@@ -164,20 +164,13 @@ export const SharerAmountCalculator = ({
   useEffect(() => {
     const handleResize = () => {
       if (showKeyboard && inputRef.current?.id === sharer.id) {
-       
-        setTimeout(() => {
-          const scrollIntoViewWithOffset = (selector: string) => {
-            const element = document.getElementById(selector);
-            const yOffset = -150;
+        const element = document.getElementById(inputRef.current?.id);
+        const yOffset = -150;
 
-            if (element) {
-              const y = element.getBoundingClientRect().bottom + window.scrollY + yOffset;
-              window.scrollTo({ top: y,behavior: 'smooth' });
-            }
-          }
-
-          scrollIntoViewWithOffset(`${inputRef.current?.id}`)
-        }, 150)
+        if (element) {
+          const y = element.getBoundingClientRect().bottom + window.scrollY + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
       }
 
     };
@@ -225,7 +218,7 @@ export const SharerAmountCalculator = ({
         onFocusDisplay={onFocusDisplay}
         onBlurDisplay={onBlurDisplay}
       />
-      
+
       <SharerCalculatorKeyboard
         showKeyboard={showKeyboard}
         handleKeyboardBlur={handleKeyboardBlur}
