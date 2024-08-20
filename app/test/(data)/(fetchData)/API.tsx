@@ -42,13 +42,16 @@ async function getExpense(id: any) {
 
 //add group
 async function addGroup(payload: any) {
-    const { id, users, expense } = payload
+    const { id, name, picture, creatorId, expenses, users } = payload;
     let url = `http://localhost:3000/group/`
 
     let body = {
         "id": id,
-        "users": users,
-        "expense": expense,
+        "name": name,
+        "picture": picture,
+        "creatorId":creatorId,
+        "expenses":expenses,
+        "users":users
     }
 
     const res = await fetch(url, {
@@ -97,4 +100,4 @@ async function changeGroup(payload: any) {
 
 }
 
-export { getGroup, getUser, getExpense }
+export { getGroup, getUser, getExpense, addGroup };

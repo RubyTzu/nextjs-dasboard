@@ -22,9 +22,9 @@ export default function ShareButton({
     const btn = btnRef.current;
 
     const shareData = {
-      url: links, // 要分享的 URL
-      title: name, // 要分享的標題
-      text: `分享群組 - ${name}` // 要分享的文字內容
+      url: links,
+      title: name,
+      text: `分享群組 - ${name}`
     };
 
     const handleClick = async () => {

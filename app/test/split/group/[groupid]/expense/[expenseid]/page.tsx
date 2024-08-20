@@ -19,7 +19,7 @@ export default function Page() {
   const { loginUserId } = useAllContext();
   const { groupid, expenseid } = useParams<{ groupid: string; expenseid: string }>();
   const group: ExtendedGroup = useGroup(groupid);
-  const expense: ExtendedExpense = useExpense(groupid, expenseid);
+  const expense: ExtendedExpense = useExpense(expenseid);
   const users: GroupUser[] = group?.users || [{
     id: "",
     name: "",

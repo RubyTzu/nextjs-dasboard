@@ -77,7 +77,7 @@ export default function ExpenseSettingSharer({ user, users, sharer, expenseData,
                     name={user.name}
                     value={user.name}
                     onChange={() => {}}
-                    onClick={() => handleSharerToggle(user.id)}
+                    onClick={() => handleSharerToggle(user.id || '')}
                     checked={isChecked}
                 />
             </div>

@@ -115,7 +115,7 @@ export default function JoinGroupModal({ groupData, setCurrentGroup }: Prop) {
                                     name="adoptable"
                                     disabled={!user.adoptable}
                                     checked={user.id === selectedUserId}
-                                    onChange={() => handleAdoptableChange(user.id)}
+                                    onChange={() => handleAdoptableChange(user.id || '')}
                                 />
                                 <label
                                     htmlFor={user.name}

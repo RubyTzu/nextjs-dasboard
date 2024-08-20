@@ -47,7 +47,7 @@ export function SharerAmountInput({ isChecked, users, sharer, user, expenseData,
       setCurrentSharer(sharer);
     } else {
       setCurrentSharer({
-        id: user.id,
+        id: user.id || '',
         amount: 0,
       });
     }
@@ -58,12 +58,12 @@ export function SharerAmountInput({ isChecked, users, sharer, user, expenseData,
     if (value === '' || Number(value) < 0) {
       value = '0';
     }
-    updateAmount(user.id, value);
+    updateAmount(user.id || '', value);
     sharer =
       sharer && String(sharer.amount).replace(/^0+/, '') !== ''
         ? sharer
         : {
-          id: user.id,
+          id: user.id || '',
           amount: 0,
         };
   }
@@ -73,7 +73,7 @@ export function SharerAmountInput({ isChecked, users, sharer, user, expenseData,
     if (value === '' || Number(value) < 0) {
       value = '0';
     }
-    updateAmount(user.id, value);
+    updateAmount(user.id || '', value);
     setCurrentSharer({
       ...sharer,
       amount: Number(value),

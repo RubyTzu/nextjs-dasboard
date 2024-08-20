@@ -48,7 +48,7 @@ export default function ExpensesList({
       },
     ];
   let expenses = expensesWithDebts;
-  // Step 1: Group expenses by date
+
   const groupedExpenses = expenses.reduce(
     (acc: { [date: string]: ExtendedExpense[] }, expense: ExtendedExpense) => {
       const date = expense.date;
@@ -61,7 +61,6 @@ export default function ExpensesList({
     {},
   );
 
-  // Step 2: Render expenses grouped by date
   const renderExpensesByDate = () => {
     return Object.keys(groupedExpenses).map((date, index) => {
       let formateDate: Date | string = new Date(date);

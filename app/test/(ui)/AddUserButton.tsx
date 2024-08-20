@@ -5,23 +5,16 @@ import { useState, useRef } from 'react';
 //import ui
 import { AddUserIcon } from '@/app/test/(ui)/Icons';
 import NameModal from './NameModal';
+import { ExtendedGroup } from '../(data)/(sharedFunction)/types';
 
-export default function AddUserButton({
-  groupData,
-  setCurrentGroup,
-}: {
-  groupData: any;
-  setCurrentGroup: any;
-}) {
-  const {
-    users,
-  }: {
-    users: any;
-  } = groupData;
+interface Props {
+  groupData: ExtendedGroup;
+  setCurrentGroup: React.Dispatch<React.SetStateAction<ExtendedGroup>>;
+}
 
+export default function AddUserButton({ groupData, setCurrentGroup }: Props) {
   const [currentGroupUserName, setCurrentGroupUserName] = useState('');
-  const [lastSavedGroup, setLastSavedGroup] =
-    useState<any>(groupData);
+  const [lastSavedGroup, setLastSavedGroup] = useState<any>(groupData);
   const [isShow, setIsShow] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -50,13 +43,14 @@ export default function AddUserButton({
   const handleSave = () => {
     let newGroup = {
       ...groupData,
-      users:[
-      ...users,
-      {
-        name: currentGroupUserName,
-        picture: '/images/icons/newUserBG.svg',
-      },
-    ]};
+      users: [
+        ...(groupData.users as []),
+        {
+          name: currentGroupUserName,
+          picture: '/images/icons/newUserBG.svg',
+        },
+      ],
+    };
     setCurrentGroup(newGroup);
     setLastSavedGroup(newGroup);
     setIsShow(false);

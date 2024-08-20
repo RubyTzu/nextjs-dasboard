@@ -13,7 +13,6 @@ import ExpenseSettingSharer from './ExpenseSettingSharer';
 //other
 import clsx from 'clsx';
 
-
 interface ExpenseSettingStepThreeProps {
   expenseData: ExtendedExpense | Expense;
   setCurrentExpense: React.Dispatch<
@@ -70,7 +69,7 @@ export function ExpenseSettingStepThree({
               sharer = sharer
                 ? sharer
                 : {
-                    id: user.id,
+                    id: user.id || "",
                     amount: 0,
                   };
               return (

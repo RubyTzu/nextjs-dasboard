@@ -15,7 +15,6 @@ import { ExpenseSettingStepOne } from '@/app/test/(ui)/ExpenseSettingStepOne';
 import { ExpenseSettingStepTwo } from '@/app/test/(ui)/ExpenseSettingStepTwo';
 import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
 
-
 export default function Page() {
   const { loginUserId } = useAllContext();
   const params = useParams<{ groupid: string; }>();

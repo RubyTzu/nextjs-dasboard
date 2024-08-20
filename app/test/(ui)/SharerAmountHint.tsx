@@ -2,8 +2,6 @@
 import { useEffect, useState } from 'react';
 //import data
 import { ExtendedExpense, Expense, GroupUser, Sharer } from '../(data)/(sharedFunction)/types';
-//import other
-import clsx from 'clsx';
 
 interface SharerAmountHintProps {
   users: GroupUser[];

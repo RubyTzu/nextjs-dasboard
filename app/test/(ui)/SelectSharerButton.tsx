@@ -17,7 +17,7 @@ export default function SelectSharerButton({ expenseData, users, setCurrentExpen
         const totalDistributedAmount = baseAmountNumber * numberOfSharers;
         const roundingDifference = totalAmount - totalDistributedAmount;
         const updatedSharersCopy = users ? users.map((user) => ({
-            id: user.id,
+            id: user.id || '',
             amount: baseAmountNumber,
         })) : [];
 

@@ -13,7 +13,7 @@ interface AllContextType {
   expenses: { [key: string]: ExtendedExpense };
   fetchUser: (userId: string) => void;
   fetchGroup: (groupId: string) => void;
-  fetchExpense: (groupId: string, expenseId: string) => void;
+  fetchExpense: (expenseId: string) => void;
 }
 
 const AllContext = createContext<AllContextType | undefined>(undefined);
@@ -30,7 +30,6 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
       setLoginUserId(loginUserId);
     }
   },[loginUserId])
-
 
   const fetchUser = async (userId: string) => {
     if (!users[userId]) {
@@ -62,7 +61,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const fetchExpense = async (groupId: string, expenseId: string) => {
+  const fetchExpense = async (expenseId: string) => {
     if (!expenses[expenseId]) {
       try {
         const expense = await getExpense(expenseId);
@@ -125,14 +124,14 @@ export const useGroup = (groupId: string) => {
   return context.groups[groupId];
 };
 
-export const useExpense = (groupId: string, expenseId: string) => {
+export const useExpense = (expenseId: string) => {
   const context = useContext(AllContext);
   if (!context) {
     throw new Error('useExpense must be used within a Provider');
   }
 
   useEffect(() => {
-    context.fetchExpense(groupId, expenseId);
+    context.fetchExpense(expenseId);
 
   }, [expenseId]);
 

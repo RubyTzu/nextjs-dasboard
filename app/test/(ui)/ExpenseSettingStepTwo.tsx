@@ -64,7 +64,7 @@ export function ExpenseSettingStepTwo({
                     onChange={() => {
                       setCurrentExpense({
                         ...expenseData,
-                        payerId: user.id,
+                        payerId: user.id || '',
                       });
                     }}
                     defaultChecked={user.id === expenseData.payerId}

@@ -27,7 +27,7 @@ export default function Page() {
   const [isIncorrectTotalNum, setisIncorrectTotalNum] = useState<boolean>(false);
 
   const group: ExtendedGroup = useGroup(groupid);
-  const expense: ExtendedExpense = useExpense(groupid, expenseid);
+  const expense: ExtendedExpense = useExpense(expenseid);
   const [currentExpense, setCurrentExpense] = useState<
     ExtendedExpense | Expense
   >(expense);

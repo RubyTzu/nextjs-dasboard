@@ -2,6 +2,7 @@
 import { Fragment, useEffect } from 'react';
 //import data
 import { Group, GroupUser } from '../(data)/(sharedFunction)/types';
+import { addGroup } from '../(data)/(fetchData)/API';
 //import ui
 import DeleteGroupButton from './DeleteGroupButton';
 import { GroupUserButton } from './GroupUserButton';
@@ -11,7 +12,8 @@ import AddUserButton from './AddUserButton';
 import AddGroupNameButton from './AddGroupNameButton';
 //import other
 import { v4 as uuidv4 } from 'uuid';
-import clsx from "clsx";
+import clsx from 'clsx';
+
 
 interface GroupNameSettingProps {
   groupData: Group;
@@ -34,42 +36,39 @@ interface GroupOtherSettingProps {
 export function GroupNameSetting({
   groupData,
   setCurrentGroup,
-  isAddPage
+  isAddPage,
 }: GroupNameSettingProps) {
-  const {
-    picture,
-    name,
-  } = groupData;
- 
+  const { picture, name } = groupData;
 
   return (
     <>
       <div className="m-6 mt-16 flex items-center justify-between pt-6">
-        <div className={clsx("flex items-center gap-4", {
-          "w-full": isAddPage,
-        })}>
+        <div
+          className={clsx('flex items-center gap-4', {
+            'w-full': isAddPage,
+          })}
+        >
           {picture ? (
             <GroupPictureButton
               groupData={groupData}
               setCurrentGroup={setCurrentGroup}
             />
           ) : null}
-          {isAddPage ?
+          {isAddPage ? (
             <AddGroupNameButton
               groupData={groupData}
               setCurrentGroup={setCurrentGroup}
             />
-            :
+          ) : (
             <p className="text-xl">{name}</p>
-          }
-
+          )}
         </div>
-        {isAddPage ?
-          null :
+        {isAddPage ? null : (
           <EditGroupNameButton
             groupData={groupData}
             setCurrentGroup={setCurrentGroup}
-          />}
+          />
+        )}
       </div>
     </>
   );
@@ -79,11 +78,11 @@ export function GroupUsersSetting({
   groupData,
   setCurrentGroup,
   isAddPage,
-  loginUserData
+  loginUserData,
 }: GroupUsersSettingProps) {
   useEffect(() => {
     console.log('group Data change!');
-    console.log(groupData)
+    console.log(groupData);
   }, [groupData]);
 
   return (
@@ -100,7 +99,7 @@ export function GroupUsersSetting({
           {isAddPage ? (
             <>
               <GroupUserButton
-                idx={loginUserData?.id}
+                idx={loginUserData?.id || ''}
                 userData={loginUserData}
                 groupData={groupData}
                 setCurrentGroup={setCurrentGroup}
@@ -156,7 +155,6 @@ export function GroupOtherSetting({
   groupData,
   setCurrentGroup,
 }: GroupOtherSettingProps) {
-
   return (
     <>
       <div className="mx-6 mt-4 flex flex-col">
@@ -170,12 +168,42 @@ export function GroupOtherSetting({
   );
 }
 
-export function GroupSave({ groupData }: { groupData: Group }) {
-  function handleClick() {
-    console.log(`group ${groupData.id} has changed and saved`);
-    console.log(groupData);
-  }
+export function GroupSave({
+  groupData,
+  formRef,
+}: {
+  groupData: Group;
+  formRef: React.RefObject<HTMLFormElement>;
+}) {
+  async function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
+    event.preventDefault();
 
+    try {
+      // await addGroup({
+      //   id: 'gNew',
+      //   name: 'group Games New',
+      //   picture: '/images/icons/groupIcon08.svg',
+      //   creatorId: 'u1',
+      //   expenses: [],
+      //   users: [
+      //     {
+      //       id: 'u1',
+      //       name: 'a',
+      //       picture: 'https://cdn2.thecatapi.com/images/a4v.jpg',
+      //       adoptable: false,
+      //     },
+      //   ],
+      // });
+
+      console.log(groupData);
+
+      if (formRef.current) {
+        formRef.current.submit();
+      }
+    } catch (error) {
+      console.error('API 呼叫失敗:', error);
+    }
+  }
   return (
     <div className="flex w-full items-center justify-center">
       <button

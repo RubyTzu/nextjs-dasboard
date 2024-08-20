@@ -1,8 +1,12 @@
 'use client';
+//import next and react
 import { useState, useEffect } from 'react';
-import { evaluate } from 'mathjs';
-import { TotalAmountCalculator, SharerAmountCalculator } from './CalculatorDetail';
+//import data
 import { Expense, ExtendedExpense, GroupUser, Sharer } from '../(data)/(sharedFunction)/types';
+//import ui
+import { TotalAmountCalculator, SharerAmountCalculator } from './CalculatorDetail';
+//import other
+import { evaluate } from 'mathjs';
 
 interface TotalProps {
   expenseData: ExtendedExpense | Expense;

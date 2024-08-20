@@ -5,9 +5,9 @@ import { useState, useEffect, useRef } from 'react';
 import { ExtendedExpense, Expense, Sharer, GroupUser } from '../(data)/(sharedFunction)/types';
 //import ui
 import { BackspaceIcon, DollarIcon } from '@/app/test/(ui)/Icons';
+import { SharerAmountHint } from './SharerAmountHint';
 //import other
 import clsx from 'clsx';
-import { SharerAmountHint } from './SharerAmountHint';
 
 interface SharedCalculatorProps {
   display: string;
