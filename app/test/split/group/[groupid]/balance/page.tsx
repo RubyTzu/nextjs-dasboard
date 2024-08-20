@@ -27,7 +27,7 @@ export default function Page() {
 
   useEffect(() => {
     if (group?.expenses && group?.expenses.length > 0) {
-      const splitExpenses = splitExpense(group.expenses);
+      const splitExpenses = splitExpense(group.expenses, loginUserId);
       const debtAmounts = Object.values(splitExpenses[loginUserId || ''] || {});
       const TotalDebtsAmount = debtAmounts.reduce(
         (sum, value) => sum + value,

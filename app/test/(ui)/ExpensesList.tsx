@@ -21,10 +21,9 @@ export default function ExpensesList({
   groupData: ExtendedGroup;
 }) {
   const { loginUserId } = useAllContext();
-  let { expensesWithDebts } = filterExpense(
+  const fetchExpenses = 
     groupData.expenses
-      ? groupData.expenses
-      : [
+      || [
         {
           id: '',
           name: '',
@@ -35,8 +34,8 @@ export default function ExpensesList({
           sharers: [],
           note: '',
         },
-      ],
-  );
+      ]
+  let { expensesWithDebts } = filterExpense(fetchExpenses, loginUserId);
   let groupId = groupData?.id ? groupData?.id : '';
   let users = groupData?.users
     ? groupData?.users

@@ -1,5 +1,4 @@
 //import data
-import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import { Expense, Debts, TotalDebts, ExtendedExpense } from '@/app/test/(data)/(sharedFunction)/types';
 
 interface SplitExpenseResult {
@@ -8,8 +7,10 @@ interface SplitExpenseResult {
   expensesWithDebts: ExtendedExpense[];
 }
 
-function filterExpense(expenses: ExtendedExpense[]): SplitExpenseResult {
-  const { loginUserId } = useAllContext();
+function filterExpense(
+  expenses: ExtendedExpense[],
+  loginUserId: string
+): SplitExpenseResult {
 
   if (!expenses) {
     return {
@@ -20,7 +21,7 @@ function filterExpense(expenses: ExtendedExpense[]): SplitExpenseResult {
   }
 
   const newExpenses: ExtendedExpense[] = expenses.map((expense) => ({
-    ...expense
+    ...expense,
   }));
 
   const debts: Debts = newExpenses.reduce((acc: Debts, expense: Expense) => {
