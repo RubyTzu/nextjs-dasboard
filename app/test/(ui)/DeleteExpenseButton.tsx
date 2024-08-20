@@ -1,7 +1,7 @@
 //import from next & react
 import { useId, useRef, useState } from 'react';
 //import data
-import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import { ExtendedExpense } from '../(data)/(sharedFunction)/types';
 //import ui
 import DeleteModal from './DeleteModal';
@@ -13,6 +13,7 @@ interface Props {
 export default function DeleteExpenseButton({
   expenseData,
 }: Props) {
+  const { loginUserId } = useAllContext();
   const {
     id,
     payerId,

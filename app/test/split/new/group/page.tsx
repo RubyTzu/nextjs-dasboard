@@ -1,10 +1,8 @@
 'use client';
 //import from next & react
-import { useParams } from 'next/navigation';
 import { useState } from 'react';
 //import data
-import { useUser } from '@/app/test/(data)/(fetchData)/Providers';
-import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { useUser, useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import { Group } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import { TopGroupSettingBar } from '@/app/test/(ui)/TopBars';
@@ -15,10 +13,11 @@ import {
 } from '@/app/test/(ui)/GroupSettingDetails';
 
 export default function Page() {
-    const data = useUser(loginUserId);
+    const { loginUserId } = useAllContext();
+    const data = useUser(loginUserId || '');
     const [currentGroup, setCurrentGroup] = useState<Group>({
         name: "未命名群組",
-        picture: "groupIcon01",
+        picture: "/images/icons/groupIcon01.svg",
         users: []
     });
 

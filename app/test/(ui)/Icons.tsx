@@ -1,21 +1,6 @@
 //import from next
 import Image from 'next/image';
 //import ui
-import groupIcon01 from '@/app/test/(ui)/icons/groupIcon01.svg';
-import groupIcon02 from '@/app/test/(ui)/icons/groupIcon02.svg';
-import groupIcon03 from '@/app/test/(ui)/icons/groupIcon03.svg';
-import groupIcon04 from '@/app/test/(ui)/icons/groupIcon04.svg';
-import groupIcon05 from '@/app/test/(ui)/icons/groupIcon05.svg';
-import groupIcon06 from '@/app/test/(ui)/icons/groupIcon06.svg';
-import groupIcon07 from '@/app/test/(ui)/icons/groupIcon07.svg';
-import groupIcon08 from '@/app/test/(ui)/icons/groupIcon08.svg';
-import groupIcon09 from '@/app/test/(ui)/icons/groupIcon09.svg';
-import groupIcon10 from '@/app/test/(ui)/icons/groupIcon10.svg';
-import groupIcon11 from '@/app/test/(ui)/icons/groupIcon11.svg';
-import groupIcon12 from '@/app/test/(ui)/icons/groupIcon12.svg';
-import groupIcon13 from '@/app/test/(ui)/icons/groupIcon13.svg';
-import groupIcon14 from '@/app/test/(ui)/icons/groupIcon14.svg';
-import groupIcon15 from '@/app/test/(ui)/icons/groupIcon15.svg';
 import checkIcon from '@/app/test/(ui)/icons/check.svg';
 import closeIcon from '@/app/test/(ui)/icons/close.svg';
 import addGroupIcon from '@/app/test/(ui)/icons/addGroup.svg';
@@ -253,7 +238,7 @@ function CopyLinkIcon() {
 }
 
 function HomeIcon() {
-  return <Image src={homeIcon} alt="" />;
+  return <Image src={homeIcon} alt="" priority/>;
 }
 
 function EditIcon() {
@@ -294,7 +279,12 @@ function LeaveIcon() {
 }
 
 function BackArrowIcon() {
-  return <Image src={backArrowIcon} alt="" />;
+  return (<Image
+    className="h-6 w-[8px]"
+    width={20}
+    height={20}
+    src={backArrowIcon}
+    alt="" />);
 }
 
 const expenseIconMap = {
@@ -307,27 +297,8 @@ const expenseIconMap = {
   other: OtherIcon,
 };
 
-const groupIconMap = {
-  groupIcon01: groupIcon01,
-  groupIcon02: groupIcon02,
-  groupIcon03: groupIcon03,
-  groupIcon04: groupIcon04,
-  groupIcon05: groupIcon05,
-  groupIcon06: groupIcon06,
-  groupIcon07: groupIcon07,
-  groupIcon08: groupIcon08,
-  groupIcon09: groupIcon09,
-  groupIcon10: groupIcon10,
-  groupIcon11: groupIcon11,
-  groupIcon12: groupIcon12,
-  groupIcon13: groupIcon13,
-  groupIcon14: groupIcon14,
-  groupIcon15: groupIcon15,
-};
-
 export {
   expenseIconMap,
-  groupIconMap,
   CheckIcon,
   CloseIcon,
   AddGroupIcon,

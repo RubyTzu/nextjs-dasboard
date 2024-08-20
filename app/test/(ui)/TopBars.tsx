@@ -1,7 +1,8 @@
-//import from next
+'use client';
+//import from next and react
 import Link from 'next/link';
 //import data
-import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import {
   ExtendedGroup,
   ExtendedExpense,
@@ -53,12 +54,14 @@ export function TopGroupBar({
   isBalancePage,
   groupData
 }: TopGroupBarProps) {
+  const { loginUserId } = useAllContext();
+
   const hasGroupData = Boolean(groupData);
   const isUserInGroup = hasGroupData && groupData.users?.some((user) => user.id === loginUserId);
 
   return (
     <div className="fixed z-10 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
-      <div className="h-6 w-6 flex">
+      <div className="h-6 w-6 flex items-center justify-center">
         {isBalancePage && hasGroupData ? (
           <Link href={`/test/split/group/${groupData.id}`} className="flex">
             <BackArrowIcon />
@@ -95,6 +98,7 @@ export function TopGroupSettingBar({
   leftCancelLink,
   rightCancelLink
 }: TopGroupSettingBarProps) {
+  const { loginUserId } = useAllContext();
 
   const shouldRender = groupData && (
     isAddPage ||
@@ -128,6 +132,7 @@ export function TopExpenseBar({
   groupData,
   expenseData,
 }: TopExpenseBarProps) {
+  const { loginUserId } = useAllContext();
   const id = groupData ? groupData.id : ""
 
   return (
@@ -172,7 +177,7 @@ export function TopExpenseSettingBar({
   hintword,
   cancelLink
 }: TopExpenseSettingBarProps) {
-
+  const { loginUserId } = useAllContext();
 
   function handleClick() {
     if (phase === 1) return;

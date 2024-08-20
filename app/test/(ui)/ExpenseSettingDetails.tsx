@@ -8,7 +8,7 @@ import {
   Expense,
 } from '../(data)/(sharedFunction)/types';
 //import ui
-import { groupIconMap, NextstepIcon } from '@/app/test/(ui)/Icons';
+import { NextstepIcon } from '@/app/test/(ui)/Icons';
 import clsx from 'clsx';
 
 interface GroupInfoBarProps {
@@ -33,17 +33,15 @@ export function GroupInfoBar({
   const picture = group?.picture || '';
   const name = group?.name || '';
 
-  const Icon = picture ? groupIconMap[picture] : undefined;
-
   return (
     <>
       {expenseData && group ?
         <div className="mt-16 flex items-center gap-4 border-b-2 py-4 pl-6">
           <p>你和</p>
           <div className="flex items-center justify-center gap-2 rounded-full bg-neutrals-30 py-1 pl-3 pr-4">
-            {Icon ? (
+            {picture ? (
               <Image
-                src={Icon}
+                src={picture}
                 className="z-0 flex h-7 w-7 items-center justify-center rounded-full bg-highlight-60"
                 width={200}
                 height={200}

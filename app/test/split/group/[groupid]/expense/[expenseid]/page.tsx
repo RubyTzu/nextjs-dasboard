@@ -3,8 +3,7 @@
 import { useParams } from 'next/navigation';
 import { Suspense } from 'react';
 //import data
-import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
-import { useGroup, useExpense } from '@/app/test/(data)/(fetchData)/Providers';
+import { useAllContext, useGroup, useExpense } from '@/app/test/(data)/(fetchData)/Providers';
 import { ExtendedExpense, ExtendedGroup, GroupUser } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import { TopExpenseBar } from '@/app/test/(ui)/TopBars';
@@ -17,6 +16,7 @@ import DeleteExpenseButton from '@/app/test/(ui)/DeleteExpenseButton';
 import { ExpenseSkeleton } from '@/app/test/(ui)/LoadingSkeletons';
 
 export default function Page() {
+  const { loginUserId } = useAllContext();
   const { groupid, expenseid } = useParams<{ groupid: string; expenseid: string }>();
   const group: ExtendedGroup = useGroup(groupid);
   const expense: ExtendedExpense = useExpense(groupid, expenseid);
@@ -33,7 +33,7 @@ export default function Page() {
         <TopExpenseBar groupData={group} expenseData={expense} />
         {group && expense &&
           (expense.sharers?.some((sharer) => sharer.id === loginUserId) ||
-            expense.payerId?.includes(loginUserId)) ? (
+            expense.payerId?.includes(loginUserId || '')) ? (
           <div className="mt-16 flex w-full flex-col items-center px-4 py-6">
             <ExpenseDetailOne expenseData={expense} users={users} />
             <ExpenseDetailTwo expenseData={expense} users={users} />

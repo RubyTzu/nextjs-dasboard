@@ -54,7 +54,7 @@ export default function AddUserButton({
       ...users,
       {
         name: currentGroupUserName,
-        picture: '',
+        picture: '/images/icons/newUserBG.svg',
       },
     ]};
     setCurrentGroup(newGroup);

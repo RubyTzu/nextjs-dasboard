@@ -32,8 +32,8 @@ export function SharerAmountHint({ users, expenseData, setIsNotEqual, currentSha
       })
 
       newAmount = newSharers.reduce(
-        (total, sharer) => { 
-          return total + Number(sharer.amount) 
+        (total, sharer) => {
+          return total + Number(sharer.amount)
         },
         0
       );
@@ -96,9 +96,9 @@ export function SharerAmountHint({ users, expenseData, setIsNotEqual, currentSha
           })[0]?.name
         }&nbsp;</div>
         <div>
-           負擔 ${expenseData.amount} 中的 ${display}
+          負擔 ${expenseData.amount} 中的 ${display}
         </div>
-       
+
       </div>
       <div className="text-sm text-white">
         {!isNaN(Number(addedAmount)) && (!isNaN(Number(display)) && String(Number(display)) !== "") ? <>

@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { Fragment } from 'react';
 //import data
-import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import { ExtendedExpense, GroupUser } from '../(data)/(sharedFunction)/types';
 //import ui
 import { expenseIconMap } from '@/app/test/(ui)/Icons';
@@ -22,6 +22,7 @@ export function ExpenseDetailOne({
   expenseData,
   users,
 }: ExpenseDetailExtendProps) {
+  const { loginUserId } = useAllContext();
   const {
     category,
     amount,
@@ -72,6 +73,7 @@ export function ExpenseDetailTwo({
   expenseData,
   users,
 }: ExpenseDetailExtendProps) {
+  const { loginUserId } = useAllContext();
   const {
     amount,
     payerId,
@@ -95,6 +97,7 @@ export function ExpenseDetailTwo({
                 width={64}
                 height={64}
                 alt="sharer image"
+                priority
               />
             ) : null}
             <div className="flex grow items-center justify-between">
@@ -135,6 +138,7 @@ export function ExpenseDetailTwo({
 }
 
 export function ExpenseDetailThree({ expenseData }: ExpenseDetailProps) {
+  const { loginUserId } = useAllContext();
   const {
     payerId,
     sharers,

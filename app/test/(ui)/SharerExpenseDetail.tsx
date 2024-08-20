@@ -1,7 +1,7 @@
 //import from next
 import Image from 'next/image';
 //import data
-import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import { ExtendedExpense, GroupUser, Sharer } from '../(data)/(sharedFunction)/types';
 
 interface Props {
@@ -15,6 +15,7 @@ export default function SharerExpenseDetail({
   sharer,
   users,
 }: Props) {
+  const { loginUserId } = useAllContext();
   const { payerId } = expenseData;
   const { id, amount } = sharer;
 
@@ -38,6 +39,7 @@ export default function SharerExpenseDetail({
               width={32}
               height={32}
               alt="sharer image"
+              priority
             />
           ) : null}
           <div className="ml-3">

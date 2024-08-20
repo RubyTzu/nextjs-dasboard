@@ -1,11 +1,13 @@
 'use client';
 //import from react
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 //import data
 import { getGroup, getUser, getExpense } from '@/app/test/(data)/(fetchData)/API';
 import { ExtendedExpense, ExtendedGroup, LoginUser } from '../(sharedFunction)/types';
 
 interface AllContextType {
+  loginUserId: string;
+  setLoginUserId: React.Dispatch<React.SetStateAction<string>>;
   users: { [key: string]: LoginUser };
   groups: { [key: string]: ExtendedGroup };
   expenses: { [key: string]: ExtendedExpense };
@@ -14,12 +16,21 @@ interface AllContextType {
   fetchExpense: (groupId: string, expenseId: string) => void;
 }
 
-const AllContext = createContext<AllContextType | null>(null);
+const AllContext = createContext<AllContextType | undefined>(undefined);
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
+  const [loginUserId, setLoginUserId] = useState<string>('');
   const [users, setUsers] = useState<{ [key: string]: LoginUser }>({});
   const [groups, setGroups] = useState<{ [key: string]: ExtendedGroup }>({});
   const [expenses, setExpenses] = useState<{ [key: string]: ExtendedExpense }>({});
+  
+  useEffect(()=>{
+    const loginUserId = localStorage.getItem("loginUserId");
+    if (loginUserId) {
+      setLoginUserId(loginUserId);
+    }
+  },[loginUserId])
+
 
   const fetchUser = async (userId: string) => {
     if (!users[userId]) {
@@ -32,7 +43,6 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
         }));
       } catch (error) {
         console.error('Error fetching user data:', error);
-        // Handle errors
       }
     }
   };
@@ -48,7 +58,6 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
         }));
       } catch (error) {
         console.error('Error fetching group data:', error);
-        // Handle errors
       }
     }
   };
@@ -57,28 +66,30 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
     if (!expenses[expenseId]) {
       try {
         const expense = await getExpense(expenseId);
-        // console.log(groupId)
         setExpenses((prevExpenses) => ({
           ...prevExpenses,
           [expenseId]: expense,
         }));
       } catch (error) {
         console.error('Error fetching expense data:', error);
-        // Handle errors
       }
     }
   };
 
+  const value = useMemo(() => ({
+    loginUserId,
+    setLoginUserId,
+    users,
+    groups,
+    expenses,
+    fetchUser,
+    fetchGroup,
+    fetchExpense,
+  }), [loginUserId, users, groups, expenses]);
+
   return (
     <AllContext.Provider
-      value={{
-        users,
-        groups,
-        expenses,
-        fetchUser,
-        fetchGroup,
-        fetchExpense,
-      }}
+      value={value}
     >
       {children}
     </AllContext.Provider>
@@ -92,9 +103,9 @@ export const useUser = (userId: string) => {
   }
 
   useEffect(() => {
+    if(userId === '') return
     context.fetchUser(userId);
 
-    // console.log(`useEffect fetch user ${userId}`);
   }, [userId]);
 
   return context.users[userId];
@@ -109,7 +120,6 @@ export const useGroup = (groupId: string) => {
   useEffect(() => {
     context.fetchGroup(groupId);
 
-    // console.log(`useEffect fetch group ${groupId}`)
   }, [groupId]);
 
   return context.groups[groupId];
@@ -124,8 +134,15 @@ export const useExpense = (groupId: string, expenseId: string) => {
   useEffect(() => {
     context.fetchExpense(groupId, expenseId);
 
-    // console.log(`useEffect fetch expense ${expenseId}`)
   }, [expenseId]);
 
   return context.expenses[expenseId];
+};
+
+export const useAllContext = () => {
+  const context = useContext(AllContext);
+  if (context === undefined) {
+    throw new Error('useAllContext must be used within a Providers');
+  }
+  return context;
 };

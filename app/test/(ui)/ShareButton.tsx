@@ -1,10 +1,8 @@
 'use client';
 //import from next & react
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 //import ui
 import { ShareLinkIcon } from '@/app/test/(ui)/Icons';
-import SuccessAlert from '@/app/test/(ui)/SuccessAlert';
 
 export default function ShareButton({
   id,
@@ -15,43 +13,66 @@ export default function ShareButton({
   name: string;
   inGroupPage: boolean;
 }) {
-  const [isShow, setIsShow] = useState(false);
-  const router = useRouter();
-  const base = 'http://localhost:3000/test/split/group/';
+  const btnRef = useRef<HTMLButtonElement | null>(null);
+  const base = 'http://localhost:3001/test/split/group/';
   const links = base + id;
+
+
+  useEffect(() => {
+    const btn = btnRef.current;
+
+    const shareData = {
+      url: links, // 要分享的 URL
+      title: name, // 要分享的標題
+      text: `分享群組 - ${name}` // 要分享的文字內容
+    };
+
+    const handleClick = async () => {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        if (err instanceof Error) {
+          console.log("發生錯誤", err);
+        } else {
+          console.log("發生錯誤", err);
+        }
+      }
+    };
+
+    if (btn) {
+      btn.addEventListener("click", handleClick);
+    }
+
+    return () => {
+      if (btn) {
+        btn.removeEventListener("click", handleClick);
+      }
+    };
+  }, []);
 
   const handlesShareLink = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setIsShow(true);
-    router.refresh();
-    console.log('share ' + links);
   };
 
   return (
     <>
       {inGroupPage ? (
-        <div
+        <button
+          ref={btnRef}
           onClick={(e) => handlesShareLink(e)}
           className="scale-[1.17] mr-2 flex items-center justify-center rounded-full bg-neutrals-20 p-2"
         >
           <ShareLinkIcon />
-        </div>
+        </button>
       ) : (
-        <div
+        <button
+          ref={btnRef}
           onClick={(e) => handlesShareLink(e)}
           className="relative z-[1] flex h-8 w-8 items-center justify-center rounded-full bg-highlight-60"
         >
-        <ShareLinkIcon />
-        </div>
+          <ShareLinkIcon />
+        </button>
       )}
-
-      <SuccessAlert
-        text="分享連結視窗"
-        name={name}
-        isShow={isShow}
-        setIsShow={setIsShow as Function}
-        inGroupPage={inGroupPage}
-      />
     </>
   );
 }

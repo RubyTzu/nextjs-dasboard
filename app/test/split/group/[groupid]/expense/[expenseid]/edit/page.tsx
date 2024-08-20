@@ -3,8 +3,7 @@
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 //import data
-import { useGroup, useExpense } from '@/app/test/(data)/(fetchData)/Providers';
-import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { useGroup, useExpense, useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import {
   ExtendedExpense,
   ExtendedGroup,
@@ -21,6 +20,7 @@ import { ExpenseSettingStepTwo } from '@/app/test/(ui)/ExpenseSettingStepTwo';
 import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
 
 export default function Page() {
+  const { loginUserId } = useAllContext();
   const { groupid, expenseid } = useParams<{ groupid: string; expenseid: string }>();
   const [phase, setPhase] = useState<number>(1);
   const [isNotEqual, setIsNotEqual] = useState<boolean>(false);
@@ -55,7 +55,7 @@ export default function Page() {
         />
         {expense &&
           (expense.sharers?.some((sharer) => sharer.id === loginUserId) ||
-            expense.payerId?.includes(loginUserId)) ? (
+            expense.payerId?.includes(loginUserId || '')) ? (
           <>
             <GroupInfoBar expenseData={currentExpense} group={group} />
             <section>

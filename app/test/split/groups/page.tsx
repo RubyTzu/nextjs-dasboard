@@ -1,15 +1,26 @@
 'use client';
 //import data
-import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
-import { useUser } from '@/app/test/(data)/(fetchData)/Providers';
+import { useAllContext, useUser } from '@/app/test/(data)/(fetchData)/Providers';
 import { LoginUser } from '../../(data)/(sharedFunction)/types';
 //import ui
 import GroupButton from '@/app/test/(ui)/GroupButton';
 import AddGroupButton from '@/app/test/(ui)/AddGroupButton';
-
+import { useEffect } from 'react';
 
 export default function Page() {
-  const userData: LoginUser = useUser(loginUserId);
+  const { loginUserId, setLoginUserId } = useAllContext();
+
+  useEffect(()=>{
+    localStorage.setItem("loginUserId", "u1");
+
+    const loginUserId = localStorage.getItem("loginUserId");
+    if (loginUserId) {
+      setLoginUserId(loginUserId);
+    }
+  },[loginUserId])
+  
+  const userData: LoginUser = useUser(loginUserId || '');
+
 
   return (
     <div className="flex min-h-screen flex-col bg-highlight-50">

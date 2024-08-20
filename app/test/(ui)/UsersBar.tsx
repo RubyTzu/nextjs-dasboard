@@ -2,10 +2,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 //import data
-import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import { ExtendedGroup, GroupUser } from '@/app/test/(data)/(sharedFunction)/types';
 
 export default function UsersBar({ groupData }: { groupData: ExtendedGroup }) {
+  const { loginUserId } = useAllContext();
   let frontUsers = [];
 
   if (groupData.users && groupData.users.length > 5) {
@@ -17,7 +18,7 @@ export default function UsersBar({ groupData }: { groupData: ExtendedGroup }) {
   return (
     <>
       {groupData &&
-        groupData.users.some((user) => user.id === loginUserId) ? (
+        groupData.users.some((user) => user.id ===  loginUserId) ? (
         <>
           {groupData.users.length ? (
             <div className="mt-16 flex items-center justify-center gap-4 border-b-grey-userBar border-b-[1px] pb-5 pt-8">
@@ -65,6 +66,7 @@ function UserBarImage({ user }: { user: GroupUser }) {
             height={200}
             alt={user.name}
             className="h-11 w-11 max-w-full rounded-full border-none object-cover align-middle shadow"
+            priority
           /> : <div className="h-11 w-11 max-w-full rounded-full border-none object-cover align-middle shadow bg-neutrals-20"></div>}
 
         </li>

@@ -2,7 +2,6 @@
 //import from next & react
 import { useState } from 'react';
 //import data
-import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
 import {
   ExtendedGroup
 } from '@/app/test/(data)/(sharedFunction)/types';
@@ -17,7 +16,7 @@ import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree
 import clsx from 'clsx';
 
 export default function Page() {
-  // const { groupid, expenseid } = useParams<{ groupid: string; expenseid: string }>();
+  const loginUserId = 'u1';
   const [phase, setPhase] = useState<number>(1);
   const [isNotEqual, setIsNotEqual] = useState<boolean>(false);
   const [isIncorrectTotalNum, setisIncorrectTotalNum] = useState<boolean>(false);
@@ -25,7 +24,7 @@ export default function Page() {
   const group: ExtendedGroup = {
     id: 'g2',
     name: '2024 Japan',
-    picture: 'groupIcon02',
+    picture: '/images/icons/groupIcon02.svg',
     creatorId: 'u1',
     expenses: [
       {

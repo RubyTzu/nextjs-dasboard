@@ -3,14 +3,13 @@
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 //import data
-import { useGroup } from '@/app/test/(data)/(fetchData)/Providers';
-import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { useGroup, useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import { Expense } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import { TopExpenseSettingBar } from '@/app/test/(ui)/TopBars';
 import {
-    GroupInfoBar,
-    NextStepButton,
+  GroupInfoBar,
+  NextStepButton,
 } from '@/app/test/(ui)/ExpenseSettingDetails';
 import { ExpenseSettingStepOne } from '@/app/test/(ui)/ExpenseSettingStepOne';
 import { ExpenseSettingStepTwo } from '@/app/test/(ui)/ExpenseSettingStepTwo';
@@ -18,77 +17,78 @@ import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree
 
 
 export default function Page() {
-    const params = useParams<{ groupid: string; }>();
-    const [phase, setPhase] = useState(1);
-    const [isNotEqual, setIsNotEqual] = useState(false);
-    const [isNotZero, setIsNotZero] = useState(false);
-      const [isIncorrectTotalNum, setisIncorrectTotalNum] =
-        useState<boolean>(false);
-        
-    const group = useGroup(params.groupid);
-    const [currentExpense, setCurrentExpense] = useState<Expense>({
-      name: '未命名費用',
-      category: 'food',
-      amount: 0,
-      date: new Date().toISOString(),
-      note: '',
-      payerId: loginUserId,
-      sharers: [],
-    });
+  const { loginUserId } = useAllContext();
+  const params = useParams<{ groupid: string; }>();
+  const [phase, setPhase] = useState(1);
+  const [isNotEqual, setIsNotEqual] = useState(false);
+  const [isNotZero, setIsNotZero] = useState(false);
+  const [isIncorrectTotalNum, setisIncorrectTotalNum] =
+    useState<boolean>(false);
 
-    useEffect(() => {
-        if (currentExpense.amount !== 0) {
-            setIsNotZero(true)
-        }
-    }, [currentExpense?.amount, isNotZero])
+  const group = useGroup(params.groupid);
+  const [currentExpense, setCurrentExpense] = useState<Expense>({
+    name: '未命名費用',
+    category: 'food',
+    amount: 0,
+    date: new Date().toISOString(),
+    note: '',
+    payerId: loginUserId || '',
+    sharers: [],
+  });
 
-    return (
-      <form method="post" action={`/test/split/group/${params.groupid}`}>
-        <div className="relative flex flex-col">
-          <TopExpenseSettingBar
-            isAddPage={true}
+  useEffect(() => {
+    if (currentExpense.amount !== 0) {
+      setIsNotZero(true)
+    }
+  }, [currentExpense?.amount, isNotZero])
+
+  return (
+    <form method="post" action={`/test/split/group/${params.groupid}`}>
+      <div className="relative flex flex-col">
+        <TopExpenseSettingBar
+          isAddPage={true}
+          group={group}
+          expenseData={currentExpense}
+          phase={phase}
+          setPhase={setPhase}
+          hintword="新增費用"
+          cancelLink={`/test/split/group/${params.groupid}`}
+        />
+        <GroupInfoBar expenseData={currentExpense} group={group} />
+        <section>
+          <ExpenseSettingStepOne
             group={group}
+            expenseData={currentExpense}
+            setCurrentExpense={setCurrentExpense}
+            phase={phase}
+            setisIncorrectTotalNum={setisIncorrectTotalNum}
+          />
+          <ExpenseSettingStepTwo
+            expenseData={currentExpense}
+            setCurrentExpense={setCurrentExpense}
+            group={group}
+            phase={phase}
+          />
+          <ExpenseSettingStepThree
+            expenseData={currentExpense}
+            setCurrentExpense={setCurrentExpense}
+            group={group}
+            phase={phase}
+            setIsNotEqual={setIsNotEqual}
+          />
+        </section>
+        <section>
+          <NextStepButton
             expenseData={currentExpense}
             phase={phase}
             setPhase={setPhase}
-            hintword="新增費用"
-            cancelLink={`/test/split/group/${params.groupid}`}
+            isNotEqual={isNotEqual}
+            setIsNotEqual={setIsNotEqual}
+            isNotZero={true}
+            isIncorrectTotalNum={isIncorrectTotalNum}
           />
-          <GroupInfoBar expenseData={currentExpense} group={group} />
-          <section>
-            <ExpenseSettingStepOne
-              group={group}
-              expenseData={currentExpense}
-              setCurrentExpense={setCurrentExpense}
-              phase={phase}
-              setisIncorrectTotalNum={setisIncorrectTotalNum}
-            />
-            <ExpenseSettingStepTwo
-              expenseData={currentExpense}
-              setCurrentExpense={setCurrentExpense}
-              group={group}
-              phase={phase}
-            />
-            <ExpenseSettingStepThree
-              expenseData={currentExpense}
-              setCurrentExpense={setCurrentExpense}
-              group={group}
-              phase={phase}
-              setIsNotEqual={setIsNotEqual}
-            />
-          </section>
-          <section>
-            <NextStepButton
-              expenseData={currentExpense}
-              phase={phase}
-              setPhase={setPhase}
-              isNotEqual={isNotEqual}
-              setIsNotEqual={setIsNotEqual}
-              isNotZero={true}
-              isIncorrectTotalNum={isIncorrectTotalNum}
-            />
-          </section>
-        </div>
-      </form>
-    );
+        </section>
+      </div>
+    </form>
+  );
 }

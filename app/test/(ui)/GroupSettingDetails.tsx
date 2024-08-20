@@ -3,7 +3,6 @@ import { Fragment, useEffect } from 'react';
 //import data
 import { Group, GroupUser } from '../(data)/(sharedFunction)/types';
 //import ui
-import { groupIconMap } from '@/app/test/(ui)/Icons';
 import DeleteGroupButton from './DeleteGroupButton';
 import { GroupUserButton } from './GroupUserButton';
 import GroupPictureButton from './GroupPictureButton';
@@ -41,7 +40,7 @@ export function GroupNameSetting({
     picture,
     name,
   } = groupData;
-  const Icon = groupIconMap[picture];
+ 
 
   return (
     <>
@@ -49,7 +48,7 @@ export function GroupNameSetting({
         <div className={clsx("flex items-center gap-4", {
           "w-full": isAddPage,
         })}>
-          {Icon ? (
+          {picture ? (
             <GroupPictureButton
               groupData={groupData}
               setCurrentGroup={setCurrentGroup}

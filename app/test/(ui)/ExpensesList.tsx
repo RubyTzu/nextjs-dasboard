@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { Fragment } from 'react';
 //import data
-import { loginUserId } from '@/app/test/(data)/(fetchData)/user';
+import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import { filterExpense } from '@/app/test/(data)/(sharedFunction)/totalDebts';
 import {
   Sharer,
@@ -20,33 +20,34 @@ export default function ExpensesList({
 }: {
   groupData: ExtendedGroup;
 }) {
+  const { loginUserId } = useAllContext();
   let { expensesWithDebts } = filterExpense(
     groupData.expenses
       ? groupData.expenses
       : [
-          {
-            id: '',
-            name: '',
-            amount: 0,
-            date: '',
-            category: 'food',
-            payerId: '',
-            sharers: [],
-            note: '',
-          },
-        ],
+        {
+          id: '',
+          name: '',
+          amount: 0,
+          date: '',
+          category: 'food',
+          payerId: '',
+          sharers: [],
+          note: '',
+        },
+      ],
   );
   let groupId = groupData?.id ? groupData?.id : '';
   let users = groupData?.users
     ? groupData?.users
     : [
-        {
-          id: '',
-          name: '',
-          picture: '',
-          adoptable: false,
-        },
-      ];
+      {
+        id: '',
+        name: '',
+        picture: '',
+        adoptable: false,
+      },
+    ];
   let expenses = expensesWithDebts;
   // Step 1: Group expenses by date
   const groupedExpenses = expenses.reduce(
@@ -78,7 +79,7 @@ export default function ExpensesList({
             <Fragment key={expense.id}>
               {expense.sharers.some(
                 (sharer: Sharer) => sharer.id === loginUserId,
-              ) || expense.payerId.includes(loginUserId) ? (
+              ) || expense.payerId.includes(loginUserId || '') ? (
                 <ExpenseButton
                   users={users}
                   expense={expense}
@@ -104,6 +105,7 @@ function ExpenseButton({
   expense: ExtendedExpense;
   groupId: string;
 }) {
+  const { loginUserId } = useAllContext();
   const { id, name, amount, category, payerId, expenseDebt } = expense;
 
   const payerData = users.filter((user: GroupUser) => user.id === payerId)[0];
