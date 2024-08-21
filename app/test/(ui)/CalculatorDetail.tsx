@@ -23,17 +23,24 @@ interface ButtonClickHandlers {
   clearClick: () => void;
 }
 
-interface TotalAmountCalculatorProps extends SharedCalculatorProps, ButtonClickHandlers {
+interface TotalAmountCalculatorProps
+  extends SharedCalculatorProps,
+    ButtonClickHandlers {
+  showKeyboard: boolean;
+  setShowKeyboard: React.Dispatch<React.SetStateAction<boolean>>;
   expenseData: ExtendedExpense | Expense;
 }
 
-interface SharerAmountCalculatorProps extends SharedCalculatorProps, ButtonClickHandlers {
+interface SharerAmountCalculatorProps
+  extends SharedCalculatorProps,
+    ButtonClickHandlers {
+  showKeyboard: boolean;
+  setShowKeyboard: React.Dispatch<React.SetStateAction<boolean>>;
   isChecked: boolean;
   expenseData: ExtendedExpense | Expense;
   sharer: Sharer;
   users: GroupUser[];
-  setIsNotEqual: React.Dispatch<
-    React.SetStateAction<boolean>>;
+  setIsNotEqual: React.Dispatch<React.SetStateAction<boolean>>;
   currentSharer: Sharer;
 }
 
@@ -62,8 +69,7 @@ interface TotalCalculatorKeyboardProps extends ButtonClickHandlers {
 interface SharerCalculatorKeyboardProps extends TotalCalculatorKeyboardProps {
   users: GroupUser[];
   expenseData: ExtendedExpense | Expense;
-  setIsNotEqual: React.Dispatch<
-    React.SetStateAction<boolean>>;
+  setIsNotEqual: React.Dispatch<React.SetStateAction<boolean>>;
   currentSharer: Sharer;
   display: string;
 }
@@ -74,6 +80,8 @@ interface CalculatorButtonProps {
 }
 
 export const TotalAmountCalculator = ({
+  showKeyboard,
+  setShowKeyboard,
   expenseData,
   display,
   setDisplay,
@@ -84,7 +92,6 @@ export const TotalAmountCalculator = ({
   equalClick,
   clearClick,
 }: TotalAmountCalculatorProps) => {
-  const [showKeyboard, setShowKeyboard] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInputFocus = () => {
@@ -143,6 +150,8 @@ export const TotalAmountCalculator = ({
 };
 
 export const SharerAmountCalculator = ({
+  showKeyboard,
+  setShowKeyboard,
   isChecked,
   sharer,
   expenseData,
@@ -158,7 +167,6 @@ export const SharerAmountCalculator = ({
   setIsNotEqual,
   currentSharer,
 }: SharerAmountCalculatorProps) => {
-  const [showKeyboard, setShowKeyboard] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -168,18 +176,18 @@ export const SharerAmountCalculator = ({
         const yOffset = -200;
 
         if (element) {
-          const y = element.getBoundingClientRect().bottom + window.scrollY + yOffset;
+          const y =
+            element.getBoundingClientRect().bottom + window.scrollY + yOffset;
           window.scrollTo({ top: y, behavior: 'smooth' });
         }
       }
-
     };
 
     window.addEventListener('resize', handleResize);
     handleResize();
 
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('resize', handleResize);
     };
   }, [sharer, showKeyboard, inputRef.current]);
 
@@ -249,7 +257,7 @@ function TotalDisplay({
   onBlurDisplay,
 }: TotalDisplayProps) {
   useEffect(() => {
-    if (amount || amount === "") {
+    if (amount || amount === '') {
       setDisplay(String(amount));
     }
   }, [amount]);
@@ -261,17 +269,17 @@ function TotalDisplay({
   const handleFocus = () => {
     handleKeyboardFocus();
     onFocusDisplay();
-  }
+  };
 
   const handleBlur = () => {
     setTimeout(() => handleKeyboardBlur(), 100);
     onBlurDisplay();
-  }
+  };
 
   return (
     <input
       ref={inputRef}
-      className="w-full z-10 border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0"
+      className="z-10 w-full border-0 border-b border-grey-500 bg-transparent pb-1 pl-0 focus:border-b focus:border-highlight-40 focus:outline-none focus:ring-0"
       onChange={handleChange}
       onFocus={handleFocus}
       onBlur={handleBlur}
@@ -296,9 +304,8 @@ function SharerDisplay({
   onFocusDisplay,
   onBlurDisplay,
 }: SharerDisplayProps) {
-
   useEffect(() => {
-    if (amount || amount === "") {
+    if (amount || amount === '') {
       setDisplay(String(amount));
     }
 
@@ -314,12 +321,12 @@ function SharerDisplay({
   const handleFocus = () => {
     handleKeyboardFocus();
     onFocusDisplay();
-  }
+  };
 
   const handleBlur = () => {
     setTimeout(() => handleKeyboardBlur(), 100);
     onBlurDisplay();
-  }
+  };
 
   return (
     <input
@@ -350,7 +357,10 @@ const TotalCalculatorKeyboard = ({
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent | TouchEvent): void => {
-      if (keyboardRef.current && !keyboardRef.current.contains(e.target as Node)) {
+      if (
+        keyboardRef.current &&
+        !keyboardRef.current.contains(e.target as Node)
+      ) {
         handleKeyboardBlur();
       }
     };
@@ -377,29 +387,57 @@ const TotalCalculatorKeyboard = ({
       onClick={handleInputFocus}
     >
       <div className="flex items-center justify-center">
-        {['1', '2', '3'].map(value => (
-          <CalculatorButton key={value} value={value} onClick={() => buttonClick(value)} />
+        {['1', '2', '3'].map((value) => (
+          <CalculatorButton
+            key={value}
+            value={value}
+            onClick={() => buttonClick(value)}
+          />
         ))}
-        {['÷', '×'].map(value => (
-          <CalculatorButton key={value} value={value} onClick={() => (value === '×' ? buttonClick('*') : buttonClick('/'))} />
-        ))}
-      </div>
-      <div className="flex items-center justify-center">
-        {['4', '5', '6', '-', '+'].map(value => (
-          <CalculatorButton key={value} value={value} onClick={() => buttonClick(value)} />
-        ))}
-      </div>
-      <div className="flex items-center justify-center">
-        {['7', '8', '9'].map(value => (
-          <CalculatorButton key={value} value={value} onClick={() => buttonClick(value)} />
-        ))}
-        {['=', 'AC'].map(value => (
-          <CalculatorButton key={value} value={value} onClick={() => (value === '=' ? equalClick() : clearClick())} />
+        {['÷', '×'].map((value) => (
+          <CalculatorButton
+            key={value}
+            value={value}
+            onClick={() =>
+              value === '×' ? buttonClick('*') : buttonClick('/')
+            }
+          />
         ))}
       </div>
       <div className="flex items-center justify-center">
-        {['.', '0', '<-'].map(value => (
-          <CalculatorButton key={value} value={value} onClick={() => (value === '<-' ? buttonClick('Backspace') : buttonClick(value))} />
+        {['4', '5', '6', '-', '+'].map((value) => (
+          <CalculatorButton
+            key={value}
+            value={value}
+            onClick={() => buttonClick(value)}
+          />
+        ))}
+      </div>
+      <div className="flex items-center justify-center">
+        {['7', '8', '9'].map((value) => (
+          <CalculatorButton
+            key={value}
+            value={value}
+            onClick={() => buttonClick(value)}
+          />
+        ))}
+        {['=', 'AC'].map((value) => (
+          <CalculatorButton
+            key={value}
+            value={value}
+            onClick={() => (value === '=' ? equalClick() : clearClick())}
+          />
+        ))}
+      </div>
+      <div className="flex items-center justify-center">
+        {['.', '0', '<-'].map((value) => (
+          <CalculatorButton
+            key={value}
+            value={value}
+            onClick={() =>
+              value === '<-' ? buttonClick('Backspace') : buttonClick(value)
+            }
+          />
         ))}
         <button
           type="button"
@@ -436,7 +474,10 @@ const SharerCalculatorKeyboard = ({
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent | TouchEvent): void => {
-      if (keyboardRef.current && !keyboardRef.current.contains(e.target as Node)) {
+      if (
+        keyboardRef.current &&
+        !keyboardRef.current.contains(e.target as Node)
+      ) {
         handleKeyboardBlur();
       }
     };
@@ -470,29 +511,57 @@ const SharerCalculatorKeyboard = ({
         display={display}
       />
       <div className="flex items-center justify-center">
-        {['1', '2', '3'].map(value => (
-          <CalculatorButton key={value} value={value} onClick={() => buttonClick(value)} />
+        {['1', '2', '3'].map((value) => (
+          <CalculatorButton
+            key={value}
+            value={value}
+            onClick={() => buttonClick(value)}
+          />
         ))}
-        {['÷', '×'].map(value => (
-          <CalculatorButton key={value} value={value} onClick={() => (value === '×' ? buttonClick('*') : buttonClick('/'))} />
-        ))}
-      </div>
-      <div className="flex items-center justify-center">
-        {['4', '5', '6', '-', '+'].map(value => (
-          <CalculatorButton key={value} value={value} onClick={() => buttonClick(value)} />
-        ))}
-      </div>
-      <div className="flex items-center justify-center">
-        {['7', '8', '9'].map(value => (
-          <CalculatorButton key={value} value={value} onClick={() => buttonClick(value)} />
-        ))}
-        {['=', 'AC'].map(value => (
-          <CalculatorButton key={value} value={value} onClick={() => (value === '=' ? equalClick() : clearClick())} />
+        {['÷', '×'].map((value) => (
+          <CalculatorButton
+            key={value}
+            value={value}
+            onClick={() =>
+              value === '×' ? buttonClick('*') : buttonClick('/')
+            }
+          />
         ))}
       </div>
       <div className="flex items-center justify-center">
-        {['.', '0', '<-'].map(value => (
-          <CalculatorButton key={value} value={value} onClick={() => (value === '<-' ? buttonClick('Backspace') : buttonClick(value))} />
+        {['4', '5', '6', '-', '+'].map((value) => (
+          <CalculatorButton
+            key={value}
+            value={value}
+            onClick={() => buttonClick(value)}
+          />
+        ))}
+      </div>
+      <div className="flex items-center justify-center">
+        {['7', '8', '9'].map((value) => (
+          <CalculatorButton
+            key={value}
+            value={value}
+            onClick={() => buttonClick(value)}
+          />
+        ))}
+        {['=', 'AC'].map((value) => (
+          <CalculatorButton
+            key={value}
+            value={value}
+            onClick={() => (value === '=' ? equalClick() : clearClick())}
+          />
+        ))}
+      </div>
+      <div className="flex items-center justify-center">
+        {['.', '0', '<-'].map((value) => (
+          <CalculatorButton
+            key={value}
+            value={value}
+            onClick={() =>
+              value === '<-' ? buttonClick('Backspace') : buttonClick(value)
+            }
+          />
         ))}
         <button
           type="button"
@@ -512,7 +581,20 @@ const SharerCalculatorKeyboard = ({
 };
 
 const CalculatorButton = ({ value, onClick }: CalculatorButtonProps) => {
-  const isNum = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.', 'AC'].includes(value);
+  const isNum = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '0',
+    '.',
+    'AC',
+  ].includes(value);
   const isOperator = ['÷', '×', '-', '+', '='].includes(value);
 
   return (

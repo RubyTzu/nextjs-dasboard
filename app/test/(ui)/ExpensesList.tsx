@@ -21,32 +21,30 @@ export default function ExpensesList({
   groupData: ExtendedGroup;
 }) {
   const { loginUserId } = useAllContext();
-  const fetchExpenses = 
-    groupData.expenses
-      || [
-        {
-          id: '',
-          name: '',
-          amount: 0,
-          date: '',
-          category: 'food',
-          payerId: '',
-          sharers: [],
-          note: '',
-        },
-      ]
+  const fetchExpenses = groupData.expenses || [
+    {
+      id: '',
+      name: '',
+      amount: 0,
+      date: '',
+      category: 'food',
+      payerId: '',
+      sharers: [],
+      note: '',
+    },
+  ];
   let { expensesWithDebts } = filterExpense(fetchExpenses, loginUserId);
   let groupId = groupData?.id ? groupData?.id : '';
   let users = groupData?.users
     ? groupData?.users
     : [
-      {
-        id: '',
-        name: '',
-        picture: '',
-        adoptable: false,
-      },
-    ];
+        {
+          id: '',
+          name: '',
+          picture: '',
+          adoptable: false,
+        },
+      ];
   let expenses = expensesWithDebts;
 
   const groupedExpenses = expenses.reduce(
@@ -62,7 +60,11 @@ export default function ExpensesList({
   );
 
   const renderExpensesByDate = () => {
-    return Object.keys(groupedExpenses).map((date, index) => {
+    const sortedDates: string[] = Object.keys(groupedExpenses).sort(
+      (a: string, b: string) => new Date(a).getTime() - new Date(b).getTime(),
+    );
+
+    return sortedDates.map((date, index) => {
       let formateDate: Date | string = new Date(date);
       formateDate = format(formateDate, 'yyyy/MM/dd');
 
@@ -75,15 +77,11 @@ export default function ExpensesList({
           ) : null}
           {groupedExpenses[date].map((expense: ExtendedExpense) => (
             <Fragment key={expense.id}>
-              {expense.sharers.some(
-                (sharer: Sharer) => sharer.id === loginUserId,
-              ) || expense.payerId.includes(loginUserId || '') ? (
-                <ExpenseButton
-                  users={users}
-                  expense={expense}
-                  groupId={groupId}
-                />
-              ) : null}
+              <ExpenseButton
+                users={users}
+                expense={expense}
+                groupId={groupId}
+              />
             </Fragment>
           ))}
         </div>

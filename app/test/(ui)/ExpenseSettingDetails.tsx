@@ -7,6 +7,7 @@ import {
   ExtendedGroup,
   Expense,
 } from '../(data)/(sharedFunction)/types';
+import { addExpense, changeExpense } from '../(data)/(fetchData)/API';
 //import ui
 import { NextstepIcon } from '@/app/test/(ui)/Icons';
 import clsx from 'clsx';
@@ -17,8 +18,11 @@ interface GroupInfoBarProps {
 }
 
 interface NextStepButtonProps {
+  isAddExpensePage: boolean;
+  formRef: React.RefObject<HTMLFormElement>;
   phase: number;
   setPhase: (phase: number) => void;
+  groupid: string;
   expenseData: ExtendedExpense | Expense;
   isNotEqual: boolean;
   setIsNotEqual: (isNotEqual: boolean) => void;
@@ -26,16 +30,13 @@ interface NextStepButtonProps {
   isIncorrectTotalNum: boolean;
 }
 
-export function GroupInfoBar({
-  expenseData,
-  group,
-}: GroupInfoBarProps) {
+export function GroupInfoBar({ expenseData, group }: GroupInfoBarProps) {
   const picture = group?.picture || '';
   const name = group?.name || '';
 
   return (
     <>
-      {expenseData && group ?
+      {expenseData && group ? (
         <div className="mt-16 flex items-center gap-4 border-b-2 py-4 pl-6">
           <p>你和</p>
           <div className="flex items-center justify-center gap-2 rounded-full bg-neutrals-30 py-1 pl-3 pr-4">
@@ -51,33 +52,35 @@ export function GroupInfoBar({
             <div>{name}</div>
           </div>
         </div>
-        : null
-      }
-
+      ) : null}
     </>
   );
 }
 
 export function NextStepButton({
+  isAddExpensePage,
+  formRef,
   phase,
   setPhase,
+  groupid,
   expenseData,
   isNotEqual,
   setIsNotEqual,
   isNotZero,
-  isIncorrectTotalNum
+  isIncorrectTotalNum,
 }: NextStepButtonProps) {
+  const expenseId = expenseData && 'id' in expenseData ? expenseData.id : '';
 
-
-  const expenseId = expenseData && 'id' in expenseData ? expenseData.id : ''
-
-  const addedAmount = expenseData?.sharers.reduce(
-    (total, sharer) => Number(total) + Number(sharer.amount),
-    0,
-  ) || 0;
+  const addedAmount =
+    expenseData?.sharers.reduce(
+      (total, sharer) => Number(total) + Number(sharer.amount),
+      0,
+    ) || 0;
 
   useEffect(() => {
-    const difference = Math.abs(Number(expenseData?.amount) - Number(addedAmount));
+    const difference = Math.abs(
+      Number(expenseData?.amount) - Number(addedAmount),
+    );
 
     const isNotEqual = difference >= 0.1;
 
@@ -92,8 +95,40 @@ export function NextStepButton({
     console.log(expenseData);
   }
 
-  function handleSubmit(expense: ExtendedExpense | Expense) {
-    // console.log(expenseData);
+  async function handleSubmit(
+    event: React.MouseEvent<HTMLButtonElement>,
+    expense: ExtendedExpense | Expense,
+    groupid: string,
+    expenseid: string,
+  ) {
+    event.preventDefault();
+
+    let payload = {
+      groupId: groupid,
+      name: expense.name,
+      category: expense.category,
+      amount: expense.amount,
+      date: expense.date,
+      note: expense.note,
+      payerId: expense.payerId,
+      sharers: expense.sharers,
+    };
+
+    try {
+      if (isAddExpensePage) {
+        // await addExpense(payload);
+      } else {
+        // await changeExpense({ ...payload, id: expenseid });
+        console.log('expense page edited!');
+      }
+
+      console.log(expense);
+      if (formRef.current) {
+        formRef.current.submit();
+      }
+    } catch (error) {
+      console.error('API 呼叫失敗:', error);
+    }
   }
 
   return (
@@ -104,49 +139,45 @@ export function NextStepButton({
             <button
               disabled={isIncorrectTotalNum}
               type="button"
-              onClick={(e: React.SyntheticEvent) => handleClick(e, expenseId)}
+              onClick={(e: React.SyntheticEvent) =>
+                handleClick(e, expenseId || '')
+              }
               className="flex w-[180px] items-center justify-between rounded-full bg-highlight-20 px-4 py-2 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
             >
               <div className="text-[10px]">{phase}/3</div>
               <div className="text-sm">下一步</div>
               <div>
                 <NextstepIcon
-                  currentColor={
-                    isIncorrectTotalNum
-                      ? '#9E9E9E'
-                      : '#000'
-                  }
+                  currentColor={isIncorrectTotalNum ? '#9E9E9E' : '#000'}
                 />
               </div>
             </button>
           ) : (
             <>
-            <button
-              disabled={isNotEqual && isNotZero}
-              type="button"
-              onClick={() => {
-                console.log('click submit');
-                console.log(expenseData);
-              }}
-              onSubmit={() => handleSubmit(expenseData)}
-              className="relative flex w-[180px] items-center justify-between rounded-full bg-highlight-20 px-4 py-2 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
-            >
-              <div
-                className={clsx(
-                  'absolute bottom-12 left-[50%] w-screen translate-x-[-50%] text-xs text-text-onDark-secondary',
-                  {
-                    hidden: !isNotEqual && isNotZero,
-                    block: isNotEqual || !isNotZero,
-                  },
-                )}
+              <button
+                disabled={isNotEqual && isNotZero}
+                type="submit"
+                onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+                  handleSubmit(e, expenseData, groupid, expenseId || '')
+                }
+                className="relative flex w-[180px] items-center justify-between rounded-full bg-highlight-20 px-4 py-2 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
               >
-                目前分帳總額 不等於 {expenseData.amount} 元
-              </div>
-              <div className="text-[10px]">3/3</div>
-              <div className="text-sm">確認</div>
-              <div></div>
-            </button>
-            <div className="h-[400px]"/>
+                <div
+                  className={clsx(
+                    'absolute bottom-12 left-[50%] w-screen translate-x-[-50%] text-xs text-text-onDark-secondary',
+                    {
+                      hidden: !isNotEqual && isNotZero,
+                      block: isNotEqual || !isNotZero,
+                    },
+                  )}
+                >
+                  目前分帳總額 不等於 {expenseData.amount} 元
+                </div>
+                <div className="text-[10px]">3/3</div>
+                <div className="text-sm">確認</div>
+                <div></div>
+              </button>
+              <div className="h-[400px]" />
             </>
           )}
         </>

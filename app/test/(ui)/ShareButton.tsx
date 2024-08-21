@@ -17,14 +17,13 @@ export default function ShareButton({
   const base = 'http://localhost:3001/test/split/group/';
   const links = base + id;
 
-
   useEffect(() => {
     const btn = btnRef.current;
 
     const shareData = {
       url: links,
       title: name,
-      text: `差不多要來 CHILL 後算賬囉！`
+      text: `差不多要來 CHILL 後算賬囉！`,
     };
 
     const handleClick = async () => {
@@ -32,20 +31,20 @@ export default function ShareButton({
         await navigator.share(shareData);
       } catch (err) {
         if (err instanceof Error) {
-          console.log("發生錯誤", err);
+          console.log('發生錯誤', err);
         } else {
-          console.log("發生錯誤", err);
+          console.log('發生錯誤', err);
         }
       }
     };
 
     if (btn) {
-      btn.addEventListener("click", handleClick);
+      btn.addEventListener('click', handleClick);
     }
 
     return () => {
       if (btn) {
-        btn.removeEventListener("click", handleClick);
+        btn.removeEventListener('click', handleClick);
       }
     };
   }, []);
@@ -60,7 +59,7 @@ export default function ShareButton({
         <button
           ref={btnRef}
           onClick={(e) => handlesShareLink(e)}
-          className="scale-[1.17] mr-2 flex items-center justify-center rounded-full bg-neutrals-20 p-2"
+          className="mr-2 flex scale-[1.17] items-center justify-center rounded-full bg-neutrals-20 p-2"
         >
           <ShareLinkIcon />
         </button>

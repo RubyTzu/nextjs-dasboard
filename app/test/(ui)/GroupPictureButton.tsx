@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useState } from 'react';
 //import data
-import { Group, GroupPicture } from '../(data)/(sharedFunction)/types';
+import { Group } from '../(data)/(sharedFunction)/types';
 //import ui
 import { CameraIcon } from '@/app/test/(ui)/Icons';
 //import other
@@ -21,11 +21,12 @@ export default function GroupPictureButton({
   setCurrentGroup,
 }: Props) {
   const { picture } = groupData;
-  const [currentPicture, setCurrentPicture] = useState<GroupPicture>(picture);
-  const [lastSavedPicture, setLastSavedPicture] = useState<GroupPicture>(currentPicture);
+  const [currentPicture, setCurrentPicture] = useState<string>(picture);
+  const [lastSavedPicture, setLastSavedPicture] =
+    useState<string>(currentPicture);
   const [isShow, setIsShow] = useState<boolean>(false);
   const router = useRouter();
-  const allGroupPicture: GroupPicture[] = [
+  const allGroupPicture: string[] = [
     '/images/icons/groupIcon01.svg',
     '/images/icons/groupIcon02.svg',
     '/images/icons/groupIcon03.svg',
@@ -50,9 +51,9 @@ export default function GroupPictureButton({
     router.refresh();
   };
 
-  const handleChange = (picture: GroupPicture) => {
+  const handleChange = (picture: string) => {
     setCurrentPicture(picture);
-  }
+  };
 
   const handleClose = () => {
     setCurrentPicture(lastSavedPicture);
@@ -105,7 +106,7 @@ export default function GroupPictureButton({
             return (
               <div
                 className={clsx(
-                  'after:content-checkWhiteIcon relative max-w-[33.33%] before:absolute before:top-0 before:h-full before:w-full before:bg-neutrals-60 before:opacity-50 after:absolute after:left-[50%] after:top-[50%] after:z-100 after:w-8 after:translate-x-[-50%] after:translate-y-[-50%]',
+                  'relative max-w-[33.33%] before:absolute before:top-0 before:h-full before:w-full before:bg-neutrals-60 before:opacity-50 after:absolute after:left-[50%] after:top-[50%] after:z-100 after:w-8 after:translate-x-[-50%] after:translate-y-[-50%] after:content-checkWhiteIcon',
                   {
                     '': currentPicture === picture,
                     'before:hidden after:hidden': currentPicture !== picture,

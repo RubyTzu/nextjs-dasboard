@@ -11,9 +11,9 @@ import { evaluate } from 'mathjs';
 interface TotalProps {
   expenseData: ExtendedExpense | Expense;
   setCurrentExpense: React.Dispatch<
-    React.SetStateAction<ExtendedExpense | Expense>>;
-  setisIncorrectTotalNum: React.Dispatch<
-    React.SetStateAction<boolean>>;
+    React.SetStateAction<ExtendedExpense | Expense>
+  >;
+  setisIncorrectTotalNum: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface SharerProps {
@@ -24,8 +24,7 @@ interface SharerProps {
   handleInputChange: (newValue: string) => void;
   expenseData: ExtendedExpense | Expense;
   users: GroupUser[];
-  setIsNotEqual: React.Dispatch<
-    React.SetStateAction<boolean>>;
+  setIsNotEqual: React.Dispatch<React.SetStateAction<boolean>>;
   currentSharer: Sharer;
 }
 
@@ -35,6 +34,7 @@ export const TotalCalculator = ({
   setisIncorrectTotalNum,
 }: TotalProps) => {
   const [display, setDisplay] = useState<string>('');
+  const [showKeyboard, setShowKeyboard] = useState<boolean>(false);
 
   const updateDisplay = (updateDisplayString: string) => {
     setDisplay(updateDisplayString);
@@ -84,7 +84,7 @@ export const TotalCalculator = ({
   const buttonClick = (num: string) => {
     if (num === 'Backspace') {
       let myString = String(display);
-      // console.log(typeof num)
+
       myString = myString.split('').reverse().slice(1).reverse().join('');
       updateDisplay(myString);
     } else {
@@ -97,7 +97,6 @@ export const TotalCalculator = ({
       if (display.length > 0) {
         const result = evaluate(display.replaceAll(',', ''));
 
-        // Determine whether there are non-zero digits after the decimal point
         const hasDecimal = result % 1 !== 0;
 
         function hasTwoZeroesAfterDecimal(num: number) {
@@ -110,15 +109,15 @@ export const TotalCalculator = ({
         setDisplay(
           hasDecimal && !hasTwoZeroesAfterDecimal(result)
             ? result.toLocaleString('en-US', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-              useGrouping: false,
-            })
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+                useGrouping: false,
+              })
             : result.toLocaleString('en-US', {
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 0,
-              useGrouping: false,
-            }),
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+                useGrouping: false,
+              }),
         );
       }
     } catch (error) {
@@ -138,12 +137,12 @@ export const TotalCalculator = ({
   };
 
   const opKey = (op: string | number) => {
-    console.log(typeof op)
+    console.log(typeof op);
     setDisplay(display + op);
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (allowedKeys.includes(e.key)) {
+    if (allowedKeys.includes(e.key) && showKeyboard) {
       switch (e.key) {
         case 'Backspace':
           !focusDisplay && backspace();
@@ -167,18 +166,19 @@ export const TotalCalculator = ({
     document.addEventListener('keydown', handleKeyDown);
 
     if (isNaN(Number(display)) || Number(display) < 1) {
-      setisIncorrectTotalNum(true)
+      setisIncorrectTotalNum(true);
     } else {
-      setisIncorrectTotalNum(false)
+      setisIncorrectTotalNum(false);
     }
 
     return () => document.removeEventListener('keydown', handleKeyDown);
   });
 
-
   return (
     <>
       <TotalAmountCalculator
+        showKeyboard={showKeyboard}
+        setShowKeyboard={setShowKeyboard}
         expenseData={expenseData}
         display={display}
         setDisplay={setDisplay}
@@ -202,9 +202,10 @@ export const SharerCalculator = ({
   expenseData,
   users,
   setIsNotEqual,
-  currentSharer
+  currentSharer,
 }: SharerProps) => {
   const [display, setDisplay] = useState<string>('');
+  const [showKeyboard, setShowKeyboard] = useState<boolean>(false);
 
   const updateDisplay = (updateDisplayString: string) => {
     setDisplay(updateDisplayString);
@@ -249,9 +250,9 @@ export const SharerCalculator = ({
     const isValidNum = !isNaN(Number(display)) && Number(display) > 1;
 
     if (isValidNum && sharer.amount !== Number(display)) {
-      handleInputBlur(display)
+      handleInputBlur(display);
     } else if (display === '') {
-      handleInputBlur(display)
+      handleInputBlur(display);
     }
   };
 
@@ -271,7 +272,6 @@ export const SharerCalculator = ({
       if (display.length > 0) {
         const result = evaluate(display.replaceAll(',', ''));
 
-        // Determine whether there are non-zero digits after the decimal point
         const hasDecimal = result % 1 !== 0;
 
         function hasTwoZeroesAfterDecimal(num: number) {
@@ -284,15 +284,15 @@ export const SharerCalculator = ({
         setDisplay(
           hasDecimal && !hasTwoZeroesAfterDecimal(result)
             ? result.toLocaleString('en-US', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-              useGrouping: false,
-            })
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+                useGrouping: false,
+              })
             : result.toLocaleString('en-US', {
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 0,
-              useGrouping: false,
-            }),
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+                useGrouping: false,
+              }),
         );
       }
     } catch (error) {
@@ -312,12 +312,12 @@ export const SharerCalculator = ({
   };
 
   const opKey = (op: string | number) => {
-    console.log(typeof op)
+    console.log(typeof op);
     setDisplay(display + op);
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (allowedKeys.includes(e.key)) {
+    if (allowedKeys.includes(e.key) && showKeyboard) {
       switch (e.key) {
         case 'Backspace':
           !focusDisplay && backspace();
@@ -343,10 +343,11 @@ export const SharerCalculator = ({
     return () => document.removeEventListener('keydown', handleKeyDown);
   });
 
-
   return (
     <>
       <SharerAmountCalculator
+        showKeyboard={showKeyboard}
+        setShowKeyboard={setShowKeyboard}
         isChecked={isChecked}
         sharer={sharer}
         expenseData={expenseData}

@@ -50,18 +50,16 @@ interface TopBarProps {
   handleRightClick: () => void;
 }
 
-export function TopGroupBar({
-  isBalancePage,
-  groupData
-}: TopGroupBarProps) {
+export function TopGroupBar({ isBalancePage, groupData }: TopGroupBarProps) {
   const { loginUserId } = useAllContext();
 
   const hasGroupData = Boolean(groupData);
-  const isUserInGroup = hasGroupData && groupData.users?.some((user) => user.id === loginUserId);
+  const isUserInGroup =
+    hasGroupData && groupData.users?.some((user) => user.id === loginUserId);
 
   return (
     <div className="fixed z-10 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
-      <div className="h-6 w-6 flex items-center justify-center">
+      <div className="flex h-6 w-6 items-center justify-center">
         {isBalancePage && hasGroupData ? (
           <Link href={`/test/split/group/${groupData.id}`} className="flex">
             <BackArrowIcon />
@@ -72,15 +70,10 @@ export function TopGroupBar({
           </Link>
         ) : null}
       </div>
-      <h1 className="text-lg">
-        {isUserInGroup ? groupData.name : ''}
-      </h1>
+      <h1 className="text-lg">{isUserInGroup ? groupData.name : ''}</h1>
       <div className="h-6 w-6">
         {!isBalancePage && isUserInGroup && (
-          <Link
-            href={`/test/split/group/${groupData.id}/edit`}
-            scroll={false}
-          >
+          <Link href={`/test/split/group/${groupData.id}/edit`} scroll={false}>
             <EditIcon />
           </Link>
         )}
@@ -96,63 +89,47 @@ export function TopGroupSettingBar({
   leftHintWord,
   rightHintWord,
   leftCancelLink,
-  rightCancelLink
+  rightCancelLink,
 }: TopGroupSettingBarProps) {
   const { loginUserId } = useAllContext();
 
-  const shouldRender = groupData && (
-    isAddPage ||
-    (groupData.users?.some((user) => user.id === loginUserId))
-  );
+  const shouldRender =
+    groupData &&
+    (isAddPage || groupData.users?.some((user) => user.id === loginUserId));
 
   return (
     <div className="fixed z-20 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
-      <div className="h-6 w-8 flex justify-center items-center">
-        {shouldRender &&
+      <div className="flex h-6 w-8 items-center justify-center">
+        {shouldRender && (
           <Link href={leftCancelLink} scroll={false}>
             <div className="">{leftHintWord}</div>
           </Link>
-        }
+        )}
       </div>
-      <h1 className="text-lg">
-        {shouldRender && middleHintword}
-      </h1>
+      <h1 className="text-lg">{shouldRender && middleHintword}</h1>
       <div className="h-6 w-8">
-        {shouldRender &&
+        {shouldRender && (
           <Link href={rightCancelLink} scroll={false}>
             <div className="">{rightHintWord}</div>
           </Link>
-        }
+        )}
       </div>
     </div>
   );
 }
 
-export function TopExpenseBar({
-  groupData,
-  expenseData,
-}: TopExpenseBarProps) {
+export function TopExpenseBar({ groupData, expenseData }: TopExpenseBarProps) {
   const { loginUserId } = useAllContext();
-  const id = groupData ? groupData.id : ""
+  const id = groupData ? groupData.id : '';
 
   return (
     <div className="fixed z-10 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
       <Link href={`/test/split/group/${id}`} className="h-6 w-6">
         <HomeIcon />
       </Link>
-      <h1 className="text-lg">
-        {expenseData &&
-          (expenseData.payerId === loginUserId ||
-            expenseData.sharers?.some((sharer) => sharer.id === loginUserId))
-          ? '費用明細'
-          : ''}
-      </h1>
+      <h1 className="text-lg">{expenseData ? '費用明細' : ''}</h1>
       <div className="h-6 w-6">
-        {expenseData &&
-          (expenseData.payerId === loginUserId ||
-            expenseData.sharers?.some(
-              (sharer) => sharer.id === loginUserId,
-            )) ? (
+        {expenseData ? (
           <Link
             href={`/test/split/group/${id}/expense/${expenseData.id}/edit`}
             className="h-6 w-6"
@@ -175,7 +152,7 @@ export function TopExpenseSettingBar({
   phase,
   setPhase,
   hintword,
-  cancelLink
+  cancelLink,
 }: TopExpenseSettingBarProps) {
   const { loginUserId } = useAllContext();
 
@@ -185,10 +162,7 @@ export function TopExpenseSettingBar({
     console.log(phase);
   }
 
-  const shouldRender = expenseData && group && (
-    isAddPage ||
-    (expenseData.payerId === loginUserId || expenseData.sharers?.some((sharer) => sharer.id === loginUserId))
-  );
+  const shouldRender = expenseData && group;
 
   return (
     <div className="fixed z-20 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
@@ -197,15 +171,13 @@ export function TopExpenseSettingBar({
           type="button"
           onClick={handleClick}
           className={clsx('cursor-pointer text-sm', {
-            hidden: phase === 1
+            hidden: phase === 1,
           })}
         >
           上一步
         </button>
       </div>
-      <h1 className="text-lg">
-        {shouldRender && hintword}
-      </h1>
+      <h1 className="text-lg">{shouldRender && hintword}</h1>
       <div className="flex h-6 w-12 items-center justify-end">
         <>
           {shouldRender && (

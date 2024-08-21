@@ -1,8 +1,10 @@
 //import from next & react
 import { useId, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 //import data
 import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import { ExtendedExpense } from '../(data)/(sharedFunction)/types';
+import { deleteExpense } from '../(data)/(fetchData)/API';
 //import ui
 import DeleteModal from './DeleteModal';
 
@@ -10,15 +12,10 @@ interface Props {
   expenseData: ExtendedExpense;
 }
 
-export default function DeleteExpenseButton({
-  expenseData,
-}: Props) {
+export default function DeleteExpenseButton({ expenseData }: Props) {
   const { loginUserId } = useAllContext();
-  const {
-    id,
-    payerId,
-    sharers,
-  } = expenseData;
+  const router = useRouter();
+  const { id, payerId, sharers, groupId } = expenseData;
 
   const [isShow, setIsShow] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -39,19 +36,18 @@ export default function DeleteExpenseButton({
     }, 100);
   };
 
-  const handleDeleteEXpense = (id: string) => {
-    console.log(`delete expense ${id}`);
+  async function handleDeleteExpense(groupId: string, expenseId: string) {
+    try {
+      // await deleteExpense(groupId, expenseId);
+      router.push(`/test/split/group/${groupId}`);
+    } catch (error) {
+      console.error('API 呼叫失敗:', error);
+    }
+  }
 
-    setIsShow(false);
-    setTimeout(() => {
-      dialogRef.current?.close();
-    }, 100);
-  };
   return (
     <>
-      {expenseData &&
-      (payerId === loginUserId ||
-        sharers?.some((sharer) => sharer.id === loginUserId)) ? (
+      {expenseData ? (
         <>
           <div
             onClick={handleToggle}
@@ -65,7 +61,7 @@ export default function DeleteExpenseButton({
             isShow={isShow}
             headerId={headerId}
             handleClose={handleClose}
-            handleSave={() => handleDeleteEXpense(id)}
+            handleSave={() => handleDeleteExpense(groupId || '', id || '')}
             hintWord="確定要放棄這筆費用嗎？"
             idx={`deleteExpense${id}`}
           />

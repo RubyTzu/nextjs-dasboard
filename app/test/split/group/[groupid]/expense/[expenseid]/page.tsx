@@ -17,23 +17,26 @@ import { ExpenseSkeleton } from '@/app/test/(ui)/LoadingSkeletons';
 
 export default function Page() {
   const { loginUserId } = useAllContext();
-  const { groupid, expenseid } = useParams<{ groupid: string; expenseid: string }>();
+  const { groupid, expenseid } = useParams<{
+    groupid: string;
+    expenseid: string;
+  }>();
   const group: ExtendedGroup = useGroup(groupid);
   const expense: ExtendedExpense = useExpense(expenseid);
-  const users: GroupUser[] = group?.users || [{
-    id: "",
-    name: "",
-    picture: "",
-    adoptable: false
-  }];
+  const users: GroupUser[] = group?.users || [
+    {
+      id: '',
+      name: '',
+      picture: '',
+      adoptable: false,
+    },
+  ];
 
   return (
     <div className="flex flex-col items-center">
       <Suspense fallback={<ExpenseSkeleton />}>
         <TopExpenseBar groupData={group} expenseData={expense} />
-        {group && expense &&
-          (expense.sharers?.some((sharer) => sharer.id === loginUserId) ||
-            expense.payerId?.includes(loginUserId || '')) ? (
+        {group && expense ? (
           <div className="mt-16 flex w-full flex-col items-center px-4 py-6">
             <ExpenseDetailOne expenseData={expense} users={users} />
             <ExpenseDetailTwo expenseData={expense} users={users} />

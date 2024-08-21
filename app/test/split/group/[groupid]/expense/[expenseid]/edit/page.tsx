@@ -1,7 +1,7 @@
 'use client';
 //import from next & react
 import { useParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 //import data
 import { useGroup, useExpense, useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import {
@@ -21,16 +21,21 @@ import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree
 
 export default function Page() {
   const { loginUserId } = useAllContext();
-  const { groupid, expenseid } = useParams<{ groupid: string; expenseid: string }>();
+  const { groupid, expenseid } = useParams<{
+    groupid: string;
+    expenseid: string;
+  }>();
   const [phase, setPhase] = useState<number>(1);
   const [isNotEqual, setIsNotEqual] = useState<boolean>(false);
-  const [isIncorrectTotalNum, setisIncorrectTotalNum] = useState<boolean>(false);
+  const [isIncorrectTotalNum, setisIncorrectTotalNum] =
+    useState<boolean>(false);
 
   const group: ExtendedGroup = useGroup(groupid);
   const expense: ExtendedExpense = useExpense(expenseid);
   const [currentExpense, setCurrentExpense] = useState<
     ExtendedExpense | Expense
   >(expense);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     if (expense) {
@@ -40,6 +45,7 @@ export default function Page() {
 
   return (
     <form
+      ref={formRef}
       method="post"
       action={`/test/split/group/${groupid}/expense/${expenseid}`}
     >
@@ -50,12 +56,10 @@ export default function Page() {
           expenseData={expense}
           phase={phase}
           setPhase={setPhase}
-          hintword='編輯費用'
+          hintword="編輯費用"
           cancelLink={`/test/split/group/${groupid}/expense/${expenseid}`}
         />
-        {expense &&
-          (expense.sharers?.some((sharer) => sharer.id === loginUserId) ||
-            expense.payerId?.includes(loginUserId || '')) ? (
+        {expense ? (
           <>
             <GroupInfoBar expenseData={currentExpense} group={group} />
             <section>
@@ -82,9 +86,12 @@ export default function Page() {
             </section>
             <section>
               <NextStepButton
-                expenseData={currentExpense}
+                isAddExpensePage={false}
+                formRef={formRef}
                 phase={phase}
                 setPhase={setPhase}
+                groupid={groupid}
+                expenseData={currentExpense}
                 isNotEqual={isNotEqual}
                 setIsNotEqual={setIsNotEqual}
                 isNotZero={true}
