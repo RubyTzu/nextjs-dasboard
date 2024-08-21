@@ -24,7 +24,7 @@ export default function ShareButton({
     const shareData = {
       url: links,
       title: name,
-      text: `分享群組 - ${name}`
+      text: `快加入 ${name} 來 CHILL 後算賬！`
     };
 
     const handleClick = async () => {
