@@ -1,231 +1,81 @@
 'use client';
-//import from next & react
-import { useState } from 'react';
+import { useEffect,useState } from 'react';
 //import data
-import {
-  ExtendedGroup
-} from '@/app/test/(data)/(sharedFunction)/types';
+import { Group } from '../../(data)/(sharedFunction)/types';
+import Image from 'next/image';
+import ShareButton from '../../(ui)/ShareButton';
 //import ui
-import {
-  GroupInfoBar,
-  NextStepButton,
-} from '@/app/test/(ui)/ExpenseSettingDetails';
-import { ExpenseSettingStepOne } from '@/app/test/(ui)/ExpenseSettingStepOne';
-import { ExpenseSettingStepTwo } from '@/app/test/(ui)/ExpenseSettingStepTwo';
-import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
-import clsx from 'clsx';
 
 export default function Page() {
-  const loginUserId = 'u1';
-  const [phase, setPhase] = useState<number>(1);
-  const [isNotEqual, setIsNotEqual] = useState<boolean>(false);
-  const [isIncorrectTotalNum, setisIncorrectTotalNum] = useState<boolean>(false);
-
-  const group: ExtendedGroup = {
-    id: 'g2',
-    name: '2024 Japan',
-    picture: '/images/icons/groupIcon02.svg',
-    creatorId: 'u1',
-    expenses: [
-      {
-        id: 'e17',
-        name: 'plane ticket',
-        amount: 180000,
-        date: '2024-05-28T00:00:00.000Z',
-        category: 'transport',
-        payerId: 'u1',
-        sharers: [
-          {
-            id: 'u1',
-            amount: 30000,
-          },
-          {
-            id: 'u2',
-            amount: 30000,
-          },
-          {
-            id: 'u3',
-            amount: 30000,
-          },
-          {
-            id: 'u4',
-            amount: 30000,
-          },
-          {
-            id: 'u5',
-            amount: 30000,
-          },
-          {
-            id: 'u6',
-            amount: 30000,
-          },
-        ],
-        note: '',
-      },
-    ],
-    users: [
-      {
-        id: 'u1',
-        name: 'a',
-        picture: 'https://cdn2.thecatapi.com/images/a4v.jpg',
-        adoptable: false,
-      },
-      {
-        id: 'u2',
-        name: 'b',
-        picture:
-          'https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg',
-        adoptable: false,
-      },
-      {
-        id: 'u3',
-        name: 'c',
-        picture: 'https://cdn2.thecatapi.com/images/O7FnoegHR.jpg',
-        adoptable: false,
-      },
-      {
-        id: 'u4',
-        name: 'd',
-        picture:
-          'https://images.dog.ceo/breeds/terrier-sealyham/n02095889_1044.jpg',
-        adoptable: false,
-      },
-      {
-        id: 'u5',
-        name: 'e',
-        picture: 'https://cdn2.thecatapi.com/images/cib.jpg',
-        adoptable: false,
-      },
-      {
-        id: 'u6',
-        name: 'f',
-        picture:
-          'https://images.dog.ceo/breeds/terrier-patterdale/Patterdale.jpg',
-        adoptable: false,
-      },
-    ],
-  };
-const expense = {
-  id: 'e17',
-  groupId: "g2",
-  name: 'plane ticket',
-  amount: 180000,
-  date: '2024-05-28T08:18:15.063Z',
-  category: 'transport',
-  creatorId: 'u1',
-  payerId: 'u1',
-  sharers: [
+const userData = {
+  "id": "u8",
+  "lineId": "linIdu8",
+  "name": "h",
+  "picture": "https://images.dog.ceo/breeds/poodle-medium/WhatsApp_Image_2022-08-06_at_4.48.38_PM.jpg",
+  "groups": [
     {
-      id: 'u1',
-      amount: 30000,
+      "id": "g5",
+      "name": "新年新希望123",
+      "picture": "/images/icons/groupIcon05.svg"
     },
     {
-      id: 'u2',
-      amount: 30000,
+      "id": "g8",
+      "name": "group Games 2",
+      "picture": "/images/icons/groupIcon08.svg"
     },
     {
-      id: 'u3',
-      amount: 30000,
-    },
-    {
-      id: 'u4',
-      amount: 30000,
-    },
-    {
-      id: 'u5',
-      amount: 30000,
-    },
-    {
-      id: 'u6',
-      amount: 30000,
-    },
-  ],
-  note: '',
-  createAt: '2024-05-28T08:18:15.063Z',
-  updateAt: '2024-05-28T08:18:15.063Z',
+      "id": "g11",
+      "name": "group Other 3",
+      "picture": "/images/icons/groupIcon11.svg"
+    }
+  ]
 }
-  const [currentExpense, setCurrentExpense] = useState<any>(expense);
-
-
-  function handleClick() {
-    if (phase === 1) return;
-    setPhase(phase - 1);
-    console.log(phase);
-  }
-  const isAddPage = false
-
-  const shouldRender = currentExpense && group && (
-    isAddPage ||
-    (currentExpense.payerId === loginUserId || currentExpense.sharers?.some((sharer: any) => sharer.id === loginUserId))
-  );
 
   return (
-    <form
-      method="post"
-      action={`/test/split/group/${group.id}/expense/${currentExpense.id}`}
+    <div className="flex min-h-screen flex-col bg-highlight-50">
+    <h1 className="pt-7 z-[2] fixed left-[50%] translate-x-[-50%] w-full bg-highlight-50 text-center text-2xl font-semibold tracking-wide text-white">
+      群組列表
+    </h1>
+    <div className="mt-[6.5rem]">
+      {userData
+        ? userData.groups.map((group) => (
+          <GroupButton key={group.id} groupData={group} />
+        ))
+        : null}
+    </div>
+    <div className="mb-16"></div>
+  </div>
+  );
+}
+
+function GroupButton({ groupData }: { groupData: any }) {
+  const {
+    id,
+    picture,
+    name,
+  }= groupData;
+
+
+  return (
+    <div
+      className="mx-6 my-4 flex justify-between rounded-[20px] bg-white py-2 px-3"
     >
-      <div className="relative flex flex-col">
-      <div className="fixed z-20 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
-      <div className="flex h-6 w-12 items-center justify-start">
-        <button
-          type="button"
-          onClick={handleClick}
-          className={clsx('cursor-pointer text-sm', {
-            hidden: phase === 1
-          })}
-        >
-          上一步
-        </button>
+      <div className="z-0 flex items-center">
+        {picture ? (
+          <Image
+            src={picture}
+            className="flex h-14 w-14 items-center justify-center rounded-full bg-highlight-60"
+            width={200}
+            height={200}
+            alt={picture}
+            priority
+          />
+        ) : null}
+        <p className="pl-3 font-normal">{name}</p>
       </div>
-      <h1 className="text-lg">
-      {shouldRender && group.name}
-      </h1>
-      <div className="flex h-6 w-12 items-center justify-end">
+      <div className="flex items-center">
+        <ShareButton id={id || ""} name={name} inGroupPage={false} />
       </div>
     </div>
-        {expense &&
-          (expense.sharers?.some((sharer) => sharer.id === loginUserId) ||
-            expense.payerId?.includes(loginUserId)) ? (
-          <>
-            <GroupInfoBar expenseData={currentExpense} group={group} />
-            <section>
-              <ExpenseSettingStepOne
-                group={group}
-                expenseData={currentExpense}
-                setCurrentExpense={setCurrentExpense}
-                phase={phase}
-                setisIncorrectTotalNum={setisIncorrectTotalNum}
-              />
-              <ExpenseSettingStepTwo
-                expenseData={currentExpense}
-                setCurrentExpense={setCurrentExpense}
-                group={group}
-                phase={phase}
-              />
-              <ExpenseSettingStepThree
-                expenseData={currentExpense}
-                setCurrentExpense={setCurrentExpense}
-                group={group}
-                phase={phase}
-                setIsNotEqual={setIsNotEqual}
-              />
-            </section>
-            <section>
-              <NextStepButton
-                expenseData={currentExpense}
-                phase={phase}
-                setPhase={setPhase}
-                isNotEqual={isNotEqual}
-                setIsNotEqual={setIsNotEqual}
-                isNotZero={true}
-                isIncorrectTotalNum={isIncorrectTotalNum}
-              />
-            </section>
-          </>
-        ) : (
-          <></>
-        )}
-      </div>
-    </form>
   );
 }
