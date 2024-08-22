@@ -32,6 +32,7 @@ export function ExpenseDetailOne({
     updateAt,
     payerId,
     sharers,
+    date
   } = expenseData;
   let creatorIdUser = users.filter((user) => user.id === creatorId)[0];
 
@@ -41,27 +42,21 @@ export function ExpenseDetailOne({
   return (
     <>
       {expenseData ? (
-        <div className="flex w-full justify-between pl-2 pr-3">
-          <div className="flex gap-5">
-            <div className="z-0 flex h-[72px] w-[72px] items-center justify-center rounded-lg border-[5px] border-white bg-highlight-60">
-              <div className="scale-[1.4]">
-                {Icon ? <Icon strokeWidth={1.6} /> : null}
-              </div>
-            </div>
-            <div className="flex flex-col justify-between">
-              <div className="text-xl leading-8">{name}</div>
-              <div className="text-xs text-grey-500">
-                <div className="leading-3">
-                  {createAt && format(createAt, 'yyyy/MM/dd')}{' '}
-                  {creatorIdUser?.name}新增
-                </div>
-                <div className="leading-6">
-                  {updateAt && format(updateAt, 'yyyy/MM/dd')} 最後更新
-                </div>
-              </div>
+        <div className="flex w-full gap-4 justify-between pl-2 pr-3">
+          <div className="z-0 flex h-[72px] w-[72px] items-center justify-center rounded-lg border-[5px] border-white bg-highlight-60">
+            <div className="scale-[1.4]">
+              {Icon ? <Icon strokeWidth={1.6} /> : null}
             </div>
           </div>
-          <div className="text-xl leading-8">${nf.format(amount)}</div>
+          <div className="grow flex justify-between pt-4">
+            <div className="h-fit">
+              <div className="text-xl leading-6 w-32 truncate">{name}</div>
+              <div className="text-sm text-grey-500 leading-4">
+                {date && format(date, 'yyyy/MM/dd')}
+              </div>
+            </div>
+            <div className="h-fit text-xl leading-6">${nf.format(amount)}</div>
+          </div>
         </div>
       ) : (
         <div></div>
@@ -96,11 +91,11 @@ export function ExpenseDetailTwo({
               />
             ) : null}
             <div className="flex grow items-center justify-between">
-              <div className="text-base">
-                {loginUserId === payerId ? '你' : payerData?.name}
-                先付了
+              <div className="flex text-base">
+                <div className="max-w-[92px] truncate">{loginUserId === payerId ? '你' : payerData?.name}</div>
+                <div>&nbsp;先付了</div>
               </div>
-              <div>${nf.format(amount)}</div>
+              <div className="text-highlight-35">${nf.format(amount)}</div>
             </div>
           </div>
 
@@ -121,7 +116,7 @@ export function ExpenseDetailTwo({
           })}
 
           {sharers.length === 1 &&
-          sharers.some((sharer) => sharer.id === payerId) ? (
+            sharers.some((sharer) => sharer.id === payerId) ? (
             <div className="my-5 flex w-full items-center justify-end">
               已結清無欠款
             </div>

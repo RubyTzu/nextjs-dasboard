@@ -70,7 +70,7 @@ export function TopGroupBar({ isBalancePage, groupData }: TopGroupBarProps) {
           </Link>
         ) : null}
       </div>
-      <h1 className="text-lg">{isUserInGroup ? groupData.name : ''}</h1>
+      <h1 className="text-lg max-w-52 truncate">{isUserInGroup ? groupData.name : ''}</h1>
       <div className="h-6 w-6">
         {!isBalancePage && isUserInGroup && (
           <Link href={`/test/split/group/${groupData.id}/edit`} scroll={false}>
@@ -123,9 +123,9 @@ export function TopExpenseBar({ groupData, expenseData }: TopExpenseBarProps) {
   const id = groupData ? groupData.id : '';
 
   return (
-    <div className="fixed z-10 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
-      <Link href={`/test/split/group/${id}`} className="h-6 w-6">
-        <HomeIcon />
+    <div className="fixed z-20 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
+      <Link href={`/test/split/group/${id}`} className="h-6 w-6 flex items-center justify-center">
+        <BackArrowIcon />
       </Link>
       <h1 className="text-lg">{expenseData ? '費用明細' : ''}</h1>
       <div className="h-6 w-6">

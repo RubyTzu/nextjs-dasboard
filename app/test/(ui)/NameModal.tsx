@@ -10,6 +10,7 @@ interface Prop {
   TopBarName: string;
   inputRef: React.Ref<HTMLInputElement>;
   currentValue: string;
+  nameExist: boolean;
 }
 
 export default function NameModal({
@@ -20,6 +21,7 @@ export default function NameModal({
   TopBarName,
   inputRef,
   currentValue,
+  nameExist
 }: Prop) {
   return (
     <>
@@ -36,16 +38,24 @@ export default function NameModal({
           name={TopBarName}
           leftBtnName=""
           rightBtnName="取消"
-          handleLeftClick={() => {}}
+          handleLeftClick={() => { }}
           handleRightClick={handleClose}
         />
-        <input
-          ref={inputRef}
-          className="relative top-[92px] z-40 mx-auto w-[80%] border-0 border-b border-b-white bg-transparent px-0 text-xl text-white focus:border-b focus:border-white focus:outline-none focus:ring-0"
-          type="text"
-          value={currentValue}
-          onChange={handleChange}
-        />
+        <div className="relative mx-auto z-40 top-[92px] w-[80%] h-fit border-b border-white">
+          <input
+            ref={inputRef}
+            className="relative w-[80%] border-0 bg-transparent px-0 text-xl text-white focus:border-0 focus:outline-none focus:ring-0"
+            type="text"
+            value={currentValue}
+            onChange={handleChange}
+            maxLength={20}
+          />
+          <div className="absolute top-[50%] translate-y-[-50%] right-0 text-neutrals-10 text-[10px]">&#40;{currentValue.length}/20&#41;</div>
+        </div>
+        <div className={clsx('relative w-[80%] mx-auto top-[105px] z-40 text-neutrals-50',{
+          'block': nameExist,
+          'hidden': !nameExist,
+          })}>該{TopBarName}已存在，請重新輸入</div>
         <button
           type="button"
           disabled={currentValue === ''}

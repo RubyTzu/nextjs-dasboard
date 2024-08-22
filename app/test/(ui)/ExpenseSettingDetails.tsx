@@ -28,6 +28,8 @@ interface NextStepButtonProps {
   setIsNotEqual: (isNotEqual: boolean) => void;
   isNotZero: boolean;
   isIncorrectTotalNum: boolean;
+  nameExist: boolean;
+  hasNameLength: boolean;
 }
 
 export function GroupInfoBar({ expenseData, group }: GroupInfoBarProps) {
@@ -49,7 +51,7 @@ export function GroupInfoBar({ expenseData, group }: GroupInfoBarProps) {
                 alt={picture}
               />
             ) : null}
-            <div>{name}</div>
+            <div className="max-w-52 truncate">{name}</div>
           </div>
         </div>
       ) : null}
@@ -68,6 +70,8 @@ export function NextStepButton({
   setIsNotEqual,
   isNotZero,
   isIncorrectTotalNum,
+  nameExist,
+  hasNameLength
 }: NextStepButtonProps) {
   const expenseId = expenseData && 'id' in expenseData ? expenseData.id : '';
 
@@ -137,7 +141,7 @@ export function NextStepButton({
         <>
           {phase !== 3 ? (
             <button
-              disabled={isIncorrectTotalNum}
+              disabled={isIncorrectTotalNum || nameExist || !hasNameLength}
               type="button"
               onClick={(e: React.SyntheticEvent) =>
                 handleClick(e, expenseId || '')
@@ -148,7 +152,7 @@ export function NextStepButton({
               <div className="text-sm">下一步</div>
               <div>
                 <NextstepIcon
-                  currentColor={isIncorrectTotalNum ? '#9E9E9E' : '#000'}
+                  currentColor={isIncorrectTotalNum || nameExist || !hasNameLength ? '#9E9E9E' : '#000'}
                 />
               </div>
             </button>

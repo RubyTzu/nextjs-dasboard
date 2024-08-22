@@ -5,17 +5,20 @@ import { useState, useRef } from 'react';
 //import ui
 import { AddUserIcon } from '@/app/test/(ui)/Icons';
 import NameModal from './NameModal';
-import { ExtendedGroup } from '../(data)/(sharedFunction)/types';
+import { ExtendedGroup, GroupUser, LoginUser } from '../(data)/(sharedFunction)/types';
 
 interface Props {
   groupData: ExtendedGroup;
   setCurrentGroup: React.Dispatch<React.SetStateAction<ExtendedGroup>>;
+  loginUserData: LoginUser | null;
 }
 
-export default function AddUserButton({ groupData, setCurrentGroup }: Props) {
+export default function AddUserButton({ groupData, setCurrentGroup, loginUserData }: Props) {
   const [currentGroupUserName, setCurrentGroupUserName] = useState('');
-  const [lastSavedGroup, setLastSavedGroup] = useState<any>(groupData);
-  const [isShow, setIsShow] = useState(false);
+  const [lastSavedGroup, setLastSavedGroup] = useState<ExtendedGroup>(groupData);
+  const [isShow, setIsShow] = useState<boolean>(false);
+  const [nameExist, setNameExist] = useState<boolean>(false);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
@@ -29,32 +32,47 @@ export default function AddUserButton({ groupData, setCurrentGroup }: Props) {
     router.refresh();
   };
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, groupData: ExtendedGroup, loginUserData: LoginUser | null) => {
+    const userExists = groupData.users?.some((user) => user.name === e.target.value) || loginUserData?.name === e.target.value;
+
+    if (userExists) {
+      setNameExist(true)
+    } else {
+      setNameExist(false)
+    }
+
     console.log(e.target.value);
     setCurrentGroupUserName(e.target.value);
   };
 
   const handleClose = () => {
-    setCurrentGroup(lastSavedGroup);
+    setCurrentGroupUserName('');
     setIsShow(false);
+    setNameExist(false)
     router.refresh();
   };
 
-  const handleSave = () => {
-    let newGroup = {
-      ...groupData,
-      users: [
-        ...(groupData.users as []),
-        {
-          name: currentGroupUserName,
-          picture: '/images/icons/newUserBG.svg',
-        },
-      ],
-    };
-    setCurrentGroup(newGroup);
-    setLastSavedGroup(newGroup);
-    setIsShow(false);
-    setCurrentGroupUserName('');
+  const handleSave = (targetUserName: string, groupData: ExtendedGroup, loginUserData: LoginUser | null) => {
+
+    const userExists = groupData.users?.some((user) => user.name === targetUserName) || loginUserData?.name === targetUserName;
+    if (userExists) {
+      return
+    } else {
+      let newGroup = {
+        ...groupData,
+        users: [
+          ...(groupData.users as []),
+          {
+            name: currentGroupUserName,
+            picture: '/images/icons/newUserBG.svg',
+          },
+        ],
+      };
+      setCurrentGroup(newGroup);
+      setLastSavedGroup(newGroup);
+      setIsShow(false);
+      setCurrentGroupUserName('');
+    }
   };
 
   return (
@@ -72,12 +90,13 @@ export default function AddUserButton({ groupData, setCurrentGroup }: Props) {
       </div>
       <NameModal
         isShow={isShow}
-        handleChange={handleChange}
+        handleChange={(e) => handleChange(e, groupData, loginUserData || null)}
         handleClose={handleClose}
-        handleSave={handleSave}
+        handleSave={() => handleSave(currentGroupUserName, groupData, loginUserData || null)}
         TopBarName="成員名稱"
         inputRef={inputRef}
         currentValue={currentGroupUserName}
+        nameExist={nameExist}
       />
     </>
   );

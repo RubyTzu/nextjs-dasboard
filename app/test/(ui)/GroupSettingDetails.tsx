@@ -1,7 +1,7 @@
 //import from next & react
 import { Fragment, useEffect } from 'react';
 //import data
-import { Group, GroupUser } from '../(data)/(sharedFunction)/types';
+import { Group, GroupUser, LoginUser } from '../(data)/(sharedFunction)/types';
 import { addGroup } from '../(data)/(fetchData)/API';
 //import ui
 import DeleteGroupButton from './DeleteGroupButton';
@@ -16,16 +16,19 @@ import clsx from 'clsx';
 
 
 interface GroupNameSettingProps {
+  loginUserData: LoginUser;
   groupData: Group;
   setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
   isAddPage: boolean;
+  nameExist: boolean;
+  setNameExist: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface GroupUsersSettingProps {
   groupData: Group;
   setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
   isAddPage: boolean;
-  loginUserData: GroupUser;
+  loginUserData: LoginUser | null;
 }
 
 interface GroupOtherSettingProps {
@@ -34,9 +37,12 @@ interface GroupOtherSettingProps {
 }
 
 export function GroupNameSetting({
+  loginUserData,
   groupData,
   setCurrentGroup,
   isAddPage,
+  nameExist,
+  setNameExist
 }: GroupNameSettingProps) {
   const { picture, name } = groupData;
 
@@ -56,17 +62,23 @@ export function GroupNameSetting({
           ) : null}
           {isAddPage ? (
             <AddGroupNameButton
+              loginUserData={loginUserData}
               groupData={groupData}
               setCurrentGroup={setCurrentGroup}
+              nameExist={nameExist}
+              setNameExist={setNameExist}
             />
           ) : (
-            <p className="text-xl">{name}</p>
+            <p className="text-xl w-52 truncate">{name}</p>
           )}
         </div>
         {isAddPage ? null : (
           <EditGroupNameButton
+            loginUserData={loginUserData}
             groupData={groupData}
             setCurrentGroup={setCurrentGroup}
+            nameExist={nameExist}
+            setNameExist={setNameExist}
           />
         )}
       </div>
@@ -93,6 +105,7 @@ export function GroupUsersSetting({
           <AddUserButton
             groupData={groupData}
             setCurrentGroup={setCurrentGroup}
+            loginUserData={loginUserData || null}
           />
         </div>
         <div>
@@ -100,11 +113,11 @@ export function GroupUsersSetting({
             <>
               <GroupUserButton
                 idx={loginUserData?.id || ''}
-                userData={loginUserData}
+                userData={loginUserData || null}
                 groupData={groupData}
                 setCurrentGroup={setCurrentGroup}
                 isAddPage={isAddPage}
-                loginUserData={loginUserData}
+                loginUserData={loginUserData || null}
               />
               {groupData.users &&
                 groupData.users.map((user: GroupUser) => {
@@ -118,7 +131,7 @@ export function GroupUsersSetting({
                         groupData={groupData}
                         setCurrentGroup={setCurrentGroup}
                         isAddPage={isAddPage}
-                        loginUserData={loginUserData}
+                        loginUserData={loginUserData || null}
                       />
                     </Fragment>
                   );
@@ -138,7 +151,7 @@ export function GroupUsersSetting({
                         groupData={groupData}
                         setCurrentGroup={setCurrentGroup}
                         isAddPage={isAddPage}
-                        loginUserData={loginUserData}
+                        loginUserData={loginUserData || null}
                       />
                     </Fragment>
                   );
@@ -171,9 +184,11 @@ export function GroupOtherSetting({
 export function GroupSave({
   groupData,
   formRef,
+  nameExist
 }: {
   groupData: Group;
   formRef: React.RefObject<HTMLFormElement>;
+  nameExist: boolean;
 }) {
   async function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
@@ -207,8 +222,9 @@ export function GroupSave({
   return (
     <div className="flex w-full items-center justify-center">
       <button
+        disabled={nameExist}
         type="submit"
-        onClick={handleClick}
+        onSubmit={handleClick}
         className="mb-6 mt-3 w-[80%] rounded-full bg-highlight-20 py-3 text-center"
       >
         儲存

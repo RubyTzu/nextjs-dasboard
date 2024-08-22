@@ -12,11 +12,11 @@ import { deleteUser } from '../(data)/(fetchData)/API';
 
 interface Props {
   idx: string;
-  userData: GroupUser;
+  userData: GroupUser | null;
   groupData: ExtendedGroup;
   setCurrentGroup: React.Dispatch<React.SetStateAction<ExtendedGroup>>;
   isAddPage: boolean;
-  loginUserData: GroupUser;
+  loginUserData: GroupUser | null;
 }
 
 export function GroupUserButton({
@@ -70,7 +70,7 @@ export function GroupUserButton({
           ];
       const userIndex = currentGroupUsers.findIndex(
         (user: GroupUser) =>
-          user.name === userData.name && e.currentTarget.id === idx,
+          user.name === userData?.name && e.currentTarget.id === idx,
       );
 
       if (userIndex !== -1) {
@@ -146,7 +146,7 @@ export function GroupUserButton({
             headerId={headerId}
             handleClose={handleClose}
             handleSave={(e) =>
-              handleSave(e, groupData.id || '', userData.id || '', isAddPage)
+              handleSave(e, groupData.id || '', userData?.id || '', isAddPage)
             }
             hintWord="確定要刪除成員嗎？"
             idx={idx}

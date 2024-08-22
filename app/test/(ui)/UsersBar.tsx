@@ -65,9 +65,9 @@ function UserBarImage({ user }: { user: GroupUser }) {
             width={200}
             height={200}
             alt={user.name}
-            className="h-11 w-11 max-w-full rounded-full border-none object-cover align-middle shadow"
+            className="h-11 w-11 max-w-full rounded-full border-none object-cover align-middle"
             priority
-          /> : <div className="h-11 w-11 max-w-full rounded-full border-none object-cover align-middle shadow bg-neutrals-20"></div>}
+          /> : <div className="h-11 w-11 max-w-full rounded-full border-none object-cover align-middle bg-neutrals-20"></div>}
 
         </li>
       ) : null}
