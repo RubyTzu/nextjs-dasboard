@@ -14,7 +14,6 @@ import AddGroupNameButton from './AddGroupNameButton';
 import { v4 as uuidv4 } from 'uuid';
 import clsx from 'clsx';
 
-
 interface GroupNameSettingProps {
   loginUserData: LoginUser;
   groupData: Group;
@@ -42,7 +41,7 @@ export function GroupNameSetting({
   setCurrentGroup,
   isAddPage,
   nameExist,
-  setNameExist
+  setNameExist,
 }: GroupNameSettingProps) {
   const { picture, name } = groupData;
 
@@ -69,7 +68,7 @@ export function GroupNameSetting({
               setNameExist={setNameExist}
             />
           ) : (
-            <p className="text-xl w-52 truncate">{name}</p>
+            <p className="w-52 truncate text-xl">{name}</p>
           )}
         </div>
         {isAddPage ? null : (
@@ -184,7 +183,7 @@ export function GroupOtherSetting({
 export function GroupSave({
   groupData,
   formRef,
-  nameExist
+  nameExist,
 }: {
   groupData: Group;
   formRef: React.RefObject<HTMLFormElement>;
@@ -192,6 +191,7 @@ export function GroupSave({
 }) {
   async function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
+    if (nameExist) return;
 
     try {
       // await addGroup({
@@ -219,12 +219,13 @@ export function GroupSave({
       console.error('API 呼叫失敗:', error);
     }
   }
+
   return (
     <div className="flex w-full items-center justify-center">
       <button
         disabled={nameExist}
         type="submit"
-        onSubmit={handleClick}
+        onClick={handleClick}
         className="mb-6 mt-3 w-[80%] rounded-full bg-highlight-20 py-3 text-center"
       >
         儲存

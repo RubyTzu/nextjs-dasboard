@@ -2,7 +2,6 @@
 import { useId, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 //import data
-import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import { ExtendedExpense } from '../(data)/(sharedFunction)/types';
 import { deleteExpense } from '../(data)/(fetchData)/API';
 //import ui
@@ -13,9 +12,8 @@ interface Props {
 }
 
 export default function DeleteExpenseButton({ expenseData }: Props) {
-  const { loginUserId } = useAllContext();
   const router = useRouter();
-  const { id, payerId, sharers, groupId } = expenseData;
+  const { id, groupId } = expenseData;
 
   const [isShow, setIsShow] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);

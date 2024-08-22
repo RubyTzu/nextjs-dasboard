@@ -31,7 +31,7 @@ export default function GroupButton({ groupData }: { groupData: Group }) {
             priority
           />
         ) : null}
-        <p className="pl-3 font-normal w-52 truncate">{name}</p>
+        <div className="pl-3 font-normal w-52 truncate">{name}</div>
       </div>
       <div className="flex items-center">
         <ShareButton id={id || ""} name={name} inGroupPage={false} />

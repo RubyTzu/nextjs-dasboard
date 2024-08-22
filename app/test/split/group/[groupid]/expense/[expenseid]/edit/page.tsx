@@ -3,7 +3,7 @@
 import { useParams } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 //import data
-import { useGroup, useExpense, useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
+import { useGroup, useExpense } from '@/app/test/(data)/(fetchData)/Providers';
 import {
   ExtendedExpense,
   ExtendedGroup,
@@ -20,7 +20,6 @@ import { ExpenseSettingStepTwo } from '@/app/test/(ui)/ExpenseSettingStepTwo';
 import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
 
 export default function Page() {
-  const { loginUserId } = useAllContext();
   const { groupid, expenseid } = useParams<{
     groupid: string;
     expenseid: string;

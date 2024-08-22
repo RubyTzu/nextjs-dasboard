@@ -5,7 +5,6 @@ import { Fragment } from 'react';
 import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import { filterExpense } from '@/app/test/(data)/(sharedFunction)/totalDebts';
 import {
-  Sharer,
   ExtendedExpense,
   GroupUser,
   ExtendedGroup,

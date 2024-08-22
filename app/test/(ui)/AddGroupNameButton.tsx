@@ -1,6 +1,5 @@
 import { ExtendedGroup, Group, LoginUser } from "@/app/test/(data)/(sharedFunction)/types"
 import clsx from "clsx";
-import { useState } from "react";
 
 interface Prop {
     loginUserData: LoginUser;

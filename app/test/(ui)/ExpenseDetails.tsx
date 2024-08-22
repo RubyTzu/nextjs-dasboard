@@ -22,19 +22,12 @@ export function ExpenseDetailOne({
   expenseData,
   users,
 }: ExpenseDetailExtendProps) {
-  const { loginUserId } = useAllContext();
   const {
     category,
     amount,
     name,
-    creatorId,
-    createAt,
-    updateAt,
-    payerId,
-    sharers,
     date
   } = expenseData;
-  let creatorIdUser = users.filter((user) => user.id === creatorId)[0];
 
   const Icon = expenseIconMap[category];
   let nf = new Intl.NumberFormat('en-US');
@@ -128,8 +121,7 @@ export function ExpenseDetailTwo({
 }
 
 export function ExpenseDetailThree({ expenseData }: ExpenseDetailProps) {
-  const { loginUserId } = useAllContext();
-  const { payerId, sharers, note } = expenseData;
+  const { note } = expenseData;
 
   return (
     <>

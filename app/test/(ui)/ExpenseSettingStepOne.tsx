@@ -1,3 +1,5 @@
+//import react
+import { useState } from 'react';
 //import data
 import {
   ExtendedExpense,
@@ -11,7 +13,6 @@ import ExpenseCategoryButton from './ExpenseCategoryButton';
 //other
 import clsx from 'clsx';
 import NoteButton from './NoteButton';
-import { useState } from 'react';
 
 interface ExpenseSettingStepOneProps {
   group?: ExtendedGroup;
@@ -44,7 +45,6 @@ export function ExpenseSettingStepOne({
   hasNameLength,
   setHasNameLength
 }: ExpenseSettingStepOneProps) {
-
   const name = expenseData?.name || '';
   const [currentValue, setCurrentValue] = useState(name);
 

@@ -2,10 +2,11 @@
 //import from next & react
 import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
+//import data
+import { ExtendedGroup, LoginUser } from '../(data)/(sharedFunction)/types';
 //import ui
 import { AddUserIcon } from '@/app/test/(ui)/Icons';
 import NameModal from './NameModal';
-import { ExtendedGroup, GroupUser, LoginUser } from '../(data)/(sharedFunction)/types';
 
 interface Props {
   groupData: ExtendedGroup;
