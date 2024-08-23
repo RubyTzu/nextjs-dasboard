@@ -21,6 +21,8 @@ interface GroupNameSettingProps {
   isAddPage: boolean;
   nameExist: boolean;
   setNameExist: React.Dispatch<React.SetStateAction<boolean>>;
+  hasNameLength: boolean;
+  setHasNameLength: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface GroupUsersSettingProps {
@@ -42,6 +44,8 @@ export function GroupNameSetting({
   isAddPage,
   nameExist,
   setNameExist,
+  hasNameLength,
+  setHasNameLength
 }: GroupNameSettingProps) {
   const { picture, name } = groupData;
 
@@ -66,6 +70,8 @@ export function GroupNameSetting({
               setCurrentGroup={setCurrentGroup}
               nameExist={nameExist}
               setNameExist={setNameExist}
+              hasNameLength={hasNameLength}
+              setHasNameLength={setHasNameLength}
             />
           ) : (
             <p className="w-52 truncate text-xl">{name}</p>
@@ -184,14 +190,17 @@ export function GroupSave({
   groupData,
   formRef,
   nameExist,
+  hasNameLength
 }: {
   groupData: Group;
   formRef: React.RefObject<HTMLFormElement>;
   nameExist: boolean;
+  hasNameLength: boolean;
 }) {
   async function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     if (nameExist) return;
+    if(!hasNameLength) return
 
     try {
       // await addGroup({
@@ -223,10 +232,10 @@ export function GroupSave({
   return (
     <div className="flex w-full items-center justify-center">
       <button
-        disabled={nameExist}
+        disabled={nameExist || !hasNameLength}
         type="submit"
         onClick={handleClick}
-        className="mb-6 mt-3 w-[80%] rounded-full bg-highlight-20 py-3 text-center"
+        className="mb-6 mt-3 w-[80%] rounded-full bg-highlight-20 py-3 text-center disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
       >
         儲存
       </button>

@@ -284,7 +284,9 @@ function BackArrowIcon() {
     width={20}
     height={20}
     src={backArrowIcon}
-    alt="" />);
+    alt=""
+    priority
+    />);
 }
 
 const expenseIconMap = {

@@ -22,6 +22,7 @@ export default function Page() {
   });
   const formRef = useRef<HTMLFormElement>(null);
   const [nameExist, setNameExist] = useState(false);
+  const [hasNameLength, setHasNameLength] = useState<boolean>(true);
 
   return (
     <form ref={formRef} method="post" action={`/test/split/groups`}>
@@ -42,6 +43,8 @@ export default function Page() {
           isAddPage={true}
           nameExist={nameExist}
           setNameExist={setNameExist}
+          hasNameLength={hasNameLength}
+          setHasNameLength={setHasNameLength}
         />
         <GroupUsersSetting
           groupData={currentGroup}
@@ -52,7 +55,9 @@ export default function Page() {
         <GroupSave 
         groupData={currentGroup} 
         formRef={formRef}
-        nameExist={nameExist} />
+        nameExist={nameExist}
+        hasNameLength={hasNameLength}
+        />
       </div>
     </form>
   );

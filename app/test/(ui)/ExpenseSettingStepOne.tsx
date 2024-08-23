@@ -29,9 +29,9 @@ interface ExpenseSettingStepOneProps {
     React.SetStateAction<boolean>
   >;
   hasNameLength: boolean;
-   setHasNameLength: React.Dispatch<
-   React.SetStateAction<boolean>
- >;
+  setHasNameLength: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
 }
 
 export function ExpenseSettingStepOne({
@@ -59,9 +59,9 @@ export function ExpenseSettingStepOne({
       setNameExist(false)
     }
 
-    if(e.target.value.length === 0){
+    if (e.target.value.length === 0) {
       setHasNameLength(false)
-    }else {
+    } else {
       setHasNameLength(true)
     }
   }

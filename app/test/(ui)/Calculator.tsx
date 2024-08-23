@@ -109,15 +109,15 @@ export const TotalCalculator = ({
         setDisplay(
           hasDecimal && !hasTwoZeroesAfterDecimal(result)
             ? result.toLocaleString('en-US', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-                useGrouping: false,
-              })
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+              useGrouping: false,
+            })
             : result.toLocaleString('en-US', {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0,
-                useGrouping: false,
-              }),
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+              useGrouping: false,
+            }),
         );
       }
     } catch (error) {
@@ -247,12 +247,25 @@ export const SharerCalculator = ({
 
   const onBlurDisplay = () => {
     setFocusDisplay(false);
-    const isValidNum = !isNaN(Number(display)) && Number(display) > 1;
 
-    if (isValidNum && sharer.amount !== Number(display)) {
-      handleInputBlur(display);
-    } else if (display === '') {
-      handleInputBlur(display);
+    function evaluateExpression(expression: string) {
+      let result;
+      try {
+        result = evaluate(expression);
+      } catch (e) {
+        result = expression;
+      }
+        return String(result);
+    }
+    
+    const displayNumber = Number(display);
+    const isValidNum = !isNaN(displayNumber) && displayNumber > 1;
+
+    if ((isValidNum && sharer.amount !== displayNumber) || display === '') {
+      return handleInputBlur(display);
+    } else {
+      const evaluatedDisplay = evaluateExpression(display);
+      return handleInputBlur(evaluatedDisplay);
     }
   };
 
@@ -284,15 +297,15 @@ export const SharerCalculator = ({
         setDisplay(
           hasDecimal && !hasTwoZeroesAfterDecimal(result)
             ? result.toLocaleString('en-US', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-                useGrouping: false,
-              })
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+              useGrouping: false,
+            })
             : result.toLocaleString('en-US', {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0,
-                useGrouping: false,
-              }),
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+              useGrouping: false,
+            }),
         );
       }
     } catch (error) {
