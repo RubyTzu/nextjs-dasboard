@@ -21,6 +21,7 @@ export default function Page() {
   const group = useGroup(groupid);
   const [currentGroup, setCurrentGroup] = useState<ExtendedGroup>(group);
   const [groupNameExist, setGroupNameExist] = useState(false);
+  const [hasNameLength, setHasNameLength] = useState<boolean>(true);
 
   useEffect(() => {
     if (group) {
@@ -54,6 +55,8 @@ export default function Page() {
               isAddPage={false}
               nameExist={groupNameExist}
               setNameExist={setGroupNameExist}
+              hasNameLength={hasNameLength}
+              setHasNameLength={setHasNameLength}
             />
             <GroupUsersSetting
               groupData={currentGroup}

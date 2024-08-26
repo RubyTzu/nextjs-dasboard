@@ -15,6 +15,30 @@ export const viewport: Viewport = {
 export const metadata = {
   title: 'Next JS Test',
   description: 'A place for me to practice NextJS',
+  metadataBase: new URL('https://nextjs-dasboard-woad.vercel.app'),
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/en-US',
+      'zh-TW': '/zh-TW',
+    },
+  },
+  openGraph: {
+    title: 'Next JS Test',
+    description: 'A place for me to practice NextJS',
+    url: 'https://nextjs-dasboard-woad.vercel.app/test/split/1forTestOnly',
+    siteName: 'Next JS Test',
+    images: [
+      {
+        url: '/images/1200_630.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'A descriptive alt text for the image',
+      },
+    ],
+    locale: 'zh_TW',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
