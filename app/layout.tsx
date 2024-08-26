@@ -48,6 +48,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta property="og:title" content="Next JS Test" />
+        <meta property="og:description" content="A place for me to practice NextJS" />
+        <meta property="og:url" content="https://nextjs-dasboard-woad.vercel.app/test/split/1forTestOnly" />
+        <meta property="og:site_name" content="Next JS Test" />
+        <meta property="og:locale" content="zh_TW" />
+        <meta property="og:image:url" content="/images/1200_630.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="My custom alt" />
+        <meta property="og:type" content="website" />
+      </head>
       <body
         className={`${inter.variable} ${notoSansJP.variable} ${notoSansTC.variable} font-sans antialiased`}
       >
