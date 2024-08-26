@@ -14,7 +14,7 @@ export default function ShareButton({
   inGroupPage: boolean;
 }) {
   const btnRef = useRef<HTMLButtonElement | null>(null);
-  const base = 'http://localhost:3001/test/split/group/';
+  const base = 'https://nextjs-dasboard-woad.vercel.app/test/split/group/';
   const links = base + id;
 
   useEffect(() => {
