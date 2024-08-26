@@ -74,10 +74,32 @@ export const TotalCalculator = ({
 
   const onBlurDisplay = () => {
     setFocusDisplay(false);
-    const isValidNum = !isNaN(Number(display)) && Number(display) > 1;
+    const displayNumber = Number(display);
+    const isValidNum = !isNaN(displayNumber) && displayNumber > 1;
 
-    if (isValidNum && expenseData.amount !== Number(display)) {
-      setCurrentExpense({ ...expenseData, amount: Number(display) });
+    function evaluateExpression(expression: string) {
+      let result;
+      try {
+        result = evaluate(expression);
+      } catch (e) {
+        result = expression;
+      }
+        return String(result);
+    }
+
+    const handleInputBlur = (newValue: string) => {
+      let value = newValue.replace(/^0+/, '');
+      if (value === '' || Number(value) < 0) {
+        value = '0';
+      }
+      setCurrentExpense({ ...expenseData, amount: Number(value) });
+    }
+  
+    if ((isValidNum && expenseData.amount !== displayNumber) || display === '') {
+      return handleInputBlur(display);
+    } else {
+      const evaluatedDisplay = evaluateExpression(display);
+      return handleInputBlur(evaluatedDisplay);
     }
   };
 
@@ -137,7 +159,6 @@ export const TotalCalculator = ({
   };
 
   const opKey = (op: string | number) => {
-    console.log(typeof op);
     setDisplay(display + op);
   };
 
@@ -247,6 +268,8 @@ export const SharerCalculator = ({
 
   const onBlurDisplay = () => {
     setFocusDisplay(false);
+    const displayNumber = Number(display);
+    const isValidNum = !isNaN(displayNumber) && displayNumber > 1;
 
     function evaluateExpression(expression: string) {
       let result;
@@ -257,9 +280,6 @@ export const SharerCalculator = ({
       }
         return String(result);
     }
-    
-    const displayNumber = Number(display);
-    const isValidNum = !isNaN(displayNumber) && displayNumber > 1;
 
     if ((isValidNum && sharer.amount !== displayNumber) || display === '') {
       return handleInputBlur(display);
@@ -325,7 +345,6 @@ export const SharerCalculator = ({
   };
 
   const opKey = (op: string | number) => {
-    console.log(typeof op);
     setDisplay(display + op);
   };
 

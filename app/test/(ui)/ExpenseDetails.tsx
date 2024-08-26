@@ -19,9 +19,8 @@ interface ExpenseDetailExtendProps extends ExpenseDetailProps {
 }
 
 export function ExpenseDetailOne({
-  expenseData,
-  users,
-}: ExpenseDetailExtendProps) {
+  expenseData
+}: ExpenseDetailProps) {
   const {
     category,
     amount,
@@ -36,14 +35,14 @@ export function ExpenseDetailOne({
     <>
       {expenseData ? (
         <div className="flex w-full gap-4 justify-between pl-2 pr-3">
-          <div className="z-0 flex h-[72px] w-[72px] items-center justify-center rounded-lg border-[5px] border-white bg-highlight-60">
+          <div className="grow-0 z-0 flex h-[72px] w-[72px] items-center justify-center rounded-lg border-[5px] border-white bg-highlight-60">
             <div className="scale-[1.4]">
               {Icon ? <Icon strokeWidth={1.6} /> : null}
             </div>
           </div>
           <div className="grow flex justify-between pt-4">
             <div className="h-fit">
-              <div className="text-xl leading-6 w-32 truncate">{name}</div>
+              <div className="text-xl leading-6 w-48 truncate">{name}</div>
               <div className="text-sm text-grey-500 leading-4">
                 {date && format(date, 'yyyy/MM/dd')}
               </div>

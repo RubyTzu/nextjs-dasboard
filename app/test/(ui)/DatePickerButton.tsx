@@ -109,7 +109,6 @@ export default function DatePickerButton({
     if (isValid(parsedDate)) {
       setSelectedDate(parsedDate);
       setMonth(parsedDate);
-      console.log(selectedDate);
     } else {
       setSelectedDate(undefined);
     }

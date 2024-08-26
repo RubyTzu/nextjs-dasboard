@@ -1,7 +1,7 @@
 //import from next & react
 import { Fragment, useEffect } from 'react';
 //import data
-import { Group, GroupUser, LoginUser } from '../(data)/(sharedFunction)/types';
+import { Group, ExtendedGroup, GroupUser, LoginUser } from '../(data)/(sharedFunction)/types';
 import { addGroup } from '../(data)/(fetchData)/API';
 //import ui
 import DeleteGroupButton from './DeleteGroupButton';
@@ -26,8 +26,8 @@ interface GroupNameSettingProps {
 }
 
 interface GroupUsersSettingProps {
-  groupData: Group;
-  setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
+  groupData: ExtendedGroup;
+  setCurrentGroup: React.Dispatch<React.SetStateAction<ExtendedGroup>>;
   isAddPage: boolean;
   loginUserData: LoginUser | null;
 }
@@ -97,11 +97,20 @@ export function GroupUsersSetting({
   isAddPage,
   loginUserData,
 }: GroupUsersSettingProps) {
+  
   useEffect(() => {
-    console.log('group Data change!');
-    console.log(groupData);
   }, [groupData]);
 
+  const creatorId = groupData.creatorId || '';
+  const sortedUsers = groupData.users?.slice() || [];
+  const creatorUserIndex = sortedUsers.findIndex(user => user.id === creatorId);
+
+  if (creatorUserIndex !== -1) {
+    const [creatorUser] = sortedUsers.splice(creatorUserIndex, 1);
+
+    sortedUsers.unshift(creatorUser);
+  }
+  
   return (
     <>
       <div className="mx-6 flex flex-col">
@@ -145,9 +154,8 @@ export function GroupUsersSetting({
           ) : (
             <>
               {groupData.users &&
-                groupData.users.map((user: GroupUser) => {
+                sortedUsers.map((user: GroupUser) => {
                   let idx = uuidv4();
-
                   return (
                     <Fragment key={idx}>
                       <GroupUserButton
@@ -200,7 +208,7 @@ export function GroupSave({
   async function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     if (nameExist) return;
-    if(!hasNameLength) return
+    if (!hasNameLength) return
 
     try {
       // await addGroup({
@@ -218,8 +226,6 @@ export function GroupSave({
       //     },
       //   ],
       // });
-
-      console.log(groupData);
 
       if (formRef.current) {
         formRef.current.submit();

@@ -1,5 +1,5 @@
 //import react
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 //import data
 import {
   ExtendedExpense,
@@ -16,6 +16,7 @@ import NoteButton from './NoteButton';
 
 interface ExpenseSettingStepOneProps {
   group?: ExtendedGroup;
+  oldExpenseData?: ExtendedExpense | Expense;
   expenseData?: ExtendedExpense | Expense;
   setCurrentExpense: React.Dispatch<
     React.SetStateAction<ExtendedExpense | Expense>
@@ -36,6 +37,7 @@ interface ExpenseSettingStepOneProps {
 
 export function ExpenseSettingStepOne({
   group,
+  oldExpenseData,
   expenseData,
   setCurrentExpense,
   phase,
@@ -45,11 +47,16 @@ export function ExpenseSettingStepOne({
   hasNameLength,
   setHasNameLength
 }: ExpenseSettingStepOneProps) {
-  const name = expenseData?.name || '';
-  const [currentValue, setCurrentValue] = useState(name);
+  const [currentValue, setCurrentValue] = useState('');
+
+  useEffect(() => {
+    if (expenseData?.name) {
+      setCurrentValue(expenseData?.name)
+    }
+  }, [expenseData?.name])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, expenseData: ExtendedExpense | Expense, group: ExtendedGroup) => {
-    const expenseNameExist = group.expenses?.some((expense) => expense.name === e.target.value) && expenseData.name !== e.target.value;
+    const expenseNameExist = group.expenses?.some((expense) => expense.name === e.target.value) && oldExpenseData?.name !== e.target.value;
 
     setCurrentValue(e.target.value)
 
@@ -67,7 +74,7 @@ export function ExpenseSettingStepOne({
   }
 
   const handleInputBlur = (e: React.ChangeEvent<HTMLInputElement>, expenseData: ExtendedExpense | Expense, group: ExtendedGroup) => {
-    const expenseNameExist = group.expenses?.some((expense) => expense.name === e.target.value) && expenseData.name !== e.target.value;
+    const expenseNameExist = group.expenses?.some((expense) => expense.name === e.target.value) && oldExpenseData?.name !== e.target.value;
 
     if (expenseNameExist || e.target.value.length === 0) {
       return

@@ -493,7 +493,6 @@ import ShareButton from '../../(ui)/ShareButton';
 //   function handleClick() {
 //     if (phase === 1) return;
 //     setPhase(phase - 1);
-//     console.log(phase);
 //   }
 
 //   return (

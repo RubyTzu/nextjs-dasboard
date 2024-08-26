@@ -16,7 +16,6 @@ interface Props {
 
 export default function AddUserButton({ groupData, setCurrentGroup, loginUserData }: Props) {
   const [currentGroupUserName, setCurrentGroupUserName] = useState('');
-  const [lastSavedGroup, setLastSavedGroup] = useState<ExtendedGroup>(groupData);
   const [isShow, setIsShow] = useState<boolean>(false);
   const [nameExist, setNameExist] = useState<boolean>(false);
 
@@ -42,7 +41,6 @@ export default function AddUserButton({ groupData, setCurrentGroup, loginUserDat
       setNameExist(false)
     }
 
-    console.log(e.target.value);
     setCurrentGroupUserName(e.target.value);
   };
 
@@ -70,7 +68,6 @@ export default function AddUserButton({ groupData, setCurrentGroup, loginUserDat
         ],
       };
       setCurrentGroup(newGroup);
-      setLastSavedGroup(newGroup);
       setIsShow(false);
       setCurrentGroupUserName('');
     }

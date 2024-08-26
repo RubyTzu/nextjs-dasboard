@@ -1,5 +1,3 @@
-import { Group } from "../(sharedFunction)/types";
-
 //new user API
 async function getUser(id: string) {
   const res = await fetch(`http://localhost:3000/user/${id}`, {
@@ -25,8 +23,6 @@ async function getGroup(id: string) {
 
   return data;
 }
-
-
 
 //get expense
 async function getExpense(id: string) {

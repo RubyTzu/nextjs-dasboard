@@ -160,7 +160,6 @@ export function TopExpenseSettingBar({
   function handleClick() {
     if (phase === 1) return;
     setPhase(phase - 1);
-    console.log(phase);
   }
 
   const shouldRender = expenseData && group;

@@ -52,7 +52,6 @@ export default function EditGroupNameButton({
       setNameExist(false)
     }
 
-    console.log(e.target.value);
     setCurrentName(e.target.value);
   };
 

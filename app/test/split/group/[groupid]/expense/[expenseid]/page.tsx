@@ -38,7 +38,7 @@ export default function Page() {
         <TopExpenseBar groupData={group} expenseData={expense} />
         {group && expense ? (
           <div className="mt-16 flex w-full flex-col items-center px-4 py-6">
-            <ExpenseDetailOne expenseData={expense} users={users} />
+            <ExpenseDetailOne expenseData={expense} />
             <ExpenseDetailTwo expenseData={expense} users={users} />
             <ExpenseDetailThree expenseData={expense} />
             <DeleteExpenseButton expenseData={expense} />
