@@ -4,17 +4,21 @@ import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
 //import data
 import { ExtendedGroup, LoginUser } from '../(data)/(sharedFunction)/types';
+import { changeGroup, changeUserGroup } from '../(data)/(fetchData)/API';
 //import ui
 import { AddUserIcon } from '@/app/test/(ui)/Icons';
 import NameModal from './NameModal';
+//import other
+import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
+  isAddPage: boolean;
   groupData: ExtendedGroup;
   setCurrentGroup: React.Dispatch<React.SetStateAction<ExtendedGroup>>;
   loginUserData: LoginUser | null;
 }
 
-export default function AddUserButton({ groupData, setCurrentGroup, loginUserData }: Props) {
+export default function AddUserButton({ isAddPage, groupData, setCurrentGroup, loginUserData }: Props) {
   const [currentGroupUserName, setCurrentGroupUserName] = useState('');
   const [isShow, setIsShow] = useState<boolean>(false);
   const [nameExist, setNameExist] = useState<boolean>(false);
@@ -51,23 +55,35 @@ export default function AddUserButton({ groupData, setCurrentGroup, loginUserDat
     router.refresh();
   };
 
-  const handleSave = (targetUserName: string, groupData: ExtendedGroup, loginUserData: LoginUser | null) => {
-
+  const handleSave = async(targetUserName: string, groupData: ExtendedGroup, loginUserData: LoginUser | null) => {
+    let idx = uuidv4();
     const userExists = groupData.users?.some((user) => user.name === targetUserName) || loginUserData?.name === targetUserName;
     if (userExists) {
       return
     } else {
-      let newGroup = {
+      let newGroupData = {
         ...groupData,
         users: [
           ...(groupData.users as []),
           {
+            id: idx,
             name: currentGroupUserName,
             picture: '/images/icons/newUserBG.svg',
+            adoptable: true
           },
         ],
       };
-      setCurrentGroup(newGroup);
+  
+      setCurrentGroup(newGroupData);
+
+      if(!isAddPage){
+        try {
+          await changeGroup(newGroupData);
+        } catch (error) {
+          console.error('API 呼叫失敗:', error);
+        }
+      }
+
       setIsShow(false);
       setCurrentGroupUserName('');
     }

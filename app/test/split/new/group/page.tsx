@@ -53,6 +53,7 @@ export default function Page() {
           loginUserData={data}
         />
         <GroupSave 
+        loginUserData={data} // json-server 適用
         groupData={currentGroup} 
         formRef={formRef}
         nameExist={nameExist}

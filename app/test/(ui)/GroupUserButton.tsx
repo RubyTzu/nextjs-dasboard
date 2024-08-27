@@ -8,7 +8,7 @@ import { ExtendedGroup, GroupUser } from '../(data)/(sharedFunction)/types';
 //import ui
 import { TrashcanIcon } from '@/app/test/(ui)/Icons';
 import DeleteModal from './DeleteModal';
-import { deleteUser } from '../(data)/(fetchData)/API';
+import { changeGroup, deleteUser } from '../(data)/(fetchData)/API';
 
 interface Props {
   idx: string;
@@ -86,9 +86,15 @@ export function GroupUserButton({
         users: currentGroupUsers,
       });
       if (!isAddPage) {
-        // await deleteUser(groupId, userId);
-        // router.push(`test/split/group/${groupId}/edit`);
-      }
+        console.log(userId);
+        if(groupData.users?.find(user => user.id === userId && user.adoptable === false)){
+          await deleteUser(userId);
+        }
+        await changeGroup({
+          ...groupData,
+          users: currentGroupUsers,
+        })
+       }
     } catch (error) {
       console.error('API 呼叫失敗:', error);
     }

@@ -7,10 +7,11 @@ import {
   ExtendedGroup,
   Expense,
 } from '../(data)/(sharedFunction)/types';
-import { addExpense, changeExpense } from '../(data)/(fetchData)/API';
+import { addExpense, changeExpense, changeGroup } from '../(data)/(fetchData)/API';
 //import ui
 import { NextstepIcon } from '@/app/test/(ui)/Icons';
 import clsx from 'clsx';
+import { v4 as uuidv4 } from 'uuid';
 
 interface GroupInfoBarProps {
   expenseData?: ExtendedExpense | Expense;
@@ -30,6 +31,7 @@ interface NextStepButtonProps {
   isIncorrectTotalNum: boolean;
   nameExist: boolean;
   hasNameLength: boolean;
+  group: ExtendedGroup;
 }
 
 export function GroupInfoBar({ expenseData, group }: GroupInfoBarProps) {
@@ -71,7 +73,8 @@ export function NextStepButton({
   isNotZero,
   isIncorrectTotalNum,
   nameExist,
-  hasNameLength
+  hasNameLength,
+  group
 }: NextStepButtonProps) {
   const expenseId = expenseData && 'id' in expenseData ? expenseData.id : '';
 
@@ -98,28 +101,76 @@ export function NextStepButton({
 
   async function handleSubmit(
     event: React.MouseEvent<HTMLButtonElement>,
-    expense: ExtendedExpense | Expense,
+    expense: ExtendedExpense,
     groupid: string,
-    expenseid: string,
+    expenseId: string,
   ) {
     event.preventDefault();
+    let idx = uuidv4();
 
-    let payload = {
-      groupId: groupid,
+    let newExpenseData = {
       name: expense.name,
       category: expense.category,
       amount: expense.amount,
       date: expense.date,
       note: expense.note,
       payerId: expense.payerId,
-      sharers: expense.sharers,
+      sharers: expense.sharers
     };
+
+    let groupExpenses = group.expenses ? group.expenses : [];
+
+    let newGroupExpenseData = {
+      ...group,
+      expenses: [
+        ...groupExpenses,
+        {
+          ...newExpenseData,
+          id: idx
+        }
+      ]
+    }
+
+    let changeExpenses = groupExpenses.map(item => {
+       if(item.id === expenseId){
+        return {
+          ...newExpenseData,
+          id: item.id
+        }
+       }else {
+        return item
+      }
+    }
+    )
+
+    let changeGroupExpenseData = {
+      ...group,
+      expenses: changeExpenses
+    }
 
     try {
       if (isAddExpensePage) {
-        // await addExpense(payload);
+        await addExpense({
+          ...newExpenseData,
+          id: idx,
+          creatorId: expense.creatorId,
+          createAt: expense.createAt,
+          updateAt: expense.updateAt,
+          historys: expense.historys
+        });
+
+        await changeGroup(newGroupExpenseData);
       } else {
-        // await changeExpense({ ...payload, id: expenseid });
+        await changeExpense({
+          ...newExpenseData,
+          groupId: groupid,
+          id: expenseId,
+          creatorId: expense.creatorId,
+          createAt: expense.createAt,
+          updateAt: expense.updateAt,
+          historys: expense.historys
+        });
+        await changeGroup(changeGroupExpenseData)
       }
 
       if (formRef.current) {

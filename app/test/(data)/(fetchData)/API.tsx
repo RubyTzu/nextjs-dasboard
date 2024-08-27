@@ -61,36 +61,94 @@ async function addGroup(payload: any) {
   });
 
   if (!res.ok) throw Error;
+  console.log('成功新增Group!')
 }
 
-async function addExpense(payload: any) {}
+//add expense
+async function addExpense(payload: any) {
+  let url = `http://localhost:3000/expense/`;
+
+  let body = {
+    ...payload
+  };
+
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+    cache: 'no-store',
+  });
+
+  if (!res.ok) throw Error;
+  console.log('成功新增Group!')
+ }
+
+async function changeUserGroup(payload: any) {
+  const { id } = payload;
+  let url = `http://localhost:3000/user/${id}`;
+
+  let body = { ...payload }
+
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+    cache: 'no-store',
+  });
+
+  if (!res.ok) throw Error;
+  console.log('成功新增User Group!')
+}
 
 // change group
 async function changeGroup(payload: any) {
-    const { id, users } = payload
-    let url = `http://localhost:3000/group/${id}`
+  const { id } = payload
+  let url = `http://localhost:3000/group/${id}`
 
-    let body = {
-        ...payload,
-        "users": users,
-    }
+  let body = { ...payload }
 
-    const res = await fetch(url, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-        cache: "no-store",
-    })
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+    cache: "no-store",
+  })
 
-    if (!res.ok) throw Error;
+  if (!res.ok) throw Error;
 
 }
 
-async function changeExpense(payload: any) {}
+async function changeExpense(payload: any) { 
+  const { id } = payload
+  let url = `http://localhost:3000/expense/${id}`
 
-async function deleteUser(groupId: string, userId:string) {}
+  let body = { ...payload }
+
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+    cache: "no-store",
+  })
+
+  if (!res.ok) throw Error;
+}
+
+async function deleteUser(id: string) { 
+  let url = `http://localhost:3000/user/${id}`;
+
+  const res = await fetch(url, { method: 'DELETE' });
+
+  if (!res.ok) throw Error;
+}
 
 // delete group
 async function deleteGroup(id: string) {
@@ -101,14 +159,16 @@ async function deleteGroup(id: string) {
   if (!res.ok) throw Error;
 }
 
-async function deleteExpense(groupId: string, expenseId: string) {}
+async function deleteExpense(groupId: string, expenseId: string) { }
 
 export {
   getUser,
   getGroup,
   getExpense,
   addGroup,
+  changeUserGroup,
   addExpense,
+  changeGroup,
   changeExpense,
   deleteUser,
   deleteGroup,

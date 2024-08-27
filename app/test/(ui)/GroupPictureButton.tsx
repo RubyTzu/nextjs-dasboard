@@ -4,7 +4,8 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useState } from 'react';
 //import data
-import { Group } from '../(data)/(sharedFunction)/types';
+import { Group, LoginUser } from '../(data)/(sharedFunction)/types';
+import { changeGroup, changeUserGroup } from '../(data)/(fetchData)/API';
 //import ui
 import { CameraIcon } from '@/app/test/(ui)/Icons';
 //import other
@@ -12,11 +13,13 @@ import clsx from 'clsx';
 import { TopBar } from './TopBars';
 
 interface Props {
+  loginUserData: LoginUser;
   groupData: Group;
   setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
 }
 
 export default function GroupPictureButton({
+  loginUserData,
   groupData,
   setCurrentGroup,
 }: Props) {
@@ -61,12 +64,35 @@ export default function GroupPictureButton({
     router.refresh();
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setLastSavedPicture(currentPicture);
     setCurrentGroup({
       ...groupData,
       picture: currentPicture,
     });
+
+    let newGroupData = {
+      ...groupData,
+      picture: currentPicture,
+    }
+
+    let newLoginUserData = {
+      ...loginUserData,
+      groups: loginUserData.groups.map(group =>
+        group.id === groupData.id
+          ? { ...group, ...newGroupData }
+          : group
+      )
+    }
+
+    try {
+      await changeGroup(newGroupData)
+      await changeUserGroup(newLoginUserData)
+
+    } catch (error) {
+      console.error('API 呼叫失敗:', error);
+    }
+
     setIsShow(false);
   };
 

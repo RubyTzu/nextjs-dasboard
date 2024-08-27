@@ -104,6 +104,7 @@ export default function Page() {
                 isIncorrectTotalNum={isIncorrectTotalNum}
                 nameExist={nameExist}
                 hasNameLength={hasNameLength}
+                group={group}
               />
             </section>
           </>

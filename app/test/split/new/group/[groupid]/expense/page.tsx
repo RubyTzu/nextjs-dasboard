@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 //import data
 import { useGroup, useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
-import { Expense } from '@/app/test/(data)/(sharedFunction)/types';
+import { ExtendedExpense } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import { TopExpenseSettingBar } from '@/app/test/(ui)/TopBars';
 import {
@@ -28,7 +28,7 @@ export default function Page() {
 
 
   const group = useGroup(groupid);
-  const [currentExpense, setCurrentExpense] = useState<Expense>({
+  const [currentExpense, setCurrentExpense] = useState<ExtendedExpense>({
     name: '未命名費用',
     category: 'food',
     amount: 0,
@@ -36,6 +36,15 @@ export default function Page() {
     note: '',
     payerId: loginUserId || '',
     sharers: [],
+    creatorId: loginUserId || '',
+    createAt: new Date().toISOString(),
+    updateAt: new Date().toISOString(),
+    historys: [
+      {
+        editedAt: new Date().toISOString(),
+        editorId: loginUserId || ''
+      }
+    ]
   });
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -99,6 +108,7 @@ export default function Page() {
             isIncorrectTotalNum={isIncorrectTotalNum}
             nameExist={nameExist}
             hasNameLength={hasNameLength}
+            group={group}
           />
         </section>
       </div>

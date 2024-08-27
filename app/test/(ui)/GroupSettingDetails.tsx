@@ -2,7 +2,7 @@
 import { Fragment, useEffect } from 'react';
 //import data
 import { Group, ExtendedGroup, GroupUser, LoginUser } from '../(data)/(sharedFunction)/types';
-import { addGroup } from '../(data)/(fetchData)/API';
+import { addGroup, changeUserGroup } from '../(data)/(fetchData)/API';
 //import ui
 import DeleteGroupButton from './DeleteGroupButton';
 import { GroupUserButton } from './GroupUserButton';
@@ -59,6 +59,7 @@ export function GroupNameSetting({
         >
           {picture ? (
             <GroupPictureButton
+              loginUserData={loginUserData}
               groupData={groupData}
               setCurrentGroup={setCurrentGroup}
             />
@@ -97,7 +98,7 @@ export function GroupUsersSetting({
   isAddPage,
   loginUserData,
 }: GroupUsersSettingProps) {
-  
+
   useEffect(() => {
   }, [groupData]);
 
@@ -110,13 +111,14 @@ export function GroupUsersSetting({
 
     sortedUsers.unshift(creatorUser);
   }
-  
+
   return (
     <>
       <div className="mx-6 flex flex-col">
         <p className="text-sm text-grey-500">群組成員</p>
         <div className="mb-4 mt-4 flex items-center justify-between">
           <AddUserButton
+            isAddPage={isAddPage}
             groupData={groupData}
             setCurrentGroup={setCurrentGroup}
             loginUserData={loginUserData || null}
@@ -195,11 +197,13 @@ export function GroupOtherSetting({
 }
 
 export function GroupSave({
+  loginUserData,
   groupData,
   formRef,
   nameExist,
   hasNameLength
 }: {
+  loginUserData: LoginUser;
   groupData: Group;
   formRef: React.RefObject<HTMLFormElement>;
   nameExist: boolean;
@@ -210,22 +214,42 @@ export function GroupSave({
     if (nameExist) return;
     if (!hasNameLength) return
 
+    let idx = uuidv4();
+    let groupUsers = groupData.users ? groupData.users : []
+    let GroupBody = {
+      id: idx,
+      name: groupData.name,
+      picture: groupData.picture,
+      creatorId: loginUserData.id,
+      expenses: [],
+      users: [
+        ...groupUsers,
+        {
+          id: loginUserData.id,
+          name: loginUserData.name,
+          picture: loginUserData.picture,
+          adoptable: false,
+        }
+      ],
+    }
+
+    let UserBody = {
+      ...loginUserData,
+      groups: [
+        ...loginUserData.groups,
+        {
+          id: idx,
+          name: groupData.name,
+          picture: groupData.picture
+        }
+      ]
+    }
+
     try {
-      // await addGroup({
-      //   id: 'gNew',
-      //   name: 'group Games New',
-      //   picture: '/images/icons/groupIcon08.svg',
-      //   creatorId: 'u1',
-      //   expenses: [],
-      //   users: [
-      //     {
-      //       id: 'u1',
-      //       name: 'a',
-      //       picture: 'https://cdn2.thecatapi.com/images/a4v.jpg',
-      //       adoptable: false,
-      //     },
-      //   ],
-      // });
+      console.log(GroupBody)
+      await addGroup(GroupBody);
+      console.log(UserBody)
+      await changeUserGroup(UserBody);
 
       if (formRef.current) {
         formRef.current.submit();

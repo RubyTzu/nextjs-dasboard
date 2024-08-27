@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
 //import data
 import { ExtendedGroup, Group, LoginUser } from '../(data)/(sharedFunction)/types';
+import { changeGroup, changeUserGroup } from '../(data)/(fetchData)/API';
 //import ui
 import NameModal from './NameModal';
 
@@ -62,7 +63,7 @@ export default function EditGroupNameButton({
     router.refresh();
   };
 
-  const handleSave = (targetUserName: string, loginUserData: LoginUser, groupData: ExtendedGroup) => {
+  const handleSave = async (targetUserName: string, loginUserData: LoginUser, groupData: ExtendedGroup) => {
     const groupExists = groupData.name !== targetUserName && loginUserData.groups.some(group => group.name === targetUserName);
 
     if (groupExists) {
@@ -75,6 +76,28 @@ export default function EditGroupNameButton({
         ...groupData,
         name: targetUserName,
       });
+
+      let newGroupData = {
+        ...groupData,
+        name: targetUserName,
+      }
+
+      let newLoginUserData = {
+        ...loginUserData,
+        groups: loginUserData.groups.map(group =>
+          group.id === groupData.id
+            ? { ...group, ...newGroupData }
+            : group
+        )
+      }
+
+      try {
+        await changeGroup(newGroupData)
+        await changeUserGroup(newLoginUserData)
+      } catch (error) {
+        console.error('API 呼叫失敗:', error);
+      }
+
       setIsShow(false);
     }
   };
