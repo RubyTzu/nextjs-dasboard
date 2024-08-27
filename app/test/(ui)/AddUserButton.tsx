@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
 //import data
 import { ExtendedGroup, LoginUser } from '../(data)/(sharedFunction)/types';
-import { changeGroup, changeUserGroup } from '../(data)/(fetchData)/API';
+import { changeGroup } from '../(data)/(fetchData)/API';
 //import ui
 import { AddUserIcon } from '@/app/test/(ui)/Icons';
 import NameModal from './NameModal';
