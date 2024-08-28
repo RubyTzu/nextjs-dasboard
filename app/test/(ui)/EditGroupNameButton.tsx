@@ -86,7 +86,11 @@ export default function EditGroupNameButton({
         ...loginUserData,
         groups: loginUserData.groups.map(group =>
           group.id === groupData.id
-            ? { ...group, ...newGroupData }
+            ? {
+              id: newGroupData.id,
+              name: newGroupData.name,
+              picture: newGroupData.picture
+            }
             : group
         )
       }

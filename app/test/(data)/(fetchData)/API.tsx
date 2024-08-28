@@ -82,7 +82,7 @@ async function addExpense(payload: any) {
   });
 
   if (!res.ok) throw Error;
-  console.log('成功新增Group!')
+  console.log('成功新增Expense!')
  }
 
 async function changeUserGroup(payload: any) {
@@ -142,6 +142,19 @@ async function changeExpense(payload: any) {
   if (!res.ok) throw Error;
 }
 
+//for json-server adoptable userId
+async function getExpensesforAdoptUser() {
+  const res = await fetch(`http://localhost:3000/expense/`, {
+    cache: 'no-store',
+  });
+
+  if (!res.ok) throw Error;
+
+  const data = await res.json();
+
+  return data;
+}
+
 async function deleteUser(id: string) { 
   let url = `http://localhost:3000/user/${id}`;
 
@@ -159,7 +172,13 @@ async function deleteGroup(id: string) {
   if (!res.ok) throw Error;
 }
 
-async function deleteExpense(groupId: string, expenseId: string) { }
+async function deleteExpense(id: string) { 
+  let url = `http://localhost:3000/expense/${id}`;
+
+  const res = await fetch(url, { method: 'DELETE' });
+
+  if (!res.ok) throw Error;
+}
 
 export {
   getUser,
@@ -173,4 +192,5 @@ export {
   deleteUser,
   deleteGroup,
   deleteExpense,
+  getExpensesforAdoptUser
 };

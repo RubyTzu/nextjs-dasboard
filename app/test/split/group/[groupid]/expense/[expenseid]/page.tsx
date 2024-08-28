@@ -41,7 +41,7 @@ export default function Page() {
             <ExpenseDetailOne expenseData={expense} />
             <ExpenseDetailTwo expenseData={expense} users={users} />
             <ExpenseDetailThree expenseData={expense} />
-            <DeleteExpenseButton expenseData={expense} />
+            <DeleteExpenseButton expenseData={expense} group={group} />
           </div>
         ) : (
           <div className="mt-16 pt-6"></div>

@@ -35,6 +35,7 @@ interface GroupUsersSettingProps {
 interface GroupOtherSettingProps {
   groupData: Group;
   setCurrentGroup: React.Dispatch<React.SetStateAction<Group>>;
+  loginUserData: LoginUser;
 }
 
 export function GroupNameSetting({
@@ -182,6 +183,7 @@ export function GroupUsersSetting({
 export function GroupOtherSetting({
   groupData,
   setCurrentGroup,
+  loginUserData
 }: GroupOtherSettingProps) {
   return (
     <>
@@ -190,6 +192,7 @@ export function GroupOtherSetting({
         <DeleteGroupButton
           groupData={groupData}
           setCurrentGroup={setCurrentGroup}
+          loginUserData={loginUserData}
         />
       </div>
     </>

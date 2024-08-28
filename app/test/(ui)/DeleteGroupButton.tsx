@@ -3,8 +3,8 @@ import { useId, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 //import data
 import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
-import { ExtendedGroup, GroupUser } from '../(data)/(sharedFunction)/types';
-import { deleteGroup } from '../(data)/(fetchData)/API';
+import { ExtendedGroup, GroupUser, LoginUser } from '../(data)/(sharedFunction)/types';
+import { changeUserGroup, changeGroup, deleteGroup } from '../(data)/(fetchData)/API';
 //import ui
 import { TrashcanIcon, LeaveIcon } from '@/app/test/(ui)/Icons';
 import DeleteModal from './DeleteModal';
@@ -12,11 +12,13 @@ import DeleteModal from './DeleteModal';
 interface Props {
   groupData: ExtendedGroup;
   setCurrentGroup: React.Dispatch<React.SetStateAction<ExtendedGroup>>;
+  loginUserData: LoginUser;
 }
 
 export default function DeleteGroupButton({
   groupData,
   setCurrentGroup,
+  loginUserData
 }: Props) {
   const { loginUserId } = useAllContext();
   const router = useRouter();
@@ -44,33 +46,61 @@ export default function DeleteGroupButton({
   };
 
   async function handleDeleteGroup(id: string) {
+    let newUserGroups = loginUserData.groups
+    let deleteIndex = newUserGroups.findIndex(group => group.id === id)
+
+    if (deleteIndex !== -1) {
+      newUserGroups.splice(deleteIndex, 1)
+    }
+
+    let newUserData = {
+      ...loginUserData,
+      groups: newUserGroups
+    }
+
     try {
-      // await deleteGroup(id);
+      await deleteGroup(id);
+      await changeUserGroup(newUserData);
       router.push(`/test/split/groups`);
     } catch (error) {
       console.error('API 呼叫失敗:', error);
     }
   }
 
-  const handleLeaveGroup = (id: string) => {
+  const handleLeaveGroup = async (loginUserId: string, groupId :string) => {
     let currentGroupUsers = [...users];
 
     const userIndex = currentGroupUsers.findIndex(
-      (user: GroupUser) => user.id === id,
+      (user: GroupUser) => user.id === loginUserId,
     );
 
     if (userIndex !== -1) {
       currentGroupUsers.splice(userIndex, 1);
     }
-    setCurrentGroup({
+
+    let newGroupData = {
       ...groupData,
       users: currentGroupUsers,
-    });
-    setIsShow(false);
-    setTimeout(() => {
-      dialogRef.current?.close();
-    }, 100);
-    console.log('leave Group!');
+    }
+
+    let newUserGroups = loginUserData.groups
+    let deleteIndex = newUserGroups.findIndex(group => group.id === groupId)
+
+    if (deleteIndex !== -1) {
+      newUserGroups.splice(deleteIndex, 1)
+    }
+
+    let newUserData = {
+      ...loginUserData,
+      groups: newUserGroups
+    }
+    try {
+      await changeGroup(newGroupData);
+      await changeUserGroup(newUserData);
+      router.push(`/test/split/groups`);
+    } catch (error) {
+      console.error('API 呼叫失敗:', error);
+    }
   };
 
   return (
@@ -106,7 +136,7 @@ export default function DeleteGroupButton({
           isShow={isShow}
           headerId={headerId}
           handleClose={handleClose}
-          handleSave={() => handleLeaveGroup(loginUserId || '')}
+          handleSave={() => handleLeaveGroup(loginUserId || '',groupData.id || '')}
           hintWord="確定要離開群組嗎？"
           idx={`leaveGroup${loginUserId}`}
         />

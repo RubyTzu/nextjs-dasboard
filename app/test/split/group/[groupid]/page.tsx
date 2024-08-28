@@ -3,8 +3,8 @@
 import { useParams } from 'next/navigation';
 import { Suspense, useState, useEffect } from 'react';
 //import data
-import { useAllContext,useGroup } from '@/app/test/(data)/(fetchData)/Providers';
-import { ExtendedGroup } from '@/app/test/(data)/(sharedFunction)/types';
+import { useAllContext,useGroup,useUser } from '@/app/test/(data)/(fetchData)/Providers';
+import { ExtendedGroup,LoginUser } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import { TopGroupBar } from '@/app/test/(ui)/TopBars';
 import UsersBar from '@/app/test/(ui)/UsersBar';
@@ -20,6 +20,7 @@ export default function Page() {
   const { loginUserId } = useAllContext();
   const { groupid } = useParams<{ groupid: string }>();
   const group: ExtendedGroup = useGroup(groupid);
+  const loginUserData: LoginUser = useUser(loginUserId || '');
   const [currentGroup, setCurrentGroup] = useState<ExtendedGroup>(group);
 
   useEffect(() => {
@@ -46,11 +47,12 @@ export default function Page() {
             <ExpensesList groupData={group} />
             <AddExpenseButton groupId={groupid} />
           </>
-        )}
+       )}
         {isUserAdoptable && !isUserInGroup && (
           <JoinGroupModal
             groupData={currentGroup}
             setCurrentGroup={setCurrentGroup}
+            loginUserData={loginUserData}
           />
         )}
         {isGroupFull && !isUserInGroup && (

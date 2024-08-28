@@ -67,6 +67,7 @@ export default function Page() {
             <GroupOtherSetting
               groupData={currentGroup}
               setCurrentGroup={setCurrentGroup}
+              loginUserData={loginUserData}
             />
           </>
         )}

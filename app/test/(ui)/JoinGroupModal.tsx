@@ -1,16 +1,20 @@
 //import next & react
 import { useEffect, useId, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 //import data
-import { ExtendedGroup, GroupUser } from '../(data)/(sharedFunction)/types';
+import { ExtendedExpense, ExtendedGroup, GroupUser, LoginUser } from '../(data)/(sharedFunction)/types';
 //import other
 import clsx from 'clsx';
+import { changeExpense, changeGroup, changeUserGroup, getExpensesforAdoptUser } from '../(data)/(fetchData)/API';
 
 interface Prop {
     groupData: ExtendedGroup;
     setCurrentGroup: React.Dispatch<React.SetStateAction<ExtendedGroup>>;
+    loginUserData: LoginUser;
 }
 
-export default function JoinGroupModal({ groupData, setCurrentGroup }: Prop) {
+export default function JoinGroupModal({ groupData, setCurrentGroup, loginUserData }: Prop) {
+    const router = useRouter();
     const [tempUsers, setTempUsers] = useState<GroupUser[]>([]);
     const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
     const [isShow, setIsShow] = useState<boolean>(true);
@@ -43,31 +47,76 @@ export default function JoinGroupModal({ groupData, setCurrentGroup }: Prop) {
 
     const handleAdoptableChange = (userId: string) => {
         if (selectedUserId === userId) return;
+        const updatedTempUsers = tempUsers.map(user => {
 
-        const updatedTempUsers = tempUsers.map(user => ({
-            ...user,
-            adoptable: user.id === userId
-                ? false
-                : (user.id === selectedUserId ? true : user.adoptable)
-        }));
+            return ({
+                ...user,
+                adoptable: user.id === userId
+                    ? false
+                    : (user.id === selectedUserId ? true : user.adoptable)
+            })
+        });
 
         setTempUsers(updatedTempUsers);
         setSelectedUserId(userId);
     };
 
 
-    const handleSave = () => {
-        const updatedUsers = tempUsers.map((user: GroupUser) => ({
-            ...user,
-            adoptable: user.adoptable === false ? false : user.adoptable
-        }))
+    const handleSave = async () => {
+        const AllExpenses = await getExpensesforAdoptUser()
+        const updatedUsers = tempUsers.map((user: GroupUser) => {
+
+            return ({
+                id: user.id === selectedUserId ? loginUserData.id : user.id,
+                name: user.id === selectedUserId ? loginUserData.name : user.name,
+                picture: user.id === selectedUserId ? loginUserData.picture : user.picture,
+                adoptable: user.adoptable
+            })
+        })
 
         setCurrentGroup({ ...groupData, users: updatedUsers });
+
+        let updatedGroupExpenses = groupData.expenses ? groupData.expenses.map(expense =>
+        ({
+            ...expense,
+            sharers: expense.sharers.map(sharer => sharer.id === selectedUserId ? { id: loginUserData.id, amount: sharer.amount } : sharer)
+        })) : []
+
+        let updateExpenses = AllExpenses.map((expense: ExtendedExpense) =>
+        ({
+            ...expense,
+            sharers: expense.sharers.map(sharer => sharer.id === selectedUserId ? { id: loginUserData.id, amount: sharer.amount } : sharer)
+        }))
+
+        try {
+            await changeGroup({
+                ...groupData,
+                expenses: updatedGroupExpenses,
+                users: updatedUsers
+            });
+             await changeUserGroup({
+                ...loginUserData,
+                groups: [
+                    ...loginUserData.groups,
+                    {
+                        id: groupData.id,
+                        name: groupData.name,
+                        picture: groupData.picture
+                    }]
+            })
+            for (const expense of updateExpenses) {
+                await changeExpense(expense);
+              }
+           
+        } catch (error) {
+            console.error('API 呼叫失敗:', error);
+        }
         setIsShow(false);
         setTimeout(() => {
             dialogRef.current?.close();
             document.body.style.overflow = '';
         }, 100);
+        router.push(`/test/split/groups`);
     }
 
     return (

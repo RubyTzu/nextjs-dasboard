@@ -152,6 +152,7 @@ export function NextStepButton({
       if (isAddExpensePage) {
         await addExpense({
           ...newExpenseData,
+          groupId: groupid,
           id: idx,
           creatorId: expense.creatorId,
           createAt: expense.createAt,
