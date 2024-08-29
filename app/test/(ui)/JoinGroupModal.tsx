@@ -63,7 +63,7 @@ export default function JoinGroupModal({ groupData, setCurrentGroup, loginUserDa
 
 
     const handleSave = async () => {
-        const AllExpenses = await getExpensesforAdoptUser()
+        const AllExpenses = await getExpensesforAdoptUser();
         const updatedUsers = tempUsers.map((user: GroupUser) => {
 
             return ({
@@ -79,12 +79,14 @@ export default function JoinGroupModal({ groupData, setCurrentGroup, loginUserDa
         let updatedGroupExpenses = groupData.expenses ? groupData.expenses.map(expense =>
         ({
             ...expense,
+            payerId: expense.payerId === selectedUserId ? loginUserData.id : expense.payerId,
             sharers: expense.sharers.map(sharer => sharer.id === selectedUserId ? { id: loginUserData.id, amount: sharer.amount } : sharer)
         })) : []
 
         let updateExpenses = AllExpenses.map((expense: ExtendedExpense) =>
         ({
             ...expense,
+            payerId: expense.payerId === selectedUserId ? loginUserData.id : expense.payerId,
             sharers: expense.sharers.map(sharer => sharer.id === selectedUserId ? { id: loginUserData.id, amount: sharer.amount } : sharer)
         }))
 

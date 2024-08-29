@@ -224,6 +224,11 @@
           "id": "g13",
           "name": "臺南 823-825",
           "picture": "/images/icons/groupIcon08.svg"
+        },
+        {
+          "id": "d0278763-49db-4043-ba3f-a6f19dca2f1e",
+          "name": "成語大補帖",
+          "picture": "/images/icons/groupIcon14.svg"
         }
       ]
     },
@@ -257,6 +262,11 @@
           "id": "g11",
           "name": "group Other 3",
           "picture": "/images/icons/groupIcon11.svg"
+        },
+        {
+          "id": "d0278763-49db-4043-ba3f-a6f19dca2f1e",
+          "name": "成語大補帖",
+          "picture": "/images/icons/groupIcon09.svg"
         }
       ]
     },
@@ -318,6 +328,11 @@
           "id": "g11",
           "name": "group Other 3",
           "picture": "/images/icons/groupIcon11.svg"
+        },
+        {
+          "id": "g1",
+          "name": "5月聚餐abcabcabcabc",
+          "picture": "/images/icons/groupIcon01.svg"
         }
       ]
     },
@@ -811,10 +826,10 @@
           "adoptable": true
         },
         {
-          "id": "u22",
-          "name": "小阿十",
-          "picture": "/images/icons/newUserBG.svg",
-          "adoptable": true
+          "id": "u7",
+          "name": "g",
+          "picture": "https://cdn2.thecatapi.com/images/edb.jpg",
+          "adoptable": false
         }
       ]
     },
@@ -1803,6 +1818,100 @@
           "name": "d",
           "picture": "https://images.dog.ceo/breeds/terrier-sealyham/n02095889_1044.jpg",
           "adoptable": false
+        }
+      ]
+    },
+    {
+      "id": "d0278763-49db-4043-ba3f-a6f19dca2f1e",
+      "name": "成語大補帖",
+      "picture": "/images/icons/groupIcon14.svg",
+      "creatorId": "u5",
+      "expenses": [
+        {
+          "name": "1",
+          "category": "food",
+          "amount": 1500,
+          "date": "2024-08-29T02:21:35.888Z",
+          "note": "",
+          "payerId": "598106f8-2cfd-45e2-9ee3-ac3fe05d4592",
+          "sharers": [
+            {
+              "id": "u4",
+              "amount": 300
+            },
+            {
+              "id": "79c80f7d-ffba-4d4c-9b3e-35f6ba5bae5d",
+              "amount": 300
+            },
+            {
+              "id": "u5",
+              "amount": 300
+            },
+            {
+              "id": "f8b04ae0-e58f-4f33-bdc2-c9815a9f47ae",
+              "amount": 600
+            }
+          ],
+          "id": "1fc93412-4b71-411f-8a73-08164f596cd2"
+        },
+        {
+          "name": "2",
+          "category": "food",
+          "amount": 1000,
+          "date": "2024-08-29T02:22:01.486Z",
+          "note": "",
+          "payerId": "79c80f7d-ffba-4d4c-9b3e-35f6ba5bae5d",
+          "sharers": [
+            {
+              "id": "u4",
+              "amount": 200
+            },
+            {
+              "id": "79c80f7d-ffba-4d4c-9b3e-35f6ba5bae5d",
+              "amount": 200
+            },
+            {
+              "id": "u5",
+              "amount": 200
+            },
+            {
+              "id": "f8b04ae0-e58f-4f33-bdc2-c9815a9f47ae",
+              "amount": 400
+            }
+          ],
+          "id": "5548424c-2631-4444-b13f-8ee3b1e45906"
+        }
+      ],
+      "users": [
+        {
+          "id": "u4",
+          "name": "d",
+          "picture": "https://images.dog.ceo/breeds/terrier-sealyham/n02095889_1044.jpg",
+          "adoptable": false
+        },
+        {
+          "id": "79c80f7d-ffba-4d4c-9b3e-35f6ba5bae5d",
+          "name": "驚為天人",
+          "picture": "/images/icons/newUserBG.svg",
+          "adoptable": true
+        },
+        {
+          "id": "u5",
+          "name": "e",
+          "picture": "https://cdn2.thecatapi.com/images/cib.jpg",
+          "adoptable": false
+        },
+        {
+          "id": "f8b04ae0-e58f-4f33-bdc2-c9815a9f47ae",
+          "name": "一石二鳥",
+          "picture": "/images/icons/newUserBG.svg",
+          "adoptable": true
+        },
+        {
+          "id": "598106f8-2cfd-45e2-9ee3-ac3fe05d4592",
+          "name": "打草驚蛇",
+          "picture": "/images/icons/newUserBG.svg",
+          "adoptable": true
         }
       ]
     }
@@ -3013,6 +3122,80 @@
         {
           "editedAt": "2024-08-24T00:00:00.000Z",
           "editorId": "u2"
+        }
+      ]
+    },
+    {
+      "name": "1",
+      "category": "food",
+      "amount": 1500,
+      "date": "2024-08-29T02:21:35.888Z",
+      "note": "",
+      "payerId": "598106f8-2cfd-45e2-9ee3-ac3fe05d4592",
+      "sharers": [
+        {
+          "id": "u4",
+          "amount": 300
+        },
+        {
+          "id": "79c80f7d-ffba-4d4c-9b3e-35f6ba5bae5d",
+          "amount": 300
+        },
+        {
+          "id": "u5",
+          "amount": 300
+        },
+        {
+          "id": "f8b04ae0-e58f-4f33-bdc2-c9815a9f47ae",
+          "amount": 600
+        }
+      ],
+      "groupId": "d0278763-49db-4043-ba3f-a6f19dca2f1e",
+      "id": "1fc93412-4b71-411f-8a73-08164f596cd2",
+      "creatorId": "u4",
+      "createAt": "2024-08-29T02:21:35.889Z",
+      "updateAt": "2024-08-29T02:21:35.889Z",
+      "historys": [
+        {
+          "editedAt": "2024-08-29T02:21:35.889Z",
+          "editorId": "u4"
+        }
+      ]
+    },
+    {
+      "name": "2",
+      "category": "food",
+      "amount": 1000,
+      "date": "2024-08-29T02:22:01.486Z",
+      "note": "",
+      "payerId": "79c80f7d-ffba-4d4c-9b3e-35f6ba5bae5d",
+      "sharers": [
+        {
+          "id": "u4",
+          "amount": 200
+        },
+        {
+          "id": "79c80f7d-ffba-4d4c-9b3e-35f6ba5bae5d",
+          "amount": 200
+        },
+        {
+          "id": "u5",
+          "amount": 200
+        },
+        {
+          "id": "f8b04ae0-e58f-4f33-bdc2-c9815a9f47ae",
+          "amount": 400
+        }
+      ],
+      "groupId": "d0278763-49db-4043-ba3f-a6f19dca2f1e",
+      "id": "5548424c-2631-4444-b13f-8ee3b1e45906",
+      "creatorId": "u4",
+      "createAt": "2024-08-29T02:22:01.486Z",
+      "updateAt": "2024-08-29T02:22:01.486Z",
+      "historys": [
+        {
+          "editedAt": "2024-08-29T02:22:01.486Z",
+          "editorId": "u4"
         }
       ]
     }

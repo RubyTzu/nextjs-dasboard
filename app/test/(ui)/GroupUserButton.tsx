@@ -4,11 +4,12 @@ import { useId, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 //import data
 import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
-import { ExtendedGroup, GroupUser } from '../(data)/(sharedFunction)/types';
+import { ExtendedGroup, GroupUser, ExtendedExpense } from '../(data)/(sharedFunction)/types';
+import { changeGroup, deleteUser } from '../(data)/(fetchData)/API';
 //import ui
 import { TrashcanIcon } from '@/app/test/(ui)/Icons';
 import DeleteModal from './DeleteModal';
-import { changeGroup, deleteUser } from '../(data)/(fetchData)/API';
+import AlertModal from './AlertModal';
 
 interface Props {
   idx: string;
@@ -61,13 +62,13 @@ export function GroupUserButton({
       let currentGroupUsers = groupData.users
         ? [...groupData.users]
         : [
-            {
-              id: '',
-              name: '',
-              picture: '',
-              adoptable: false,
-            },
-          ];
+          {
+            id: '',
+            name: '',
+            picture: '',
+            adoptable: false,
+          },
+        ];
       const userIndex = currentGroupUsers.findIndex(
         (user: GroupUser) =>
           user.name === userData?.name && e.currentTarget.id === idx,
@@ -87,14 +88,14 @@ export function GroupUserButton({
       });
       if (!isAddPage) {
         console.log(userId);
-        if(groupData.users?.find(user => user.id === userId && user.adoptable === false)){
+        if (groupData.users?.find(user => user.id === userId && user.adoptable === false)) {
           await deleteUser(userId);
         }
         await changeGroup({
           ...groupData,
           users: currentGroupUsers,
         })
-       }
+      }
     } catch (error) {
       console.error('API 呼叫失敗:', error);
     }
@@ -107,6 +108,10 @@ export function GroupUserButton({
     (isAddPage && loginUserData?.id === idx) || isMemberAdmin;
   const showDeleteButton =
     (isAddPage && loginUserData?.id !== idx) || (isAdmin && !isMemberAdmin);
+
+  const isUserInGroupExpense = groupData.expenses ? groupData.expenses.some((expense: ExtendedExpense) =>
+    expense.sharers.some(sharer => sharer.id === userData?.id) || expense.payerId === userData?.id
+  ) : false
 
   return (
     <div className="mb-4 flex items-center justify-between">
@@ -145,18 +150,31 @@ export function GroupUserButton({
           >
             <TrashcanIcon />
           </div>
-          <DeleteModal
-            dialogRef={dialogRef}
-            dialogId={dialogId}
-            isShow={isShow}
-            headerId={headerId}
-            handleClose={handleClose}
-            handleSave={(e) =>
-              handleSave(e, groupData.id || '', userData?.id || '', isAddPage)
-            }
-            hintWord="確定要刪除成員嗎？"
-            idx={idx}
-          />
+          {isUserInGroupExpense ?
+            <AlertModal
+              dialogRef={dialogRef}
+              dialogId={dialogId}
+              isShow={isShow}
+              headerId={headerId}
+              url={`/test/split/group/${groupData.id}/edit`}
+              hintWord="該成員存在於費用中，請先調整費用再刪除。"
+              buttonHintWord="確定"
+            />
+            :
+            <DeleteModal
+              dialogRef={dialogRef}
+              dialogId={dialogId}
+              isShow={isShow}
+              headerId={headerId}
+              handleClose={handleClose}
+              handleSave={(e) =>
+                handleSave(e, groupData.id || '', userData?.id || '', isAddPage)
+              }
+              hintWord="確定要刪除成員嗎？"
+              idx={idx}
+            />
+          }
+
         </>
       ) : null}
     </div>

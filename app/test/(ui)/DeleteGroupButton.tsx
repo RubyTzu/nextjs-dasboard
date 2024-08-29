@@ -3,11 +3,15 @@ import { useId, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 //import data
 import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
-import { ExtendedGroup, GroupUser, LoginUser } from '../(data)/(sharedFunction)/types';
-import { changeUserGroup, changeGroup, deleteGroup } from '../(data)/(fetchData)/API';
+import { ExtendedExpense, ExtendedGroup, GroupUser, LoginUser } from '../(data)/(sharedFunction)/types';
+import { changeExpense, changeUserGroup, changeGroup, deleteGroup, getExpensesforAdoptUser } from '../(data)/(fetchData)/API';
 //import ui
 import { TrashcanIcon, LeaveIcon } from '@/app/test/(ui)/Icons';
 import DeleteModal from './DeleteModal';
+import AlertModal from './AlertModal';
+//import other
+import { v4 as uuidv4 } from 'uuid';
+
 
 interface Props {
   groupData: ExtendedGroup;
@@ -67,7 +71,9 @@ export default function DeleteGroupButton({
     }
   }
 
-  const handleLeaveGroup = async (loginUserId: string, groupId :string) => {
+  const handleLeaveGroup = async (loginUserId: string, groupId: string) => {
+    const AllExpenses = await getExpensesforAdoptUser();
+    let idx = uuidv4();
     let currentGroupUsers = [...users];
 
     const userIndex = currentGroupUsers.findIndex(
@@ -75,11 +81,23 @@ export default function DeleteGroupButton({
     );
 
     if (userIndex !== -1) {
-      currentGroupUsers.splice(userIndex, 1);
+      currentGroupUsers.splice(userIndex, 1, {
+        "id": idx,
+        "name": `原 ${loginUserData.name}`,
+        "picture": "/images/icons/newUserBG.svg",
+        "adoptable": true
+      });
     }
+
+    let updatedGroupExpenses = groupData.expenses ? groupData.expenses.map((expense: ExtendedExpense) => ({
+      ...expense,
+      payerId: expense.payerId === loginUserId ? idx : expense.payerId,
+      sharers: expense.sharers.map(sharer => sharer.id === loginUserId ? { id: idx, amount: sharer.amount } : sharer)
+    })) : []
 
     let newGroupData = {
       ...groupData,
+      expenses: updatedGroupExpenses,
       users: currentGroupUsers,
     }
 
@@ -94,9 +112,25 @@ export default function DeleteGroupButton({
       ...loginUserData,
       groups: newUserGroups
     }
+
+    let updateExpenses = AllExpenses.map((expense: ExtendedExpense) => {
+      if (expense.groupId === groupId) {
+        return ({
+          ...expense,
+          payerId: expense.payerId === loginUserId ? idx : expense.payerId,
+          sharers: expense.sharers.map(sharer => sharer.id === loginUserId ? { id: idx, amount: sharer.amount } : sharer)
+        })
+      } else {
+        return expense
+      }
+    })
+
     try {
       await changeGroup(newGroupData);
       await changeUserGroup(newUserData);
+      for (const expense of updateExpenses) {
+        await changeExpense(expense);
+      }
       router.push(`/test/split/groups`);
     } catch (error) {
       console.error('API 呼叫失敗:', error);
@@ -118,29 +152,29 @@ export default function DeleteGroupButton({
           <p className="">{isAdmin ? '刪除群組' : '離開群組'}</p>
         </div>
       </div>
-      {isAdmin ? (
-        <DeleteModal
-          dialogRef={dialogRef}
-          dialogId={dialogId}
-          isShow={isShow}
-          headerId={headerId}
-          handleClose={handleClose}
-          handleSave={() => handleDeleteGroup(groupData.id || '')}
-          hintWord="若刪除群組，所有的紀錄和成員名單將會被刪除。"
-          idx={`deleteGroup${loginUserId}`}
-        />
-      ) : (
-        <DeleteModal
-          dialogRef={dialogRef}
-          dialogId={dialogId}
-          isShow={isShow}
-          headerId={headerId}
-          handleClose={handleClose}
-          handleSave={() => handleLeaveGroup(loginUserId || '',groupData.id || '')}
-          hintWord="確定要離開群組嗎？"
-          idx={`leaveGroup${loginUserId}`}
-        />
-      )}
+          {isAdmin ? (
+            <DeleteModal
+              dialogRef={dialogRef}
+              dialogId={dialogId}
+              isShow={isShow}
+              headerId={headerId}
+              handleClose={handleClose}
+              handleSave={() => handleDeleteGroup(groupData.id || '')}
+              hintWord="若刪除群組，所有的紀錄和成員名單將會被刪除。"
+              idx={`deleteGroup${loginUserId}`}
+            />
+          ) : (
+            <DeleteModal
+              dialogRef={dialogRef}
+              dialogId={dialogId}
+              isShow={isShow}
+              headerId={headerId}
+              handleClose={handleClose}
+              handleSave={() => handleLeaveGroup(loginUserId || '', groupData.id || '')}
+              hintWord="確定要離開群組嗎？"
+              idx={`leaveGroup${loginUserId}`}
+            />
+          )}
     </>
   );
 }
