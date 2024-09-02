@@ -69,6 +69,7 @@ export default function Page() {
         <GroupInfoBar expenseData={currentExpense} group={group} />
         <section>
           <ExpenseSettingStepOne
+            isAddPage={true}
             group={group}
             oldExpenseData={currentExpense}
             expenseData={currentExpense}

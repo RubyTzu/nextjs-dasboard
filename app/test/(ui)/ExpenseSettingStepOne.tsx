@@ -15,6 +15,7 @@ import clsx from 'clsx';
 import NoteButton from './NoteButton';
 
 interface ExpenseSettingStepOneProps {
+  isAddPage: boolean;
   group?: ExtendedGroup;
   oldExpenseData?: ExtendedExpense | Expense;
   expenseData?: ExtendedExpense | Expense;
@@ -22,20 +23,15 @@ interface ExpenseSettingStepOneProps {
     React.SetStateAction<ExtendedExpense | Expense>
   >;
   phase: number;
-  setisIncorrectTotalNum: React.Dispatch<
-    React.SetStateAction<boolean>
-  >;
+  setisIncorrectTotalNum: React.Dispatch<React.SetStateAction<boolean>>;
   nameExist: boolean;
-  setNameExist: React.Dispatch<
-    React.SetStateAction<boolean>
-  >;
+  setNameExist: React.Dispatch<React.SetStateAction<boolean>>;
   hasNameLength: boolean;
-  setHasNameLength: React.Dispatch<
-    React.SetStateAction<boolean>
-  >;
+  setHasNameLength: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function ExpenseSettingStepOne({
+  isAddPage,
   group,
   oldExpenseData,
   expenseData,
@@ -45,48 +41,78 @@ export function ExpenseSettingStepOne({
   nameExist,
   setNameExist,
   hasNameLength,
-  setHasNameLength
+  setHasNameLength,
 }: ExpenseSettingStepOneProps) {
   const [currentValue, setCurrentValue] = useState('');
 
   useEffect(() => {
     if (expenseData?.name) {
-      setCurrentValue(expenseData?.name)
+      setCurrentValue(expenseData?.name);
     }
-  }, [expenseData?.name])
+  }, [expenseData?.name, nameExist]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, expenseData: ExtendedExpense | Expense, group: ExtendedGroup) => {
-    const expenseNameExist = group.expenses?.some((expense) => expense.name === e.target.value) && oldExpenseData?.name !== e.target.value;
+  useEffect(() => {
+    if (expenseData?.name) {
+      if (isAddPage) {
+        setNameExist(
+          group?.expenses?.some(
+            (expense) => expense.name === expenseData?.name,
+          ) || false,
+        );
+        console.log(nameExist);
+      }
+    }
+  }, []);
 
-    setCurrentValue(e.target.value)
-
-    if (expenseNameExist) {
-      setNameExist(true)
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    group: ExtendedGroup,
+  ) => {
+    if (isAddPage) {
+      console.log(group.expenses);
+      setNameExist(
+        group.expenses?.some((expense) => expense.name === e.target.value) ||
+          false,
+      );
+      console.log(
+        group.expenses?.some((expense) => expense.name === e.target.value) ||
+          false,
+      );
+      console.log(nameExist);
     } else {
-      setNameExist(false)
+      setNameExist(
+        (group.expenses?.some((expense) => expense.name === e.target.value) &&
+          oldExpenseData?.name !== e.target.value) ||
+          false,
+      );
     }
+    setCurrentValue(e.target.value);
 
     if (e.target.value.length === 0) {
-      setHasNameLength(false)
+      setHasNameLength(false);
     } else {
-      setHasNameLength(true)
+      setHasNameLength(true);
     }
-  }
+  };
 
-  const handleInputBlur = (e: React.ChangeEvent<HTMLInputElement>, expenseData: ExtendedExpense | Expense, group: ExtendedGroup) => {
-    const expenseNameExist = group.expenses?.some((expense) => expense.name === e.target.value) && oldExpenseData?.name !== e.target.value;
+  const handleInputBlur = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    expenseData: ExtendedExpense | Expense,
+    group: ExtendedGroup,
+  ) => {
+    const expenseNameExist =
+      group.expenses?.some((expense) => expense.name === e.target.value) &&
+      oldExpenseData?.name !== e.target.value;
 
     if (expenseNameExist || e.target.value.length === 0) {
-      return
+      return;
     } else {
       setCurrentExpense({
         ...expenseData,
         name: e.target.value,
       });
     }
-
-
-  }
+  };
 
   return (
     <div
@@ -94,51 +120,68 @@ export function ExpenseSettingStepOne({
         hidden: phase !== 1,
       })}
     >
-      {group && expenseData ? <>
-        <div className="mb-4">
-          <DatePickerButton
-            expenseData={expenseData}
-            setCurrentExpense={setCurrentExpense}
-          />
-        </div>
-        <div className="my-3 flex items-end justify-between gap-6">
-          <ExpenseCategoryButton
-            setCurrentExpense={setCurrentExpense}
-            expenseData={expenseData}
-          />
-          <div className="relative w-48 border-b border-grey-500">
-            <input
-              className="relative w-[80%] border-0 bg-transparent pb-1 pl-0 focus:border-0 focus:outline-none focus:ring-0"
-              onChange={(e) => handleInputChange(e, expenseData, group)}
-              onBlur={(e) => handleInputBlur(e, expenseData, group)}
-              type="text"
-              defaultValue={currentValue}
-              maxLength={20}
+      {group && expenseData ? (
+        <>
+          <div className="mb-4">
+            <DatePickerButton
+              expenseData={expenseData}
+              setCurrentExpense={setCurrentExpense}
             />
-            <div className="absolute top-[59%] translate-y-[-50%] right-0 text-neutrals-50 text-[10px]">&#40;{currentValue.length}/20&#41;</div>
-            <div className={clsx('absolute top-[130%] translate-y-[-50%] right-0 text-neutrals-50 text-[10px]', {
-              'block': nameExist,
-              'hidden': !nameExist,
-            })}>該費用名稱已存在，請重新輸入</div>
-            <div className={clsx('absolute top-[130%] translate-y-[-50%] right-0 text-neutrals-50 text-[10px]', {
-              'block': !hasNameLength,
-              'hidden': hasNameLength,
-            })}>費用名稱不可為空值</div>
           </div>
-
-        </div>
-        <div className="my-3">
-          <TotalCalculator
+          <div className="my-3 flex items-end justify-between gap-6">
+            <ExpenseCategoryButton
+              setCurrentExpense={setCurrentExpense}
+              expenseData={expenseData}
+            />
+            <div className="relative w-48 border-b border-grey-500">
+              <input
+                className="relative w-[80%] border-0 bg-transparent pb-1 pl-0 focus:border-0 focus:outline-none focus:ring-0"
+                onChange={(e) => handleInputChange(e, group)}
+                onBlur={(e) => handleInputBlur(e, expenseData, group)}
+                type="text"
+                defaultValue={currentValue}
+                maxLength={20}
+              />
+              <div className="absolute right-0 top-[59%] translate-y-[-50%] text-[10px] text-neutrals-50">
+                &#40;{currentValue.length}/20&#41;
+              </div>
+              <div
+                className={clsx(
+                  'absolute right-0 top-[130%] translate-y-[-50%] text-[10px] text-neutrals-50',
+                  {
+                    block: nameExist,
+                    hidden: !nameExist,
+                  },
+                )}
+              >
+                該費用名稱已存在，請重新輸入
+              </div>
+              <div
+                className={clsx(
+                  'absolute right-0 top-[130%] translate-y-[-50%] text-[10px] text-neutrals-50',
+                  {
+                    block: !hasNameLength,
+                    hidden: hasNameLength,
+                  },
+                )}
+              >
+                費用名稱不可為空值
+              </div>
+            </div>
+          </div>
+          <div className="my-3">
+            <TotalCalculator
+              expenseData={expenseData}
+              setCurrentExpense={setCurrentExpense}
+              setisIncorrectTotalNum={setisIncorrectTotalNum}
+            />
+          </div>
+          <NoteButton
             expenseData={expenseData}
             setCurrentExpense={setCurrentExpense}
-            setisIncorrectTotalNum={setisIncorrectTotalNum}
           />
-        </div>
-        <NoteButton
-          expenseData={expenseData}
-          setCurrentExpense={setCurrentExpense}
-        />
-      </> : null}
+        </>
+      ) : null}
     </div>
   );
 }

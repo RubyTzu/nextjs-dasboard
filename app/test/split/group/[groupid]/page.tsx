@@ -36,10 +36,7 @@ export default function Page() {
   return (
     <div className="flex flex-col">
       <Suspense fallback={<UsersBarSkeleton />}>
-        <TopGroupBar
-          isBalancePage={false}
-          groupData={group}
-        />
+        <TopGroupBar isBalancePage={false} groupData={group} />
         {isUserInGroup && (
           <>
             <UsersBar groupData={group} />
@@ -47,7 +44,7 @@ export default function Page() {
             <ExpensesList groupData={group} />
             <AddExpenseButton groupId={groupid} />
           </>
-       )}
+        )}
         {isUserAdoptable && !isUserInGroup && (
           <JoinGroupModal
             groupData={currentGroup}
@@ -62,6 +59,7 @@ export default function Page() {
             buttonHintWord="確定"
           />
         )}
+        <div className="mb-32"></div>
       </Suspense>
     </div>
   );
