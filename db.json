@@ -1326,7 +1326,43 @@
       "name": "group Travel 3",
       "picture": "/images/icons/groupIcon09.svg",
       "creatorId": "u1",
-      "expenses": [],
+      "expenses": [
+        {
+          "name": "未命名費用",
+          "category": "food",
+          "amount": 2,
+          "date": "2024-09-04T12:35:38.159Z",
+          "note": "",
+          "payerId": "u7",
+          "sharers": [
+            {
+              "id": "u1",
+              "amount": 0.33
+            },
+            {
+              "id": "u2",
+              "amount": 0.33
+            },
+            {
+              "id": "u3",
+              "amount": 0.33
+            },
+            {
+              "id": "u7",
+              "amount": 0.33
+            },
+            {
+              "id": "u9",
+              "amount": 0.33
+            },
+            {
+              "id": "u10",
+              "amount": 0.33
+            }
+          ],
+          "id": "2d5977b0-2210-4f99-a283-992bf88080ce"
+        }
+      ],
       "users": [
         {
           "id": "u1",
@@ -3196,6 +3232,51 @@
         {
           "editedAt": "2024-08-29T02:22:01.486Z",
           "editorId": "u4"
+        }
+      ]
+    },
+    {
+      "id": "2d5977b0-2210-4f99-a283-992bf88080ce",
+      "name": "未命名費用",
+      "category": "food",
+      "amount": 2,
+      "date": "2024-09-04T12:35:38.159Z",
+      "note": "",
+      "payerId": "u7",
+      "sharers": [
+        {
+          "id": "u1",
+          "amount": 0.33
+        },
+        {
+          "id": "u2",
+          "amount": 0.33
+        },
+        {
+          "id": "u3",
+          "amount": 0.33
+        },
+        {
+          "id": "u7",
+          "amount": 0.33
+        },
+        {
+          "id": "u9",
+          "amount": 0.33
+        },
+        {
+          "id": "u10",
+          "amount": 0.33
+        }
+      ],
+      "groupId": "g9",
+      "creatorId": "u7",
+      "createAt": "2024-09-04T12:35:38.159Z",
+      "updateAt": "2024-09-04T12:35:38.159Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-04T12:35:38.159Z",
+          "editorId": "u7"
         }
       ]
     }

@@ -58,7 +58,6 @@ export default function Page() {
     <form ref={formRef} method="post" action={`/test/split/group/${groupid}`}>
       <div className="relative flex flex-col">
         <TopExpenseSettingBar
-          isAddPage={true}
           group={group}
           expenseData={currentExpense}
           phase={phase}

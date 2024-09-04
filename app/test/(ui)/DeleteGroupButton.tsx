@@ -8,20 +8,16 @@ import { changeExpense, changeUserGroup, changeGroup, deleteGroup, getExpensesfo
 //import ui
 import { TrashcanIcon, LeaveIcon } from '@/app/test/(ui)/Icons';
 import DeleteModal from './DeleteModal';
-import AlertModal from './AlertModal';
 //import other
 import { v4 as uuidv4 } from 'uuid';
 
-
 interface Props {
   groupData: ExtendedGroup;
-  setCurrentGroup: React.Dispatch<React.SetStateAction<ExtendedGroup>>;
   loginUserData: LoginUser;
 }
 
 export default function DeleteGroupButton({
   groupData,
-  setCurrentGroup,
   loginUserData
 }: Props) {
   const { loginUserId } = useAllContext();

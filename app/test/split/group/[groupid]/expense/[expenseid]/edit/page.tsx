@@ -52,7 +52,6 @@ export default function Page() {
     >
       <div className="relative flex flex-col">
         <TopExpenseSettingBar
-          isAddPage={false}
           group={group}
           expenseData={expense}
           phase={phase}

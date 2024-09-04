@@ -10,9 +10,9 @@ import {
 import { TotalCalculator } from './Calculator';
 import DatePickerButton from './DatePickerButton';
 import ExpenseCategoryButton from './ExpenseCategoryButton';
+import NoteButton from './NoteButton';
 //other
 import clsx from 'clsx';
-import NoteButton from './NoteButton';
 
 interface ExpenseSettingStepOneProps {
   isAddPage: boolean;
@@ -59,7 +59,6 @@ export function ExpenseSettingStepOne({
             (expense) => expense.name === expenseData?.name,
           ) || false,
         );
-        console.log(nameExist);
       }
     }
   }, []);
@@ -69,16 +68,10 @@ export function ExpenseSettingStepOne({
     group: ExtendedGroup,
   ) => {
     if (isAddPage) {
-      console.log(group.expenses);
       setNameExist(
         group.expenses?.some((expense) => expense.name === e.target.value) ||
           false,
       );
-      console.log(
-        group.expenses?.some((expense) => expense.name === e.target.value) ||
-          false,
-      );
-      console.log(nameExist);
     } else {
       setNameExist(
         (group.expenses?.some((expense) => expense.name === e.target.value) &&

@@ -4,48 +4,52 @@ import { useEffect, useId, useRef } from 'react';
 import AlertModal from './AlertModal';
 
 interface Props {
-    url: string;
-    hintWord: string;
-    buttonHintWord: string;
+  url: string;
+  hintWord: string;
+  buttonHintWord: string;
 }
 
 export default function PageLoadAlertModal({
   url,
   hintWord,
   buttonHintWord,
-}:  Props) {
+}: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dialogId = useId();
   const headerId = useId();
 
   useEffect(() => {
-
     const dialog = dialogRef.current;
 
     document.body.style.overflow = 'hidden';
 
     if (dialog) {
-        dialog.showModal();
+      dialog.showModal();
     }
 
     return () => {
-        if (dialog) {
-              dialogRef.current?.close();
-              document.body.style.overflow = '';
-        }
+      if (dialog) {
+        dialogRef.current?.close();
+        document.body.style.overflow = '';
+      }
     };
-}, [])
+  }, []);
 
   return (
     <>
-      <AlertModal 
-       dialogRef={dialogRef}
-       dialogId={dialogId}
-       isShow={true}
-       headerId={headerId}
-       url={url}
-       hintWord={hintWord}
-       buttonHintWord={buttonHintWord}
+      <AlertModal
+        hasTwoButton={false}
+        isChangePage={true}
+        dialogRef={dialogRef}
+        dialogId={dialogId}
+        isShow={true}
+        headerId={headerId}
+        url={url}
+        handleClose={() => {}}
+        handleSave={() => {}}
+        hintWord={hintWord}
+        buttonHintWord={buttonHintWord}
+        SecondbuttonHintWord=""
       />
     </>
   );

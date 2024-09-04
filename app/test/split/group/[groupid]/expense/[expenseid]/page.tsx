@@ -3,7 +3,7 @@
 import { useParams } from 'next/navigation';
 import { Suspense } from 'react';
 //import data
-import { useAllContext, useGroup, useExpense } from '@/app/test/(data)/(fetchData)/Providers';
+import { useGroup, useExpense } from '@/app/test/(data)/(fetchData)/Providers';
 import { ExtendedExpense, ExtendedGroup, GroupUser } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import { TopExpenseBar } from '@/app/test/(ui)/TopBars';
@@ -16,7 +16,6 @@ import DeleteExpenseButton from '@/app/test/(ui)/DeleteExpenseButton';
 import { ExpenseSkeleton } from '@/app/test/(ui)/LoadingSkeletons';
 
 export default function Page() {
-  const { loginUserId } = useAllContext();
   const { groupid, expenseid } = useParams<{
     groupid: string;
     expenseid: string;

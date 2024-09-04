@@ -61,7 +61,6 @@ async function addGroup(payload: any) {
   });
 
   if (!res.ok) throw Error;
-  console.log('成功新增Group!')
 }
 
 //add expense
@@ -82,7 +81,6 @@ async function addExpense(payload: any) {
   });
 
   if (!res.ok) throw Error;
-  console.log('成功新增Expense!')
  }
 
 async function changeUserGroup(payload: any) {
@@ -101,7 +99,6 @@ async function changeUserGroup(payload: any) {
   });
 
   if (!res.ok) throw Error;
-  console.log('成功新增User Group!')
 }
 
 // change group

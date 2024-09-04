@@ -34,7 +34,6 @@ interface TopExpenseBarProps {
 }
 
 interface TopExpenseSettingBarProps {
-  isAddPage: boolean;
   group: ExtendedGroup;
   expenseData: ExtendedExpense | Expense;
   phase: number;
@@ -120,7 +119,6 @@ export function TopGroupSettingBar({
 }
 
 export function TopExpenseBar({ groupData, expenseData }: TopExpenseBarProps) {
-  const { loginUserId } = useAllContext();
   const id = groupData ? groupData.id : '';
 
   return (
@@ -147,7 +145,6 @@ export function TopExpenseBar({ groupData, expenseData }: TopExpenseBarProps) {
 }
 
 export function TopExpenseSettingBar({
-  isAddPage,
   group,
   expenseData,
   phase,
@@ -155,7 +152,6 @@ export function TopExpenseSettingBar({
   hintword,
   cancelLink,
 }: TopExpenseSettingBarProps) {
-  const { loginUserId } = useAllContext();
 
   function handleClick() {
     if (phase === 1) return;

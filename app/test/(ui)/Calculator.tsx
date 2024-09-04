@@ -2,9 +2,17 @@
 //import next and react
 import { useState, useEffect } from 'react';
 //import data
-import { Expense, ExtendedExpense, GroupUser, Sharer } from '../(data)/(sharedFunction)/types';
+import {
+  Expense,
+  ExtendedExpense,
+  GroupUser,
+  Sharer,
+} from '../(data)/(sharedFunction)/types';
 //import ui
-import { TotalAmountCalculator, SharerAmountCalculator } from './CalculatorDetail';
+import {
+  TotalAmountCalculator,
+  SharerAmountCalculator,
+} from './CalculatorDetail';
 //import other
 import { evaluate } from 'mathjs';
 
@@ -84,7 +92,7 @@ export const TotalCalculator = ({
       } catch (e) {
         result = expression;
       }
-        return String(result);
+      return String(result);
     }
 
     const handleInputBlur = (newValue: string) => {
@@ -93,9 +101,12 @@ export const TotalCalculator = ({
         value = '0';
       }
       setCurrentExpense({ ...expenseData, amount: Number(value) });
-    }
-  
-    if ((isValidNum && expenseData.amount !== displayNumber) || display === '') {
+    };
+
+    if (
+      (isValidNum && expenseData.amount !== displayNumber) ||
+      display === ''
+    ) {
       return handleInputBlur(display);
     } else {
       const evaluatedDisplay = evaluateExpression(display);
@@ -131,15 +142,15 @@ export const TotalCalculator = ({
         setDisplay(
           hasDecimal && !hasTwoZeroesAfterDecimal(result)
             ? result.toLocaleString('en-US', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-              useGrouping: false,
-            })
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+                useGrouping: false,
+              })
             : result.toLocaleString('en-US', {
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 0,
-              useGrouping: false,
-            }),
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+                useGrouping: false,
+              }),
         );
       }
     } catch (error) {
@@ -278,7 +289,7 @@ export const SharerCalculator = ({
       } catch (e) {
         result = expression;
       }
-        return String(result);
+      return String(result);
     }
 
     if ((isValidNum && sharer.amount !== displayNumber) || display === '') {
@@ -317,15 +328,15 @@ export const SharerCalculator = ({
         setDisplay(
           hasDecimal && !hasTwoZeroesAfterDecimal(result)
             ? result.toLocaleString('en-US', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-              useGrouping: false,
-            })
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+                useGrouping: false,
+              })
             : result.toLocaleString('en-US', {
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 0,
-              useGrouping: false,
-            }),
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+                useGrouping: false,
+              }),
         );
       }
     } catch (error) {
