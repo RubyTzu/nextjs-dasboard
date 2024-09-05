@@ -97,7 +97,6 @@ export function ExpenseDetailTwo({
                 {sharer.id !== payerId ? (
                   <>
                     <SharerExpenseDetail
-                      expenseData={expenseData}
                       sharer={sharer}
                       users={users}
                     />

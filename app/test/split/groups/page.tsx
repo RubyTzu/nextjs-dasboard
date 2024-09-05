@@ -17,7 +17,7 @@ export default function Page() {
   const { loginUserId, setLoginUserId } = useAllContext();
 
   useEffect(() => {
-    localStorage.setItem('loginUserId', 'u7');
+    localStorage.setItem('loginUserId', 'u1');
 
     const loginUserId = localStorage.getItem('loginUserId');
     if (loginUserId) {

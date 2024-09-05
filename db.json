@@ -55,6 +55,11 @@
           "id": "g13",
           "name": "臺南 823-825",
           "picture": "/images/icons/groupIcon08.svg"
+        },
+        {
+          "id": "f33d7bb8-3565-4a40-adf2-6529d2ec3c56",
+          "name": "未命名群組",
+          "picture": "/images/icons/groupIcon01.svg"
         }
       ]
     },
@@ -332,6 +337,11 @@
         {
           "id": "g1",
           "name": "5月聚餐abcabcabcabc",
+          "picture": "/images/icons/groupIcon01.svg"
+        },
+        {
+          "id": "f33d7bb8-3565-4a40-adf2-6529d2ec3c56",
+          "name": "未命名群組",
           "picture": "/images/icons/groupIcon01.svg"
         }
       ]
@@ -1950,6 +1960,97 @@
           "adoptable": true
         }
       ]
+    },
+    {
+      "id": "f33d7bb8-3565-4a40-adf2-6529d2ec3c56",
+      "name": "未命名群組",
+      "picture": "/images/icons/groupIcon01.svg",
+      "creatorId": "u7",
+      "expenses": [
+        {
+          "name": "未命名費用",
+          "category": "food",
+          "amount": 60000,
+          "date": "2024-09-05T11:15:51.209Z",
+          "note": "",
+          "payerId": "a18f298f-e59d-4df5-8c43-21f15b7b6fdb",
+          "sharers": [
+            {
+              "id": "ad1fe181-0b0a-4087-8d8d-6440cc43c898",
+              "amount": 8571.43
+            },
+            {
+              "id": "u7",
+              "amount": 8571.43
+            },
+            {
+              "id": "50106613-572d-47d5-9896-b88c254b863a",
+              "amount": 8571.43
+            },
+            {
+              "id": "a18f298f-e59d-4df5-8c43-21f15b7b6fdb",
+              "amount": 8571.43
+            },
+            {
+              "id": "27f62856-cd68-4e5b-89e7-fac62c9da598",
+              "amount": 8571.43
+            },
+            {
+              "id": "u1",
+              "amount": 8571.43
+            },
+            {
+              "id": "44bccd0e-2210-4d39-b902-dd40380f8aaa",
+              "amount": 8571.43
+            }
+          ],
+          "id": "bb8290e3-0842-4751-8a2f-5a42b4fa30f5"
+        }
+      ],
+      "users": [
+        {
+          "id": "ad1fe181-0b0a-4087-8d8d-6440cc43c898",
+          "name": "333",
+          "picture": "/images/icons/newUserBG.svg",
+          "adoptable": true
+        },
+        {
+          "id": "u7",
+          "name": "g",
+          "picture": "https://cdn2.thecatapi.com/images/edb.jpg",
+          "adoptable": false
+        },
+        {
+          "id": "50106613-572d-47d5-9896-b88c254b863a",
+          "name": "444",
+          "picture": "/images/icons/newUserBG.svg",
+          "adoptable": true
+        },
+        {
+          "id": "a18f298f-e59d-4df5-8c43-21f15b7b6fdb",
+          "name": "原 小明bbbbb",
+          "picture": "/images/icons/newUserBG.svg",
+          "adoptable": true
+        },
+        {
+          "id": "27f62856-cd68-4e5b-89e7-fac62c9da598",
+          "name": "666",
+          "picture": "/images/icons/newUserBG.svg",
+          "adoptable": true
+        },
+        {
+          "id": "u1",
+          "name": "小陳aaaaaaaaaaaa",
+          "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
+          "adoptable": false
+        },
+        {
+          "id": "44bccd0e-2210-4d39-b902-dd40380f8aaa",
+          "name": "888",
+          "picture": "/images/icons/newUserBG.svg",
+          "adoptable": true
+        }
+      ]
     }
   ],
   "expense": [
@@ -3276,6 +3377,55 @@
       "historys": [
         {
           "editedAt": "2024-09-04T12:35:38.159Z",
+          "editorId": "u7"
+        }
+      ]
+    },
+    {
+      "id": "bb8290e3-0842-4751-8a2f-5a42b4fa30f5",
+      "name": "未命名費用",
+      "category": "food",
+      "amount": 60000,
+      "date": "2024-09-05T11:15:51.209Z",
+      "note": "",
+      "payerId": "a18f298f-e59d-4df5-8c43-21f15b7b6fdb",
+      "sharers": [
+        {
+          "id": "ad1fe181-0b0a-4087-8d8d-6440cc43c898",
+          "amount": 8571.43
+        },
+        {
+          "id": "u7",
+          "amount": 8571.43
+        },
+        {
+          "id": "50106613-572d-47d5-9896-b88c254b863a",
+          "amount": 8571.43
+        },
+        {
+          "id": "a18f298f-e59d-4df5-8c43-21f15b7b6fdb",
+          "amount": 8571.43
+        },
+        {
+          "id": "27f62856-cd68-4e5b-89e7-fac62c9da598",
+          "amount": 8571.43
+        },
+        {
+          "id": "u1",
+          "amount": 8571.43
+        },
+        {
+          "id": "44bccd0e-2210-4d39-b902-dd40380f8aaa",
+          "amount": 8571.43
+        }
+      ],
+      "groupId": "f33d7bb8-3565-4a40-adf2-6529d2ec3c56",
+      "creatorId": "u7",
+      "createAt": "2024-09-05T11:15:51.209Z",
+      "updateAt": "2024-09-05T11:15:51.209Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-05T11:15:51.209Z",
           "editorId": "u7"
         }
       ]
