@@ -3429,6 +3429,114 @@
           "editorId": "u7"
         }
       ]
+    },
+    {
+      "id": "868d335e-4b99-42a6-a049-75e7404aa3a2",
+      "name": "太陽番茄拉麵",
+      "category": "food",
+      "amount": 510,
+      "date": "2024-09-08T13:21:39.517Z",
+      "note": "",
+      "payerId": "a5975fec-3cbd-4294-8abc-cdc4d575d551",
+      "sharers": [
+        {
+          "id": "a5975fec-3cbd-4294-8abc-cdc4d575d551",
+          "amount": 250
+        },
+        {
+          "id": "u1",
+          "amount": 260
+        }
+      ],
+      "groupId": null,
+      "creatorId": "u1",
+      "createAt": "2024-09-08T13:21:39.517Z",
+      "updateAt": "2024-09-08T13:21:39.517Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-08T13:21:39.517Z",
+          "editorId": "u1"
+        }
+      ]
+    },
+    {
+      "id": "c5e695a8-0ddf-43b4-a1da-6d388e6bfbdd",
+      "name": "palladium",
+      "category": "food",
+      "amount": 5313.6,
+      "date": "2024-09-08T13:22:11.581Z",
+      "note": "",
+      "payerId": "a5975fec-3cbd-4294-8abc-cdc4d575d551",
+      "sharers": [
+        {
+          "id": "a5975fec-3cbd-4294-8abc-cdc4d575d551",
+          "amount": 2575.8
+        },
+        {
+          "id": "u1",
+          "amount": 2737.8
+        }
+      ],
+      "groupId": null,
+      "creatorId": "u1",
+      "createAt": "2024-09-08T13:22:11.581Z",
+      "updateAt": "2024-09-08T13:22:11.581Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-08T13:22:11.581Z",
+          "editorId": "u1"
+        }
+      ]
+    },
+    {
+      "id": "28941b79-9656-4470-b7f8-355ceacbd659",
+      "name": "安全帽",
+      "category": "food",
+      "amount": 528,
+      "date": "2024-09-08T13:23:24.393Z",
+      "note": "",
+      "payerId": "u1",
+      "sharers": [
+        {
+          "id": "a5975fec-3cbd-4294-8abc-cdc4d575d551",
+          "amount": 528
+        }
+      ],
+      "groupId": null,
+      "creatorId": "u1",
+      "createAt": "2024-09-08T13:23:24.393Z",
+      "updateAt": "2024-09-08T13:23:24.393Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-08T13:23:24.393Z",
+          "editorId": "u1"
+        }
+      ]
+    },
+    {
+      "id": "2afa31c8-2c18-4b89-8db7-c7c74411ae8a",
+      "name": "食鹽水",
+      "category": "food",
+      "amount": 84,
+      "date": "2024-09-08T13:24:49.896Z",
+      "note": "",
+      "payerId": "u1",
+      "sharers": [
+        {
+          "id": "a5975fec-3cbd-4294-8abc-cdc4d575d551",
+          "amount": 84
+        }
+      ],
+      "groupId": null,
+      "creatorId": "u1",
+      "createAt": "2024-09-08T13:24:49.896Z",
+      "updateAt": "2024-09-08T13:24:49.896Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-08T13:24:49.896Z",
+          "editorId": "u1"
+        }
+      ]
     }
   ]
 }

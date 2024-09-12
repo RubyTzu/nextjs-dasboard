@@ -47,11 +47,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="zh-TW">
       <head>
         <meta property="og:title" content="Next JS Test" />
-        <meta property="og:description" content="A place for me to practice NextJS" />
-        <meta property="og:url" content="https://nextjs-dasboard-woad.vercel.app/test/split/1forTestOnly" />
+        <meta
+          property="og:description"
+          content="A place for me to practice NextJS"
+        />
+        <meta
+          property="og:url"
+          content="https://nextjs-dasboard-woad.vercel.app/test/split/1forTestOnly"
+        />
         <meta property="og:site_name" content="Next JS Test" />
         <meta property="og:locale" content="zh_TW" />
         <meta property="og:image:url" content="/images/1200_630.jpg" />

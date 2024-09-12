@@ -102,6 +102,9 @@ const config: Config = {
       content: {
         checkWhiteIcon: 'url("../test/(ui)/icons/checkWhite.svg")',
       },
+      flexGrow: {
+        3: '3',
+      },
     },
     keyframes: {
       shimmer: {

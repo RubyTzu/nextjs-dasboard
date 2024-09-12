@@ -17,11 +17,10 @@ export default function UsersBar({ groupData }: { groupData: ExtendedGroup }) {
 
   return (
     <>
-      {groupData &&
-        groupData.users.some((user) => user.id ===  loginUserId) ? (
+      {groupData && groupData.users.some((user) => user.id === loginUserId) ? (
         <>
           {groupData.users.length ? (
-            <div className="mt-16 flex items-center justify-center gap-4 border-b-grey-userBar border-b-[1px] pb-5 pt-8">
+            <div className="mt-16 flex items-center justify-center gap-4 border-b-[1px] border-b-grey-userBar pb-5 pt-8">
               <ul className="flex items-center justify-center gap-2">
                 {frontUsers.map((user) => (
                   <UserBarImage user={user} key={user.id} />
@@ -29,7 +28,7 @@ export default function UsersBar({ groupData }: { groupData: ExtendedGroup }) {
               </ul>
               <Link
                 href={`/test/split/group/${groupData.id}/edit`}
-                className="flex gap-[2px] rounded-full bg-neutrals-30 px-3 py-[5.5px] text-sm text-grey-500"
+                className="flex gap-[2px] rounded-full bg-neutrals-30 px-3 py-[5.5px] text-sm text-grey-500 active:bg-neutrals-50"
                 scroll={false}
               >
                 <p className="">{groupData.users.length}</p>
