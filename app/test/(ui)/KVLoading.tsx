@@ -16,7 +16,7 @@ import kvIcon12 from '@/app/test/(ui)/icons/kv_icon_12.svg';
 
 // Loading animation
 const shimmer =
-  'before:h-[12.5vh] before:w-full before:absolute before:inset-x-50 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent';
+  'relative overflow-hidden before:h-[12.5vh] before:w-full before:absolute before:left-[-50%] before:translate-x-0 before:animate-[shimmer_3s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent';
 
 export function KVLoading() {
   return (

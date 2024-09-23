@@ -112,8 +112,12 @@ const config: Config = {
           transform: 'translateX(100%)',
         },
       },
-    }
+    },
   },
-  plugins: [require('@tailwindcss/forms'), require('tailwind-scrollbar'), require("@xpd/tailwind-3dtransforms")],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('tailwind-scrollbar'),
+    require('@xpd/tailwind-3dtransforms'),
+  ],
 };
 export default config;
