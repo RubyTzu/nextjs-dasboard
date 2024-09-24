@@ -13,10 +13,10 @@ import kvIcon9 from '@/app/test/(ui)/icons/kv_icon_9.svg';
 import kvIcon10 from '@/app/test/(ui)/icons/kv_icon_10.svg';
 import kvIcon11 from '@/app/test/(ui)/icons/kv_icon_11.svg';
 import kvIcon12 from '@/app/test/(ui)/icons/kv_icon_12.svg';
-
+//before:animate-[shimmer_3s_infinite]
 // Loading animation
 const shimmer =
-  'relative overflow-hidden before:h-[12.5vh] before:w-full before:absolute before:left-[-50%] before:translate-x-0 before:animate-[shimmer_3s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent';
+  'relative overflow-hidden before:h-[12.5vh] before:w-full before:absolute before:left-[-50%] before:translate-x-[-100vw] before:animate-[shimmer_3s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent';
 
 export function KVLoading() {
   return (
