@@ -1,6 +1,6 @@
 //import from next & react
-import Link from 'next/link';
-import { Fragment } from 'react';
+import { useRouter } from 'next/navigation';
+import { Fragment, useState } from 'react';
 //import data
 import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import { filterExpense } from '@/app/test/(data)/(sharedFunction)/totalDebts';
@@ -11,6 +11,7 @@ import {
 } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import { GreaterThanIcon, expenseIconMap } from '@/app/test/(ui)/Icons';
+import FullPageLoading from './FullPageLoading';
 //import other
 import { format } from 'date-fns';
 
@@ -107,20 +108,35 @@ function ExpenseButton({
 
   const Icon = expenseIconMap[category];
   let nf = new Intl.NumberFormat('en-US');
+
+
+    const router = useRouter();
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleClick = () => {
+      setTimeout(() => {
+        setIsLoading(true);
+      }, 300);
+      router.push(`/test/split/group/${groupId}/expense/${id}`, {
+        scroll: false,
+      });
+    };
   return (
-    <Link
-      href={`/test/split/group/${groupId}/expense/${id}`}
+    <div
+      onClick={handleClick}
       className="mx-4 mb-4 flex justify-between rounded-lg bg-white py-3 pl-4 pr-3"
-      scroll={false}
     >
+      {isLoading && <FullPageLoading />}
       <div className="flex items-center gap-3">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-highlight-60">
           {Icon ? <Icon strokeWidth={1} /> : null}
         </div>
         <div className="leading-[20px]">
-          <div className="font-normal max-w-[150px] truncate">{name}</div>
-          <div className="flex font-base text-sm text-grey-500">
-            <div className="max-w-[60px] truncate">{loginUserId === payerId ? '你' : payerData?.name}</div>
+          <div className="max-w-[150px] truncate font-normal">{name}</div>
+          <div className="font-base flex text-sm text-grey-500">
+            <div className="max-w-[60px] truncate">
+              {loginUserId === payerId ? '你' : payerData?.name}
+            </div>
             <div>付了</div>
             <div>${nf.format(Number(amount))}</div>
           </div>
@@ -139,6 +155,6 @@ function ExpenseButton({
         )}
         <GreaterThanIcon />
       </div>
-    </Link>
+    </div>
   );
 }

@@ -1,6 +1,8 @@
 'use client';
 //import from next and react
 import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 //import data
 import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import {
@@ -9,7 +11,13 @@ import {
   Expense,
 } from '../(data)/(sharedFunction)/types';
 //import ui
-import { HomeIcon, EditIcon, EditTwoIcon, BackArrowIcon } from '@/app/test/(ui)/Icons';
+import {
+  HomeIcon,
+  EditIcon,
+  EditTwoIcon,
+  BackArrowIcon,
+} from '@/app/test/(ui)/Icons';
+import FullPageLoading from './FullPageLoading';
 //import other
 import clsx from 'clsx';
 
@@ -52,10 +60,20 @@ interface TopBarProps {
 
 export function TopGroupBar({ isBalancePage, groupData }: TopGroupBarProps) {
   const { loginUserId } = useAllContext();
-
+  const router = useRouter();
   const hasGroupData = Boolean(groupData);
   const isUserInGroup =
     hasGroupData && groupData.users?.some((user) => user.id === loginUserId);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleEditPageClick = () => {
+    setTimeout(() => {
+      setIsLoading(true);
+    }, 300);
+    router.push(`/test/split/group/${groupData.id}/edit`, {
+      scroll: false,
+    });
+  };
 
   return (
     <div className="fixed z-10 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
@@ -70,12 +88,15 @@ export function TopGroupBar({ isBalancePage, groupData }: TopGroupBarProps) {
           </Link>
         ) : null}
       </div>
-      <h1 className="text-lg max-w-52 truncate">{isUserInGroup ? groupData.name : ''}</h1>
+      <h1 className="max-w-52 truncate text-lg">
+        {isUserInGroup ? groupData.name : ''}
+      </h1>
       <div className="h-6 w-6">
         {!isBalancePage && isUserInGroup && (
-          <Link href={`/test/split/group/${groupData.id}/edit`} scroll={false}>
+          <div onClick={handleEditPageClick}>
+            {isLoading && <FullPageLoading />}
             <EditIcon />
-          </Link>
+          </div>
         )}
       </div>
     </div>
@@ -123,7 +144,10 @@ export function TopExpenseBar({ groupData, expenseData }: TopExpenseBarProps) {
 
   return (
     <div className="fixed z-20 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
-      <Link href={`/test/split/group/${id}`} className="h-6 w-6 flex items-center justify-center">
+      <Link
+        href={`/test/split/group/${id}`}
+        className="flex h-6 w-6 items-center justify-center"
+      >
         <BackArrowIcon />
       </Link>
       <h1 className="text-lg">{expenseData ? '費用明細' : ''}</h1>
@@ -152,7 +176,6 @@ export function TopExpenseSettingBar({
   hintword,
   cancelLink,
 }: TopExpenseSettingBarProps) {
-
   function handleClick() {
     if (phase === 1) return;
     setPhase(phase - 1);

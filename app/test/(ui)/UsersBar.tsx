@@ -1,19 +1,38 @@
 //import from next
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 //import data
 import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
-import { ExtendedGroup, GroupUser } from '@/app/test/(data)/(sharedFunction)/types';
+import {
+  ExtendedGroup,
+  GroupUser,
+} from '@/app/test/(data)/(sharedFunction)/types';
+//import ui
+import FullPageLoading from './FullPageLoading';
 
 export default function UsersBar({ groupData }: { groupData: ExtendedGroup }) {
   const { loginUserId } = useAllContext();
+
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  
   let frontUsers = [];
 
   if (groupData?.users && groupData.users.length > 5) {
     frontUsers = groupData.users.slice(0, 5);
   } else if (groupData?.users) {
     frontUsers = groupData.users;
-  } else return
+  } else return;
+
+  const handleClick = () => {
+    setTimeout(() => {
+      setIsLoading(true);
+    }, 300);
+    router.push(`/test/split/group/${groupData.id}/edit`, {
+      scroll: false,
+    });
+  };
 
   return (
     <>
@@ -26,14 +45,14 @@ export default function UsersBar({ groupData }: { groupData: ExtendedGroup }) {
                   <UserBarImage user={user} key={user.id} />
                 ))}
               </ul>
-              <Link
-                href={`/test/split/group/${groupData.id}/edit`}
+              <div
+                onClick={handleClick}
                 className="flex gap-[2px] rounded-full bg-neutrals-30 px-3 py-[5.5px] text-sm text-grey-500 active:bg-neutrals-50"
-                scroll={false}
               >
+                {isLoading && <FullPageLoading />}
                 <p className="">{groupData.users.length}</p>
                 <span className="relative bottom-[1px] ml-[1px]">&gt;</span>
-              </Link>
+              </div>
             </div>
           ) : (
             <NoneUsersBar text="$0" />
@@ -48,7 +67,7 @@ export default function UsersBar({ groupData }: { groupData: ExtendedGroup }) {
 
 function NoneUsersBar({ text }: { text: string }) {
   return (
-    <div className="mt-16 flex items-center justify-center gap-4 border-b-grey-userBar border-b-[1px] pb-5 pt-8">
+    <div className="mt-16 flex items-center justify-center gap-4 border-b-[1px] border-b-grey-userBar pb-5 pt-8">
       {text}
     </div>
   );
@@ -59,15 +78,18 @@ function UserBarImage({ user }: { user: GroupUser }) {
     <>
       {user ? (
         <li>
-          {user.picture ? <Image
-            src={user.picture}
-            width={200}
-            height={200}
-            alt={user.name}
-            className="h-11 w-11 max-w-full rounded-full border-none object-cover align-middle"
-            priority
-          /> : <div className="h-11 w-11 max-w-full rounded-full border-none object-cover align-middle bg-neutrals-20"></div>}
-
+          {user.picture ? (
+            <Image
+              src={user.picture}
+              width={200}
+              height={200}
+              alt={user.name}
+              className="h-11 w-11 max-w-full rounded-full border-none object-cover align-middle"
+              priority
+            />
+          ) : (
+            <div className="h-11 w-11 max-w-full rounded-full border-none bg-neutrals-20 object-cover align-middle"></div>
+          )}
         </li>
       ) : null}
     </>

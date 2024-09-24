@@ -35,7 +35,7 @@ export default function FullPageLoading() {
   }, []);
 
   return (
-    <>
+    <div className="fixed w-screen top-0 left-0 z-100">
       <motion.div
         className="flex min-h-screen flex-col items-center justify-center"
         style={{
@@ -78,6 +78,6 @@ export default function FullPageLoading() {
           </motion.div>
         </motion.div>
       </motion.div>
-    </>
+    </div>
   );
 }
