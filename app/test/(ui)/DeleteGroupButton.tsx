@@ -23,6 +23,7 @@ export default function DeleteGroupButton({
   const { loginUserId } = useAllContext();
   const router = useRouter();
   const isAdmin = groupData.creatorId === loginUserId;
+  const isOnlyOneAdopted = groupData.users?.filter(user => user.adoptable === false).length === 1;
   const [isShow, setIsShow] = useState<boolean>(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dialogId = useId();
@@ -71,11 +72,13 @@ export default function DeleteGroupButton({
     const AllExpenses = await getExpensesforAdoptUser();
     let idx = uuidv4();
     let currentGroupUsers = [...users];
-
+    let currentCreatorId = groupData.creatorId;
     const userIndex = currentGroupUsers.findIndex(
       (user: GroupUser) => user.id === loginUserId,
     );
-
+    if (currentCreatorId === loginUserId) {
+      currentCreatorId = idx
+    }
     if (userIndex !== -1) {
       currentGroupUsers.splice(userIndex, 1, {
         "id": idx,
@@ -93,6 +96,7 @@ export default function DeleteGroupButton({
 
     let newGroupData = {
       ...groupData,
+      creatorId: currentCreatorId,
       expenses: updatedGroupExpenses,
       users: currentGroupUsers,
     }
@@ -142,35 +146,35 @@ export default function DeleteGroupButton({
         >
           <div className="relative flex h-11 w-11 items-center justify-center rounded-full bg-neutrals-30">
             <div className="absolute left-[13px]">
-              {isAdmin ? <TrashcanIcon /> : <LeaveIcon />}
+              <LeaveIcon />
             </div>
           </div>
-          <p className="">{isAdmin ? '刪除群組' : '離開群組'}</p>
+          <p className="">離開群組</p>
         </div>
       </div>
-          {isAdmin ? (
-            <DeleteModal
-              dialogRef={dialogRef}
-              dialogId={dialogId}
-              isShow={isShow}
-              headerId={headerId}
-              handleClose={handleClose}
-              handleSave={() => handleDeleteGroup(groupData.id || '')}
-              hintWord="若刪除群組，所有的紀錄和成員名單將會被刪除。"
-              idx={`deleteGroup${loginUserId}`}
-            />
-          ) : (
-            <DeleteModal
-              dialogRef={dialogRef}
-              dialogId={dialogId}
-              isShow={isShow}
-              headerId={headerId}
-              handleClose={handleClose}
-              handleSave={() => handleLeaveGroup(loginUserId || '', groupData.id || '')}
-              hintWord="確定要離開群組嗎？"
-              idx={`leaveGroup${loginUserId}`}
-            />
-          )}
+      {isOnlyOneAdopted ? (
+        <DeleteModal
+          dialogRef={dialogRef}
+          dialogId={dialogId}
+          isShow={isShow}
+          headerId={headerId}
+          handleClose={handleClose}
+          handleSave={() => handleDeleteGroup(groupData.id || '')}
+          hintWord="若離開群組，所有的紀錄和成員名單將會被刪除。"
+          idx={`deleteGroup${loginUserId}`}
+        />
+      ) : (
+        <DeleteModal
+          dialogRef={dialogRef}
+          dialogId={dialogId}
+          isShow={isShow}
+          headerId={headerId}
+          handleClose={handleClose}
+          handleSave={() => handleLeaveGroup(loginUserId || '', groupData.id || '')}
+          hintWord="確定要離開群組嗎？"
+          idx={`leaveGroup${loginUserId}`}
+        />
+      )}
     </>
   );
 }

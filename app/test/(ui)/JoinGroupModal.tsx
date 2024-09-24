@@ -21,7 +21,7 @@ export default function JoinGroupModal({ groupData, setCurrentGroup, loginUserDa
     const dialogRef = useRef<HTMLDialogElement>(null);
     const dialogId = useId();
     const headerId = useId();
-
+    
     useEffect(() => {
 
         if (groupData?.users) {
@@ -73,8 +73,9 @@ export default function JoinGroupModal({ groupData, setCurrentGroup, loginUserDa
                 adoptable: user.adoptable
             })
         })
+        const updatedCreatorId = selectedUserId === groupData?.creatorId ? loginUserData.id : groupData?.creatorId
 
-        setCurrentGroup({ ...groupData, users: updatedUsers });
+        setCurrentGroup({ ...groupData, users: updatedUsers, creatorId: updatedCreatorId });
 
         let updatedGroupExpenses = groupData.expenses ? groupData.expenses.map(expense =>
         ({
@@ -94,9 +95,10 @@ export default function JoinGroupModal({ groupData, setCurrentGroup, loginUserDa
             await changeGroup({
                 ...groupData,
                 expenses: updatedGroupExpenses,
-                users: updatedUsers
+                users: updatedUsers,
+                creatorId: updatedCreatorId
             });
-             await changeUserGroup({
+            await changeUserGroup({
                 ...loginUserData,
                 groups: [
                     ...loginUserData.groups,
@@ -108,8 +110,8 @@ export default function JoinGroupModal({ groupData, setCurrentGroup, loginUserDa
             })
             for (const expense of updateExpenses) {
                 await changeExpense(expense);
-              }
-           
+            }
+
         } catch (error) {
             console.error('API 呼叫失敗:', error);
         }
