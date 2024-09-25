@@ -14,6 +14,7 @@ import { BalanceDetails } from '@/app/test/(ui)/BalanceDetails';
 import { UsersBarSkeleton } from '@/app/test/(ui)/LoadingSkeletons';
 //import other
 import clsx from 'clsx';
+import { FadeIn } from '@/app/test/(ui)/FadeIn';
 
 export default function Page() {
   const { loginUserId } = useAllContext();
@@ -47,16 +48,18 @@ export default function Page() {
     >
       <Suspense fallback={<UsersBarSkeleton />}>
         <TopGroupBar groupData={group} isBalancePage={true} />
-        <BalanceAmount totalAmount={totalAmount} />
-        {totalAmount !== 0 ? (
-          <BalanceDetails
-            groupUsers={groupUsers}
-            ownerDebt={ownerDebt}
-            totalAmount={totalAmount}
-          />
-        ) : (
-          <div className="mt-9">-尚未有費用紀錄-</div>
-        )}
+        <FadeIn direction='top'>
+            <BalanceAmount totalAmount={totalAmount} />
+            {totalAmount !== 0 ? (
+              <BalanceDetails
+                groupUsers={groupUsers}
+                ownerDebt={ownerDebt}
+                totalAmount={totalAmount}
+              />
+            ) : (
+              <div className="mt-9 text-center">-尚未有費用紀錄-</div>
+            )}
+        </FadeIn>
       </Suspense>
     </div>
   );

@@ -11,6 +11,7 @@ import {
   GroupSave,
   GroupUsersSetting,
 } from '@/app/test/(ui)/GroupSettingDetails';
+import { FadeIn } from '@/app/test/(ui)/FadeIn';
 
 export default function Page() {
   const { loginUserId } = useAllContext();
@@ -36,6 +37,7 @@ export default function Page() {
           leftCancelLink=""
           rightCancelLink={`/test/split/groups`}
         />
+       <FadeIn direction='left'>
         <GroupNameSetting
           loginUserData={data}
           groupData={currentGroup}
@@ -59,6 +61,7 @@ export default function Page() {
         nameExist={nameExist}
         hasNameLength={hasNameLength}
         />
+        </FadeIn>
       </div>
     </form>
   );

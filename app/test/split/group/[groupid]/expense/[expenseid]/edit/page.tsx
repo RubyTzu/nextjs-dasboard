@@ -18,6 +18,7 @@ import {
 import { ExpenseSettingStepOne } from '@/app/test/(ui)/ExpenseSettingStepOne';
 import { ExpenseSettingStepTwo } from '@/app/test/(ui)/ExpenseSettingStepTwo';
 import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
+import { FadeIn } from '@/app/test/(ui)/FadeIn';
 
 export default function Page() {
   const { groupid, expenseid } = useParams<{
@@ -60,7 +61,7 @@ export default function Page() {
           cancelLink={`/test/split/group/${groupid}/expense/${expenseid}`}
         />
         {expense ? (
-          <>
+          <FadeIn direction='left'>
             <GroupInfoBar expenseData={currentExpense} group={group} />
             <section>
               <ExpenseSettingStepOne
@@ -107,7 +108,7 @@ export default function Page() {
                 group={group}
               />
             </section>
-          </>
+            </FadeIn>
         ) : (
           <></>
         )}

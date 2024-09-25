@@ -14,6 +14,7 @@ import {
 import { ExpenseSettingStepOne } from '@/app/test/(ui)/ExpenseSettingStepOne';
 import { ExpenseSettingStepTwo } from '@/app/test/(ui)/ExpenseSettingStepTwo';
 import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
+import { FadeIn } from '@/app/test/(ui)/FadeIn';
 
 export default function Page() {
   const { loginUserId } = useAllContext();
@@ -65,52 +66,54 @@ export default function Page() {
           hintword="新增費用"
           cancelLink={`/test/split/group/${groupid}`}
         />
-        <GroupInfoBar expenseData={currentExpense} group={group} />
-        <section>
-          <ExpenseSettingStepOne
-            isAddPage={true}
-            group={group}
-            oldExpenseData={currentExpense}
-            expenseData={currentExpense}
-            setCurrentExpense={setCurrentExpense}
-            phase={phase}
-            setisIncorrectTotalNum={setisIncorrectTotalNum}
-            nameExist={nameExist}
-            setNameExist={setNameExist}
-            hasNameLength={hasNameLength}
-            setHasNameLength={setHasNameLength}
-          />
-          <ExpenseSettingStepTwo
-            expenseData={currentExpense}
-            setCurrentExpense={setCurrentExpense}
-            group={group}
-            phase={phase}
-          />
-          <ExpenseSettingStepThree
-            expenseData={currentExpense}
-            setCurrentExpense={setCurrentExpense}
-            group={group}
-            phase={phase}
-            setIsNotEqual={setIsNotEqual}
-          />
-        </section>
-        <section>
-          <NextStepButton
-            isAddExpensePage={true}
-            formRef={formRef}
-            groupid={groupid}
-            expenseData={currentExpense}
-            phase={phase}
-            setPhase={setPhase}
-            isNotEqual={isNotEqual}
-            setIsNotEqual={setIsNotEqual}
-            isNotZero={true}
-            isIncorrectTotalNum={isIncorrectTotalNum}
-            nameExist={nameExist}
-            hasNameLength={hasNameLength}
-            group={group}
-          />
-        </section>
+        <FadeIn direction='left'>
+          <GroupInfoBar expenseData={currentExpense} group={group} />
+          <section>
+            <ExpenseSettingStepOne
+              isAddPage={true}
+              group={group}
+              oldExpenseData={currentExpense}
+              expenseData={currentExpense}
+              setCurrentExpense={setCurrentExpense}
+              phase={phase}
+              setisIncorrectTotalNum={setisIncorrectTotalNum}
+              nameExist={nameExist}
+              setNameExist={setNameExist}
+              hasNameLength={hasNameLength}
+              setHasNameLength={setHasNameLength}
+            />
+            <ExpenseSettingStepTwo
+              expenseData={currentExpense}
+              setCurrentExpense={setCurrentExpense}
+              group={group}
+              phase={phase}
+            />
+            <ExpenseSettingStepThree
+              expenseData={currentExpense}
+              setCurrentExpense={setCurrentExpense}
+              group={group}
+              phase={phase}
+              setIsNotEqual={setIsNotEqual}
+            />
+          </section>
+          <section>
+            <NextStepButton
+              isAddExpensePage={true}
+              formRef={formRef}
+              groupid={groupid}
+              expenseData={currentExpense}
+              phase={phase}
+              setPhase={setPhase}
+              isNotEqual={isNotEqual}
+              setIsNotEqual={setIsNotEqual}
+              isNotZero={true}
+              isIncorrectTotalNum={isIncorrectTotalNum}
+              nameExist={nameExist}
+              hasNameLength={hasNameLength}
+              group={group}
+            />
+          </section>
+        </FadeIn>
       </div>
     </form>
   );

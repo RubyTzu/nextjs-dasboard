@@ -60,6 +60,11 @@
           "id": "f33d7bb8-3565-4a40-adf2-6529d2ec3c56",
           "name": "未命名群組",
           "picture": "/images/icons/groupIcon01.svg"
+        },
+        {
+          "id": "099f484c-c928-4ddc-9af1-8c2fe33031c5",
+          "name": "高雄OOR/臺南 920-922",
+          "picture": "/images/icons/groupIcon07.svg"
         }
       ]
     },
@@ -71,7 +76,7 @@
       "groups": [
         {
           "id": "g1",
-          "name": "5月聚餐abcabcabcabc",
+          "name": "5月聚餐",
           "picture": "/images/icons/groupIcon01.svg"
         },
         {
@@ -118,6 +123,11 @@
           "id": "g13",
           "name": "臺南 823-825",
           "picture": "/images/icons/groupIcon08.svg"
+        },
+        {
+          "id": "099f484c-c928-4ddc-9af1-8c2fe33031c5",
+          "name": "高雄OOR/臺南 920-922",
+          "picture": "/images/icons/groupIcon07.svg"
         }
       ]
     },
@@ -419,7 +429,7 @@
   "group": [
     {
       "id": "g1",
-      "name": "5月聚餐abcabcabcabc",
+      "name": "5月聚餐",
       "picture": "/images/icons/groupIcon01.svg",
       "creatorId": "u1",
       "expenses": [
@@ -2051,6 +2061,220 @@
           "adoptable": true
         }
       ]
+    },
+    {
+      "id": "099f484c-c928-4ddc-9af1-8c2fe33031c5",
+      "name": "高雄OOR/臺南 920-922",
+      "picture": "/images/icons/groupIcon07.svg",
+      "creatorId": "u2",
+      "expenses": [
+        {
+          "name": "阿龍意麵",
+          "category": "food",
+          "amount": 250,
+          "date": "2024-09-20T00:00:00.000Z",
+          "note": "",
+          "payerId": "u1",
+          "sharers": [
+            {
+              "id": "u1",
+              "amount": 125
+            },
+            {
+              "id": "u2",
+              "amount": 125
+            }
+          ],
+          "id": "a824b582-f3fe-4336-aaf1-27f7820a71ac"
+        },
+        {
+          "name": "莉莉水果行",
+          "category": "food",
+          "amount": 166,
+          "date": "2024-09-20T00:00:00.000Z",
+          "note": "水果拼盤、小玉西瓜汁、鳳梨蘋果汁",
+          "payerId": "u2",
+          "sharers": [
+            {
+              "id": "u1",
+              "amount": 83
+            },
+            {
+              "id": "u2",
+              "amount": 83
+            }
+          ],
+          "id": "c7cc8822-9952-486b-8be6-754bd142045c"
+        },
+        {
+          "name": "老江紅茶",
+          "category": "food",
+          "amount": 182,
+          "date": "2024-09-21T00:00:00.000Z",
+          "note": "紅茶鮮奶、蛋餅、吐司兩個",
+          "payerId": "u1",
+          "sharers": [
+            {
+              "id": "u1",
+              "amount": 91
+            },
+            {
+              "id": "u2",
+              "amount": 91
+            }
+          ],
+          "id": "6b56fa65-edc5-4731-a2c0-8c9a43aa525e"
+        },
+        {
+          "name": "水",
+          "category": "food",
+          "amount": 58,
+          "date": "2024-09-21T00:00:00.000Z",
+          "note": "全家領票時順便買水",
+          "payerId": "u2",
+          "sharers": [
+            {
+              "id": "u1",
+              "amount": 29
+            },
+            {
+              "id": "u2",
+              "amount": 29
+            }
+          ],
+          "id": "10b07c25-8bb1-48a7-824e-da3022841db9"
+        },
+        {
+          "name": "OOR周邊毛巾",
+          "category": "entertainment",
+          "amount": 550,
+          "date": "2024-09-21T00:00:00.000Z",
+          "note": "Emily買的 我代墊",
+          "payerId": "u2",
+          "sharers": [
+            {
+              "id": "u1",
+              "amount": 550
+            }
+          ],
+          "id": "c6df82c0-40c7-4b2e-90c5-0bce037b258f"
+        },
+        {
+          "name": "魚皮湯",
+          "category": "food",
+          "amount": 125,
+          "date": "2024-09-22T00:00:00.000Z",
+          "note": "",
+          "payerId": "u1",
+          "sharers": [
+            {
+              "id": "u1",
+              "amount": 62.5
+            },
+            {
+              "id": "u2",
+              "amount": 62.5
+            }
+          ],
+          "id": "e6e1dab4-60fe-4a20-9134-1b466133bfbb"
+        },
+        {
+          "name": "牛肉湯",
+          "category": "food",
+          "amount": 370,
+          "date": "2024-09-22T00:00:00.000Z",
+          "note": "牛肉湯、牛肉飯、燙青菜、牛肉炒麵",
+          "payerId": "u1",
+          "sharers": [
+            {
+              "id": "u1",
+              "amount": 185
+            },
+            {
+              "id": "u2",
+              "amount": 185
+            }
+          ],
+          "id": "d43b8cc1-8944-40a7-9b38-aa5d27f6eeef"
+        },
+        {
+          "name": "安平豆花",
+          "category": "food",
+          "amount": 40,
+          "date": "2024-09-22T00:00:00.000Z",
+          "note": "",
+          "payerId": "u1",
+          "sharers": [
+            {
+              "id": "u1",
+              "amount": 20
+            },
+            {
+              "id": "u2",
+              "amount": 20
+            }
+          ],
+          "id": "a1e23a20-9ee8-4273-9898-ac1a1a8771b7"
+        },
+        {
+          "name": "酸梅汁",
+          "category": "food",
+          "amount": 40,
+          "date": "2024-09-22T00:00:00.000Z",
+          "note": "",
+          "payerId": "u1",
+          "sharers": [
+            {
+              "id": "u1",
+              "amount": 20
+            },
+            {
+              "id": "u2",
+              "amount": 20
+            }
+          ],
+          "id": "5bf07656-9c98-428f-b5fc-5d0dfa59bb38"
+        },
+        {
+          "name": "咖啡麵包",
+          "category": "food",
+          "amount": 40,
+          "date": "2024-09-22T00:00:00.000Z",
+          "note": "",
+          "payerId": "u1",
+          "sharers": [
+            {
+              "id": "u1",
+              "amount": 20
+            },
+            {
+              "id": "u2",
+              "amount": 20
+            }
+          ],
+          "id": "e2cad9b3-548e-4791-8140-e6a2f8a5c58c"
+        }
+      ],
+      "users": [
+        {
+          "id": "u1",
+          "name": "小陳aaaaaaaaaaaa",
+          "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
+          "adoptable": false
+        },
+        {
+          "id": "u2",
+          "name": "小明bbbbb",
+          "picture": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg",
+          "adoptable": false
+        },
+        {
+          "id": "a1a68c01-af9b-4e26-bbc3-677bf6b9c3e9",
+          "name": "3",
+          "picture": "/images/icons/newUserBG.svg",
+          "adoptable": true
+        }
+      ]
     }
   ],
   "expense": [
@@ -3534,6 +3758,292 @@
       "historys": [
         {
           "editedAt": "2024-09-08T13:24:49.896Z",
+          "editorId": "u1"
+        }
+      ]
+    },
+    {
+      "id": "a824b582-f3fe-4336-aaf1-27f7820a71ac",
+      "name": "阿龍意麵",
+      "category": "food",
+      "amount": 250,
+      "date": "2024-09-20T00:00:00.000Z",
+      "note": "",
+      "payerId": "u1",
+      "sharers": [
+        {
+          "id": "u1",
+          "amount": 125
+        },
+        {
+          "id": "u2",
+          "amount": 125
+        }
+      ],
+      "groupId": "099f484c-c928-4ddc-9af1-8c2fe33031c5",
+      "creatorId": "u1",
+      "createAt": "2024-09-25T06:44:46.684Z",
+      "updateAt": "2024-09-25T06:44:46.684Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-25T06:44:46.684Z",
+          "editorId": "u1"
+        }
+      ]
+    },
+    {
+      "id": "c7cc8822-9952-486b-8be6-754bd142045c",
+      "name": "莉莉水果行",
+      "category": "food",
+      "amount": 166,
+      "date": "2024-09-20T00:00:00.000Z",
+      "note": "水果拼盤、小玉西瓜汁、鳳梨蘋果汁",
+      "payerId": "u2",
+      "sharers": [
+        {
+          "id": "u1",
+          "amount": 83
+        },
+        {
+          "id": "u2",
+          "amount": 83
+        }
+      ],
+      "groupId": "099f484c-c928-4ddc-9af1-8c2fe33031c5",
+      "creatorId": "u1",
+      "createAt": "2024-09-25T06:45:24.920Z",
+      "updateAt": "2024-09-25T06:45:24.920Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-25T06:45:24.920Z",
+          "editorId": "u1"
+        }
+      ]
+    },
+    {
+      "id": "6b56fa65-edc5-4731-a2c0-8c9a43aa525e",
+      "name": "老江紅茶",
+      "category": "food",
+      "amount": 182,
+      "date": "2024-09-21T00:00:00.000Z",
+      "note": "紅茶鮮奶、蛋餅、吐司兩個",
+      "payerId": "u1",
+      "sharers": [
+        {
+          "id": "u1",
+          "amount": 91
+        },
+        {
+          "id": "u2",
+          "amount": 91
+        }
+      ],
+      "groupId": "099f484c-c928-4ddc-9af1-8c2fe33031c5",
+      "creatorId": "u1",
+      "createAt": "2024-09-25T06:46:21.995Z",
+      "updateAt": "2024-09-25T06:46:21.995Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-25T06:46:21.995Z",
+          "editorId": "u1"
+        }
+      ]
+    },
+    {
+      "id": "10b07c25-8bb1-48a7-824e-da3022841db9",
+      "name": "水",
+      "category": "food",
+      "amount": 58,
+      "date": "2024-09-21T00:00:00.000Z",
+      "note": "全家領票時順便買水",
+      "payerId": "u2",
+      "sharers": [
+        {
+          "id": "u1",
+          "amount": 29
+        },
+        {
+          "id": "u2",
+          "amount": 29
+        }
+      ],
+      "groupId": "099f484c-c928-4ddc-9af1-8c2fe33031c5",
+      "creatorId": "u1",
+      "createAt": "2024-09-25T06:47:26.631Z",
+      "updateAt": "2024-09-25T06:47:26.631Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-25T06:47:26.631Z",
+          "editorId": "u1"
+        }
+      ]
+    },
+    {
+      "name": "OOR周邊毛巾",
+      "category": "entertainment",
+      "amount": 550,
+      "date": "2024-09-21T00:00:00.000Z",
+      "note": "Emily買的 我代墊",
+      "payerId": "u2",
+      "sharers": [
+        {
+          "id": "u1",
+          "amount": 550
+        }
+      ],
+      "groupId": "099f484c-c928-4ddc-9af1-8c2fe33031c5",
+      "id": "c6df82c0-40c7-4b2e-90c5-0bce037b258f",
+      "creatorId": "u1",
+      "createAt": "2024-09-25T06:48:06.466Z",
+      "updateAt": "2024-09-25T06:48:06.466Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-25T06:48:06.466Z",
+          "editorId": "u1"
+        }
+      ]
+    },
+    {
+      "id": "e6e1dab4-60fe-4a20-9134-1b466133bfbb",
+      "name": "魚皮湯",
+      "category": "food",
+      "amount": 125,
+      "date": "2024-09-22T00:00:00.000Z",
+      "note": "",
+      "payerId": "u1",
+      "sharers": [
+        {
+          "id": "u1",
+          "amount": 62.5
+        },
+        {
+          "id": "u2",
+          "amount": 62.5
+        }
+      ],
+      "groupId": "099f484c-c928-4ddc-9af1-8c2fe33031c5",
+      "creatorId": "u1",
+      "createAt": "2024-09-25T06:48:48.535Z",
+      "updateAt": "2024-09-25T06:48:48.535Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-25T06:48:48.535Z",
+          "editorId": "u1"
+        }
+      ]
+    },
+    {
+      "id": "d43b8cc1-8944-40a7-9b38-aa5d27f6eeef",
+      "name": "牛肉湯",
+      "category": "food",
+      "amount": 370,
+      "date": "2024-09-22T00:00:00.000Z",
+      "note": "牛肉湯、牛肉飯、燙青菜、牛肉炒麵",
+      "payerId": "u1",
+      "sharers": [
+        {
+          "id": "u1",
+          "amount": 185
+        },
+        {
+          "id": "u2",
+          "amount": 185
+        }
+      ],
+      "groupId": "099f484c-c928-4ddc-9af1-8c2fe33031c5",
+      "creatorId": "u1",
+      "createAt": "2024-09-25T06:49:30.351Z",
+      "updateAt": "2024-09-25T06:49:30.351Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-25T06:49:30.351Z",
+          "editorId": "u1"
+        }
+      ]
+    },
+    {
+      "id": "a1e23a20-9ee8-4273-9898-ac1a1a8771b7",
+      "name": "安平豆花",
+      "category": "food",
+      "amount": 40,
+      "date": "2024-09-22T00:00:00.000Z",
+      "note": "",
+      "payerId": "u1",
+      "sharers": [
+        {
+          "id": "u1",
+          "amount": 20
+        },
+        {
+          "id": "u2",
+          "amount": 20
+        }
+      ],
+      "groupId": "099f484c-c928-4ddc-9af1-8c2fe33031c5",
+      "creatorId": "u1",
+      "createAt": "2024-09-25T06:50:15.118Z",
+      "updateAt": "2024-09-25T06:50:15.118Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-25T06:50:15.118Z",
+          "editorId": "u1"
+        }
+      ]
+    },
+    {
+      "id": "5bf07656-9c98-428f-b5fc-5d0dfa59bb38",
+      "name": "酸梅汁",
+      "category": "food",
+      "amount": 40,
+      "date": "2024-09-22T00:00:00.000Z",
+      "note": "",
+      "payerId": "u1",
+      "sharers": [
+        {
+          "id": "u1",
+          "amount": 20
+        },
+        {
+          "id": "u2",
+          "amount": 20
+        }
+      ],
+      "groupId": "099f484c-c928-4ddc-9af1-8c2fe33031c5",
+      "creatorId": "u1",
+      "createAt": "2024-09-25T06:50:40.930Z",
+      "updateAt": "2024-09-25T06:50:40.930Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-25T06:50:40.930Z",
+          "editorId": "u1"
+        }
+      ]
+    },
+    {
+      "id": "e2cad9b3-548e-4791-8140-e6a2f8a5c58c",
+      "name": "咖啡麵包",
+      "category": "food",
+      "amount": 40,
+      "date": "2024-09-22T00:00:00.000Z",
+      "note": "",
+      "payerId": "u1",
+      "sharers": [
+        {
+          "id": "u1",
+          "amount": 20
+        },
+        {
+          "id": "u2",
+          "amount": 20
+        }
+      ],
+      "groupId": "099f484c-c928-4ddc-9af1-8c2fe33031c5",
+      "creatorId": "u1",
+      "createAt": "2024-09-25T06:50:59.878Z",
+      "updateAt": "2024-09-25T06:50:59.878Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-25T06:50:59.878Z",
           "editorId": "u1"
         }
       ]

@@ -15,6 +15,7 @@ import JoinGroupModal from '@/app/test/(ui)/JoinGroupModal';
 import PageLoadAlertModal from '@/app/test/(ui)/PageLoadAlertModal';
 //import ui loading fallback
 import { UsersBarSkeleton } from '@/app/test/(ui)/LoadingSkeletons';
+import { FadeIn } from '@/app/test/(ui)/FadeIn';
 
 export default function Page() {
   const { loginUserId } = useAllContext();
@@ -38,12 +39,12 @@ export default function Page() {
       <Suspense fallback={<UsersBarSkeleton />}>
         <TopGroupBar isBalancePage={false} groupData={group} />
         {isUserInGroup && (
-          <>
+          <FadeIn direction='top'>
             <UsersBar groupData={group} />
             <BalanceAndShareButtons groupData={group} />
             <ExpensesList groupData={group} />
             <AddExpenseButton groupId={groupid} />
-          </>
+          </FadeIn>
         )}
         {isUserAdoptable && !isUserInGroup && (
           <JoinGroupModal

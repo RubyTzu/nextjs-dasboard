@@ -1,11 +1,43 @@
 
 'use client';
-// import clsx from 'clsx';
-import { motion, easeIn } from 'framer-motion';
+//import next or react
+import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+//import other
+import { motion, easeIn } from 'framer-motion';
 // import heart from '@/app/test/(ui)/gif/heart.svg';
 
-export default function FullPageLoading() {
+interface LoadingButtonProps {
+  url: string;
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export function LoadingButton({ url, className = '', children }: LoadingButtonProps) {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClick = () => {
+    setTimeout(() => {
+          setIsLoading(true);
+        }, 300);
+    router.push(url, { scroll: true });
+  };
+
+  return (
+    <>
+      {isLoading && <FullPageLoading />}
+      <div
+        onClick={handleClick}
+        className={`${className}`}
+      >
+        {children}
+      </div>
+    </>
+  );
+}
+
+export function FullPageLoading() {
   const [flip, setFlip] = useState(true);
   const [colorIndex, setColorIndex] = useState(0);
   const [frontImageIndex, setFrontImageIndex] = useState(0);

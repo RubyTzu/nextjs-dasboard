@@ -1,35 +1,23 @@
 'use client';
 //import from next
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 //import data
 import { ExtendedGroup, Group } from '../(data)/(sharedFunction)/types';
 import { useGroup } from '../(data)/(fetchData)/Providers';
 //import ui
 import ShareButton from '@/app/test/(ui)/ShareButton';
-import { useState } from 'react';
-import FullPageLoading from './FullPageLoading';
+import { LoadingButton } from './FullPageLoading';
 
 export default function GroupButton({ groupData }: { groupData: Group }) {
-  const router = useRouter();
   const { id, picture, name } = groupData;
 
   const groupWithUsers: ExtendedGroup = useGroup(groupData?.id || '');
   const groupUsers = groupWithUsers ? groupWithUsers.users : [];
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleClick = () => {
-    setTimeout(() => {
-      setIsLoading(true);
-    }, 300);
-    router.push(`/test/split/group/${id}`, { scroll: false });
-  };
 
   return (
     <>
-      {isLoading && <FullPageLoading />}
-      <div
-        onClick={handleClick}
+      <LoadingButton
+        url={`/test/split/group/${id}`}
         className="mx-6 my-4 flex justify-between rounded-[20px] bg-white px-3 py-2"
       >
         <div className="z-0 flex items-center">
@@ -53,7 +41,7 @@ export default function GroupButton({ groupData }: { groupData: Group }) {
             groupUsers={groupUsers}
           />
         </div>
-      </div>
+      </LoadingButton>
     </>
   );
 }

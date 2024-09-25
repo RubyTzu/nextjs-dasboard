@@ -1,22 +1,16 @@
 //import from next
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 //import data
 import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import {
   ExtendedGroup,
   GroupUser,
 } from '@/app/test/(data)/(sharedFunction)/types';
-//import ui
-import FullPageLoading from './FullPageLoading';
+import { LoadingButton } from './FullPageLoading';
 
 export default function UsersBar({ groupData }: { groupData: ExtendedGroup }) {
   const { loginUserId } = useAllContext();
 
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-  
   let frontUsers = [];
 
   if (groupData?.users && groupData.users.length > 5) {
@@ -24,15 +18,6 @@ export default function UsersBar({ groupData }: { groupData: ExtendedGroup }) {
   } else if (groupData?.users) {
     frontUsers = groupData.users;
   } else return;
-
-  const handleClick = () => {
-    setTimeout(() => {
-      setIsLoading(true);
-    }, 300);
-    router.push(`/test/split/group/${groupData.id}/edit`, {
-      scroll: false,
-    });
-  };
 
   return (
     <>
@@ -45,14 +30,10 @@ export default function UsersBar({ groupData }: { groupData: ExtendedGroup }) {
                   <UserBarImage user={user} key={user.id} />
                 ))}
               </ul>
-              <div
-                onClick={handleClick}
-                className="flex gap-[2px] rounded-full bg-neutrals-30 px-3 py-[5.5px] text-sm text-grey-500 active:bg-neutrals-50"
-              >
-                {isLoading && <FullPageLoading />}
+              <LoadingButton url={`/test/split/group/${groupData.id}/edit`} className="flex gap-[2px] rounded-full bg-neutrals-30 px-3 py-[5.5px] text-sm text-grey-500 active:bg-neutrals-50">
                 <p className="">{groupData.users.length}</p>
                 <span className="relative bottom-[1px] ml-[1px]">&gt;</span>
-              </div>
+              </LoadingButton>
             </div>
           ) : (
             <NoneUsersBar text="$0" />

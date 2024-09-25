@@ -1,7 +1,7 @@
 'use client';
 //import from next & react
 import { useParams } from 'next/navigation';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 //import data
@@ -20,11 +20,9 @@ import { ExpenseSettingStepTwo } from '@/app/test/(ui)/ExpenseSettingStepTwo';
 import { ExpenseSettingStepThree } from '@/app/test/(ui)/ExpenseSettingStepThree';
 //import other
 import clsx from 'clsx';
-import { FadeIn } from '@/app/test/(ui)/FadeIn';
 
 export default function Page() {
-  const [phase, setPhase] = useState<number>(1);
-  const [isNotEqual, setIsNotEqual] = useState<boolean>(false);
+  const phase = 1;
   const [isIncorrectTotalNum, setisIncorrectTotalNum] =
     useState<boolean>(false);
   const [nameExist, setNameExist] = useState<boolean>(false);
@@ -488,39 +486,23 @@ export default function Page() {
   const [currentExpense, setCurrentExpense] = useState<
     ExtendedExpense | Expense
   >(expense);
-  const formRef = useRef<HTMLFormElement>(null);
-  function handleClick() {
-    if (phase === 1) return;
-    setPhase(phase - 1);
-  }
+  // try debounce
+
 
   return (
-    <form
-      ref={formRef}
-      method="post"
-      action={`/test/split/1forTestOnly`}
+    <>
+      {/* <div
     >
       <div className="relative flex flex-col">
         <div className="fixed z-20 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
           <div className="flex h-6 w-12 items-center justify-start">
-            <button
-              type="button"
-              onClick={handleClick}
-              className={clsx('cursor-pointer text-sm', {
-                hidden: phase === 1,
-              })}
-            >
-              上一步
-            </button>
           </div>
-          <h1 className="text-lg">編輯費用</h1>
+          <h1 className="text-lg">Input Test</h1>
           <div className="flex h-6 w-12 items-center justify-end">
-            <>
-            </>
           </div>
         </div>
         {expense ? (
-          <FadeIn direction='left'>
+          <>
             <GroupInfoBar expenseData={currentExpense} group={group} />
             <section>
               <ExpenseSettingStepOne
@@ -536,42 +518,55 @@ export default function Page() {
                 hasNameLength={hasNameLength}
                 setHasNameLength={setHasNameLength}
               />
-              <ExpenseSettingStepTwo
-                expenseData={currentExpense}
-                setCurrentExpense={setCurrentExpense}
-                group={group}
-                phase={phase}
-              />
-              <ExpenseSettingStepThree
-                expenseData={currentExpense}
-                setCurrentExpense={setCurrentExpense}
-                group={group}
-                phase={phase}
-                setIsNotEqual={setIsNotEqual}
-              />
             </section>
-            <section>
-              <NextStepButton
-                isAddExpensePage={false}
-                formRef={formRef}
-                phase={phase}
-                setPhase={setPhase}
-                groupid={group.id || ''}
-                expenseData={currentExpense}
-                isNotEqual={isNotEqual}
-                setIsNotEqual={setIsNotEqual}
-                isNotZero={true}
-                isIncorrectTotalNum={isIncorrectTotalNum}
-                nameExist={nameExist}
-                hasNameLength={hasNameLength}
-                group={group}
-              />
-            </section>
-          </FadeIn>
+          </>
         ) : (
           <></>
         )}
       </div>
-    </form>
+    </div> */}
+<DebouncedSearch />
+    </>
   );
+
 }
+
+
+
+const DebouncedSearch = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  function debounce(fn: any, delay = 500) {
+    let timer: any;
+    return (...args: any) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        fn(...args);
+      }, delay);
+    };
+  }
+  // Update function that will be debounced
+  const updateDebounceText = useCallback(
+    debounce((text: any) => {
+      console.log("call api get search result for:", text);
+    }, 500),
+    []
+  );
+
+  // Handle input change
+  const handleInputChange = (e: any) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    updateDebounceText(value);
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleInputChange}
+        placeholder="Search..."
+      />
+    </div>
+  );
+};

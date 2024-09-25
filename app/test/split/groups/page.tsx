@@ -1,6 +1,4 @@
 'use client';
-//import from next & react
-import { Suspense, useEffect } from 'react';
 //import data
 import {
   useAllContext,
@@ -12,6 +10,7 @@ import GroupButton from '@/app/test/(ui)/GroupButton';
 import AddGroupButton from '@/app/test/(ui)/AddGroupButton';
 //import ui loading fallback
 import { GroupsSkeleton } from '@/app/test/(ui)/LoadingSkeletons';
+import { FadeIn } from '../../(ui)/FadeIn';
 
 export default function Page() {
   const { loginUserId } = useAllContext();
@@ -34,9 +33,11 @@ export default function Page() {
           </h1>
           <AddGroupButton />
           <div className="mt-[6.5rem]">
+            <FadeIn direction='right'>
             {userData?.groups.map((group) => (
               <GroupButton key={group.id} groupData={group} />
             ))}
+            </FadeIn>
           </div>
           <div className="mb-16"></div>
         </>

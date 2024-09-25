@@ -1,8 +1,4 @@
 'use client';
-//import from next and react
-import Link from 'next/link';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 //import data
 import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import {
@@ -17,7 +13,7 @@ import {
   EditTwoIcon,
   BackArrowIcon,
 } from '@/app/test/(ui)/Icons';
-import FullPageLoading from './FullPageLoading';
+import { LoadingButton } from './FullPageLoading';
 //import other
 import clsx from 'clsx';
 
@@ -60,32 +56,21 @@ interface TopBarProps {
 
 export function TopGroupBar({ isBalancePage, groupData }: TopGroupBarProps) {
   const { loginUserId } = useAllContext();
-  const router = useRouter();
   const hasGroupData = Boolean(groupData);
   const isUserInGroup =
     hasGroupData && groupData.users?.some((user) => user.id === loginUserId);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleEditPageClick = () => {
-    setTimeout(() => {
-      setIsLoading(true);
-    }, 300);
-    router.push(`/test/split/group/${groupData.id}/edit`, {
-      scroll: false,
-    });
-  };
 
   return (
     <div className="fixed z-10 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
       <div className="flex h-6 w-6 items-center justify-center">
         {isBalancePage && hasGroupData ? (
-          <Link href={`/test/split/group/${groupData.id}`} className="flex">
+          <LoadingButton url={`/test/split/group/${groupData.id}`} className='flex'>
             <BackArrowIcon />
-          </Link>
+          </LoadingButton>
         ) : hasGroupData ? (
-          <Link href="/test/split/groups">
+          <LoadingButton url="/test/split/groups" className=''>
             <HomeIcon />
-          </Link>
+          </LoadingButton>
         ) : null}
       </div>
       <h1 className="max-w-52 truncate text-lg">
@@ -93,10 +78,9 @@ export function TopGroupBar({ isBalancePage, groupData }: TopGroupBarProps) {
       </h1>
       <div className="h-6 w-6">
         {!isBalancePage && isUserInGroup && (
-          <div onClick={handleEditPageClick}>
-            {isLoading && <FullPageLoading />}
+          <LoadingButton url={`/test/split/group/${groupData.id}/edit`} className=''>
             <EditIcon />
-          </div>
+          </LoadingButton>
         )}
       </div>
     </div>
@@ -122,17 +106,17 @@ export function TopGroupSettingBar({
     <div className="fixed z-20 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
       <div className="flex h-6 w-8 items-center justify-center">
         {shouldRender && (
-          <Link href={leftCancelLink} scroll={false}>
+          <LoadingButton url={leftCancelLink} className=''>
             <div className="">{leftHintWord}</div>
-          </Link>
+          </LoadingButton>
         )}
       </div>
       <h1 className="text-lg">{shouldRender && middleHintword}</h1>
       <div className="h-6 w-8">
         {shouldRender && (
-          <Link href={rightCancelLink} scroll={false}>
+          <LoadingButton url={rightCancelLink} className=''>
             <div className="">{rightHintWord}</div>
-          </Link>
+          </LoadingButton>
         )}
       </div>
     </div>
@@ -144,22 +128,15 @@ export function TopExpenseBar({ groupData, expenseData }: TopExpenseBarProps) {
 
   return (
     <div className="fixed z-20 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
-      <Link
-        href={`/test/split/group/${id}`}
-        className="flex h-6 w-6 items-center justify-center"
-      >
+      <LoadingButton url={`/test/split/group/${id}`} className="flex h-6 w-6 items-center justify-center">
         <BackArrowIcon />
-      </Link>
+      </LoadingButton>
       <h1 className="text-lg">{expenseData ? '費用明細' : ''}</h1>
       <div className="h-6 w-6">
         {expenseData ? (
-          <Link
-            href={`/test/split/group/${id}/expense/${expenseData.id}/edit`}
-            className="h-6 w-6"
-            scroll={false}
-          >
+          <LoadingButton url={`/test/split/group/${id}/expense/${expenseData.id}/edit`} className="h-6 w-6">
             <EditTwoIcon />
-          </Link>
+          </LoadingButton>
         ) : (
           ''
         )}
@@ -200,9 +177,9 @@ export function TopExpenseSettingBar({
       <div className="flex h-6 w-12 items-center justify-end">
         <>
           {shouldRender && (
-            <Link href={cancelLink} scroll={false}>
+            <LoadingButton url={cancelLink} className=''>
               <p className="text-sm">取消</p>
-            </Link>
+            </LoadingButton>
           )}
         </>
       </div>
