@@ -1,3 +1,7 @@
+//import react
+import { useState } from 'react';
+//import ui
+import { FullPageLoading } from './FullPageLoading';
 //import other
 import clsx from 'clsx';
 
@@ -20,17 +24,27 @@ export default function DeleteModal({
   handleClose,
   handleSave,
   hintWord,
-  idx
+  idx,
 }: Props) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSaveLoading = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    setIsLoading(true);
+    handleSave(e);
+  };
+
   return (
     <>
+      {isLoading && <FullPageLoading />}
       <dialog
         role="dialog"
         ref={dialogRef}
         id={dialogId}
         aria-modal
         className={clsx(
-          'z-20 m-0 mx-auto w-[60%] translate-y-[-50%] rounded-lg bg-white transition-all duration-300 focus:!border-none focus:outline-none drop-shadow-xl',
+          'm-0 mx-auto w-[60%] translate-y-[-50%] rounded-lg bg-white drop-shadow-xl transition-all duration-300 focus:!border-none focus:outline-none',
           {
             'top-[40%] z-50 transform opacity-100  backdrop:bg-highlight-50/80':
               isShow,
@@ -42,10 +56,10 @@ export default function DeleteModal({
         onClick={handleClose}
       >
         <div onClick={(e: React.SyntheticEvent) => e.stopPropagation()}>
-          <div className="flex h-20 items-center justify-center px-6 mt-3 mb-4">
+          <div className="mb-4 mt-3 flex h-20 items-center justify-center px-6">
             <div className="text-normal">{hintWord}</div>
           </div>
-          <div className="mx-4 mb-3 flex gap-3 items-center justify-between">
+          <div className="mx-4 mb-3 flex items-center justify-between gap-3">
             <div
               className="flex h-8 w-24 items-center justify-center rounded-lg bg-highlight-30 text-white"
               onClick={handleClose}
@@ -55,7 +69,7 @@ export default function DeleteModal({
             <div
               id={idx}
               className="flex h-8 w-24 items-center justify-center rounded-lg bg-highlight-60 text-neutrals-90"
-              onClick={handleSave}
+              onClick={handleSaveLoading}
             >
               確定
             </div>

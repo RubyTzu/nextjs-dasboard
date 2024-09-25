@@ -2,7 +2,10 @@
 import { useId, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 //import data
-import { ExtendedExpense, ExtendedGroup } from '../(data)/(sharedFunction)/types';
+import {
+  ExtendedExpense,
+  ExtendedGroup,
+} from '../(data)/(sharedFunction)/types';
 import { changeGroup, deleteExpense } from '../(data)/(fetchData)/API';
 //import ui
 import DeleteModal from './DeleteModal';
@@ -36,22 +39,28 @@ export default function DeleteExpenseButton({ expenseData, group }: Props) {
   };
 
   async function handleDeleteExpense(groupId: string, expenseId: string) {
-    
-    let newExpenses = group.expenses ? [...group.expenses] : []
-    let deleteIndex = newExpenses.findIndex((expense) => expense.id === expenseId)
+    setIsShow(false);
+    setTimeout(() => {
+      dialogRef.current?.close();
+    }, 100);
 
-    if(deleteIndex !== -1){
-      newExpenses.splice(deleteIndex, 1)
+    let newExpenses = group.expenses ? [...group.expenses] : [];
+    let deleteIndex = newExpenses.findIndex(
+      (expense) => expense.id === expenseId,
+    );
+
+    if (deleteIndex !== -1) {
+      newExpenses.splice(deleteIndex, 1);
     }
 
     let newGroupData = {
       ...group,
-      expenses: newExpenses
-   } 
+      expenses: newExpenses,
+    };
 
     try {
       await deleteExpense(expenseId);
-      await changeGroup(newGroupData)
+      await changeGroup(newGroupData);
       router.push(`/test/split/group/${groupId}`);
     } catch (error) {
       console.error('API 呼叫失敗:', error);

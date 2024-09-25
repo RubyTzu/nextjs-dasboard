@@ -16,6 +16,7 @@ import EditGroupNameButton from './EditGroupNameButton';
 import AddUserButton from './AddUserButton';
 import AddGroupNameButton from './AddGroupNameButton';
 import AlertModal from './AlertModal';
+import { FullPageLoading } from './FullPageLoading';
 //import other
 import { v4 as uuidv4 } from 'uuid';
 import clsx from 'clsx';
@@ -224,8 +225,15 @@ export function GroupSave({
   const dialogId = useId();
   const headerId = useId();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   async function handleSave(e: React.SyntheticEvent) {
     e.preventDefault();
+    setIsShow(false);
+    setTimeout(() => {
+      dialogRef.current?.close();
+    }, 100);
+
     if (nameExist) return;
     if (!hasNameLength) return;
 
@@ -260,6 +268,8 @@ export function GroupSave({
     };
 
     try {
+      setIsLoading(true);
+
       await addGroup(GroupBody);
       await changeUserGroup(UserBody);
 
@@ -299,42 +309,45 @@ export function GroupSave({
   };
 
   return (
-    <div className="flex w-full items-center justify-center">
-      {groupUsers.length === 0 ? (
-        <>
+    <>
+      {isLoading && <FullPageLoading />}
+      <div className="flex w-full items-center justify-center">
+        {groupUsers.length === 0 ? (
+          <>
+            <button
+              disabled={nameExist || !hasNameLength}
+              type="submit"
+              onClick={(e) => handleToggle(e)}
+              className="mb-6 mt-3 w-[80%] rounded-full bg-highlight-20 py-3 text-center disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
+            >
+              儲存
+            </button>
+            <AlertModal
+              hasTwoButton={true}
+              isChangePage={false}
+              dialogRef={dialogRef}
+              dialogId={dialogId}
+              isShow={isShow}
+              headerId={headerId}
+              url={`/test/split/group/${groupId}/edit`}
+              handleClose={handleClose}
+              handleSave={handleSave}
+              hintWord={<HintWord />}
+              buttonHintWord="仍要建立群組"
+              SecondbuttonHintWord="新增成員空位"
+            />
+          </>
+        ) : (
           <button
             disabled={nameExist || !hasNameLength}
             type="submit"
-            onClick={(e) => handleToggle(e)}
+            onClick={handleSave}
             className="mb-6 mt-3 w-[80%] rounded-full bg-highlight-20 py-3 text-center disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
           >
             儲存
           </button>
-          <AlertModal
-            hasTwoButton={true}
-            isChangePage={false}
-            dialogRef={dialogRef}
-            dialogId={dialogId}
-            isShow={isShow}
-            headerId={headerId}
-            url={`/test/split/group/${groupId}/edit`}
-            handleClose={handleClose}
-            handleSave={handleSave}
-            hintWord={<HintWord />}
-            buttonHintWord="仍要建立群組"
-            SecondbuttonHintWord="新增成員空位"
-          />
-        </>
-      ) : (
-        <button
-          disabled={nameExist || !hasNameLength}
-          type="submit"
-          onClick={handleSave}
-          className="mb-6 mt-3 w-[80%] rounded-full bg-highlight-20 py-3 text-center disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
-        >
-          儲存
-        </button>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 }

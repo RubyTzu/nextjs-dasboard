@@ -18,7 +18,12 @@ interface Props {
   loginUserData: LoginUser | null;
 }
 
-export default function AddUserButton({ isAddPage, groupData, setCurrentGroup, loginUserData }: Props) {
+export default function AddUserButton({
+  isAddPage,
+  groupData,
+  setCurrentGroup,
+  loginUserData,
+}: Props) {
   const [currentGroupUserName, setCurrentGroupUserName] = useState('');
   const [isShow, setIsShow] = useState<boolean>(false);
   const [nameExist, setNameExist] = useState<boolean>(false);
@@ -36,13 +41,19 @@ export default function AddUserButton({ isAddPage, groupData, setCurrentGroup, l
     router.refresh();
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, groupData: ExtendedGroup, loginUserData: LoginUser | null) => {
-    const userExists = groupData.users?.some((user) => user.name === e.target.value) || loginUserData?.name === e.target.value;
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    groupData: ExtendedGroup,
+    loginUserData: LoginUser | null,
+  ) => {
+    const userExists =
+      groupData.users?.some((user) => user.name === e.target.value) ||
+      loginUserData?.name === e.target.value;
 
     if (userExists) {
-      setNameExist(true)
+      setNameExist(true);
     } else {
-      setNameExist(false)
+      setNameExist(false);
     }
 
     setCurrentGroupUserName(e.target.value);
@@ -51,15 +62,23 @@ export default function AddUserButton({ isAddPage, groupData, setCurrentGroup, l
   const handleClose = () => {
     setCurrentGroupUserName('');
     setIsShow(false);
-    setNameExist(false)
+    setNameExist(false);
     router.refresh();
   };
 
-  const handleSave = async(targetUserName: string, groupData: ExtendedGroup, loginUserData: LoginUser | null) => {
+  const handleSave = async (
+    targetUserName: string,
+    groupData: ExtendedGroup,
+    loginUserData: LoginUser | null,
+  ) => {
+    setIsShow(false);
+
     let idx = uuidv4();
-    const userExists = groupData.users?.some((user) => user.name === targetUserName) || loginUserData?.name === targetUserName;
+    const userExists =
+      groupData.users?.some((user) => user.name === targetUserName) ||
+      loginUserData?.name === targetUserName;
     if (userExists) {
-      return
+      return;
     } else {
       let newGroupData = {
         ...groupData,
@@ -69,14 +88,14 @@ export default function AddUserButton({ isAddPage, groupData, setCurrentGroup, l
             id: idx,
             name: currentGroupUserName,
             picture: '/images/icons/newUserBG.svg',
-            adoptable: true
+            adoptable: true,
           },
         ],
       };
-  
+
       setCurrentGroup(newGroupData);
 
-      if(!isAddPage){
+      if (!isAddPage) {
         try {
           await changeGroup(newGroupData);
         } catch (error) {
@@ -106,7 +125,9 @@ export default function AddUserButton({ isAddPage, groupData, setCurrentGroup, l
         isShow={isShow}
         handleChange={(e) => handleChange(e, groupData, loginUserData || null)}
         handleClose={handleClose}
-        handleSave={() => handleSave(currentGroupUserName, groupData, loginUserData || null)}
+        handleSave={() =>
+          handleSave(currentGroupUserName, groupData, loginUserData || null)
+        }
         TopBarName="成員名稱"
         inputRef={inputRef}
         currentValue={currentGroupUserName}

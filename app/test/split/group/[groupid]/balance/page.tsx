@@ -12,9 +12,9 @@ import { BalanceAmount } from '@/app/test/(ui)/BalanceAmount';
 import { BalanceDetails } from '@/app/test/(ui)/BalanceDetails';
 //import ui loading fallback
 import { UsersBarSkeleton } from '@/app/test/(ui)/LoadingSkeletons';
+import { FadeIn } from '@/app/test/(ui)/FadeIn';
 //import other
 import clsx from 'clsx';
-import { FadeIn } from '@/app/test/(ui)/FadeIn';
 
 export default function Page() {
   const { loginUserId } = useAllContext();
