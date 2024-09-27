@@ -1,15 +1,21 @@
 //import from next & react
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 //import data
 import {
   ExtendedExpense,
   ExtendedGroup,
   Expense,
 } from '../(data)/(sharedFunction)/types';
-import { addExpense, changeExpense, changeGroup } from '../(data)/(fetchData)/API';
+import {
+  addExpense,
+  changeExpense,
+  changeGroup,
+} from '../(data)/(fetchData)/API';
 //import ui
 import { NextstepIcon } from '@/app/test/(ui)/Icons';
+import { FullPageLoading } from './FullPageLoading';
+//import other
 import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -74,7 +80,7 @@ export function NextStepButton({
   isIncorrectTotalNum,
   nameExist,
   hasNameLength,
-  group
+  group,
 }: NextStepButtonProps) {
   const expenseId = expenseData && 'id' in expenseData ? expenseData.id : '';
 
@@ -83,6 +89,8 @@ export function NextStepButton({
       (total, sharer) => Number(total) + Number(sharer.amount),
       0,
     ) || 0;
+
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const difference = Math.abs(
@@ -115,7 +123,7 @@ export function NextStepButton({
       date: expense.date,
       note: expense.note,
       payerId: expense.payerId,
-      sharers: expense.sharers
+      sharers: expense.sharers,
     };
 
     let groupExpenses = group.expenses ? group.expenses : [];
@@ -126,29 +134,30 @@ export function NextStepButton({
         ...groupExpenses,
         {
           ...newExpenseData,
-          id: idx
-        }
-      ]
-    }
+          id: idx,
+        },
+      ],
+    };
 
-    let changeExpenses = groupExpenses.map(item => {
-       if(item.id === expenseId){
+    let changeExpenses = groupExpenses.map((item) => {
+      if (item.id === expenseId) {
         return {
           ...newExpenseData,
-          id: item.id
-        }
-       }else {
-        return item
+          id: item.id,
+        };
+      } else {
+        return item;
       }
-    }
-    )
+    });
 
     let changeGroupExpenseData = {
       ...group,
-      expenses: changeExpenses
-    }
+      expenses: changeExpenses,
+    };
 
     try {
+      setIsLoading(true);
+
       if (isAddExpensePage) {
         await addExpense({
           ...newExpenseData,
@@ -157,7 +166,7 @@ export function NextStepButton({
           creatorId: expense.creatorId,
           createAt: expense.createAt,
           updateAt: expense.updateAt,
-          historys: expense.historys
+          historys: expense.historys,
         });
 
         await changeGroup(newGroupExpenseData);
@@ -169,9 +178,9 @@ export function NextStepButton({
           creatorId: expense.creatorId,
           createAt: expense.createAt,
           updateAt: expense.updateAt,
-          historys: expense.historys
+          historys: expense.historys,
         });
-        await changeGroup(changeGroupExpenseData)
+        await changeGroup(changeGroupExpenseData);
       }
 
       if (formRef.current) {
@@ -183,56 +192,63 @@ export function NextStepButton({
   }
 
   return (
-    <div className="mb-8 flex flex-col items-center">
-      {expenseData ? (
-        <>
-          {phase !== 3 ? (
-            <button
-              disabled={isIncorrectTotalNum || nameExist || !hasNameLength}
-              type="button"
-              onClick={(e: React.SyntheticEvent) =>
-                handleClick(e, expenseId || '')
-              }
-              className="flex w-[180px] items-center justify-between rounded-full bg-highlight-20 px-4 py-2 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
-            >
-              <div className="text-[10px]">{phase}/3</div>
-              <div className="text-sm">下一步</div>
-              <div>
-                <NextstepIcon
-                  currentColor={isIncorrectTotalNum || nameExist || !hasNameLength ? '#9E9E9E' : '#000'}
-                />
-              </div>
-            </button>
-          ) : (
-            <>
+    <>
+      {isLoading && <FullPageLoading />}
+      <div className="mb-8 flex flex-col items-center">
+        {expenseData ? (
+          <>
+            {phase !== 3 ? (
               <button
-                disabled={isNotEqual && isNotZero}
-                type="submit"
-                onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
-                  handleSubmit(e, expenseData, groupid, expenseId || '')
+                disabled={isIncorrectTotalNum || nameExist || !hasNameLength}
+                type="button"
+                onClick={(e: React.SyntheticEvent) =>
+                  handleClick(e, expenseId || '')
                 }
-                className="relative flex w-[180px] items-center justify-between rounded-full bg-highlight-20 px-4 py-2 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
+                className="flex w-[180px] items-center justify-between rounded-full bg-highlight-20 px-4 py-2 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
               >
-                <div
-                  className={clsx(
-                    'absolute bottom-12 left-[50%] w-screen translate-x-[-50%] text-xs text-text-onDark-secondary',
-                    {
-                      hidden: !isNotEqual && isNotZero,
-                      block: isNotEqual || !isNotZero,
-                    },
-                  )}
-                >
-                  目前分帳總額 不等於 {expenseData.amount} 元
+                <div className="text-[10px]">{phase}/3</div>
+                <div className="text-sm">下一步</div>
+                <div>
+                  <NextstepIcon
+                    currentColor={
+                      isIncorrectTotalNum || nameExist || !hasNameLength
+                        ? '#9E9E9E'
+                        : '#000'
+                    }
+                  />
                 </div>
-                <div className="text-[10px]">3/3</div>
-                <div className="text-sm">確認</div>
-                <div></div>
               </button>
-              <div className="h-[400px]" />
-            </>
-          )}
-        </>
-      ) : null}
-    </div>
+            ) : (
+              <>
+                <button
+                  disabled={isNotEqual && isNotZero}
+                  type="submit"
+                  onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+                    handleSubmit(e, expenseData, groupid, expenseId || '')
+                  }
+                  className="relative flex w-[180px] items-center justify-between rounded-full bg-highlight-20 px-4 py-2 disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
+                >
+                  <div
+                    className={clsx(
+                      'absolute bottom-12 left-[50%] w-screen translate-x-[-50%] text-xs text-text-onDark-secondary',
+                      {
+                        hidden: !isNotEqual && isNotZero,
+                        block: isNotEqual || !isNotZero,
+                      },
+                    )}
+                  >
+                    目前分帳總額 不等於 {expenseData.amount} 元
+                  </div>
+                  <div className="text-[10px]">3/3</div>
+                  <div className="text-sm">確認</div>
+                  <div></div>
+                </button>
+                <div className="h-[400px]" />
+              </>
+            )}
+          </>
+        ) : null}
+      </div>
+    </>
   );
 }

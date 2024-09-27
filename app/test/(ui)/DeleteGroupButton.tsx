@@ -6,7 +6,7 @@ import { useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import { ExtendedExpense, ExtendedGroup, GroupUser, LoginUser } from '../(data)/(sharedFunction)/types';
 import { changeExpense, changeUserGroup, changeGroup, deleteGroup, getExpensesforAdoptUser } from '../(data)/(fetchData)/API';
 //import ui
-import { TrashcanIcon, LeaveIcon } from '@/app/test/(ui)/Icons';
+import { LeaveIcon } from '@/app/test/(ui)/Icons';
 import DeleteModal from './DeleteModal';
 //import other
 import { v4 as uuidv4 } from 'uuid';
@@ -22,7 +22,6 @@ export default function DeleteGroupButton({
 }: Props) {
   const { loginUserId } = useAllContext();
   const router = useRouter();
-  const isAdmin = groupData.creatorId === loginUserId;
   const isOnlyOneAdopted = groupData.users?.filter(user => user.adoptable === false).length === 1;
   const [isShow, setIsShow] = useState<boolean>(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -47,6 +46,11 @@ export default function DeleteGroupButton({
   };
 
   async function handleDeleteGroup(id: string) {
+    setIsShow(false);
+    setTimeout(() => {
+      dialogRef.current?.close();
+    }, 100);
+    
     let newUserGroups = loginUserData.groups
     let deleteIndex = newUserGroups.findIndex(group => group.id === id)
 
