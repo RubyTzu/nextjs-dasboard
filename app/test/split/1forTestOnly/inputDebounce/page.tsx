@@ -9,6 +9,7 @@ import {
   ExtendedExpense,
   ExtendedGroup,
   Expense,
+  Group,
 } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
 import {
@@ -487,54 +488,122 @@ export default function Page() {
     ExtendedExpense | Expense
   >(expense);
   // try debounce
+  const [currentValue, setCurrentValue] = useState('');
+  const isAddPage = false
 
+  const handleInputChange = (
+    text: string,
+    group: ExtendedGroup,
+  ) => {
+    if (isAddPage) {
+      setNameExist(
+        group.expenses?.some((expense) => expense.name === text) ||
+        false,
+      );
+    } else {
+      setNameExist(
+        (group.expenses?.some((expense) => expense.name === text) &&
+          expense?.name !== text) ||
+        false,
+      );
+    }
+
+    if (text.length === 0) {
+      setHasNameLength(false);
+    } else {
+      setHasNameLength(true);
+    }
+  };
+
+  const handleInputBlur = (
+    text: string,
+    expenseData: ExtendedExpense | Expense,
+    group: ExtendedGroup,
+  ) => {
+    const expenseNameExist =
+      group.expenses?.some((expense) => expense.name === text) &&
+      expense?.name !== text;
+
+    if (expenseNameExist || text.length === 0) {
+      return;
+    } else {
+      setCurrentExpense({
+        ...expenseData,
+        name: text,
+      });
+    }
+    console.log(currentExpense)
+  };
 
   return (
     <>
-      {/* <div
-    >
-      <div className="relative flex flex-col">
-        <div className="fixed z-20 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
-          <div className="flex h-6 w-12 items-center justify-start">
-          </div>
-          <h1 className="text-lg">Input Test</h1>
-          <div className="flex h-6 w-12 items-center justify-end">
-          </div>
+      <div className="relative w-48 border-b border-grey-500">
+        <DebouncedInput
+          className="relative w-[80%] border-0 bg-transparent pb-1 pl-0 focus:border-0 focus:outline-none focus:ring-0"
+          placeholder=""
+          currentValue={currentValue}
+          setCurrentValue={setCurrentValue}
+          maxLength={20}
+          handleInputChange={(text) => {
+            console.log(`hi ${text}`)
+            handleInputChange(text, group)
+          }}
+          handleInputBlur={(text) => handleInputBlur(text, currentExpense, group)}
+          group={group}
+          expense={currentExpense}
+        />
+        <div className="absolute right-0 top-[59%] translate-y-[-50%] text-[10px] text-neutrals-50">
+          &#40;{currentValue.length}/20&#41;
         </div>
-        {expense ? (
-          <>
-            <GroupInfoBar expenseData={currentExpense} group={group} />
-            <section>
-              <ExpenseSettingStepOne
-                isAddPage={false}
-                group={group}
-                oldExpenseData={expense}
-                expenseData={currentExpense}
-                setCurrentExpense={setCurrentExpense}
-                phase={phase}
-                setisIncorrectTotalNum={setisIncorrectTotalNum}
-                nameExist={nameExist}
-                setNameExist={setNameExist}
-                hasNameLength={hasNameLength}
-                setHasNameLength={setHasNameLength}
-              />
-            </section>
-          </>
-        ) : (
-          <></>
-        )}
+        <div
+          className={clsx(
+            'absolute right-0 top-[130%] translate-y-[-50%] text-[10px] text-neutrals-50',
+            {
+              block: nameExist,
+              hidden: !nameExist,
+            },
+          )}
+        >
+          該費用名稱已存在，請重新輸入
+        </div>
+        <div
+          className={clsx(
+            'absolute right-0 top-[130%] translate-y-[-50%] text-[10px] text-neutrals-50',
+            {
+              block: !hasNameLength,
+              hidden: hasNameLength,
+            },
+          )}
+        >
+          費用名稱不可為空值
+        </div>
       </div>
-    </div> */}
-<DebouncedSearch />
     </>
   );
-
 }
 
+const DebouncedInput = ({
+  className,
+  placeholder,
+  currentValue,
+  setCurrentValue,
+  maxLength,
+  handleInputChange,
+  handleInputBlur,
+  group,
+  expense
+}: {
+  className: string;
+  placeholder: string;
+  currentValue: string;
+  setCurrentValue: React.Dispatch<React.SetStateAction<string>>;
+  maxLength: number;
+  handleInputChange: (text: string, group: ExtendedGroup | Group) => void;
+  handleInputBlur: (text: string, expenseData: ExtendedExpense | Expense, group: ExtendedGroup | Group) => void;
+  group: ExtendedGroup | Group;
+  expense: ExtendedExpense | Expense;
+}) => {
 
-
-const DebouncedSearch = () => {
-  const [searchTerm, setSearchTerm] = useState('');
   function debounce(fn: any, delay = 500) {
     let timer: any;
     return (...args: any) => {
@@ -548,25 +617,29 @@ const DebouncedSearch = () => {
   const updateDebounceText = useCallback(
     debounce((text: any) => {
       console.log("call api get search result for:", text);
+      handleInputChange(text, group);
     }, 500),
     []
   );
 
   // Handle input change
-  const handleInputChange = (e: any) => {
+  const handleFinalInputChange = (e: any) => {
     const value = e.target.value;
-    setSearchTerm(value);
+    setCurrentValue(value);
     updateDebounceText(value);
   };
 
   return (
-    <div>
+    <>
       <input
+        className={className}
         type="text"
-        value={searchTerm}
-        onChange={handleInputChange}
-        placeholder="Search..."
+        defaultValue={currentValue}
+        placeholder={placeholder}
+        maxLength={maxLength}
+        onChange={handleFinalInputChange}
+        onBlur={(e) => handleInputBlur(e.target.value, expense, group)}
       />
-    </div>
+    </>
   );
 };
