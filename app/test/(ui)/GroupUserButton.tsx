@@ -112,7 +112,7 @@ export function GroupUserButton({
         {userData?.adoptable === false || userData?.id === loginUserId ? (
           <Image
             className="h-11 w-11 rounded-full bg-neutrals-20"
-            src={userData.picture}
+            src={userData.picture === "" ? "/images/icons/newUserBG.svg":userData.picture}
             width={32}
             height={32}
             alt="user's image"

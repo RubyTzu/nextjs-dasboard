@@ -1,6 +1,6 @@
 'use client';
 //import from next & react
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 //import data
 import { useUser, useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import { Group } from '@/app/test/(data)/(sharedFunction)/types';
@@ -21,12 +21,11 @@ export default function Page() {
     picture: "/images/icons/groupIcon01.svg",
     users: []
   });
-  const formRef = useRef<HTMLFormElement>(null);
   const [nameExist, setNameExist] = useState(false);
   const [hasNameLength, setHasNameLength] = useState<boolean>(true);
 
   return (
-    <form ref={formRef} method="post" action={`/test/split/groups`}>
+    <div>
       <div className="relative flex flex-col">
         <TopGroupSettingBar
           isAddPage={true}
@@ -37,32 +36,32 @@ export default function Page() {
           leftCancelLink=""
           rightCancelLink={`/test/split/groups`}
         />
-       <FadeIn direction='left'>
-        <GroupNameSetting
-          loginUserData={data}
-          groupData={currentGroup}
-          setCurrentGroup={setCurrentGroup}
-          isAddPage={true}
-          nameExist={nameExist}
-          setNameExist={setNameExist}
-          hasNameLength={hasNameLength}
-          setHasNameLength={setHasNameLength}
-        />
-        <GroupUsersSetting
-          groupData={currentGroup}
-          setCurrentGroup={setCurrentGroup}
-          isAddPage={true}
-          loginUserData={data}
-        />
-        <GroupSave 
-        loginUserData={data} // json-server 適用
-        groupData={currentGroup} 
-        formRef={formRef}
-        nameExist={nameExist}
-        hasNameLength={hasNameLength}
-        />
+        <FadeIn direction='left'>
+          <GroupNameSetting
+            loginUserData={data}
+            groupData={currentGroup}
+            setCurrentGroup={setCurrentGroup}
+            isAddPage={true}
+            nameExist={nameExist}
+            setNameExist={setNameExist}
+            hasNameLength={hasNameLength}
+            setHasNameLength={setHasNameLength}
+          />
+          <GroupUsersSetting
+            groupData={currentGroup}
+            setCurrentGroup={setCurrentGroup}
+            isAddPage={true}
+            loginUserData={data}
+          />
+          <GroupSave
+            loginUserData={data} // json-server 適用
+            groupData={currentGroup}
+            nameExist={nameExist}
+            hasNameLength={hasNameLength}
+            url={`/test/split/groups`}
+          />
         </FadeIn>
       </div>
-    </form>
+    </div>
   );
 }

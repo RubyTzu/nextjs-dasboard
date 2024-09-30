@@ -1,7 +1,7 @@
 'use client';
 //import from next & react
 import { useParams } from 'next/navigation';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 //import data
 import { useGroup, useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
 import { ExtendedExpense } from '@/app/test/(data)/(sharedFunction)/types';
@@ -47,7 +47,6 @@ export default function Page() {
       }
     ]
   });
-  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     if (currentExpense.amount !== 0) {
@@ -56,7 +55,7 @@ export default function Page() {
   }, [currentExpense?.amount, isNotZero]);
 
   return (
-    <form ref={formRef} method="post" action={`/test/split/group/${groupid}`}>
+    <div>
       <div className="relative flex flex-col">
         <TopExpenseSettingBar
           group={group}
@@ -99,7 +98,6 @@ export default function Page() {
           <section>
             <NextStepButton
               isAddExpensePage={true}
-              formRef={formRef}
               groupid={groupid}
               expenseData={currentExpense}
               phase={phase}
@@ -111,10 +109,11 @@ export default function Page() {
               nameExist={nameExist}
               hasNameLength={hasNameLength}
               group={group}
+              url={`/test/split/group/${groupid}`}
             />
           </section>
         </FadeIn>
       </div>
-    </form>
+    </div>
   );
 }

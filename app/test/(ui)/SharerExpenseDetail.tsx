@@ -31,7 +31,7 @@ export default function SharerExpenseDetail({
           {sharerData ? (
             <Image
               className="bg-grey-200 flex h-[32px] w-[32px] items-center justify-center rounded-full"
-              src={sharerData.picture}
+              src={sharerData.picture === "" ? "/images/icons/newUserBG.svg": sharerData.picture}
               width={32}
               height={32}
               alt="sharer image"
