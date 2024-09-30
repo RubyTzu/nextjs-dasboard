@@ -2392,6 +2392,25 @@
             }
           ],
           "id": "f6c42030-5a3d-441b-be52-2216f8cbfbe8"
+        },
+        {
+          "name": "未命名費用444",
+          "category": "food",
+          "amount": 222,
+          "date": "2024-09-30T14:40:15.992Z",
+          "note": "",
+          "payerId": "44c4a958-9e53-4452-a749-944d9686d955",
+          "sharers": [
+            {
+              "id": "u3",
+              "amount": 111
+            },
+            {
+              "id": "44c4a958-9e53-4452-a749-944d9686d955",
+              "amount": 111
+            }
+          ],
+          "id": "f40d6658-c357-4ed6-bb74-a46c641aac84"
         }
       ],
       "users": [
@@ -4239,6 +4258,35 @@
       "historys": [
         {
           "editedAt": "2024-09-30T03:28:13.030Z",
+          "editorId": "u3"
+        }
+      ]
+    },
+    {
+      "id": "f40d6658-c357-4ed6-bb74-a46c641aac84",
+      "name": "未命名費用444",
+      "category": "food",
+      "amount": 222,
+      "date": "2024-09-30T14:40:15.992Z",
+      "note": "",
+      "payerId": "44c4a958-9e53-4452-a749-944d9686d955",
+      "sharers": [
+        {
+          "id": "u3",
+          "amount": 111
+        },
+        {
+          "id": "44c4a958-9e53-4452-a749-944d9686d955",
+          "amount": 111
+        }
+      ],
+      "groupId": "9adec5af-10fb-49a9-a4f4-fc80020af688",
+      "creatorId": "u3",
+      "createAt": "2024-09-30T14:40:15.992Z",
+      "updateAt": "2024-09-30T14:40:15.992Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-30T14:40:15.992Z",
           "editorId": "u3"
         }
       ]

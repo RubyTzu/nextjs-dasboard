@@ -488,18 +488,13 @@ export default function Page() {
   const [currentExpense, setCurrentExpense] = useState<
     ExtendedExpense | Expense
   >(expense);
-  const formRef = useRef<HTMLFormElement>(null);
   function handleClick() {
     if (phase === 1) return;
     setPhase(phase - 1);
   }
 
   return (
-    <form
-      ref={formRef}
-      method="post"
-      action={`/test/split/1forTestOnly`}
-    >
+    <div>
       <div className="relative flex flex-col">
         <div className="fixed z-20 flex w-full items-center justify-between bg-highlight-50 px-5 py-4 text-white">
           <div className="flex h-6 w-12 items-center justify-start">
@@ -515,12 +510,11 @@ export default function Page() {
           </div>
           <h1 className="text-lg">編輯費用</h1>
           <div className="flex h-6 w-12 items-center justify-end">
-            <>
-            </>
+            <></>
           </div>
         </div>
         {expense ? (
-          <FadeIn direction='left'>
+          <FadeIn direction="left">
             <GroupInfoBar expenseData={currentExpense} group={group} />
             <section>
               <ExpenseSettingStepOne
@@ -553,7 +547,6 @@ export default function Page() {
             <section>
               <NextStepButton
                 isAddExpensePage={false}
-                formRef={formRef}
                 phase={phase}
                 setPhase={setPhase}
                 groupid={group.id || ''}
@@ -565,6 +558,7 @@ export default function Page() {
                 nameExist={nameExist}
                 hasNameLength={hasNameLength}
                 group={group}
+                url={`/test/split/1forTestOnly`}
               />
             </section>
           </FadeIn>
@@ -572,6 +566,6 @@ export default function Page() {
           <></>
         )}
       </div>
-    </form>
+    </div>
   );
 }
