@@ -87,7 +87,7 @@ export default function AddUserButton({
           {
             id: idx,
             name: currentGroupUserName,
-            picture: '/images/icons/newUserBG.svg',
+            picture: '',
             adoptable: true,
           },
         ],

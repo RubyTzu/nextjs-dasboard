@@ -75,7 +75,7 @@ export function ExpenseDetailTwo({
             {payerData ? (
               <Image
                 className="z-10 flex h-[64px] w-[64px] items-center justify-center rounded-full bg-neutrals-30"
-                src={payerData.picture}
+                src={payerData.picture === "" ? "/images/icons/newUserBG.svg": payerData.picture}
                 width={64}
                 height={64}
                 alt="sharer image"

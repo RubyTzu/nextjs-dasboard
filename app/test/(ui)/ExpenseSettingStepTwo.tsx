@@ -44,7 +44,7 @@ export function ExpenseSettingStepTwo({
                     {user.adoptable === false ? (
                       <Image
                         className="h-12 w-12 rounded-full"
-                        src={user.picture}
+                        src={user.picture === "" ? "/images/icons/newUserBG.svg" : user.picture}
                         width={50}
                         height={50}
                         alt="user's picture"

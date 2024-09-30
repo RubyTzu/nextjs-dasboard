@@ -46,7 +46,7 @@ export default function ExpenseSettingSharer({ user, users, sharer, expenseData,
                 {user.adoptable === false ? (
                     <Image
                         className="h-12 w-12 rounded-full"
-                        src={user.picture}
+                        src={user.picture === "" ? "/images/icons/newUserBG.svg" : user.picture}
                         width={50}
                         height={50}
                         alt="user's picture"
@@ -76,7 +76,7 @@ export default function ExpenseSettingSharer({ user, users, sharer, expenseData,
                     id={user.name}
                     name={user.name}
                     value={user.name}
-                    onChange={() => {}}
+                    onChange={() => { }}
                     onClick={() => handleSharerToggle(user.id || '')}
                     checked={isChecked}
                 />

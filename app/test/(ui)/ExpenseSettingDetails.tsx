@@ -1,6 +1,7 @@
 //import from next & react
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 //import data
 import {
   ExtendedExpense,
@@ -26,7 +27,6 @@ interface GroupInfoBarProps {
 
 interface NextStepButtonProps {
   isAddExpensePage: boolean;
-  formRef: React.RefObject<HTMLFormElement>;
   phase: number;
   setPhase: (phase: number) => void;
   groupid: string;
@@ -38,6 +38,7 @@ interface NextStepButtonProps {
   nameExist: boolean;
   hasNameLength: boolean;
   group: ExtendedGroup;
+  url: string;
 }
 
 export function GroupInfoBar({ expenseData, group }: GroupInfoBarProps) {
@@ -69,7 +70,6 @@ export function GroupInfoBar({ expenseData, group }: GroupInfoBarProps) {
 
 export function NextStepButton({
   isAddExpensePage,
-  formRef,
   phase,
   setPhase,
   groupid,
@@ -81,7 +81,9 @@ export function NextStepButton({
   nameExist,
   hasNameLength,
   group,
+  url
 }: NextStepButtonProps) {
+  const router = useRouter();
   const expenseId = expenseData && 'id' in expenseData ? expenseData.id : '';
 
   const addedAmount =
@@ -183,9 +185,7 @@ export function NextStepButton({
         await changeGroup(changeGroupExpenseData);
       }
 
-      if (formRef.current) {
-        formRef.current.submit();
-      }
+     router.push(url);
     } catch (error) {
       console.error('API 呼叫失敗:', error);
     }

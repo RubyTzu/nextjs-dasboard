@@ -201,6 +201,16 @@
           "id": "g13",
           "name": "臺南 823-825",
           "picture": "/images/icons/groupIcon08.svg"
+        },
+        {
+          "id": "cb9b35ec-9d17-4cae-914f-0799903a748c",
+          "name": "未命名群組",
+          "picture": "/images/icons/groupIcon05.svg"
+        },
+        {
+          "id": "9adec5af-10fb-49a9-a4f4-fc80020af688",
+          "name": "未命名",
+          "picture": "/images/icons/groupIcon05.svg"
         }
       ]
     },
@@ -2306,6 +2316,98 @@
           "adoptable": false
         }
       ]
+    },
+    {
+      "id": "cb9b35ec-9d17-4cae-914f-0799903a748c",
+      "name": "未命名群組",
+      "picture": "/images/icons/groupIcon05.svg",
+      "creatorId": "u3",
+      "expenses": [
+        {
+          "name": "未命名費用",
+          "category": "food",
+          "amount": 240,
+          "date": "2024-09-30T03:08:17.016Z",
+          "note": "",
+          "payerId": "f7811a9b-a2d7-4f57-aeab-a74f7415ac98",
+          "sharers": [
+            {
+              "id": "u3",
+              "amount": 80
+            },
+            {
+              "id": "f7811a9b-a2d7-4f57-aeab-a74f7415ac98",
+              "amount": 80
+            },
+            {
+              "id": "081e4dcd-4a9c-47b1-9c1a-d35dc61b6359",
+              "amount": 80
+            }
+          ],
+          "id": "5bf71378-5c2e-4e70-b967-5ebd74134099"
+        }
+      ],
+      "users": [
+        {
+          "id": "u3",
+          "name": "小美的名字c",
+          "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
+          "adoptable": false
+        },
+        {
+          "id": "f7811a9b-a2d7-4f57-aeab-a74f7415ac98",
+          "name": "6666",
+          "picture": "",
+          "adoptable": true
+        },
+        {
+          "id": "081e4dcd-4a9c-47b1-9c1a-d35dc61b6359",
+          "name": "888",
+          "picture": "",
+          "adoptable": true
+        }
+      ]
+    },
+    {
+      "id": "9adec5af-10fb-49a9-a4f4-fc80020af688",
+      "name": "未命名",
+      "picture": "/images/icons/groupIcon05.svg",
+      "creatorId": "u3",
+      "expenses": [
+        {
+          "name": "未命名費用",
+          "category": "food",
+          "amount": 222111,
+          "date": "2024-09-30T03:28:13.030Z",
+          "note": "",
+          "payerId": "44c4a958-9e53-4452-a749-944d9686d955",
+          "sharers": [
+            {
+              "id": "u3",
+              "amount": 111055.5
+            },
+            {
+              "id": "44c4a958-9e53-4452-a749-944d9686d955",
+              "amount": 111055.5
+            }
+          ],
+          "id": "f6c42030-5a3d-441b-be52-2216f8cbfbe8"
+        }
+      ],
+      "users": [
+        {
+          "id": "u3",
+          "name": "小美的名字c",
+          "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
+          "adoptable": false
+        },
+        {
+          "id": "44c4a958-9e53-4452-a749-944d9686d955",
+          "name": "2222",
+          "picture": "",
+          "adoptable": true
+        }
+      ]
     }
   ],
   "expense": [
@@ -4076,6 +4178,68 @@
         {
           "editedAt": "2024-09-25T06:50:59.878Z",
           "editorId": "u1"
+        }
+      ]
+    },
+    {
+      "id": "5bf71378-5c2e-4e70-b967-5ebd74134099",
+      "name": "未命名費用",
+      "category": "food",
+      "amount": 240,
+      "date": "2024-09-30T03:08:17.016Z",
+      "note": "",
+      "payerId": "f7811a9b-a2d7-4f57-aeab-a74f7415ac98",
+      "sharers": [
+        {
+          "id": "u3",
+          "amount": 80
+        },
+        {
+          "id": "f7811a9b-a2d7-4f57-aeab-a74f7415ac98",
+          "amount": 80
+        },
+        {
+          "id": "081e4dcd-4a9c-47b1-9c1a-d35dc61b6359",
+          "amount": 80
+        }
+      ],
+      "groupId": "cb9b35ec-9d17-4cae-914f-0799903a748c",
+      "creatorId": "u3",
+      "createAt": "2024-09-30T03:08:17.016Z",
+      "updateAt": "2024-09-30T03:08:17.016Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-30T03:08:17.016Z",
+          "editorId": "u3"
+        }
+      ]
+    },
+    {
+      "name": "未命名費用",
+      "category": "food",
+      "amount": 222111,
+      "date": "2024-09-30T03:28:13.030Z",
+      "note": "",
+      "payerId": "44c4a958-9e53-4452-a749-944d9686d955",
+      "sharers": [
+        {
+          "id": "u3",
+          "amount": 111055.5
+        },
+        {
+          "id": "44c4a958-9e53-4452-a749-944d9686d955",
+          "amount": 111055.5
+        }
+      ],
+      "groupId": "9adec5af-10fb-49a9-a4f4-fc80020af688",
+      "id": "f6c42030-5a3d-441b-be52-2216f8cbfbe8",
+      "creatorId": "u3",
+      "createAt": "2024-09-30T03:28:13.030Z",
+      "updateAt": "2024-09-30T03:28:13.030Z",
+      "historys": [
+        {
+          "editedAt": "2024-09-30T03:28:13.030Z",
+          "editorId": "u3"
         }
       ]
     }

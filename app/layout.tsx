@@ -35,6 +35,18 @@ export const metadata = {
         height: 630,
         alt: 'A descriptive alt text for the image',
       },
+      {
+        url: '/images/600_315.jpg',
+        width: 600,
+        height: 315,
+        alt: 'A descriptive alt text for the image',
+      },
+      {
+        url: '/images/200_200.jpg',
+        width: 200,
+        height: 200,
+        alt: 'A descriptive alt text for the image',
+      }
     ],
     locale: 'zh_TW',
     type: 'website',
