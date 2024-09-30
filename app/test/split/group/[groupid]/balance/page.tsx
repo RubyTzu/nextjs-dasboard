@@ -3,7 +3,10 @@
 import { useParams } from 'next/navigation';
 import { Suspense, useState, useEffect } from 'react';
 //import data
-import { useGroup, useAllContext } from '@/app/test/(data)/(fetchData)/Providers';
+import {
+  useGroup,
+  useAllContext,
+} from '@/app/test/(data)/(fetchData)/Providers';
 import { splitExpense } from '@/app/test/(data)/(sharedFunction)/splitDebt';
 import { Debt, ExtendedGroup } from '@/app/test/(data)/(sharedFunction)/types';
 //import ui
@@ -41,14 +44,15 @@ export default function Page() {
   }, [group]);
 
   return (
-    <div
-      className={clsx('flex flex-col', {
-        'items-center': totalAmount === 0,
-      })}
-    >
+    <div>
       <Suspense fallback={<UsersBarSkeleton />}>
         <TopGroupBar groupData={group} isBalancePage={true} />
-        <FadeIn direction='top'>
+        <FadeIn direction="top">
+          <div
+            className={clsx('flex flex-col', {
+              'items-center': totalAmount === 0,
+            })}
+          >
             <BalanceAmount totalAmount={totalAmount} />
             {totalAmount !== 0 ? (
               <BalanceDetails
@@ -59,6 +63,7 @@ export default function Page() {
             ) : (
               <div className="mt-9 text-center">-尚未有費用紀錄-</div>
             )}
+          </div>
         </FadeIn>
       </Suspense>
     </div>

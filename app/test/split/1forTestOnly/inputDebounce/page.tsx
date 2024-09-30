@@ -578,6 +578,7 @@ export default function Page() {
           費用名稱不可為空值
         </div>
       </div>
+      <button className="w-[100px] bg-black text-white" type="button">ok</button>
     </>
   );
 }

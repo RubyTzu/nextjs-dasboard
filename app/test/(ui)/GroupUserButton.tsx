@@ -28,7 +28,6 @@ export function GroupUserButton({
   loginUserData,
 }: Props) {
   const { loginUserId } = useAllContext();
-  const router = useRouter();
   const [lastSavedGroup, setLastSavedGroup] =
     useState<ExtendedGroup>(groupData);
   const [isShow, setIsShow] = useState<boolean>(false);

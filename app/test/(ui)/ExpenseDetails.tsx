@@ -34,16 +34,16 @@ export function ExpenseDetailOne({
   return (
     <>
       {expenseData ? (
-        <div className="flex w-full gap-4 justify-between pl-2 pr-3">
-          <div className="grow-0 z-0 flex h-[72px] w-[72px] items-center justify-center rounded-lg border-[5px] border-white bg-highlight-60">
+        <div className="flex w-full justify-between gap-4 pl-2 pr-3">
+          <div className="z-0 flex h-[72px] w-[72px] grow-0 items-center justify-center rounded-lg border-[5px] border-white bg-highlight-60">
             <div className="scale-[1.4]">
               {Icon ? <Icon strokeWidth={1.6} /> : null}
             </div>
           </div>
-          <div className="grow flex justify-between pt-4">
+          <div className="flex grow justify-between pt-4">
             <div className="h-fit">
-              <div className="text-xl leading-6 w-48 truncate">{name}</div>
-              <div className="text-sm text-grey-500 leading-4">
+              <div className="truncate text-xl leading-6 w-44">{name}</div>
+              <div className="text-sm leading-4 text-grey-500">
                 {date && format(date, 'yyyy/MM/dd')}
               </div>
             </div>
