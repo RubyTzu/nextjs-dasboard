@@ -30,9 +30,9 @@ export const metadata = {
     siteName: 'Next JS Test',
     images: [
       {
-        url: '/images/1200_630.jpg',
-        width: 1200,
-        height: 630,
+        url: '/images/200_200.jpg',
+        width: 200,
+        height: 200,
         alt: 'A descriptive alt text for the image',
       },
       {
@@ -42,11 +42,11 @@ export const metadata = {
         alt: 'A descriptive alt text for the image',
       },
       {
-        url: '/images/200_200.jpg',
-        width: 200,
-        height: 200,
+        url: '/images/1200_630.jpg',
+        width: 1200,
+        height: 630,
         alt: 'A descriptive alt text for the image',
-      }
+      },
     ],
     locale: 'zh_TW',
     type: 'website',

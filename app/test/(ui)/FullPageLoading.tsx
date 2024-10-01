@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 //import other
 import { motion, easeIn } from 'framer-motion';
-// import heart from '@/app/test/(ui)/gif/heart.svg';
 
 interface LoadingButtonProps {
   url: string;
@@ -55,9 +54,9 @@ export function FullPageLoading() {
   useEffect(() => {
     const interval = setInterval(() => {
       setFlip((prevFlip) => !prevFlip);
-      setColorIndex((prevIndex) => (prevIndex + 1) % colors.length);
 
       setTimeout(() => {
+        setColorIndex((prevIndex) => (prevIndex + 1) % colors.length);
         setFrontImageIndex((prevIndex) => (prevIndex + 1) % images.length);
         setBackImageIndex((prevIndex) => (prevIndex + 1) % images.length);
       }, 120);

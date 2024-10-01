@@ -205,7 +205,7 @@
         {
           "id": "cb9b35ec-9d17-4cae-914f-0799903a748c",
           "name": "未命名群組",
-          "picture": "/images/icons/groupIcon05.svg"
+          "picture": "/images/icons/groupIcon04.svg"
         },
         {
           "id": "9adec5af-10fb-49a9-a4f4-fc80020af688",
@@ -2320,7 +2320,7 @@
     {
       "id": "cb9b35ec-9d17-4cae-914f-0799903a748c",
       "name": "未命名群組",
-      "picture": "/images/icons/groupIcon05.svg",
+      "picture": "/images/icons/groupIcon04.svg",
       "creatorId": "u3",
       "expenses": [
         {

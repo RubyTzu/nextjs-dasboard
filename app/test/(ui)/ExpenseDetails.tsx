@@ -42,7 +42,7 @@ export function ExpenseDetailOne({
           </div>
           <div className="flex grow justify-between pt-4">
             <div className="h-fit">
-              <div className="truncate text-xl leading-6 w-44">{name}</div>
+              <div className="truncate text-xl leading-6 w-40">{name}</div>
               <div className="text-sm leading-4 text-grey-500">
                 {date && format(date, 'yyyy/MM/dd')}
               </div>
