@@ -430,17 +430,17 @@
       "groups": [
         {
           "id": "g5",
-          "name": "新年新希望123",
-          "picture": "/images/icons/groupIcon05.svg"
+          "name": "First Group",
+          "picture": "/images/icons/groupIcon01.svg"
         },
         {
           "id": "g9",
-          "name": "group Travel 3",
+          "name": "Trip to Taichung",
           "picture": "/images/icons/groupIcon09.svg"
         },
         {
           "id": "g11",
-          "name": "group Other 3",
+          "name": "Family Dinner",
           "picture": "/images/icons/groupIcon11.svg"
         }
       ]
@@ -1189,8 +1189,8 @@
     },
     {
       "id": "g5",
-      "name": "新年新希望123",
-      "picture": "/images/icons/groupIcon05.svg",
+      "name": "First Group",
+      "picture": "/images/icons/groupIcon01.svg",
       "creatorId": "u1",
       "expenses": [],
       "users": [
@@ -1363,44 +1363,149 @@
     },
     {
       "id": "g9",
-      "name": "group Travel 3",
+      "name": "Trip to Taichung",
       "picture": "/images/icons/groupIcon09.svg",
       "creatorId": "u1",
       "expenses": [
         {
-          "name": "未命名費用",
-          "category": "food",
-          "amount": 2,
-          "date": "2024-09-04T12:35:38.159Z",
+          "name": "HSR TPE to TXG",
+          "category": "transport",
+          "amount": 4350,
+          "date": "2024-09-04T00:00:00.000Z",
           "note": "",
           "payerId": "u7",
           "sharers": [
             {
               "id": "u1",
-              "amount": 0.33
+              "amount": 725
             },
             {
               "id": "u2",
-              "amount": 0.33
+              "amount": 725
             },
             {
               "id": "u3",
-              "amount": 0.33
+              "amount": 725
             },
             {
               "id": "u7",
-              "amount": 0.33
+              "amount": 725
             },
             {
               "id": "u9",
-              "amount": 0.33
+              "amount": 725
             },
             {
               "id": "u10",
-              "amount": 0.33
+              "amount": 725
             }
           ],
           "id": "2d5977b0-2210-4f99-a283-992bf88080ce"
+        },
+        {
+          "name": "Noodle",
+          "category": "food",
+          "amount": 600,
+          "date": "2024-09-04T00:00:00.000Z",
+          "note": "",
+          "payerId": "u10",
+          "sharers": [
+            {
+              "id": "u1",
+              "amount": 100
+            },
+            {
+              "id": "u2",
+              "amount": 100
+            },
+            {
+              "id": "u3",
+              "amount": 100
+            },
+            {
+              "id": "u7",
+              "amount": 100
+            },
+            {
+              "id": "u9",
+              "amount": 100
+            },
+            {
+              "id": "u10",
+              "amount": 100
+            }
+          ],
+          "id": "d19f1453-af78-43bd-a1ec-315372620a48"
+        },
+        {
+          "name": "Museum",
+          "category": "entertainment",
+          "amount": 300,
+          "date": "2024-09-04T00:00:00.000Z",
+          "note": "",
+          "payerId": "u1",
+          "sharers": [
+            {
+              "id": "u1",
+              "amount": 50
+            },
+            {
+              "id": "u2",
+              "amount": 50
+            },
+            {
+              "id": "u3",
+              "amount": 50
+            },
+            {
+              "id": "u7",
+              "amount": 50
+            },
+            {
+              "id": "u9",
+              "amount": 50
+            },
+            {
+              "id": "u10",
+              "amount": 50
+            }
+          ],
+          "id": "ca664a78-95a6-4d47-a416-19a5dd09f304"
+        },
+        {
+          "name": "HSR TXG to TPE",
+          "category": "food",
+          "amount": 4350,
+          "date": "2024-09-05T00:00:00.000Z",
+          "note": "",
+          "payerId": "u7",
+          "sharers": [
+            {
+              "id": "u1",
+              "amount": 725
+            },
+            {
+              "id": "u2",
+              "amount": 725
+            },
+            {
+              "id": "u3",
+              "amount": 725
+            },
+            {
+              "id": "u7",
+              "amount": 725
+            },
+            {
+              "id": "u9",
+              "amount": 725
+            },
+            {
+              "id": "u10",
+              "amount": 725
+            }
+          ],
+          "id": "e6943165-4be8-4b38-8c2a-74c3004ce06d"
         }
       ],
       "users": [
@@ -1439,6 +1544,12 @@
           "name": "j",
           "picture": "https://images.dog.ceo/breeds/hound-english/n02089973_1303.jpg",
           "adoptable": false
+        },
+        {
+          "id": "aecdf7e7-782a-4772-aa2e-92ce8e44cb73",
+          "name": "member",
+          "picture": "",
+          "adoptable": true
         }
       ]
     },
@@ -1471,7 +1582,7 @@
     },
     {
       "id": "g11",
-      "name": "group Other 3",
+      "name": "Family Dinner",
       "picture": "/images/icons/groupIcon11.svg",
       "creatorId": "u1",
       "expenses": [],
@@ -3713,40 +3824,40 @@
       ]
     },
     {
-      "id": "2d5977b0-2210-4f99-a283-992bf88080ce",
-      "name": "未命名費用",
-      "category": "food",
-      "amount": 2,
-      "date": "2024-09-04T12:35:38.159Z",
+      "name": "HSR TPE to TXG",
+      "category": "transport",
+      "amount": 4350,
+      "date": "2024-09-04T00:00:00.000Z",
       "note": "",
       "payerId": "u7",
       "sharers": [
         {
           "id": "u1",
-          "amount": 0.33
+          "amount": 725
         },
         {
           "id": "u2",
-          "amount": 0.33
+          "amount": 725
         },
         {
           "id": "u3",
-          "amount": 0.33
+          "amount": 725
         },
         {
           "id": "u7",
-          "amount": 0.33
+          "amount": 725
         },
         {
           "id": "u9",
-          "amount": 0.33
+          "amount": 725
         },
         {
           "id": "u10",
-          "amount": 0.33
+          "amount": 725
         }
       ],
       "groupId": "g9",
+      "id": "2d5977b0-2210-4f99-a283-992bf88080ce",
       "creatorId": "u7",
       "createAt": "2024-09-04T12:35:38.159Z",
       "updateAt": "2024-09-04T12:35:38.159Z",
@@ -4288,6 +4399,141 @@
         {
           "editedAt": "2024-09-30T14:40:15.992Z",
           "editorId": "u3"
+        }
+      ]
+    },
+    {
+      "name": "Noodle",
+      "category": "food",
+      "amount": 600,
+      "date": "2024-09-04T00:00:00.000Z",
+      "note": "",
+      "payerId": "u10",
+      "sharers": [
+        {
+          "id": "u1",
+          "amount": 100
+        },
+        {
+          "id": "u2",
+          "amount": 100
+        },
+        {
+          "id": "u3",
+          "amount": 100
+        },
+        {
+          "id": "u7",
+          "amount": 100
+        },
+        {
+          "id": "u9",
+          "amount": 100
+        },
+        {
+          "id": "u10",
+          "amount": 100
+        }
+      ],
+      "groupId": "g9",
+      "id": "d19f1453-af78-43bd-a1ec-315372620a48",
+      "creatorId": "u10",
+      "createAt": "2024-10-02T01:14:41.604Z",
+      "updateAt": "2024-10-02T01:14:41.604Z",
+      "historys": [
+        {
+          "editedAt": "2024-10-02T01:14:41.604Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "name": "Museum",
+      "category": "entertainment",
+      "amount": 300,
+      "date": "2024-09-04T00:00:00.000Z",
+      "note": "",
+      "payerId": "u1",
+      "sharers": [
+        {
+          "id": "u1",
+          "amount": 50
+        },
+        {
+          "id": "u2",
+          "amount": 50
+        },
+        {
+          "id": "u3",
+          "amount": 50
+        },
+        {
+          "id": "u7",
+          "amount": 50
+        },
+        {
+          "id": "u9",
+          "amount": 50
+        },
+        {
+          "id": "u10",
+          "amount": 50
+        }
+      ],
+      "groupId": "g9",
+      "id": "ca664a78-95a6-4d47-a416-19a5dd09f304",
+      "creatorId": "u10",
+      "createAt": "2024-10-02T01:16:19.926Z",
+      "updateAt": "2024-10-02T01:16:19.926Z",
+      "historys": [
+        {
+          "editedAt": "2024-10-02T01:16:19.926Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "name": "HSR TXG to TPE",
+      "category": "food",
+      "amount": 4350,
+      "date": "2024-09-05T00:00:00.000Z",
+      "note": "",
+      "payerId": "u7",
+      "sharers": [
+        {
+          "id": "u1",
+          "amount": 725
+        },
+        {
+          "id": "u2",
+          "amount": 725
+        },
+        {
+          "id": "u3",
+          "amount": 725
+        },
+        {
+          "id": "u7",
+          "amount": 725
+        },
+        {
+          "id": "u9",
+          "amount": 725
+        },
+        {
+          "id": "u10",
+          "amount": 725
+        }
+      ],
+      "groupId": "g9",
+      "id": "e6943165-4be8-4b38-8c2a-74c3004ce06d",
+      "creatorId": "u10",
+      "createAt": "2024-10-02T01:20:40.753Z",
+      "updateAt": "2024-10-02T01:20:40.753Z",
+      "historys": [
+        {
+          "editedAt": "2024-10-02T01:20:40.753Z",
+          "editorId": "u10"
         }
       ]
     }

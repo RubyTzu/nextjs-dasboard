@@ -87,7 +87,7 @@ export default function DeleteGroupButton({
       currentGroupUsers.splice(userIndex, 1, {
         "id": idx,
         "name": `原 ${loginUserData.name}`,
-        "picture": "/images/icons/newUserBG.svg",
+        "picture": "",
         "adoptable": true
       });
     }

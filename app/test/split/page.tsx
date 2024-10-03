@@ -12,7 +12,7 @@ export default function HomePage() {
   const router = useRouter();
    
   useEffect(() => {
-    const userId ="u3"
+    const userId ="u10"
       window.localStorage.setItem('loginUserId', userId);
 
       setLoginUserId(userId);

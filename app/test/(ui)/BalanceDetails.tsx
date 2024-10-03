@@ -29,7 +29,9 @@ export function BalanceDetails({ groupUsers, ownerDebt, totalAmount }: Prop) {
       {user.picture ? (
         <Image
           className="z-10 flex h-[36px] w-[36px] items-center justify-center rounded-full bg-neutrals-30"
-          src={user.picture}
+          src={
+            user.picture === '' ? '/images/icons/newUserBG.svg' : user.picture
+          }
           width={64}
           height={64}
           alt={`${user.name}'s picture`}

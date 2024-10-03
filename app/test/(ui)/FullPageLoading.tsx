@@ -112,3 +112,51 @@ export function FullPageLoading() {
     </div>
   );
 }
+
+export function FullPageLoadingTwo() {
+  const [flip, setFlip] = useState(true);
+  const [colorIndex, setColorIndex] = useState(0);
+  // const [frontImageIndex, setFrontImageIndex] = useState(0);
+  // const [backImageIndex, setBackImageIndex] = useState(0);
+  const colors = ['#EBFF79', '#16120F', '#FF9500', '#A3EA71', '#FA64B5'];
+  // const images = [
+  //   '/images/money.svg',
+  //   '/images/tableware.svg',
+  //   '/images/star.svg',
+  //   '/images/plane.svg',
+  //   '/images/heart.svg',
+  // ];
+  const eased = easeIn(0.3);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFlip((prevFlip) => !prevFlip);
+
+      setTimeout(() => {
+        setColorIndex((prevIndex) => (prevIndex + 1) % colors.length);
+        // setFrontImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+        // setBackImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+      }, 120);
+    }, 700);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="fixed left-0 top-0 z-50 w-screen">
+      <motion.div
+        className="flex min-h-screen flex-col items-center justify-center"
+        style={{
+          backgroundColor: colors[colorIndex],
+          transition: 'background-color 0.3s',
+        }}
+      >
+        <div>
+          <video controls loop>
+            <source src="/videos/loading.webm" type="video/webm" />
+          </video>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
