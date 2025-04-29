@@ -84,7 +84,7 @@ export function ExpenseDetailTwo({
             ) : null}
             <div className="flex grow items-center justify-between">
               <div className="flex text-base">
-                <div className="max-w-[92px] truncate">{loginUserId === payerId ? '你' : payerData?.name}</div>
+                <div className="max-w-[92px]">{loginUserId === payerId ? '你' : payerData?.name}</div>
                 <div>&nbsp;先付了</div>
               </div>
               <div className="text-highlight-35">${nf.format(amount)}</div>

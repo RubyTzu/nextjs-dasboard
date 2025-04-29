@@ -48,7 +48,7 @@ export function GroupInfoBar({ expenseData, group }: GroupInfoBarProps) {
   return (
     <>
       {expenseData && group ? (
-        <div className="mt-16 flex items-center gap-4 border-b-2 py-4 pl-6">
+        <div className="man-w-[320px] mx-auto mt-16 flex max-w-[800px] items-center gap-4 border-b-2 py-4 pl-6">
           <p>你和</p>
           <div className="flex items-center justify-center gap-2 rounded-full bg-neutrals-30 py-1 pl-3 pr-4">
             {picture ? (

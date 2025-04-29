@@ -35,11 +35,11 @@ export default function Page() {
   const isUserAdoptable = group?.users?.some((user) => user.adoptable === true);
 
   return (
-    <div className="flex flex-col">
+    <div className="mx-auto flex max-w-[800px] flex-col">
       <Suspense fallback={<UsersBarSkeleton />}>
         <TopGroupBar isBalancePage={false} groupData={group} />
         {isUserInGroup && (
-          <FadeIn direction='top'>
+          <FadeIn direction="top">
             <UsersBar groupData={group} />
             <BalanceAndShareButtons groupData={group} />
             <ExpensesList groupData={group} />

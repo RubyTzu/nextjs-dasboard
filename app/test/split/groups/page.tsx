@@ -25,7 +25,7 @@ export default function Page() {
   userData = useUser(loginUserId || '');
 
   return (
-    <div className="flex min-h-screen flex-col bg-highlight-50">
+    <div className="mx-auto flex min-h-screen w-full max-w-[800px] flex-col bg-highlight-50">
       {userData ? (
         <>
           <h1 className="fixed left-[50%] z-[2] w-full translate-x-[-50%] bg-highlight-50 pt-7 text-center text-2xl font-semibold tracking-wide text-white">
@@ -33,10 +33,10 @@ export default function Page() {
           </h1>
           <AddGroupButton />
           <div className="mt-[6.5rem]">
-            <FadeIn direction='right'>
-            {userData?.groups.map((group) => (
-              <GroupButton key={group.id} groupData={group} />
-            ))}
+            <FadeIn direction="right">
+              {userData?.groups.map((group) => (
+                <GroupButton key={group.id} groupData={group} />
+              ))}
             </FadeIn>
           </div>
           <div className="mb-16"></div>

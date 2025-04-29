@@ -34,9 +34,9 @@ export default function Page() {
   return (
     <>
       {group && expense ? (
-        <div className="flex flex-col items-center">
+        <div className="mx-auto flex max-w-[800px] flex-col items-center">
           <TopExpenseBar groupData={group} expenseData={expense} />
-          <FadeIn direction='top'>
+          <FadeIn direction="top">
             <div className="mt-16 flex w-full flex-col items-center px-4 py-6">
               <ExpenseDetailOne expenseData={expense} />
               <ExpenseDetailTwo expenseData={expense} users={users} />

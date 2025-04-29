@@ -39,7 +39,7 @@ export default function SharerExpenseDetail({
             />
           ) : null}
           <div className="ml-3 flex">
-           <div className="max-w-[68px] truncate">{id === loginUserId ? '你' : sharerData?.name}</div> 
+           <div className="">{id === loginUserId ? '你' : sharerData?.name}</div> 
            <div>&nbsp;應付</div>
           </div>
         </div>

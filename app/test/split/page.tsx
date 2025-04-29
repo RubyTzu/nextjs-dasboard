@@ -23,7 +23,7 @@ export default function HomePage() {
   
   
   return (
-    <main className="relative z-[2] mt-0 w-screen text-center text-3xl">
+    <main className="relative z-[2] mx-auto mt-0 w-screen min-w-[320px] text-center text-3xl">
       <KVLoading />
     </main>
   );

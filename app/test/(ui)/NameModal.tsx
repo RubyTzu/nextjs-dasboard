@@ -54,7 +54,7 @@ export default function NameModal({
           handleLeftClick={() => {}}
           handleRightClick={handleClose}
         />
-        <div className="relative top-[92px] z-40 mx-auto h-fit w-[80%] border-b border-white">
+        <div className="relative top-[92px] z-40 mx-auto h-fit w-[80%] min-w-[320px] max-w-[800px] border-b border-white">
           <input
             ref={inputRef}
             className="relative w-[80%] border-0 bg-transparent px-0 text-xl text-white focus:border-0 focus:outline-none focus:ring-0"
@@ -69,7 +69,7 @@ export default function NameModal({
         </div>
         <div
           className={clsx(
-            'relative top-[105px] z-40 mx-auto w-[80%] text-neutrals-50',
+            'relative top-[105px] z-40 mx-auto w-[80%] min-w-[320px]  max-w-[800px] text-neutrals-50',
             {
               block: nameExist,
               hidden: !nameExist,
@@ -81,7 +81,7 @@ export default function NameModal({
         <button
           type="button"
           disabled={currentValue === '' || nameExist}
-          className="fixed left-[50%] top-56 z-40 mx-auto w-[80%] translate-x-[-50%] rounded-full bg-highlight-20 py-3 text-center disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
+          className="fixed left-[50%] top-56 z-40 mx-auto w-[80%] min-w-[320px] max-w-[800px] translate-x-[-50%] rounded-full bg-highlight-20 py-3 text-center disabled:bg-neutrals-30 disabled:text-text-onDark-secondary"
           onClick={handleSaveLoading}
         >
           儲存

@@ -26,9 +26,12 @@ export function ExpenseSettingStepTwo({
 }: Props) {
   return (
     <div
-      className={clsx('my-6 flex w-full flex-col items-center', {
-        hidden: phase !== 2,
-      })}
+      className={clsx(
+        'man-w-[320px] mx-auto my-6 flex w-full max-w-[800px] flex-col items-center',
+        {
+          hidden: phase !== 2,
+        },
+      )}
     >
       {expenseData && group ? (
         <>
@@ -44,7 +47,11 @@ export function ExpenseSettingStepTwo({
                     {user.adoptable === false ? (
                       <Image
                         className="h-12 w-12 rounded-full"
-                        src={user.picture === "" ? "/images/icons/newUserBG.svg" : user.picture}
+                        src={
+                          user.picture === ''
+                            ? '/images/icons/newUserBG.svg'
+                            : user.picture
+                        }
                         width={50}
                         height={50}
                         alt="user's picture"

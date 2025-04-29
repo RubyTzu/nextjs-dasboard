@@ -56,11 +56,13 @@ export function GroupsSkeleton() {
   const divArray = Array(5).fill(0);
   return (
     <>
-      <div className={`flex min-h-screen flex-col bg-highlight-50`}>
+      <div
+        className={`flex min-h-screen flex-col items-center bg-highlight-50`}
+      >
         <h1 className="fixed left-[50%] z-[2] w-full translate-x-[-50%] bg-transparent pt-7 text-center text-2xl font-semibold tracking-wide text-white">
           Chilling..
         </h1>
-        <div className="mt-[6.5rem]">
+        <div className="mt-[6.5rem] w-full min-w-[320px] max-w-[800px]">
           {divArray.map((_, index) => (
             <div
               key={index}

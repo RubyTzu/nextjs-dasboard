@@ -3,7 +3,7 @@
     {
       "id": "u1",
       "lineId": "linIdu1",
-      "name": "小陳aaaaaaaaaaaa",
+      "name": "a",
       "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
       "groups": [
         {
@@ -76,7 +76,7 @@
     {
       "id": "u2",
       "lineId": "linIdu2",
-      "name": "小明bbbbb",
+      "name": "b",
       "picture": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg",
       "groups": [
         {
@@ -144,7 +144,7 @@
     {
       "id": "u3",
       "lineId": "linIdu3",
-      "name": "小美的名字c",
+      "name": "c",
       "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
       "groups": [
         {
@@ -442,6 +442,26 @@
           "id": "g11",
           "name": "Family Dinner",
           "picture": "/images/icons/groupIcon11.svg"
+        },
+        {
+          "id": "e787b132-f50f-40cd-b049-bbe1581fde84",
+          "name": "Test",
+          "picture": "/images/icons/groupIcon01.svg"
+        },
+        {
+          "id": "db6ae3bf-ecc5-4dd1-8999-319722726753",
+          "name": "Dinner",
+          "picture": "/images/icons/groupIcon11.svg"
+        },
+        {
+          "id": "d8992ef7-b33c-4d1e-bd8b-2d5262221d6b",
+          "name": "Trip to Taipei",
+          "picture": "/images/icons/groupIcon08.svg"
+        },
+        {
+          "id": "203cc0e2-a60a-47f0-ae90-625f884a5a5a",
+          "name": "Trip to Tainan",
+          "picture": "/images/icons/groupIcon02.svg"
         }
       ]
     }
@@ -777,19 +797,19 @@
       "users": [
         {
           "id": "u1",
-          "name": "小陳aaaaaaaaaaaa",
+          "name": "a",
           "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
           "adoptable": false
         },
         {
           "id": "u2",
-          "name": "小明bbbbb",
+          "name": "b",
           "picture": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg",
           "adoptable": false
         },
         {
           "id": "u3",
-          "name": "小美的名字c",
+          "name": "c",
           "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
           "adoptable": false
         },
@@ -980,19 +1000,19 @@
       "users": [
         {
           "id": "u1",
-          "name": "小陳aaaaaaaaaaaa",
+          "name": "a",
           "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
           "adoptable": false
         },
         {
           "id": "u2",
-          "name": "小明bbbbb",
+          "name": "b",
           "picture": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg",
           "adoptable": false
         },
         {
           "id": "u3",
-          "name": "小美的名字c",
+          "name": "c",
           "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
           "adoptable": false
         },
@@ -1072,19 +1092,19 @@
       "users": [
         {
           "id": "u1",
-          "name": "小陳aaaaaaaaaaaa",
+          "name": "a",
           "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
           "adoptable": false
         },
         {
           "id": "u2",
-          "name": "小明bbbbb",
+          "name": "b",
           "picture": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg",
           "adoptable": false
         },
         {
           "id": "u3",
-          "name": "小美的名字c",
+          "name": "c",
           "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
           "adoptable": false
         }
@@ -1169,19 +1189,19 @@
       "users": [
         {
           "id": "u1",
-          "name": "小陳aaaaaaaaaaaa",
+          "name": "a",
           "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
           "adoptable": false
         },
         {
           "id": "u2",
-          "name": "小明bbbbb",
+          "name": "b",
           "picture": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg",
           "adoptable": false
         },
         {
           "id": "u3",
-          "name": "小美的名字c",
+          "name": "c",
           "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
           "adoptable": false
         }
@@ -1196,19 +1216,19 @@
       "users": [
         {
           "id": "u1",
-          "name": "小陳aaaaaaaaaaaa",
+          "name": "a",
           "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
           "adoptable": false
         },
         {
           "id": "u2",
-          "name": "小明bbbbb",
+          "name": "b",
           "picture": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg",
           "adoptable": false
         },
         {
           "id": "u3",
-          "name": "小美的名字c",
+          "name": "c",
           "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
           "adoptable": false
         },
@@ -1265,19 +1285,19 @@
       "users": [
         {
           "id": "u1",
-          "name": "小陳aaaaaaaaaaaa",
+          "name": "a",
           "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
           "adoptable": false
         },
         {
           "id": "u2",
-          "name": "小明bbbbb",
+          "name": "b",
           "picture": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg",
           "adoptable": false
         },
         {
           "id": "u3",
-          "name": "小美的名字c",
+          "name": "c",
           "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
           "adoptable": false
         },
@@ -1310,7 +1330,7 @@
       "users": [
         {
           "id": "u1",
-          "name": "小陳aaaaaaaaaaaa",
+          "name": "a",
           "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
           "adoptable": false
         },
@@ -1337,7 +1357,7 @@
       "users": [
         {
           "id": "u3",
-          "name": "小美的名字c",
+          "name": "c",
           "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
           "adoptable": false
         },
@@ -1511,19 +1531,19 @@
       "users": [
         {
           "id": "u1",
-          "name": "小陳aaaaaaaaaaaa",
+          "name": "a",
           "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
           "adoptable": false
         },
         {
           "id": "u2",
-          "name": "小明bbbbb",
+          "name": "b",
           "picture": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg",
           "adoptable": false
         },
         {
           "id": "u3",
-          "name": "小美的名字c",
+          "name": "c",
           "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
           "adoptable": false
         },
@@ -1562,13 +1582,13 @@
       "users": [
         {
           "id": "u2",
-          "name": "小明bbbbb",
+          "name": "b",
           "picture": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg",
           "adoptable": false
         },
         {
           "id": "u3",
-          "name": "小美的名字c",
+          "name": "c",
           "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
           "adoptable": false
         },
@@ -1589,13 +1609,13 @@
       "users": [
         {
           "id": "u1",
-          "name": "小陳aaaaaaaaaaaa",
+          "name": "a",
           "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
           "adoptable": false
         },
         {
           "id": "u3",
-          "name": "小美的名字c",
+          "name": "c",
           "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
           "adoptable": false
         },
@@ -1640,7 +1660,7 @@
       "users": [
         {
           "id": "u2",
-          "name": "小明bbbbb",
+          "name": "b",
           "picture": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg",
           "adoptable": false
         },
@@ -1984,19 +2004,19 @@
       "users": [
         {
           "id": "u1",
-          "name": "小陳aaaaaaaaaaaa",
+          "name": "a",
           "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
           "adoptable": false
         },
         {
           "id": "u2",
-          "name": "小明bbbbb",
+          "name": "b",
           "picture": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg",
           "adoptable": false
         },
         {
           "id": "u3",
-          "name": "小美的名字c",
+          "name": "c",
           "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
           "adoptable": false
         },
@@ -2169,7 +2189,7 @@
         },
         {
           "id": "a18f298f-e59d-4df5-8c43-21f15b7b6fdb",
-          "name": "原 小明bbbbb",
+          "name": "原 b",
           "picture": "/images/icons/newUserBG.svg",
           "adoptable": true
         },
@@ -2181,7 +2201,7 @@
         },
         {
           "id": "u1",
-          "name": "小陳aaaaaaaaaaaa",
+          "name": "a",
           "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
           "adoptable": false
         },
@@ -2389,13 +2409,13 @@
       "users": [
         {
           "id": "u1",
-          "name": "小陳aaaaaaaaaaaa",
+          "name": "a",
           "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
           "adoptable": false
         },
         {
           "id": "u2",
-          "name": "小明bbbbb",
+          "name": "b",
           "picture": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg",
           "adoptable": false
         },
@@ -2416,13 +2436,13 @@
       "users": [
         {
           "id": "u1",
-          "name": "小陳aaaaaaaaaaaa",
+          "name": "a",
           "picture": "https://cdn2.thecatapi.com/images/a4v.jpg",
           "adoptable": false
         },
         {
           "id": "u2",
-          "name": "小明bbbbb",
+          "name": "b",
           "picture": "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_803.jpg",
           "adoptable": false
         }
@@ -2461,7 +2481,7 @@
       "users": [
         {
           "id": "u3",
-          "name": "小美的名字c",
+          "name": "c",
           "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
           "adoptable": false
         },
@@ -2527,13 +2547,392 @@
       "users": [
         {
           "id": "u3",
-          "name": "小美的名字c",
+          "name": "c",
           "picture": "https://cdn2.thecatapi.com/images/O7FnoegHR.jpg",
           "adoptable": false
         },
         {
           "id": "44c4a958-9e53-4452-a749-944d9686d955",
           "name": "2222",
+          "picture": "",
+          "adoptable": true
+        }
+      ]
+    },
+    {
+      "id": "e787b132-f50f-40cd-b049-bbe1581fde84",
+      "name": "Test",
+      "picture": "/images/icons/groupIcon01.svg",
+      "creatorId": "u10",
+      "expenses": [
+        {
+          "name": "未命名費用",
+          "category": "food",
+          "amount": 100,
+          "date": "2025-04-13T01:43:36.655Z",
+          "note": "",
+          "payerId": "u10",
+          "sharers": [
+            {
+              "id": "u10",
+              "amount": 25
+            },
+            {
+              "id": "827309c7-5fdb-4e85-834d-c9fa40ab82c3",
+              "amount": 25
+            },
+            {
+              "id": "f1ce4c8c-c19f-4dd0-a8f4-c6aecf7f8de1",
+              "amount": 25
+            },
+            {
+              "id": "54438c4b-0474-4ada-b730-e72dba490851",
+              "amount": 25
+            }
+          ],
+          "id": "4904262b-bc52-4fbe-8d2c-495bf8cedc4c"
+        },
+        {
+          "name": "未命名費用2",
+          "category": "food",
+          "amount": 6,
+          "date": "2025-04-13T01:43:59.095Z",
+          "note": "",
+          "payerId": "u10",
+          "sharers": [
+            {
+              "id": "u10",
+              "amount": 1.5
+            },
+            {
+              "id": "827309c7-5fdb-4e85-834d-c9fa40ab82c3",
+              "amount": 1.5
+            },
+            {
+              "id": "f1ce4c8c-c19f-4dd0-a8f4-c6aecf7f8de1",
+              "amount": 1.5
+            },
+            {
+              "id": "54438c4b-0474-4ada-b730-e72dba490851",
+              "amount": 1.5
+            }
+          ],
+          "id": "109b3996-8ca6-4536-818a-10377e184a7f"
+        }
+      ],
+      "users": [
+        {
+          "id": "u10",
+          "name": "j",
+          "picture": "https://images.dog.ceo/breeds/hound-english/n02089973_1303.jpg",
+          "adoptable": false
+        },
+        {
+          "id": "827309c7-5fdb-4e85-834d-c9fa40ab82c3",
+          "name": "1",
+          "picture": "",
+          "adoptable": true
+        },
+        {
+          "id": "f1ce4c8c-c19f-4dd0-a8f4-c6aecf7f8de1",
+          "name": "2",
+          "picture": "",
+          "adoptable": true
+        },
+        {
+          "id": "54438c4b-0474-4ada-b730-e72dba490851",
+          "name": "3",
+          "picture": "",
+          "adoptable": true
+        }
+      ]
+    },
+    {
+      "id": "db6ae3bf-ecc5-4dd1-8999-319722726753",
+      "name": "Dinner",
+      "picture": "/images/icons/groupIcon11.svg",
+      "creatorId": "u10",
+      "expenses": [
+        {
+          "name": "Noodle",
+          "category": "food",
+          "amount": 100,
+          "date": "2025-04-27T00:00:00.000Z",
+          "note": "",
+          "payerId": "u10",
+          "sharers": [
+            {
+              "id": "2b4f4081-2e7b-433b-94f6-34323d9f9e54",
+              "amount": 33.33
+            },
+            {
+              "id": "5a149958-0416-446c-87b3-866508e9c58c",
+              "amount": 33.33
+            },
+            {
+              "id": "u10",
+              "amount": 33.33
+            }
+          ],
+          "id": "60bd9252-6761-4447-8f7e-abe4f216bed3"
+        }
+      ],
+      "users": [
+        {
+          "id": "2b4f4081-2e7b-433b-94f6-34323d9f9e54",
+          "name": "member1",
+          "picture": "",
+          "adoptable": true
+        },
+        {
+          "id": "5a149958-0416-446c-87b3-866508e9c58c",
+          "name": "member2",
+          "picture": "",
+          "adoptable": true
+        },
+        {
+          "id": "u10",
+          "name": "j",
+          "picture": "https://images.dog.ceo/breeds/hound-english/n02089973_1303.jpg",
+          "adoptable": false
+        }
+      ]
+    },
+    {
+      "id": "d8992ef7-b33c-4d1e-bd8b-2d5262221d6b",
+      "name": "Trip to Taipei",
+      "picture": "/images/icons/groupIcon08.svg",
+      "creatorId": "u10",
+      "expenses": [
+        {
+          "name": "Taxi",
+          "category": "transport",
+          "amount": 600,
+          "date": "2025-04-25T00:00:00.000Z",
+          "note": "Station to Dinner place",
+          "payerId": "u10",
+          "sharers": [
+            {
+              "id": "1274b300-3595-4e5b-b929-f5f8cbe9b37d",
+              "amount": 200
+            },
+            {
+              "id": "f2710bc5-c6e3-4a54-bf81-b6d1e3cf6c63",
+              "amount": 200
+            },
+            {
+              "id": "u10",
+              "amount": 200
+            }
+          ],
+          "id": "7c93b090-e230-422e-b525-720176cdbe88"
+        },
+        {
+          "name": "Dinner",
+          "category": "food",
+          "amount": 1320,
+          "date": "2025-04-25T00:00:00.000Z",
+          "note": "Steak",
+          "payerId": "1274b300-3595-4e5b-b929-f5f8cbe9b37d",
+          "sharers": [
+            {
+              "id": "1274b300-3595-4e5b-b929-f5f8cbe9b37d",
+              "amount": 440
+            },
+            {
+              "id": "f2710bc5-c6e3-4a54-bf81-b6d1e3cf6c63",
+              "amount": 440
+            },
+            {
+              "id": "u10",
+              "amount": 440
+            }
+          ],
+          "id": "7ce7f98c-fe9d-4a62-8d6e-2dcc1fcd8fba"
+        },
+        {
+          "name": "Stay",
+          "category": "stay",
+          "amount": 3000,
+          "date": "2025-04-25T00:00:00.000Z",
+          "note": "AAA Hotel",
+          "payerId": "u10",
+          "sharers": [
+            {
+              "id": "1274b300-3595-4e5b-b929-f5f8cbe9b37d",
+              "amount": 1000
+            },
+            {
+              "id": "f2710bc5-c6e3-4a54-bf81-b6d1e3cf6c63",
+              "amount": 1000
+            },
+            {
+              "id": "u10",
+              "amount": 1000
+            }
+          ],
+          "id": "188402a3-0c21-4165-addd-314e11794f5a"
+        },
+        {
+          "name": "Concert",
+          "category": "entertainment",
+          "amount": 12000,
+          "date": "2025-04-26T00:00:00.000Z",
+          "note": "",
+          "payerId": "u10",
+          "sharers": [
+            {
+              "id": "1274b300-3595-4e5b-b929-f5f8cbe9b37d",
+              "amount": 4000
+            },
+            {
+              "id": "f2710bc5-c6e3-4a54-bf81-b6d1e3cf6c63",
+              "amount": 4000
+            },
+            {
+              "id": "u10",
+              "amount": 4000
+            }
+          ],
+          "id": "f8cc8a4a-3d40-4a17-87ba-6c119c92f895"
+        }
+      ],
+      "users": [
+        {
+          "id": "1274b300-3595-4e5b-b929-f5f8cbe9b37d",
+          "name": "Member 1",
+          "picture": "",
+          "adoptable": true
+        },
+        {
+          "id": "f2710bc5-c6e3-4a54-bf81-b6d1e3cf6c63",
+          "name": "Member 2",
+          "picture": "",
+          "adoptable": true
+        },
+        {
+          "id": "u10",
+          "name": "j",
+          "picture": "https://images.dog.ceo/breeds/hound-english/n02089973_1303.jpg",
+          "adoptable": false
+        }
+      ]
+    },
+    {
+      "id": "203cc0e2-a60a-47f0-ae90-625f884a5a5a",
+      "name": "Trip to Tainan",
+      "picture": "/images/icons/groupIcon02.svg",
+      "creatorId": "u10",
+      "expenses": [
+        {
+          "name": "Stay",
+          "category": "stay",
+          "amount": 12000,
+          "date": "2025-04-25T00:00:00.000Z",
+          "note": "BBB Hotel",
+          "payerId": "u10",
+          "sharers": [
+            {
+              "id": "7466ba95-eec4-4019-8237-9a8f0788df82",
+              "amount": 4000
+            },
+            {
+              "id": "afa85388-47a9-42e5-8d40-cdff45cd49b1",
+              "amount": 4000
+            },
+            {
+              "id": "u10",
+              "amount": 4000
+            }
+          ],
+          "id": "73ac3d17-511e-4c5f-a8d8-6e59621a9b99"
+        },
+        {
+          "name": "Dinner",
+          "category": "food",
+          "amount": 2200,
+          "date": "2025-04-25T00:00:00.000Z",
+          "note": "Famous Noodle",
+          "payerId": "7466ba95-eec4-4019-8237-9a8f0788df82",
+          "sharers": [
+            {
+              "id": "7466ba95-eec4-4019-8237-9a8f0788df82",
+              "amount": 733.33
+            },
+            {
+              "id": "u10",
+              "amount": 733.33
+            },
+            {
+              "id": "afa85388-47a9-42e5-8d40-cdff45cd49b1",
+              "amount": 733.33
+            }
+          ],
+          "id": "2a50729e-ec5b-4cfb-b014-171b63abd1b8"
+        },
+        {
+          "name": "Taxi",
+          "category": "transport",
+          "amount": 600,
+          "date": "2025-04-25T00:00:00.000Z",
+          "note": "Train Station to Dinner place",
+          "payerId": "afa85388-47a9-42e5-8d40-cdff45cd49b1",
+          "sharers": [
+            {
+              "id": "7466ba95-eec4-4019-8237-9a8f0788df82",
+              "amount": 200
+            },
+            {
+              "id": "u10",
+              "amount": 200
+            },
+            {
+              "id": "afa85388-47a9-42e5-8d40-cdff45cd49b1",
+              "amount": 200
+            }
+          ],
+          "id": "a345d4e2-37bb-45f6-bbe5-b369675ea8ac"
+        },
+        {
+          "name": "Concert",
+          "category": "entertainment",
+          "amount": 16000,
+          "date": "2025-04-26T00:00:00.000Z",
+          "note": "4000: 2 tickets\n8000: 1 ticket",
+          "payerId": "u10",
+          "sharers": [
+            {
+              "id": "7466ba95-eec4-4019-8237-9a8f0788df82",
+              "amount": 4000
+            },
+            {
+              "id": "u10",
+              "amount": 8000
+            },
+            {
+              "id": "afa85388-47a9-42e5-8d40-cdff45cd49b1",
+              "amount": 4000
+            }
+          ],
+          "id": "e97a0adf-7b82-4c53-bf7c-c4960f90dd81"
+        }
+      ],
+      "users": [
+        {
+          "id": "7466ba95-eec4-4019-8237-9a8f0788df82",
+          "name": "Member 1",
+          "picture": "",
+          "adoptable": true
+        },
+        {
+          "id": "u10",
+          "name": "j",
+          "picture": "https://images.dog.ceo/breeds/hound-english/n02089973_1303.jpg",
+          "adoptable": false
+        },
+        {
+          "id": "afa85388-47a9-42e5-8d40-cdff45cd49b1",
+          "name": "Member 2",
           "picture": "",
           "adoptable": true
         }
@@ -4533,6 +4932,641 @@
       "historys": [
         {
           "editedAt": "2024-10-02T01:20:40.753Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "name": "未命名費用",
+      "category": "food",
+      "amount": 100,
+      "date": "2025-04-13T01:43:36.655Z",
+      "note": "",
+      "payerId": "u10",
+      "sharers": [
+        {
+          "id": "u10",
+          "amount": 25
+        },
+        {
+          "id": "827309c7-5fdb-4e85-834d-c9fa40ab82c3",
+          "amount": 25
+        },
+        {
+          "id": "f1ce4c8c-c19f-4dd0-a8f4-c6aecf7f8de1",
+          "amount": 25
+        },
+        {
+          "id": "54438c4b-0474-4ada-b730-e72dba490851",
+          "amount": 25
+        }
+      ],
+      "groupId": "e787b132-f50f-40cd-b049-bbe1581fde84",
+      "id": "4904262b-bc52-4fbe-8d2c-495bf8cedc4c",
+      "creatorId": "u10",
+      "createAt": "2025-04-13T01:43:36.655Z",
+      "updateAt": "2025-04-13T01:43:36.655Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-13T01:43:36.655Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "id": "109b3996-8ca6-4536-818a-10377e184a7f",
+      "name": "未命名費用2",
+      "category": "food",
+      "amount": 6,
+      "date": "2025-04-13T01:43:59.095Z",
+      "note": "",
+      "payerId": "u10",
+      "sharers": [
+        {
+          "id": "u10",
+          "amount": 1.5
+        },
+        {
+          "id": "827309c7-5fdb-4e85-834d-c9fa40ab82c3",
+          "amount": 1.5
+        },
+        {
+          "id": "f1ce4c8c-c19f-4dd0-a8f4-c6aecf7f8de1",
+          "amount": 1.5
+        },
+        {
+          "id": "54438c4b-0474-4ada-b730-e72dba490851",
+          "amount": 1.5
+        }
+      ],
+      "groupId": "e787b132-f50f-40cd-b049-bbe1581fde84",
+      "creatorId": "u10",
+      "createAt": "2025-04-13T01:43:59.095Z",
+      "updateAt": "2025-04-13T01:43:59.095Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-13T01:43:59.095Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "id": "60bd9252-6761-4447-8f7e-abe4f216bed3",
+      "name": "Noodle",
+      "category": "food",
+      "amount": 100,
+      "date": "2025-04-27T00:00:00.000Z",
+      "note": "",
+      "payerId": "u10",
+      "sharers": [
+        {
+          "id": "2b4f4081-2e7b-433b-94f6-34323d9f9e54",
+          "amount": 33.33
+        },
+        {
+          "id": "5a149958-0416-446c-87b3-866508e9c58c",
+          "amount": 33.33
+        },
+        {
+          "id": "u10",
+          "amount": 33.33
+        }
+      ],
+      "groupId": "db6ae3bf-ecc5-4dd1-8999-319722726753",
+      "creatorId": "u10",
+      "createAt": "2025-04-29T12:19:23.671Z",
+      "updateAt": "2025-04-29T12:19:23.671Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T12:19:23.671Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "id": "6e82e447-41d7-42c9-840b-abea99c10824",
+      "name": "Plane ticket",
+      "category": "food",
+      "amount": 90000,
+      "date": "2025-04-25T00:00:00.000Z",
+      "note": "3 tickets",
+      "payerId": "u10",
+      "sharers": [
+        {
+          "id": "abfc2ad3-c02b-42c3-8e98-4f9c9e1ed550",
+          "amount": 30000
+        },
+        {
+          "id": "3b526b3d-5be0-4540-9862-258bf5a59bca",
+          "amount": 30000
+        },
+        {
+          "id": "u10",
+          "amount": 30000
+        }
+      ],
+      "groupId": null,
+      "creatorId": "u10",
+      "createAt": "2025-04-29T12:42:38.964Z",
+      "updateAt": "2025-04-29T12:42:38.964Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T12:42:38.964Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "id": "2df4d088-4cb6-4500-b98e-ed83d75e296b",
+      "name": "Dinner",
+      "category": "food",
+      "amount": 1000,
+      "date": "2025-04-25T00:00:00.000Z",
+      "note": "",
+      "payerId": "abfc2ad3-c02b-42c3-8e98-4f9c9e1ed550",
+      "sharers": [
+        {
+          "id": "abfc2ad3-c02b-42c3-8e98-4f9c9e1ed550",
+          "amount": 333.33
+        },
+        {
+          "id": "3b526b3d-5be0-4540-9862-258bf5a59bca",
+          "amount": 333.33
+        },
+        {
+          "id": "u10",
+          "amount": 333.33
+        }
+      ],
+      "groupId": null,
+      "creatorId": "u10",
+      "createAt": "2025-04-29T12:43:20.434Z",
+      "updateAt": "2025-04-29T12:43:20.434Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T12:43:20.434Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "id": "aa1aeb56-4dd4-4ecb-9d02-7eb022e0ea34",
+      "name": "Disney Land",
+      "category": "food",
+      "amount": 9000,
+      "date": "2025-04-29T12:43:51.905Z",
+      "note": "",
+      "payerId": "3b526b3d-5be0-4540-9862-258bf5a59bca",
+      "sharers": [
+        {
+          "id": "abfc2ad3-c02b-42c3-8e98-4f9c9e1ed550",
+          "amount": 3000
+        },
+        {
+          "id": "3b526b3d-5be0-4540-9862-258bf5a59bca",
+          "amount": 3000
+        },
+        {
+          "id": "u10",
+          "amount": 3000
+        }
+      ],
+      "groupId": null,
+      "creatorId": "u10",
+      "createAt": "2025-04-29T12:43:51.905Z",
+      "updateAt": "2025-04-29T12:43:51.905Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T12:43:51.905Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "name": "Plane Ticket",
+      "category": "transport",
+      "amount": 27000,
+      "date": "2025-04-29T12:53:37.785Z",
+      "note": "",
+      "payerId": "u10",
+      "sharers": [
+        {
+          "id": "2527b69c-d3bc-45dc-ae63-01d10b1427b5",
+          "amount": 9000
+        },
+        {
+          "id": "f9337158-5e16-41bc-b0d1-8d3fb74dd554",
+          "amount": 9000
+        },
+        {
+          "id": "u10",
+          "amount": 9000
+        }
+      ],
+      "groupId": null,
+      "id": "e75046af-e37f-4c16-b5a9-a2503f8dd338",
+      "creatorId": "u10",
+      "createAt": "2025-04-29T12:53:37.785Z",
+      "updateAt": "2025-04-29T12:53:37.785Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T12:53:37.785Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "id": "48d9b3b7-0dc8-4c0f-a9dc-a6ebaf3bbedb",
+      "name": "Dinner",
+      "category": "food",
+      "amount": 1200,
+      "date": "2025-04-29T12:54:43.226Z",
+      "note": "Steak",
+      "payerId": "2527b69c-d3bc-45dc-ae63-01d10b1427b5",
+      "sharers": [
+        {
+          "id": "2527b69c-d3bc-45dc-ae63-01d10b1427b5",
+          "amount": 400
+        },
+        {
+          "id": "f9337158-5e16-41bc-b0d1-8d3fb74dd554",
+          "amount": 400
+        },
+        {
+          "id": "u10",
+          "amount": 400
+        }
+      ],
+      "groupId": null,
+      "creatorId": "u10",
+      "createAt": "2025-04-29T12:54:43.226Z",
+      "updateAt": "2025-04-29T12:54:43.226Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T12:54:43.226Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "id": "00df601f-a32e-4daf-bac3-f2a842aae6dd",
+      "name": "Taxi",
+      "category": "transport",
+      "amount": 600,
+      "date": "2025-04-25T00:00:00.000Z",
+      "note": "",
+      "payerId": "u10",
+      "sharers": [
+        {
+          "id": "b58766b9-8051-47dc-994e-71fcbb5e6c81",
+          "amount": 200
+        },
+        {
+          "id": "d9c6db5e-2d7a-47ac-859f-95002fe0d824",
+          "amount": 200
+        },
+        {
+          "id": "u10",
+          "amount": 200
+        }
+      ],
+      "groupId": null,
+      "creatorId": "u10",
+      "createAt": "2025-04-29T13:00:08.574Z",
+      "updateAt": "2025-04-29T13:00:08.574Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T13:00:08.574Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "id": "9ed5e1a9-41ca-4b9d-87bd-5dc6e40ecf3f",
+      "name": "Dinner",
+      "category": "food",
+      "amount": 1200,
+      "date": "2025-04-25T00:00:00.000Z",
+      "note": "Steak",
+      "payerId": "b58766b9-8051-47dc-994e-71fcbb5e6c81",
+      "sharers": [
+        {
+          "id": "b58766b9-8051-47dc-994e-71fcbb5e6c81",
+          "amount": 400
+        },
+        {
+          "id": "d9c6db5e-2d7a-47ac-859f-95002fe0d824",
+          "amount": 400
+        },
+        {
+          "id": "u10",
+          "amount": 400
+        }
+      ],
+      "groupId": null,
+      "creatorId": "u10",
+      "createAt": "2025-04-29T13:00:37.838Z",
+      "updateAt": "2025-04-29T13:00:37.838Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T13:00:37.838Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "name": "Stay",
+      "category": "stay",
+      "amount": 6000,
+      "date": "2025-04-25T00:00:00.000Z",
+      "note": "AAA Hotel",
+      "payerId": "u10",
+      "sharers": [
+        {
+          "id": "b58766b9-8051-47dc-994e-71fcbb5e6c81",
+          "amount": 2000
+        },
+        {
+          "id": "d9c6db5e-2d7a-47ac-859f-95002fe0d824",
+          "amount": 2000
+        },
+        {
+          "id": "u10",
+          "amount": 2000
+        }
+      ],
+      "groupId": null,
+      "id": "7926504b-1e0c-4b8b-ac42-d3a0d7292c15",
+      "creatorId": "u10",
+      "createAt": "2025-04-29T13:01:13.376Z",
+      "updateAt": "2025-04-29T13:01:13.376Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T13:01:13.376Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "id": "7c93b090-e230-422e-b525-720176cdbe88",
+      "name": "Taxi",
+      "category": "transport",
+      "amount": 600,
+      "date": "2025-04-25T00:00:00.000Z",
+      "note": "Station to Dinner place",
+      "payerId": "u10",
+      "sharers": [
+        {
+          "id": "1274b300-3595-4e5b-b929-f5f8cbe9b37d",
+          "amount": 200
+        },
+        {
+          "id": "f2710bc5-c6e3-4a54-bf81-b6d1e3cf6c63",
+          "amount": 200
+        },
+        {
+          "id": "u10",
+          "amount": 200
+        }
+      ],
+      "groupId": "d8992ef7-b33c-4d1e-bd8b-2d5262221d6b",
+      "creatorId": "u10",
+      "createAt": "2025-04-29T13:13:34.191Z",
+      "updateAt": "2025-04-29T13:13:34.191Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T13:13:34.191Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "name": "Dinner",
+      "category": "food",
+      "amount": 1320,
+      "date": "2025-04-25T00:00:00.000Z",
+      "note": "Steak",
+      "payerId": "1274b300-3595-4e5b-b929-f5f8cbe9b37d",
+      "sharers": [
+        {
+          "id": "1274b300-3595-4e5b-b929-f5f8cbe9b37d",
+          "amount": 440
+        },
+        {
+          "id": "f2710bc5-c6e3-4a54-bf81-b6d1e3cf6c63",
+          "amount": 440
+        },
+        {
+          "id": "u10",
+          "amount": 440
+        }
+      ],
+      "groupId": "d8992ef7-b33c-4d1e-bd8b-2d5262221d6b",
+      "id": "7ce7f98c-fe9d-4a62-8d6e-2dcc1fcd8fba",
+      "creatorId": "u10",
+      "createAt": "2025-04-29T13:14:22.949Z",
+      "updateAt": "2025-04-29T13:14:22.949Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T13:14:22.949Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "name": "Stay",
+      "category": "stay",
+      "amount": 3000,
+      "date": "2025-04-25T00:00:00.000Z",
+      "note": "AAA Hotel",
+      "payerId": "u10",
+      "sharers": [
+        {
+          "id": "1274b300-3595-4e5b-b929-f5f8cbe9b37d",
+          "amount": 1000
+        },
+        {
+          "id": "f2710bc5-c6e3-4a54-bf81-b6d1e3cf6c63",
+          "amount": 1000
+        },
+        {
+          "id": "u10",
+          "amount": 1000
+        }
+      ],
+      "groupId": "d8992ef7-b33c-4d1e-bd8b-2d5262221d6b",
+      "id": "188402a3-0c21-4165-addd-314e11794f5a",
+      "creatorId": "u10",
+      "createAt": "2025-04-29T13:15:20.696Z",
+      "updateAt": "2025-04-29T13:15:20.696Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T13:15:20.696Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "id": "f8cc8a4a-3d40-4a17-87ba-6c119c92f895",
+      "name": "Concert",
+      "category": "entertainment",
+      "amount": 12000,
+      "date": "2025-04-26T00:00:00.000Z",
+      "note": "",
+      "payerId": "u10",
+      "sharers": [
+        {
+          "id": "1274b300-3595-4e5b-b929-f5f8cbe9b37d",
+          "amount": 4000
+        },
+        {
+          "id": "f2710bc5-c6e3-4a54-bf81-b6d1e3cf6c63",
+          "amount": 4000
+        },
+        {
+          "id": "u10",
+          "amount": 4000
+        }
+      ],
+      "groupId": "d8992ef7-b33c-4d1e-bd8b-2d5262221d6b",
+      "creatorId": "u10",
+      "createAt": "2025-04-29T13:16:43.303Z",
+      "updateAt": "2025-04-29T13:16:43.303Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T13:16:43.303Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "id": "73ac3d17-511e-4c5f-a8d8-6e59621a9b99",
+      "name": "Stay",
+      "category": "stay",
+      "amount": 12000,
+      "date": "2025-04-25T00:00:00.000Z",
+      "note": "BBB Hotel",
+      "payerId": "u10",
+      "sharers": [
+        {
+          "id": "7466ba95-eec4-4019-8237-9a8f0788df82",
+          "amount": 4000
+        },
+        {
+          "id": "afa85388-47a9-42e5-8d40-cdff45cd49b1",
+          "amount": 4000
+        },
+        {
+          "id": "u10",
+          "amount": 4000
+        }
+      ],
+      "groupId": "203cc0e2-a60a-47f0-ae90-625f884a5a5a",
+      "creatorId": "u10",
+      "createAt": "2025-04-29T13:21:41.208Z",
+      "updateAt": "2025-04-29T13:21:41.208Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T13:21:41.208Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "id": "2a50729e-ec5b-4cfb-b014-171b63abd1b8",
+      "name": "Dinner",
+      "category": "food",
+      "amount": 2200,
+      "date": "2025-04-25T00:00:00.000Z",
+      "note": "Famous Noodle",
+      "payerId": "7466ba95-eec4-4019-8237-9a8f0788df82",
+      "sharers": [
+        {
+          "id": "7466ba95-eec4-4019-8237-9a8f0788df82",
+          "amount": 733.33
+        },
+        {
+          "id": "u10",
+          "amount": 733.33
+        },
+        {
+          "id": "afa85388-47a9-42e5-8d40-cdff45cd49b1",
+          "amount": 733.33
+        }
+      ],
+      "groupId": "203cc0e2-a60a-47f0-ae90-625f884a5a5a",
+      "creatorId": "u10",
+      "createAt": "2025-04-29T13:23:49.024Z",
+      "updateAt": "2025-04-29T13:23:49.024Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T13:23:49.024Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "id": "a345d4e2-37bb-45f6-bbe5-b369675ea8ac",
+      "name": "Taxi",
+      "category": "transport",
+      "amount": 600,
+      "date": "2025-04-25T00:00:00.000Z",
+      "note": "Train Station to Dinner place",
+      "payerId": "afa85388-47a9-42e5-8d40-cdff45cd49b1",
+      "sharers": [
+        {
+          "id": "7466ba95-eec4-4019-8237-9a8f0788df82",
+          "amount": 200
+        },
+        {
+          "id": "u10",
+          "amount": 200
+        },
+        {
+          "id": "afa85388-47a9-42e5-8d40-cdff45cd49b1",
+          "amount": 200
+        }
+      ],
+      "groupId": "203cc0e2-a60a-47f0-ae90-625f884a5a5a",
+      "creatorId": "u10",
+      "createAt": "2025-04-29T13:25:04.836Z",
+      "updateAt": "2025-04-29T13:25:04.836Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T13:25:04.836Z",
+          "editorId": "u10"
+        }
+      ]
+    },
+    {
+      "id": "e97a0adf-7b82-4c53-bf7c-c4960f90dd81",
+      "name": "Concert",
+      "category": "entertainment",
+      "amount": 16000,
+      "date": "2025-04-26T00:00:00.000Z",
+      "note": "4000: 2 tickets\n8000: 1 ticket",
+      "payerId": "u10",
+      "sharers": [
+        {
+          "id": "7466ba95-eec4-4019-8237-9a8f0788df82",
+          "amount": 4000
+        },
+        {
+          "id": "u10",
+          "amount": 8000
+        },
+        {
+          "id": "afa85388-47a9-42e5-8d40-cdff45cd49b1",
+          "amount": 4000
+        }
+      ],
+      "groupId": "203cc0e2-a60a-47f0-ae90-625f884a5a5a",
+      "creatorId": "u10",
+      "createAt": "2025-04-29T13:26:04.526Z",
+      "updateAt": "2025-04-29T13:26:04.526Z",
+      "historys": [
+        {
+          "editedAt": "2025-04-29T13:26:04.526Z",
           "editorId": "u10"
         }
       ]

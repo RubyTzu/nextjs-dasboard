@@ -34,9 +34,12 @@ export function ExpenseSettingStepThree({
 
   return (
     <div
-      className={clsx('my-6 flex w-full flex-col items-center', {
-        hidden: phase !== 3,
-      })}
+      className={clsx(
+        'man-w-[320px] mx-auto my-6 flex w-full max-w-[800px] flex-col items-center',
+        {
+          hidden: phase !== 3,
+        },
+      )}
     >
       {expenseData && group ? (
         <>
@@ -69,7 +72,7 @@ export function ExpenseSettingStepThree({
               sharer = sharer
                 ? sharer
                 : {
-                    id: user.id || "",
+                    id: user.id || '',
                     amount: 0,
                   };
               return (
